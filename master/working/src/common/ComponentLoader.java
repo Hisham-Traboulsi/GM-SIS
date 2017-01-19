@@ -9,6 +9,15 @@ package common;
  *
  * @author hisha
  */
-public class gui {
+
+import javax.swing.*;
+
+public class ComponentLoader 
+{
+    public static void mian (String [] param)
+    {
+        JOptionPane.showMessageDialog(null, "It works!");
+    }
+    
     
 }
