@@ -10,5 +10,8 @@ package parts.logic;
  * @author sergi
  */
 public class NewClass {
-    
+    public static void main (String [] param)
+    {
+        
+    }
 }
