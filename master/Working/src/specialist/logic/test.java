@@ -10,5 +10,10 @@ package specialist.logic;
  * @author Shiraj Miah
  */
 public class test {
+    public static void main (String args[])
+    {
+        System.out.println("Hello world");
     
+    }
+           
 }
