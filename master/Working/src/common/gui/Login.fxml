@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="521.0" prefWidth="757.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.gui.LoginController">
+   <children>
+      <Button layoutX="381.0" layoutY="400.0" mnemonicParsing="false" text="Login" />
+      <TextField layoutX="316.0" layoutY="272.0" />
+      <PasswordField layoutX="316.0" layoutY="338.0" />
+      <Label layoutX="154.0" layoutY="277.0" prefHeight="21.0" prefWidth="105.0" text="USERNAME" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="154.0" layoutY="343.0" prefHeight="30.0" prefWidth="122.0" text="PASSWORD" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="72.0" prefHeight="120.0" prefWidth="662.0" text="   GMSIS LOGIN" textFill="WHITE">
+         <font>
+            <Font size="82.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
