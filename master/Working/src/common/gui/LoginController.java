@@ -14,10 +14,15 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -51,12 +56,22 @@ public class LoginController implements Initializable {
         {
             invalid_label.setText("");
             System.out.println("Logged in succesfully");
+            
+            /*Parent AdminParent = FXMLLoader.load(getClass().getResource("Admon.fxml"));
+            Scene AdminScene = new Scene(AdminParent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.hide();
+            app_stage.setScene(AdminScene);
+            app_stage.show();*/
+            
         }
         else
         {
             username_box.clear();
             password_box.clear();
             invalid_label.setText("Sorry, invalid credentials");
+            
+           
         }
         
     }
@@ -80,7 +95,7 @@ public class LoginController implements Initializable {
       java.sql.Statement stmt = null;
       
       try{
-          c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\sergi\\Desktop\\SEProject\\scratch\\Hisham\\GMSIS.db");
+          c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\hisha\\Desktop\\SEProject\\scratch\\Hisham\\GMSIS.db");
           c.setAutoCommit(false);
           
           System.out.println("Database opened successfully");
