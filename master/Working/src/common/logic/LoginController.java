@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package common.gui;
+package common.logic;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,18 +51,18 @@ public class LoginController implements Initializable {
     
     @FXML
     private void LogInButton(ActionEvent event) throws IOException {
-            
+         
         if (isValidCredentials())
         {
             invalid_label.setText("");
-            System.out.println("Logged in succesfully");
+            System.out.println("Logged in succesfully");   
             
-            /*Parent AdminParent = FXMLLoader.load(getClass().getResource("Admon.fxml"));
-            Scene AdminScene = new Scene(AdminParent);
-            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            app_stage.hide();
-            app_stage.setScene(AdminScene);
-            app_stage.show();*/
+            Parent AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
+            Scene scene = new Scene(AdminParent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+            stage.setResizable(false);
             
         }
         else
@@ -70,6 +70,7 @@ public class LoginController implements Initializable {
             username_box.clear();
             password_box.clear();
             invalid_label.setText("Sorry, invalid credentials");
+            
             
            
         }
@@ -80,7 +81,6 @@ public class LoginController implements Initializable {
             username_box.clear();
             password_box.clear();
             invalid_label.setText("");
-            
     }
     
     public boolean isValidCredentials()
@@ -95,7 +95,7 @@ public class LoginController implements Initializable {
       java.sql.Statement stmt = null;
       
       try{
-          c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\hisha\\Desktop\\SEProject\\scratch\\Hisham\\GMSIS.db");
+          c = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\GMSIS.db");
           c.setAutoCommit(false);
           
           System.out.println("Database opened successfully");

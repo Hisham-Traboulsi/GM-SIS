@@ -7,7 +7,10 @@ package common.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,12 +19,32 @@ import javafx.fxml.Initializable;
  */
 public class AdminController implements Initializable {
 
+    @FXML
+    private TextField FirstName_Box;
+    
+    @FXML
+    private TextField ID_Box;
+    
+    @FXML
+    private TextField Surname_Box;
+    
+    @FXML
+    private PasswordField Password_Box;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    } 
+    
+    public void clearButton()
+    {
+        ID_Box.clear();
+        FirstName_Box.clear();
+        Surname_Box.clear();
+        Password_Box.clear();
+    }
     
 }
