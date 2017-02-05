@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package common.gui;
+package common.logic;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,7 +39,7 @@ public class AdminController implements Initializable {
         // TODO
     } 
     
-    public void clearButton()
+    private void clearButton()
     {
         ID_Box.clear();
         FirstName_Box.clear();
