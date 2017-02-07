@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -55,9 +56,9 @@ public class LoginController implements Initializable {
         if (isValidCredentials())
         {
             invalid_label.setText("");
-            System.out.println("Logged in succesfully");   
+           JOptionPane.showMessageDialog(null,"Logged in succesfully");   
             
-            Parent AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
+            Parent AdminParent = FXMLLoader.load(getClass().getResource("/parts/gui/parts.fxml"));
             Scene scene = new Scene(AdminParent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -95,7 +96,7 @@ public class LoginController implements Initializable {
       java.sql.Statement stmt = null;
       
       try{
-          c = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\GMSIS.db");
+          c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\sergi\\Desktop\\SE\\scratch\\Hisham\\GMSIS.db");
           c.setAutoCommit(false);
           
           System.out.println("Database opened successfully");
