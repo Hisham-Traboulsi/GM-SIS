@@ -1,4 +1,7 @@
-/nbproject/private/
-/master/Working/src/nbproject/private/
+.gitignore
+*.xml
+*.mf
+lib
+nbproject
 /build/
 /dist/
