@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.gui.AdminController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.AdminController">
     <children>
         <MenuBar layoutY="-2.0">
             <menus>
@@ -45,6 +45,6 @@
         <Label layoutX="190.0" layoutY="266.0" text="SURNAME" textFill="WHITE" />
         <Label layoutX="186.0" layoutY="324.0" text="PASSWORD" textFill="WHITE" />
         <Button layoutX="280.0" layoutY="375.0" mnemonicParsing="false" text="Submit" />
-        <Button layoutX="370.0" layoutY="375.0" mnemonicParsing="false" onAction = "#clearButton" text="Clear" />
+        <Button layoutX="370.0" layoutY="375.0" mnemonicParsing="false" text="Clear" />
     </children>
 </AnchorPane>
