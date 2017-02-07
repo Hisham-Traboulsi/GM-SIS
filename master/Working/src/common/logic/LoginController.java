@@ -5,6 +5,7 @@
  */
 package common.logic;
 
+import common.database.Database;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -24,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  * FXML Controller class
@@ -41,7 +43,7 @@ public class LoginController implements Initializable {
     private Label invalid_label;
     
     @FXML
-    private TextField username_box;
+    private TextField id_box;
     
     @FXML
     private TextField password_box;
@@ -56,9 +58,9 @@ public class LoginController implements Initializable {
         if (isValidCredentials())
         {
             invalid_label.setText("");
-           JOptionPane.showMessageDialog(null,"Logged in succesfully");   
-            
-            Parent AdminParent = FXMLLoader.load(getClass().getResource("/parts/gui/parts.fxml"));
+            JOptionPane.showMessageDialog(null,"Logged in succesfully");   
+         
+            Parent AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
             Scene scene = new Scene(AdminParent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -68,7 +70,7 @@ public class LoginController implements Initializable {
         }
         else
         {
-            username_box.clear();
+            id_box.clear();
             password_box.clear();
             invalid_label.setText("Sorry, invalid credentials");
             
@@ -79,17 +81,17 @@ public class LoginController implements Initializable {
     }
     public void clearButton()
     {
-            username_box.clear();
+            id_box.clear();
             password_box.clear();
             invalid_label.setText("");
     }
     
     public boolean isValidCredentials()
     {
-      
+      //System.out.println("We are in the is valid credentials method");
       boolean allow_access=false;
       
-      System.out.println("SELECT * FROM AUTHENTICATION WHERE ID = " + "'" + username_box.getText() + "'"
+      /*System.out.println("SELECT * FROM AUTHENTICATION WHERE ID = " + "'" + username_box.getText() + "'"
        + " AND password= " + "'" + password_box.getText() + "'");
       
       Connection c = null;
@@ -128,9 +130,13 @@ public class LoginController implements Initializable {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(0);
       }
+      */
+      int id = Integer.parseInt(id_box.getText());
       
+      //System.out.println("Accessing the authentication method");
+      allow_access = Database.getInstance().authentication(id, password_box.getText());
         
-        return allow_access;
+      return allow_access;
       
      
       

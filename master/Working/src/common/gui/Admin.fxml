@@ -36,7 +36,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <TextField fx:id="ID_BOX" layoutX="280.0" layoutY="147.0" />
+        <TextField fx:id="ID_Box" layoutX="280.0" layoutY="147.0" />
         <TextField fx:id="FirstName_Box" layoutX="280.0" layoutY="204.0" />
         <TextField fx:id="Surname_Box" layoutX="280.0" layoutY="261.0" />
         <PasswordField fx:id="Password_Box" layoutX="280.0" layoutY="319.0" />
@@ -45,6 +45,6 @@
         <Label layoutX="190.0" layoutY="266.0" text="SURNAME" textFill="WHITE" />
         <Label layoutX="186.0" layoutY="324.0" text="PASSWORD" textFill="WHITE" />
         <Button layoutX="280.0" layoutY="375.0" mnemonicParsing="false" text="Submit" />
-        <Button layoutX="370.0" layoutY="375.0" mnemonicParsing="false" text="Clear" />
+        <Button layoutX="370.0" layoutY="375.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
     </children>
 </AnchorPane>

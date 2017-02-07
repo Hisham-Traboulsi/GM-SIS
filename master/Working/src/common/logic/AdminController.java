@@ -39,7 +39,7 @@ public class AdminController implements Initializable {
         // TODO
     } 
     
-    private void clearButton()
+    public void clearButton()
     {
         ID_Box.clear();
         FirstName_Box.clear();
