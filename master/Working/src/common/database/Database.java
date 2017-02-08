@@ -23,18 +23,19 @@ public final class Database
     
     private Database(String DBFileName)
     {
-        System.out.println("Trying to connect to the database");
+        //System.out.println("Trying to connect to the database");
         try
         {
             //Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:" + DBFileName);
             conn.setAutoCommit(false);
-            System.out.println("Connection successful");
+            //System.out.println("Connection successful");
         }
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            System.out.println("Dtabase connection failed");
+            //System.err.println("Database connection failed");
+            //throw new RuntimeException("Database connection failed!", ex);
         } 
 //        catch (ClassNotFoundException ex) 
 //        {
@@ -45,7 +46,7 @@ public final class Database
     
     public PreparedStatement preparedStatement(String sqlStmt)
     {
-        System.out.println("We are in the prepared statement method");
+        //System.out.println("We are in the prepared statement method");
         PreparedStatement stmt = null;
         try 
         {
@@ -62,13 +63,13 @@ public final class Database
     
     public boolean authentication(int ID, String password)
     {
-        System.out.println("We are in the authentication module");
+        //System.out.println("We are in the authentication module");
         PreparedStatement auth = null;
         boolean check_access = false;
         try
         {
             auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
-            System.out.println("We are out side the prepared statement");
+            //System.out.println("We are out side the prepared statement");
             auth.setInt(1, ID);
             auth.setString(2, password);
             
@@ -86,20 +87,46 @@ public final class Database
                 check_access = true;
             }
             System.out.println(count);
+            
+            auth.close();
         }
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            System.out.println("Unable to access table or table doesnt exist");
+            System.err.println("Unable to access table or table doesnt exist");
         }
         
         return check_access;
+    }
+    
+    public boolean addSysUser(int ID, String firstName, String surname, String password, String admin)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO AUTHENTICATION VALUES (?, ?, ?, ?, ?)"); 
+           add.setInt(1, ID);
+           add.setString(2, firstName);
+           add.setString(3, surname);
+           add.setString(4, password);
+           add.setString(5, admin);
+  
+           add.execute();
+           add.close();
+           added = true;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
     }
     
     public static Database getInstance()
     {
         return db;
     }
-    
-    
 }
