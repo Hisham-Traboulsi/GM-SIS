@@ -66,16 +66,12 @@ public class LoginController implements Initializable {
             stage.setScene(scene);
             stage.show();
             stage.setResizable(false);
-            
         }
         else
         {
             id_box.clear();
             password_box.clear();
-            invalid_label.setText("Sorry, invalid credentials");
-            
-            
-           
+            invalid_label.setText("Sorry, invalid credentials");  
         }
         
     }
@@ -91,55 +87,12 @@ public class LoginController implements Initializable {
       //System.out.println("We are in the is valid credentials method");
       boolean allow_access=false;
       
-      /*System.out.println("SELECT * FROM AUTHENTICATION WHERE ID = " + "'" + username_box.getText() + "'"
-       + " AND password= " + "'" + password_box.getText() + "'");
-      
-      Connection c = null;
-      java.sql.Statement stmt = null;
-      
-      try{
-          c = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\sergi\\Desktop\\SE\\scratch\\Hisham\\GMSIS.db");
-          c.setAutoCommit(false);
-          
-          System.out.println("Database opened successfully");
-          stmt = c.createStatement();
-          
-          ResultSet rs= stmt.executeQuery ("SELECT * FROM AUTHENTICATION WHERE ID = " + "'" + username_box.getText() + "'"
-       + " AND password= " + "'" + password_box.getText() + "'");
-          
-          while (rs.next() )
-          {
-              if (rs.getString("id") !=null && rs.getString("password") != null)
-              {
-                  String id= rs.getString("id");
-                  System.out.println("id = " + id);
-                  
-                  String password = rs.getString("password");
-                  allow_access = true;
-              }
-              else {
-                  System.out.println("Error invalid credentials");
-                  return allow_access;     
-              }
-          }
-          rs.close();
-          stmt.close();
-          c.close();
-      } catch (SQLException e)
-      {
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-         System.exit(0);
-      }
-      */
       int id = Integer.parseInt(id_box.getText());
-      
+  
       //System.out.println("Accessing the authentication method");
       allow_access = Database.getInstance().authentication(id, password_box.getText());
         
       return allow_access;
-      
-     
-      
     }
     
     @Override
