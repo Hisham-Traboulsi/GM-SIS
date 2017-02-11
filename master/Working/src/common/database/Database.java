@@ -149,6 +149,30 @@ public final class Database
         
         return added;
     }
+    /*public void loadDatabase()
+    {
+        PreparedStatement add = null;
+        
+        try
+        {
+            auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
+            //System.out.println("We are out side the prepared statement");
+            auth.setInt(1, ID);
+            auth.setString(2, password);
+            
+            ResultSet rs = auth.executeQuery();
+            while(rs.next())
+            {
+                
+            }
+        
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+}*/
     
     public static Database getInstance()
     {
