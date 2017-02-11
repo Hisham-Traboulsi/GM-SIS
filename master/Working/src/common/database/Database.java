@@ -124,6 +124,31 @@ public final class Database
         
         return added;
     }
+    public boolean addPart(int ID, String name, String description, int amount, int cost)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
+           add.setInt(1, ID);
+           add.setString(2, name);
+           add.setString(3, description);
+           add.setInt(4, amount);
+           add.setInt(5, cost);
+  
+           add.execute();
+           add.close();
+           added = true;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
     
     public static Database getInstance()
     {
