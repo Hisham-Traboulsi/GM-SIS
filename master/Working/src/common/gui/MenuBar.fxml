@@ -28,7 +28,9 @@
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Parts">
-              
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Parts" onAction="#parts" />
+                    </items>    
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Specialist Repairs">
