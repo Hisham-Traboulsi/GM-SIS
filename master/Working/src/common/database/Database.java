@@ -23,18 +23,18 @@ public final class Database
     
     private Database(String DBFileName)
     {
-        //System.out.println("Trying to connect to the database");
+        System.out.println("Trying to connect to the database");
         try
         {
             //Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:" + DBFileName);
-            conn.setAutoCommit(false);
-            //System.out.println("Connection successful");
+            //conn.setAutoCommit(false);
+            System.out.println("Connection successful");
         }
         catch(SQLException ex)
         {
             ex.printStackTrace();
-            //System.err.println("Database connection failed");
+            System.err.println("Database connection failed");
             //throw new RuntimeException("Database connection failed!", ex);
         } 
 //        catch (ClassNotFoundException ex) 
@@ -46,7 +46,7 @@ public final class Database
     
     public PreparedStatement preparedStatement(String sqlStmt)
     {
-        //System.out.println("We are in the prepared statement method");
+        System.out.println("We are in the prepared statement method");
         PreparedStatement stmt = null;
         try 
         {
@@ -63,13 +63,13 @@ public final class Database
     
     public boolean authentication(int ID, String password)
     {
-        //System.out.println("We are in the authentication module");
+        System.out.println("We are in the authentication module");
         PreparedStatement auth = null;
         boolean check_access = false;
         try
         {
             auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
-            //System.out.println("We are out side the prepared statement");
+            System.out.println("We are out side the prepared statement");
             auth.setInt(1, ID);
             auth.setString(2, password);
             
