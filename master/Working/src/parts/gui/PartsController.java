@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*Author Sergio*/
 package parts.gui;
 
 import common.database.Database;
@@ -39,11 +40,15 @@ public class PartsController implements Initializable {
     @FXML
     private TextField partCost;
     @FXML
+    private TextField searchBox;
+    @FXML
     private Button search;
      @FXML
     private Button update;
      @FXML
     private Button delete;
+     @FXML
+    private Button clearButton;
      @FXML
     private Button add;
     @FXML
@@ -87,6 +92,15 @@ public class PartsController implements Initializable {
       allow_access = Database.getInstance().addPart(id,name,desc,amount,cost);
         
       return allow_access;
+    }
+   public void clearButton()
+    {
+    partID.clear();
+    partName.clear();
+    partDesc.clear();
+    partAmount.clear();
+    partCost.clear();
+    searchBox.clear();
     }
         
 }

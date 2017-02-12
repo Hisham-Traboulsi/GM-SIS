@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
     private TextField password_box;
     
     @FXML
-    private Button handleButtonAction;
+    private Button LogInButton;
     
     
     @FXML
