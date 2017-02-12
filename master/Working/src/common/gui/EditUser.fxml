@@ -39,6 +39,5 @@
       <RadioButton layoutX="562.0" layoutY="392.0" mnemonicParsing="false" text="Yes" textFill="WHITE" />
       <Button layoutX="305.0" layoutY="441.0" mnemonicParsing="false" text="Submit" />
       <Button layoutX="403.0" layoutY="441.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Clear" />
-      <RadioButton layoutX="623.0" layoutY="392.0" mnemonicParsing="false" text="No" textFill="WHITE" />
    </children>
 </AnchorPane>
