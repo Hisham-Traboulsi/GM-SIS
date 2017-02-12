@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<MenuBar layoutY="-2.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="common.logic.MenuBarController">
+            <menus>
+                <Menu mnemonicParsing="false" text="Users">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Add Users" onAction="#addUser"/> 
+                        <MenuItem mnemonicParsing="false" text="Edit Users"/> 
+                        <MenuItem mnemonicParsing="false" text="Remove Users"/> 
+                    </items>   
+                </Menu>
+                <Menu mnemonicParsing="false" text="Customer Accounts">
+            
+                </Menu>
+          
+                <Menu mnemonicParsing="false" text="Vehicle Records">
+           
+                </Menu>
+          
+                <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
+              
+                </Menu>
+          
+                <Menu mnemonicParsing="false" text="Parts">
+              
+                </Menu>
+          
+                <Menu mnemonicParsing="false" text="Specialist Repairs">
+              
+                </Menu>
+            </menus>
+        </MenuBar>
