@@ -5,27 +5,24 @@
  */
 package common.logic;
 
+import common.Main;
+import common.logic.MenuBarController;
 import common.database.Database;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javax.swing.JOptionPane;
-import java.sql.*;
 
 /**
  * FXML Controller class
@@ -60,12 +57,32 @@ public class LoginController implements Initializable {
             invalid_label.setText("");
             JOptionPane.showMessageDialog(null,"Logged in succesfully");   
          
-            Parent AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
+            /*AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
             Scene scene = new Scene(AdminParent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-            stage.setResizable(false);
+            stage.setResizable(false);*/
+            try
+            {
+               
+                URL welcomeUrl = getClass().getResource("/common/gui/Welcome.fxml");
+                AnchorPane welcomePane = FXMLLoader.load(welcomeUrl);
+
+                URL menuBarUrl = getClass().getResource("/common/gui/MenuBar.fxml");
+                MenuBar bar = FXMLLoader.load(menuBarUrl);
+
+                BorderPane pane = Main.getRoot();
+
+                pane.setTop(bar);
+                pane.setCenter(welcomePane);
+            }
+            catch(IOException ex)
+            {
+                ex.printStackTrace();
+            }
+            
+            
         }
         else
         {
@@ -90,6 +107,8 @@ public class LoginController implements Initializable {
       int id = Integer.parseInt(id_box.getText());
   
       //System.out.println("Accessing the authentication method");
+      
+      //this assigns either true or false depending on the result we get from the authentication method
       allow_access = Database.getInstance().authentication(id, password_box.getText());
         
       return allow_access;
