@@ -5,7 +5,11 @@
  */
 package common.database;
 
+import common.logic.SystemUser;
 import java.sql.*;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -37,11 +41,6 @@ public final class Database
             System.err.println("Database connection failed");
             //throw new RuntimeException("Database connection failed!", ex);
         } 
-//        catch (ClassNotFoundException ex) 
-//        {
-//            ex.printStackTrace();
-//            System.out.println("Class not found");
-//        }
     }
     
     public PreparedStatement preparedStatement(String sqlStmt)
@@ -124,6 +123,32 @@ public final class Database
         
         return added;
     }
+    
+    public ObservableList<SystemUser> getAllUsers() throws SQLException
+    {   
+        PreparedStatement allUsers = null;
+        
+        ObservableList usersData = FXCollections.observableArrayList();
+        
+       
+        allUsers = preparedStatement("SELECT * FROM AUTHENTICATION");
+        ResultSet rs = allUsers.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("ID");
+            String firstName = rs.getString("FIRST_NAME");
+            String surname = rs.getString("SURNAME");
+            String password = rs.getString("PASSWORD");
+            String admin = rs.getString("ADMIN");
+            
+            SystemUser sysUser = new SystemUser(id, firstName, surname, password, admin);
+            
+            usersData.add(sysUser);
+        }
+        return usersData;
+    }
+    
     public boolean addPart(int ID, String name, String description, int amount, int cost)
     {
         PreparedStatement add = null;
