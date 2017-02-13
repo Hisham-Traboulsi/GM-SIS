@@ -11,13 +11,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.EditUserController">
    <children>
-      <TableView layoutX="38.0" layoutY="129.0" prefHeight="200.0" prefWidth="727.0">
+      <TableView id="usersTable" fx:id="usersTable" layoutX="38.0" layoutY="129.0" prefHeight="200.0" prefWidth="727.0">
         <columns>
-          <TableColumn prefWidth="120.0" text="ID" />
-          <TableColumn prefWidth="161.0" text="First Name" />
-            <TableColumn prefWidth="151.0" text="Surname" />
-            <TableColumn prefWidth="219.0" text="Password" />
-            <TableColumn prefWidth="75.0" text="Admin" />
+          <TableColumn id="id_Col" fx:id="id_Col" prefWidth="120.0" text="ID" />
+          <TableColumn id="firstName_Col" fx:id="firstName_Col" prefWidth="161.0" text="First Name" />
+            <TableColumn id="surname_Col" fx:id="surname_Col" prefWidth="151.0" text="Surname" />
+            <TableColumn id="password_Col" fx:id="password_Col" prefWidth="219.0" text="Password" />
+            <TableColumn id="admin_Col" fx:id="admin_Col" prefWidth="75.0" text="Admin" />
         </columns>
       </TableView>
       <Label layoutX="278.0" layoutY="48.0" prefHeight="56.0" prefWidth="232.0" text="EDIT USER" textFill="WHITE">
