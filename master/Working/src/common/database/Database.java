@@ -26,6 +26,8 @@ public final class Database
     
     private PreparedStatement stmt;
     
+    private ObservableList<SystemUser> usersData;
+    
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
@@ -46,7 +48,7 @@ public final class Database
     
     public PreparedStatement preparedStatement(String sqlStmt)
     {
-        System.out.println("We are in the prepared statement method");
+        //System.out.println("We are in the prepared statement method");
         PreparedStatement stmt = null;
         try 
         {
@@ -63,13 +65,13 @@ public final class Database
     
     public boolean authentication(int ID, String password)
     {
-        System.out.println("We are in the authentication module");
+        //System.out.println("We are in the authentication module");
         PreparedStatement auth = null;
         boolean check_access = false;
         try
         {
             auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
-            System.out.println("We are out side the prepared statement");
+            //System.out.println("We are out side the prepared statement");
             auth.setInt(1, ID);
             auth.setString(2, password);
             
@@ -130,7 +132,7 @@ public final class Database
     {   
         PreparedStatement allUsers = null;
         
-        ObservableList usersData = FXCollections.observableArrayList();
+         usersData = FXCollections.observableArrayList();
         
        
         allUsers = preparedStatement("SELECT * FROM AUTHENTICATION");
@@ -149,6 +151,26 @@ public final class Database
             usersData.add(sysUser);
         }
         return usersData;
+    }
+    
+    public void editUser() throws SQLException
+    {
+        PreparedStatement editUser = preparedStatement("UPDATE AUTHENTICATION SET FIRST_NAME=?, SURNAME=?, PASSWORD=?, ADMIN=? WHERE ID=?");
+        int counter = 0;
+        while(counter < usersData.size())
+        {
+            editUser.setString(1, usersData.get(counter).getfirstName());
+            editUser.setString(2, usersData.get(counter).getSurname());
+            editUser.setString(3, usersData.get(counter).getPassword());
+            editUser.setString(4, usersData.get(counter).getAdmin());
+            editUser.setInt(5, usersData.get(counter).getID());
+            
+            editUser.executeUpdate();
+            
+            counter++;
+        }
+        
+        getAllUsers();
     }
     /*Author Sergio*/
     public boolean addPart(int ID, String name, String description, int amount, int cost)

@@ -85,4 +85,19 @@ public class SystemUser
     {
         this.firstName.set(firstName);
     }
+    
+    public void setSurname(String surname)
+    {
+        this.surname.set(surname);
+    }
+    
+    public void setPassword(String password)
+    {
+        this.password.set(password);
+    }
+    
+    public void setAdmin(String admin)
+    {
+        this.admin.set(admin);
+    }
 }

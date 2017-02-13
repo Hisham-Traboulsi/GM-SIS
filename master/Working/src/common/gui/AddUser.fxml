@@ -32,7 +32,7 @@
       <TextField fx:id="Surname_Box" layoutX="337.0" layoutY="266.0" />
       <TextField fx:id="FirstName_Box" layoutX="337.0" layoutY="207.0" />
       <TextField fx:id="ID_Box" layoutX="337.0" layoutY="148.0" />
-      <Label layoutX="290.0" layoutY="41.0" prefHeight="84.0" prefWidth="208.0" text="ADD USER" textFill="WHITE">
+      <Label layoutX="296.0" layoutY="17.0" prefHeight="81.0" prefWidth="208.0" text="ADD USER" textFill="WHITE">
          <font>
             <Font size="43.0" />
          </font>

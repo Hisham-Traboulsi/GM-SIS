@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.EditUserController">
    <children>
-      <TableView id="usersTable" fx:id="usersTable" layoutX="38.0" layoutY="129.0" prefHeight="320.0" prefWidth="727.0">
+      <TableView id="usersTable" fx:id="usersTable" layoutX="38.0" layoutY="97.0" prefHeight="328.0" prefWidth="727.0">
         <columns>
           <TableColumn id="id_Col" fx:id="id_Col" prefWidth="120.0" text="ID" />
           <TableColumn id="firstName_Col" fx:id="firstName_Col" prefWidth="161.0" text="First Name" />
@@ -18,11 +18,11 @@
             <TableColumn id="admin_Col" fx:id="admin_Col" prefWidth="75.0" text="Admin" />
         </columns>
       </TableView>
-      <Label layoutX="278.0" layoutY="48.0" prefHeight="56.0" prefWidth="232.0" text="EDIT USER" textFill="WHITE">
+      <Label layoutX="286.0" layoutY="14.0" prefHeight="56.0" prefWidth="232.0" text="EDIT USER" textFill="WHITE">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Button layoutX="367.0" layoutY="457.0" mnemonicParsing="false" text="Update" />
+      <Button layoutX="367.0" layoutY="439.0" mnemonicParsing="false" onAction="#update" text="Update" />
    </children>
 </AnchorPane>

@@ -56,7 +56,7 @@ public class EditUserController implements Initializable {
             usersTable.setEditable(true);
 
             id_Col.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            id_Col.setCellFactory(TextFieldTableCell.forTableColumn(
+            /*id_Col.setCellFactory(TextFieldTableCell.forTableColumn(
             new StringConverter<Integer>() {
 
                 @Override
@@ -79,7 +79,7 @@ public class EditUserController implements Initializable {
                             t.getTablePosition().getRow())).setID(Integer.parseInt(t.getNewValue()));
                 }
             }
-            );
+            );*/
 
             firstName_Col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             firstName_Col.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -94,12 +94,51 @@ public class EditUserController implements Initializable {
             );
 
             surname_Col.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            surname_Col.setCellFactory(TextFieldTableCell.forTableColumn());
+            surname_Col.setOnEditCommit(
+                    new EventHandler<CellEditEvent<SystemUser, String>>() {
+                @Override
+                public void handle(CellEditEvent<SystemUser, String> t) {
+                    ((SystemUser) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSurname(t.getNewValue());
+                }
+            }
+            );
+            
             password_Col.setCellValueFactory(new PropertyValueFactory<>("password"));
+            password_Col.setCellFactory(TextFieldTableCell.forTableColumn());
+            password_Col.setOnEditCommit(
+                    new EventHandler<CellEditEvent<SystemUser, String>>() {
+                @Override
+                public void handle(CellEditEvent<SystemUser, String> t) {
+                    ((SystemUser) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setPassword(t.getNewValue());
+                }
+            }
+            );
+            
             admin_Col.setCellValueFactory(new PropertyValueFactory<>("admin"));
+            admin_Col.setCellFactory(TextFieldTableCell.forTableColumn());
+            admin_Col.setOnEditCommit(
+                    new EventHandler<CellEditEvent<SystemUser, String>>() {
+                @Override
+                public void handle(CellEditEvent<SystemUser, String> t) {
+                    ((SystemUser) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setAdmin(t.getNewValue());
+                }
+            }
+            );
 
             usersTable.setItems(usersData);
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) 
+        {
             ex.printStackTrace();
         }
+    }
+    
+    public void update() throws SQLException
+    {
+        Database.getInstance().editUser();
     }
 }
