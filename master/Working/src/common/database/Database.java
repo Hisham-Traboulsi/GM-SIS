@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.swing.JOptionPane;
+import parts.logic.Part;
 
 /**
  *
@@ -114,6 +116,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
+           
         }
         catch(SQLException ex)
         {
@@ -148,7 +151,7 @@ public final class Database
         }
         return usersData;
     }
-    
+    /*Author Sergio*/
     public boolean addPart(int ID, String name, String description, int amount, int cost)
     {
         PreparedStatement add = null;
@@ -165,6 +168,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
+           JOptionPane.showMessageDialog(null,"Part successfully added");
         }
         catch(SQLException ex)
         {
@@ -174,30 +178,57 @@ public final class Database
         
         return added;
     }
-    /*public void loadDatabase()
-    {
-        PreparedStatement add = null;
+    /*Author Sergio*/
+    public ObservableList<Part> getPart() throws SQLException
+    {   
+        PreparedStatement getPart = null;
+        ObservableList partData = FXCollections.observableArrayList();
         
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_TRACKING");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("ID");
+            String partName = rs.getString("Name");
+            String partDesc = rs.getString("Description");
+            int partAmount = rs.getInt("Amount");
+            int partCost = rs.getInt("Cost");
+            
+            Part part = new Part(id, partName, partDesc, partAmount, partCost);
+            
+            partData.add(part);
+        }
+        return partData;
+    }
+    /*Author Sergio*/
+    public boolean deletePart(int ID, String name, String description, int amount, int cost)
+    {
+        PreparedStatement delete = null;
+        boolean deleted = false;
         try
         {
-            auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
-            //System.out.println("We are out side the prepared statement");
-            auth.setInt(1, ID);
-            auth.setString(2, password);
-            
-            ResultSet rs = auth.executeQuery();
-            while(rs.next())
-            {
-                
-            }
-        
+           delete= preparedStatement("DELETE FROM PARTS_TRACKING WHERE VALUES (?, ?, ?, ?, ?)"); 
+           delete.setInt(1, ID);
+           delete.setString(2, name);
+           delete.setString(3, description);
+           delete.setInt(4, amount);
+           delete.setInt(5, cost);
+  
+           delete.execute();
+           delete.close();
+           deleted = true;
+           JOptionPane.showMessageDialog(null,"Part successfully deleted");
         }
         catch(SQLException ex)
         {
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
-}*/
+        
+        return deleted;
+    }
     
     public static Database getInstance()
     {

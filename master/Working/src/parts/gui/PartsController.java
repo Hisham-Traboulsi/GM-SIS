@@ -8,6 +8,7 @@ package parts.gui;
 
 import common.database.Database;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
+import parts.logic.Part;
 
 /**
  * FXML Controller class
@@ -27,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class PartsController implements Initializable {
     
-    ObservableList data = FXCollections.observableArrayList();
+    ObservableList partData = FXCollections.observableArrayList();
     
     @FXML
     private TextField partID;
@@ -52,20 +54,24 @@ public class PartsController implements Initializable {
      @FXML
     private Button add;
     @FXML
-    private TableView table;
+    private TableView partsTable;
     @FXML
     private TableColumn colID;
     @FXML
-    private TableColumn colName;
+    private TableColumn <Part,String> colName;
     @FXML
-    private TableColumn colDesc;
+    private TableColumn <Part,String>colDesc;
     @FXML
-    private TableColumn colAmount;
+    private TableColumn <Part,Integer>colAmount;
     @FXML
-    private TableColumn colCost;
+    private TableColumn <Part,Double> colCost;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        try{
+            
+        partData = Database.getInstance().getPart();
         
      colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
      colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -73,14 +79,19 @@ public class PartsController implements Initializable {
      colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
      colCost.setCellValueFactory(new PropertyValueFactory<>("Cost"));
         
-        
+     partsTable.setItems(partData);
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
     } 
     
     @FXML
    public boolean add()
     {
       
-      boolean allow_access=false;
+      boolean added=false;
       
       int id = Integer.parseInt(partID.getText());
       String name = (partName.getText());
@@ -89,11 +100,15 @@ public class PartsController implements Initializable {
       int cost = Integer.parseInt(partCost.getText());
   
       
-      allow_access = Database.getInstance().addPart(id,name,desc,amount,cost);
+      added = Database.getInstance().addPart(id,name,desc,amount,cost);
         
-      return allow_access;
+      return added;
     }
-   public void clearButton()
+
+    /**
+     *
+     */
+    public void clearButton()
     {
     partID.clear();
     partName.clear();
