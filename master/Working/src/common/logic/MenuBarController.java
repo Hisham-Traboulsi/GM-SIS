@@ -67,6 +67,26 @@ public class MenuBarController
         }
     }
     
+    public void editUser()
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL editUserUrl = getClass().getResource("/common/gui/EditUser.fxml");
+            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(editUserPane);
+            
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public void parts(ActionEvent event)
     {
         try
