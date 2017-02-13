@@ -199,7 +199,7 @@ public final class Database
         getAllUsers();
     }
     /*Author Sergio*/
-    public boolean addPart(int ID, String name, String description, int amount, int cost)
+    public boolean addPart(int ID, String name, String description, int amount, double cost)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -210,7 +210,7 @@ public final class Database
            add.setString(2, name);
            add.setString(3, description);
            add.setInt(4, amount);
-           add.setInt(5, cost);
+           add.setDouble(5, cost);
   
            add.execute();
            add.close();
@@ -241,7 +241,7 @@ public final class Database
             String partName = rs.getString("Name");
             String partDesc = rs.getString("Description");
             int partAmount = rs.getInt("Amount");
-            int partCost = rs.getInt("Cost");
+             double partCost = rs.getDouble("Cost");
             
             Part part = new Part(id, partName, partDesc, partAmount, partCost);
             
@@ -250,18 +250,24 @@ public final class Database
         return partData;
     }
     /*Author Sergio*/
-    public boolean deletePart(int ID, String name, String description, int amount, int cost)
+    public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
     {
         PreparedStatement delete = null;
         boolean deleted = false;
         try
         {
-           delete= preparedStatement("DELETE FROM PARTS_TRACKING WHERE VALUES (?, ?, ?, ?, ?)"); 
+           delete= preparedStatement("DELETE FROM PARTS_TRACKING WHERE RELEVANT_ID_NUM=" 
+                   + ID +" AND NAME='" 
+                   + partName +"' AND DESCRIPTION='" 
+                   + partDesc + "' AND AMOUNT=" 
+                   + amount + " AND COST=" 
+                   + cost);
+                   
            delete.setInt(1, ID);
-           delete.setString(2, name);
-           delete.setString(3, description);
+           delete.setString(2, partName);
+           delete.setString(3, partDesc);
            delete.setInt(4, amount);
-           delete.setInt(5, cost);
+           delete.setDouble(5, cost);
   
            delete.execute();
            delete.close();

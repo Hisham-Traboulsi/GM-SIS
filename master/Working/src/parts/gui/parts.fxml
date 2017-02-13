@@ -40,7 +40,7 @@
       <Text layoutX="14.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
       <TextField fx:id="partAmount" layoutX="77.0" layoutY="178.0" prefHeight="25.0" prefWidth="112.0" />
       <Button fx:id="update" layoutX="68.0" layoutY="411.0" mnemonicParsing="false" text="Update" />
-      <Button fx:id="delete" layoutX="133.0" layoutY="411.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="delete" layoutX="133.0" layoutY="411.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
       <Button fx:id="search" layoutX="298.0" layoutY="158.0" mnemonicParsing="false" text="Search" />
       <TextField fx:id="searchBox" layoutX="410.0" layoutY="158.0" prefHeight="25.0" prefWidth="174.0" />
       <Button fx:id="clearButton" layoutX="70.0" layoutY="451.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />

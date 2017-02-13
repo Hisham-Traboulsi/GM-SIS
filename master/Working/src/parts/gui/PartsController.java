@@ -97,13 +97,31 @@ public class PartsController implements Initializable {
       String name = (partName.getText());
       String desc = (partDesc.getText());
       int amount = Integer.parseInt(partAmount.getText());
-      int cost = Integer.parseInt(partCost.getText());
+      double cost = Double.parseDouble(partCost.getText());
   
       
       added = Database.getInstance().addPart(id,name,desc,amount,cost);
         
       return added;
     }
+   @FXML
+   public boolean delete()
+    {
+      
+      boolean deleted=false;
+      
+      int id = Integer.parseInt(partID.getText());
+      String name = (partName.getText());
+      String desc = (partDesc.getText());
+      int amount = Integer.parseInt(partAmount.getText());
+      double cost = Double.parseDouble(partCost.getText());
+  
+      
+      deleted= Database.getInstance().deletePart(id,name,desc,amount,cost);
+        
+      return deleted;
+    }
+
 
     /**
      *

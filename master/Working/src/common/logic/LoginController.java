@@ -34,11 +34,11 @@ import javax.swing.JOptionPane;
 
 public class LoginController implements Initializable {
     
-    @FXML
+  /*  @FXML
     private Label label;
     
     @FXML
-    private Label invalid_label;
+    private Label invalid_label;*/
     
     @FXML
     private TextField id_box;
@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
          
         if (isValidCredentials())
         {
-            invalid_label.setText("");
+            //invalid_label.setText("");
             JOptionPane.showMessageDialog(null,"Logged in succesfully");   
          
             URL welcomeUrl = getClass().getResource("/common/gui/Welcome.fxml");
@@ -80,7 +80,7 @@ public class LoginController implements Initializable {
         {
             id_box.clear();
             password_box.clear();
-            invalid_label.setText("Sorry, invalid credentials");  
+          //  invalid_label.setText("Sorry, invalid credentials");  
         }
         
     }
@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
     {
             id_box.clear();
             password_box.clear();
-            invalid_label.setText("");
+            //invalid_label.setText("");
     }
     
     public boolean isValidCredentials() throws SQLException

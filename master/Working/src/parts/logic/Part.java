@@ -5,8 +5,8 @@
  */
 package parts.logic;
 
-//import javafx.beans.property.SimpleStringProperty;
-//mport javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -15,18 +15,18 @@ package parts.logic;
 public class Part
 {
     private int id;
-    private String partName;
-    private String partDesc;
+    private StringProperty partName;
+    private StringProperty partDesc;
     private int amount;
     private double cost;
     
-    public Part(int id, String partName, String partDesc, int amount, double cost)
+   public Part(int id, String partName, String partDesc, int amount, double cost)
     {
         this.id = id;
-        this.partName = partName;
-        this.partDesc = partDesc;
-        this.amount = amount;
-        this.cost= cost;
+        this.partName = new SimpleStringProperty(partName);
+        this.partDesc= new SimpleStringProperty(partDesc);
+        this.amount= amount;
+        this.cost=cost;
     }
     
     public int getID()
@@ -36,24 +36,34 @@ public class Part
     
     public String getpartName()
     {
-        return partName;
+        return partName.get();
     }
     
     public String getpartDesc()
     {
-        return partDesc;
+        return partDesc.get();
+    
     }
     
-    public int getPartAmount()
+    public double getCost(){
+        
+        return cost;
+    }
+    
+    public int getAmount()
     {
         return amount;
     }
     
-    public double getpartCost()
+    public StringProperty partNameProperty()
     {
-        return cost;
+        return partName;
+    }
+    
+    public StringProperty partDescProperty()
+    {
+       return partDesc;
     }
     
    
 }
-
