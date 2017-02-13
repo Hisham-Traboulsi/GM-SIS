@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import parts.logic.Part;
 
 /**
  *
@@ -148,7 +149,7 @@ public final class Database
         }
         return usersData;
     }
-    
+    /*Author Sergio*/
     public boolean addPart(int ID, String name, String description, int amount, int cost)
     {
         PreparedStatement add = null;
@@ -174,30 +175,31 @@ public final class Database
         
         return added;
     }
-    /*public void loadDatabase()
-    {
-        PreparedStatement add = null;
+    /*Author Sergio*/
+    public ObservableList<Part> getPart() throws SQLException
+    {   
+        PreparedStatement getPart = null;
+        ObservableList partData = FXCollections.observableArrayList();
         
-        try
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_TRACKING");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
         {
-            auth = preparedStatement("SELECT * FROM AUTHENTICATION WHERE ID = ? AND PASSWORD = ?");
-            //System.out.println("We are out side the prepared statement");
-            auth.setInt(1, ID);
-            auth.setString(2, password);
+            int id = rs.getInt("ID");
+            String partName = rs.getString("Name");
+            String partDesc = rs.getString("Description");
+            int partAmount = rs.getInt("Amount");
+            int partCost = rs.getInt("Cost");
             
-            ResultSet rs = auth.executeQuery();
-            while(rs.next())
-            {
-                
-            }
-        
+            Part part = new Part(id, partName, partDesc, partAmount, partCost);
+            
+            partData.add(part);
         }
-        catch(SQLException ex)
-        {
-            ex.printStackTrace();
-            System.err.println("Unable to access table or table doesnt exist");
-        }
-}*/
+        return partData;
+    }
+    
     
     public static Database getInstance()
     {
