@@ -28,10 +28,10 @@ public class EditUserController implements Initializable {
      */
     
     @FXML
-    private  TableView<SystemUser> usersTable;
+    private  TableView usersTable;
     
     @FXML
-    private TableColumn<SystemUser, Integer> id_Col;
+    private TableColumn id_Col;
     
     @FXML
     private TableColumn<SystemUser, String> firstName_Col;
@@ -50,13 +50,13 @@ public class EditUserController implements Initializable {
     {
         try 
         {
-            ObservableList usersData = Database.getInstance().getAllUsers();
+            ObservableList<SystemUser> usersData = Database.getInstance().getAllUsers();
             
-            id_Col.setCellValueFactory(new PropertyValueFactory("ID"));
-            firstName_Col.setCellValueFactory(new PropertyValueFactory("FIRST_NAME"));
-            surname_Col.setCellValueFactory(new PropertyValueFactory("SURNAME"));
-            password_Col.setCellValueFactory(new PropertyValueFactory("PASSWORD"));
-            admin_Col.setCellValueFactory(new PropertyValueFactory("ADMIN"));
+            id_Col.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            firstName_Col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            surname_Col.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            password_Col.setCellValueFactory(new PropertyValueFactory<>("password"));
+            admin_Col.setCellValueFactory(new PropertyValueFactory<>("admin"));
             
             usersTable.setItems(usersData);
         } 
@@ -64,10 +64,5 @@ public class EditUserController implements Initializable {
         {
             ex.printStackTrace();
         }
-    } 
-    
-        
-    
-    
-    
+    }
 }
