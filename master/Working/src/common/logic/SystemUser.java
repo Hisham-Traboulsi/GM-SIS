@@ -5,6 +5,8 @@
  */
 package common.logic;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -14,7 +16,7 @@ import javafx.beans.property.StringProperty;
  */
 public class SystemUser 
 {
-    private int id;
+    private IntegerProperty id;
     private StringProperty firstName;
     private StringProperty surname;
     private StringProperty password;
@@ -22,7 +24,7 @@ public class SystemUser
     
     public SystemUser(int id, String firstName, String surname, String password, String admin)
     {
-        this.id = id;
+        this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.surname = new SimpleStringProperty(surname);
         this.password = new SimpleStringProperty(password);
@@ -31,7 +33,7 @@ public class SystemUser
     
     public int getID()
     {
-        return id;
+        return id.get();
     }
     
     public String getfirstName()
@@ -72,5 +74,15 @@ public class SystemUser
     public StringProperty adminProperty()
     {
         return admin;
+    }
+    
+    public void setID(int id)
+    {
+        this.id.set(id);        
+    }
+    
+    public void setFirstName(String firstName)
+    {
+        this.firstName.set(firstName);
     }
 }

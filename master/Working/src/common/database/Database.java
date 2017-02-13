@@ -7,7 +7,6 @@ package common.database;
 
 import common.logic.SystemUser;
 import java.sql.*;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
