@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.swing.JOptionPane;
 import parts.logic.Part;
 
 /**
@@ -115,6 +116,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
+           
         }
         catch(SQLException ex)
         {
@@ -166,6 +168,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
+           JOptionPane.showMessageDialog(null,"Part successfully added");
         }
         catch(SQLException ex)
         {
@@ -199,7 +202,33 @@ public final class Database
         }
         return partData;
     }
-    
+    /*Author Sergio*/
+    public boolean deletePart(int ID, String name, String description, int amount, int cost)
+    {
+        PreparedStatement delete = null;
+        boolean deleted = false;
+        try
+        {
+           delete= preparedStatement("DELETE FROM PARTS_TRACKING WHERE VALUES (?, ?, ?, ?, ?)"); 
+           delete.setInt(1, ID);
+           delete.setString(2, name);
+           delete.setString(3, description);
+           delete.setInt(4, amount);
+           delete.setInt(5, cost);
+  
+           delete.execute();
+           delete.close();
+           deleted = true;
+           JOptionPane.showMessageDialog(null,"Part successfully deleted");
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return deleted;
+    }
     
     public static Database getInstance()
     {
