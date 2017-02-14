@@ -56,6 +56,5 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="116.0" layoutX="488.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
       <Button layoutX="622.0" layoutY="267.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="128.0" text="Order Parts" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="292.0" layoutX="15.0" layoutY="217.0" stroke="BLACK" strokeType="INSIDE" width="758.0" />
-      <Button layoutX="15.0" layoutY="420.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
