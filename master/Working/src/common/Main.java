@@ -37,7 +37,7 @@ public class Main extends Application
         stage.show();
         stage.setResizable(false);*/
         
-        URL loginUrl = getClass().getResource("/common/gui/Login.fxml");
+        URL loginUrl = getClass().getResource("/parts/gui/parts.fxml");
         AnchorPane loginPane = FXMLLoader.load(loginUrl);
         
         root.setCenter(loginPane);
