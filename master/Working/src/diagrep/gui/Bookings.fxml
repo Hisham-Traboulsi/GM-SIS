@@ -5,9 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -17,26 +14,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar>
-         <menus>
-            <Menu mnemonicParsing="false" text="Users">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#addUser" text="Add Users" />
-                  <MenuItem mnemonicParsing="false" onAction="#editUser" text="Edit Users" />
-                  <MenuItem mnemonicParsing="false" text="Remove Users" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Customer Accounts" />
-            <Menu mnemonicParsing="false" text="Vehicle Records" />
-            <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings" />
-            <Menu mnemonicParsing="false" text="Parts">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#parts" text="Parts" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Specialist Repairs" />
-         </menus>
-      </MenuBar>
       <Label layoutX="263.0" layoutY="31.0" prefHeight="42.0" prefWidth="261.0" text="Diagnosis &amp; Repairs Bookings" textFill="WHITE">
          <font>
             <Font size="18.0" />
