@@ -101,6 +101,32 @@ public final class Database
         return check_access;
     }
     
+    public boolean isAdmin(int id) throws SQLException
+    {
+        PreparedStatement admin = preparedStatement("SELECT ADMIN FROM AUTHENTICATION WHERE ID=?");
+        
+        admin.setInt(1, id);
+        
+        ResultSet rs = admin.executeQuery();
+        
+        String checkAdmin = "";
+        
+        while(rs.next())
+        {
+           checkAdmin = rs.getString(1);
+        }
+        
+        if(checkAdmin.equals("Y"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    
     public boolean addSysUser(int ID, String firstName, String surname, String password, String admin)
     {
         PreparedStatement add = null;

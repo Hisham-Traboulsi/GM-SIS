@@ -10,6 +10,7 @@ import common.logic.MenuBarController;
 import common.database.Database;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,41 +49,32 @@ public class LoginController implements Initializable {
     @FXML
     private Button LogInButton;
     
+    private boolean admin;
     
     @FXML
-    private void LogInButton(ActionEvent event) throws IOException {
+    private void LogInButton(ActionEvent event) throws SQLException, IOException {
          
         if (isValidCredentials())
         {
             invalid_label.setText("");
             JOptionPane.showMessageDialog(null,"Logged in succesfully");   
          
-            /*AdminParent = FXMLLoader.load(getClass().getResource("/common/gui/Admin.fxml"));
-            Scene scene = new Scene(AdminParent);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-            stage.setResizable(false);*/
-            try
+            URL welcomeUrl = getClass().getResource("/common/gui/Welcome.fxml");
+            AnchorPane welcomePane = FXMLLoader.load(welcomeUrl);
+            MenuBar bar;
+            if(admin)
             {
-               
-                URL welcomeUrl = getClass().getResource("/common/gui/Welcome.fxml");
-                AnchorPane welcomePane = FXMLLoader.load(welcomeUrl);
-
-                URL menuBarUrl = getClass().getResource("/common/gui/MenuBar.fxml");
-                MenuBar bar = FXMLLoader.load(menuBarUrl);
-
-                BorderPane pane = Main.getRoot();
-
-                pane.setTop(bar);
-                pane.setCenter(welcomePane);
+                URL menuBarAdminUrl = getClass().getResource("/common/gui/MenuBarAdmin.fxml");
+                bar = FXMLLoader.load(menuBarAdminUrl);
             }
-            catch(IOException ex)
+            else
             {
-                ex.printStackTrace();
+                URL menuBarNonAdminUrl = getClass().getResource("/common/gui/MenuBarNonAdmin.fxml");
+                bar = FXMLLoader.load(menuBarNonAdminUrl);
             }
-            
-            
+            BorderPane pane = Main.getRoot();
+            pane.setTop(bar);
+            pane.setCenter(welcomePane);
         }
         else
         {
@@ -99,7 +91,7 @@ public class LoginController implements Initializable {
             invalid_label.setText("");
     }
     
-    public boolean isValidCredentials()
+    public boolean isValidCredentials() throws SQLException
     {
       //System.out.println("We are in the is valid credentials method");
       boolean allow_access=false;
@@ -110,7 +102,7 @@ public class LoginController implements Initializable {
       
       //this assigns either true or false depending on the result we get from the authentication method
       allow_access = Database.getInstance().authentication(id, password_box.getText());
-        
+      admin = Database.getInstance().isAdmin(id);
       return allow_access;
     }
     

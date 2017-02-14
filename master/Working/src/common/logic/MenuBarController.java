@@ -35,7 +35,7 @@ public class MenuBarController
     {
         try
         {
-            URL menuBarUrl = getClass().getResource("/common/gui/MenuBar.fxml");
+            URL menuBarUrl = getClass().getResource("/common/gui/MenuBarAdmin.fxml");
             MenuBar menuBarPane = FXMLLoader.load(menuBarUrl);
             
             BorderPane pane = Main.getRoot();
@@ -80,6 +80,25 @@ public class MenuBarController
             
             border.setCenter(editUserPane);
             
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void removeUser()
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL removeUserUrl = getClass().getResource("/common/gui/RemoveUser.fxml");
+            AnchorPane removeUserPane = FXMLLoader.load(removeUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(removeUserPane);
         }
         catch(IOException ex)
         {
