@@ -13,7 +13,7 @@
           <TableColumn fx:id="idCol" prefWidth="72.0" text="Part ID" />
           <TableColumn fx:id="partNameCol" prefWidth="90.0" text="Name" />
             <TableColumn fx:id="partDescCol" prefWidth="142.0" text="Description" />
-            <TableColumn fx:id="costCol" prefWidth="140.0" text="Cost" />
+            <TableColumn fx:id="costCol" prefWidth="140.0" text="Cost (£)" />
             <TableColumn fx:id="amountCol" prefWidth="140.0" text="Stock" />
         </columns>
       </TableView>
