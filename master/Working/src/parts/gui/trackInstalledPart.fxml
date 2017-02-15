@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="838.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.TrackPartController">
+   <children>
+      <TableView fx:id="partsTable" layoutX="28.0" layoutY="102.0" prefHeight="268.0" prefWidth="585.0">
+        <columns>
+          <TableColumn prefWidth="114.0" text="Installation ID" />
+          <TableColumn prefWidth="156.0" text="Vehicle Registration" />
+            <TableColumn prefWidth="144.0" text="Installation Date" />
+            <TableColumn prefWidth="170.0" text="Warranty Expiration" />
+        </columns>
+      </TableView>
+      <Text fill="#fff6f6" layoutX="199.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Installed parts">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
