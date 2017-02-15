@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.AddUserController">
    <children>
       <Button layoutX="333.0" layoutY="437.0" mnemonicParsing="false" onAction="#addSyUser" text="Submit" />
-      <Button layoutX="457.0" layoutY="437.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="31.0" prefWidth="67.0" text="Clear" />
+      <Button layoutX="424.0" layoutY="437.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="54.0" text="Clear" />
       <Label layoutX="207.0" layoutY="150.0" text="ID NUMBER:" textFill="WHITE">
          <font>
             <Font size="19.0" />
