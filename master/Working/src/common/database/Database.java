@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import parts.logic.Part;
+//import parts.logic.PartsController;
 
 /**
  *
@@ -27,6 +28,7 @@ public final class Database
     private PreparedStatement stmt;
     
     private ObservableList<SystemUser> usersData;
+    private ObservableList<Part> partsData;
     
     private Database(String DBFileName)
     {
@@ -228,8 +230,9 @@ public final class Database
     /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException
     {   
+        
         PreparedStatement getPart = null;
-        ObservableList partData = FXCollections.observableArrayList();
+        partsData = FXCollections.observableArrayList();
         
        
         getPart = preparedStatement("SELECT * FROM PARTS_TRACKING");
@@ -237,17 +240,17 @@ public final class Database
         
         while(rs.next())
         {
-            int id = rs.getInt("ID");
-            String partName = rs.getString("Name");
-            String partDesc = rs.getString("Description");
-            int partAmount = rs.getInt("Amount");
-             double partCost = rs.getDouble("Cost");
+            int id = rs.getInt("RELEVANT_ID_NUM");
+            String partName = rs.getString("NAME");
+            String partDesc = rs.getString("DESCRIPTION");
+            int partAmount = rs.getInt("AMOUNT");
+            double partCost = rs.getDouble("COST");
             
             Part part = new Part(id, partName, partDesc, partAmount, partCost);
             
-            partData.add(part);
+            partsData.add(part);
         }
-        return partData;
+        return partsData;
     }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
@@ -281,6 +284,26 @@ public final class Database
         }
         
         return deleted;
+    }
+    
+    public void editPart() throws SQLException
+    {
+        PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET  NAME=?, DESCRIPTION=?, AMOUNT=?, COST=? WHERE RELEVANT_ID_NUM=?");
+        int counter = 0;
+        while(counter < partsData.size())
+        {
+            editPart.setString(1, partsData.get(counter).getpartName());
+            editPart.setString(2, partsData.get(counter).getpartDesc());
+            editPart.setInt(3, partsData.get(counter).getAmount());
+            editPart.setDouble(4, partsData.get(counter).getCost());
+            editPart.setInt(5, partsData.get(counter).getID());
+            
+            editPart.executeUpdate();
+            
+            counter++;
+        }
+        
+        getPart();
     }
     
     public static Database getInstance()

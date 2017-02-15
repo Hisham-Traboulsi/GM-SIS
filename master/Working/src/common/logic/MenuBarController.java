@@ -106,18 +106,36 @@ public class MenuBarController
         }
     }
     
-    public void parts(ActionEvent event)
+    public void addPart(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL partsUrl = getClass().getResource("/parts/gui/parts.fxml");
-            AnchorPane partsPane = FXMLLoader.load(partsUrl);
+            URL addPartUrl = getClass().getResource("/parts/gui/addPart.fxml");
+            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(partsPane);
+            border.setCenter(addPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    public void trackPart(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL trackPartUrl = getClass().getResource("/parts/gui/trackPart.fxml");
+            AnchorPane trackPartPane = FXMLLoader.load(trackPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(trackPartPane);
         }
         catch(IOException ex)
         {

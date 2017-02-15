@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 
-<MenuBar layoutY="-2.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="common.logic.MenuBarController">
+<MenuBar layoutY="-2.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.MenuBarController">
             <menus>
                 <Menu mnemonicParsing="false" text="Users">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Add Users" onAction="#addUser"/> 
-                        <MenuItem mnemonicParsing="false" text="Edit Users" onAction="#editUser"/> 
-                        <MenuItem mnemonicParsing="false" text="Remove Users" onAction="#removeUser"/> 
+                        <MenuItem mnemonicParsing="false" onAction="#addUser" text="Add Users" /> 
+                        <MenuItem mnemonicParsing="false" onAction="#editUser" text="Edit Users" /> 
+                        <MenuItem mnemonicParsing="false" onAction="#removeUser" text="Remove Users" /> 
                     </items>   
                 </Menu>
                 <Menu mnemonicParsing="false" text="Customer Accounts">
@@ -29,7 +27,8 @@
           
                 <Menu mnemonicParsing="false" text="Parts">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Parts" onAction="#parts" />
+                        <MenuItem mnemonicParsing="false" onAction="#addPart" text="Add part" />
+            <MenuItem mnemonicParsing="false" onAction="#trackPart" text="Track part" />
                     </items>    
                 </Menu>
           

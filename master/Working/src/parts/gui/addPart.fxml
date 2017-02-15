@@ -4,21 +4,27 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.gui.PartsController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.PartsController">
    <children>
-      <Text layoutX="180.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID" />
-      <Text layoutX="180.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name" />
-      <Text layoutX="180.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost" />
-      <Text layoutX="180.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Description" />
-      <TextField fx:id="partID" layoutX="243.0" layoutY="38.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partName" layoutX="243.0" layoutY="78.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partCost" layoutX="243.0" layoutY="127.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextArea fx:id="partDesc" layoutX="182.0" layoutY="245.0" prefHeight="123.0" prefWidth="165.0" />
-      <Button fx:id="add" layoutX="217.0" layoutY="405.0" mnemonicParsing="false" onAction="#add" text="Add" />
-      <Text layoutX="180.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
-      <TextField fx:id="partAmount" layoutX="243.0" layoutY="172.0" prefHeight="25.0" prefWidth="112.0" />
-      <Button fx:id="clearButton" layoutX="292.0" layoutY="405.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
+      <Text layoutX="190.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID" />
+      <Text layoutX="190.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name" />
+      <Text layoutX="190.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost" />
+      <Text layoutX="190.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Description" />
+      <TextField fx:id="partID" layoutX="253.0" layoutY="92.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partName" layoutX="253.0" layoutY="132.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partCost" layoutX="253.0" layoutY="181.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextArea fx:id="partDesc" layoutX="192.0" layoutY="299.0" prefHeight="123.0" prefWidth="165.0" />
+      <Button fx:id="add" layoutX="227.0" layoutY="459.0" mnemonicParsing="false" onAction="#add" text="Add" />
+      <Text layoutX="190.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
+      <TextField fx:id="partAmount" layoutX="253.0" layoutY="226.0" prefHeight="25.0" prefWidth="112.0" />
+      <Button fx:id="clearButton" layoutX="302.0" layoutY="459.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
+      <Text fill="#f8f4f4" layoutX="226.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add part">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

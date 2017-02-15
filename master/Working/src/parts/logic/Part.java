@@ -5,7 +5,11 @@
  */
 package parts.logic;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -14,24 +18,24 @@ import javafx.beans.property.StringProperty;
  */
 public class Part
 {
-    private int id;
+    private IntegerProperty id;
     private StringProperty partName;
     private StringProperty partDesc;
-    private int amount;
-    private double cost;
+    private IntegerProperty amount;
+    private DoubleProperty cost;
     
    public Part(int id, String partName, String partDesc, int amount, double cost)
     {
-        this.id = id;
+        this.id =  new SimpleIntegerProperty(id);
         this.partName = new SimpleStringProperty(partName);
         this.partDesc= new SimpleStringProperty(partDesc);
-        this.amount= amount;
-        this.cost=cost;
+        this.amount=  new SimpleIntegerProperty(amount);
+        this.cost=new SimpleDoubleProperty(cost);
     }
     
     public int getID()
     {
-        return id;
+        return id.get();
     }
     
     public String getpartName()
@@ -47,14 +51,14 @@ public class Part
     
     public double getCost(){
         
-        return cost;
+        return cost.get();
     }
     
     public int getAmount()
     {
-        return amount;
+        return amount.get();
     }
-    
+    /////
     public StringProperty partNameProperty()
     {
         return partName;
@@ -64,6 +68,31 @@ public class Part
     {
        return partDesc;
     }
+    //
+    public void setID(int id)
+    {
+        this.id.set(id);        
+    }
     
-   
+    public void setpartName(String partName)
+    {
+        this.partName.set(partName);
+    }
+    
+    public void setpartDesc(String partDesc)
+    {
+        this.partDesc.set(partDesc);
+    }
+    
+    public void setAmount(int amount)
+    {
+        this.amount.set(amount);
+    }
+    
+    public void setCost(double cost)
+    {
+        this.cost.set(cost);
+    }
 }
+   
+
