@@ -228,6 +228,37 @@ public final class Database
         return added;
     }
     /*Author Sergio*/
+    public boolean addInstalledPart(int INST_ID, String REG_NUM, String INST_DATE, 
+            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, int PART_COST)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
+           add.setInt(1, INST_ID);
+           add.setString(2, REG_NUM);
+           add.setString(3, INST_DATE);
+           add.setString(4, EXP_DATE);
+           add.setInt(5, PART_ID);
+           add.setString(6, CUST_NAME);
+           add.setInt(7, VEHICLE_ID);
+           add.setInt(8, PART_COST);
+  
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Part successfully added");
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+    /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException
     {   
         
