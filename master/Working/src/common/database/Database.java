@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import parts.logic.Part;
+import parts.logic.installedPart;
 //import parts.logic.PartsController;
 
 /**
@@ -29,6 +30,7 @@ public final class Database
     
     private ObservableList<SystemUser> usersData;
     private ObservableList<Part> partsData;
+    private ObservableList<installedPart> installedPartsData;
     
     private Database(String DBFileName)
     {
@@ -282,6 +284,36 @@ public final class Database
             partsData.add(part);
         }
         return partsData;
+    }
+     /*Author Sergio*/
+    public ObservableList<installedPart> getinstalledPart() throws SQLException
+    {   
+        
+        PreparedStatement getPart = null;
+        partsData = FXCollections.observableArrayList();
+        
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_INSTALLATION");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int INST_ID = rs.getInt("INST_ID");
+            String REG_NUM = rs.getString("REG_NUM");
+            String INST_DATE = rs.getString("INST_DATE");
+            String EXP_DATE= rs.getString("EXP_DATE");
+            int PART_ID = rs.getInt("PART_ID");
+            String CUST_NAME = rs.getString("CUST_NAME");
+            int VEHICLE_ID = rs.getInt("VEHICLE_ID");
+            int PART_COST = rs.getInt("PART_COST");
+            
+            
+            installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            
+            installedPartsData.add(installedPart);
+        }
+        return installedPartsData;
     }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
