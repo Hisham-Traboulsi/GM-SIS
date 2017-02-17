@@ -20,7 +20,7 @@
           
                 <Menu mnemonicParsing="false" text="Parts">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#parts" text="Parts" />
+                        <MenuItem mnemonicParsing="false" text="Parts" />
                     </items>    
                 </Menu>
           
