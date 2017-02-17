@@ -1,6 +1,13 @@
 #AnchorPane
 {
-	-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #38a5ff 0%, #0aff80 100%);
+	/* HISHAM THIS IS THE CSS GRADIENT THAT YOU HAD, I KEPT IT JUST IN CASE
+         -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #38a5ff 0%, #0aff80 100%);
 	-fx-pref-height: 521;
-	-fx-pref-width: 787;	
+	-fx-pref-width: 787;*/
+        
+        -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #38a5ff 0%, #a90329 100%);
+	-fx-pref-height: 521;
+	-fx-pref-width: 787;
+        
+        
 }
