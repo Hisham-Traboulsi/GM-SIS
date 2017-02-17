@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
             pane.setCenter(welcomePane);
         }
         else
-        {
+        {   JOptionPane.showMessageDialog(null,"Invalid credentials, please try again");
             id_box.clear();
             password_box.clear();
           //  invalid_label.setText("Sorry, invalid credentials");  
