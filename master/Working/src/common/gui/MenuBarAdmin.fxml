@@ -29,6 +29,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#addPart" text="Add part" />
             <MenuItem mnemonicParsing="false" onAction="#trackPart" text="Track part" />
+            <MenuItem mnemonicParsing="false" onAction="#trackInstalledPart" text="Track installed part" />
                     </items>    
                 </Menu>
           
