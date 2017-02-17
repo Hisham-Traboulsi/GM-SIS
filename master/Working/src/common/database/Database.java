@@ -290,7 +290,7 @@ public final class Database
     {   
         
         PreparedStatement getPart = null;
-        partsData = FXCollections.observableArrayList();
+        installedPartsData = FXCollections.observableArrayList();
         
        
         getPart = preparedStatement("SELECT * FROM PARTS_INSTALLATION");
@@ -298,12 +298,12 @@ public final class Database
         
         while(rs.next())
         {
-            int INST_ID = rs.getInt("INST_ID");
+            int INST_ID = rs.getInt("INSTALLATION_ID");
             String REG_NUM = rs.getString("REG_NUM");
-            String INST_DATE = rs.getString("INST_DATE");
+            String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             int PART_ID = rs.getInt("PART_ID");
-            String CUST_NAME = rs.getString("CUST_NAME");
+            String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
             int PART_COST = rs.getInt("PART_COST");
             
