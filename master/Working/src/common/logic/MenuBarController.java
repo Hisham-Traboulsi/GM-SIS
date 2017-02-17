@@ -166,5 +166,22 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    
+    public void addInstalledPart(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL addInstalledPartUrl = getClass().getResource("/parts/gui/addInstalledPart.fxml");
+            AnchorPane addInstalledPartPane = FXMLLoader.load(addInstalledPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addInstalledPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }
