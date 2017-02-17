@@ -30,6 +30,12 @@ public class MenuBarController
     
     @FXML
     private MenuItem removeUser;
+    @FXML
+    private MenuItem addPart;
+   /* @FXML
+    private MenuItem trackPart;
+    @FXML
+    private MenuItem trackInstalledPart;*/
     
     public void addMenuBar()
     {
@@ -136,6 +142,24 @@ public class MenuBarController
             BorderPane border = Main.getRoot();
             
             border.setCenter(trackPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    public void trackInstalledPart(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL trackInstalledPartUrl = getClass().getResource("/parts/gui/trackInstalledPart.fxml");
+            AnchorPane trackInstalledPartPane = FXMLLoader.load(trackInstalledPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(trackInstalledPartPane);
         }
         catch(IOException ex)
         {
