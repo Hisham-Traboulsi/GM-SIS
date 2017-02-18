@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,7 +51,8 @@ public class TrackInstalledPartController implements Initializable {
     @FXML
     private TableColumn<installedPart, String> CUST_NAME;
 
-   
+    @FXML
+    private TextField searchBox;
     @FXML
     private ObservableList<installedPart> selected = null;
 
@@ -58,11 +60,11 @@ public class TrackInstalledPartController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-         try {
+        try {
             ObservableList<installedPart> installedPartsData = Database.getInstance().getinstalledPart();
             installedPartsTable.setEditable(true);
 
-            INST_ID.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
+           INST_ID.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
             PART_ID.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
             VEHICLE_ID.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_ID"));
             PART_COST.setCellValueFactory(new PropertyValueFactory<>("PART_COST"));
@@ -130,6 +132,17 @@ public class TrackInstalledPartController implements Initializable {
         Database.getInstance().editInstalledPart();
     }
     
-      
+       public void searchPart() throws SQLException
+    {
+         ObservableList  <installedPart> search;
+         //int registration = Integer.parseInt(searchBox.getText());
+        String registration=searchBox.getText();
+     
+        search = Database.getInstance().searchInstalledPart(registration);
+       // Database.getInstance().searchInstalledPart();
+       
+       System.out.print("test");
+    }
+    
     
 }

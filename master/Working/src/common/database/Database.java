@@ -31,6 +31,7 @@ public final class Database
     private ObservableList<SystemUser> usersData;
     private ObservableList<Part> partsData;
     private ObservableList<installedPart> installedPartsData;
+    private ObservableList<installedPart> searchPartsData;
     
     private Database(String DBFileName)
     {
@@ -315,6 +316,47 @@ public final class Database
         }
         return installedPartsData;
     }
+      /*Author Sergio*/
+    public ObservableList<installedPart> searchInstalledPart(String registration ) throws SQLException
+    {   
+        try{
+        PreparedStatement searchInstalledPart = null;
+        installedPartsData = FXCollections.observableArrayList();
+        
+      
+        searchInstalledPart = preparedStatement("SELECT * FROM PARTS_INSTALLATION WHERE REG_NUM=?");
+        
+        searchInstalledPart.setString(1,registration);
+        
+        
+        ResultSet rs = searchInstalledPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int INST_ID = rs.getInt("INSTALLATION_ID");
+            String REG_NUM = rs.getString("REG_NUM");
+            String INST_DATE = rs.getString("INSTALLATION_DATE");
+            String EXP_DATE= rs.getString("EXP_DATE");
+            int PART_ID = rs.getInt("PART_ID");
+            String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
+            int VEHICLE_ID = rs.getInt("VEHICLE_ID");
+            double PART_COST = rs.getInt("PART_COST");
+            
+            
+            installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            
+            installedPartsData.add(installedPart);
+        }
+        
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        return installedPartsData;
+    }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
     {
@@ -401,4 +443,6 @@ public final class Database
     {
         return db;
     }
+
+    
 }
