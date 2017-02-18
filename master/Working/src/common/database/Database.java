@@ -349,26 +349,54 @@ public final class Database
         return deleted;
     }
     
-    public void editPart() throws SQLException
+    public void editInstalledPart() throws SQLException
     {
-        PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET  NAME=?, DESCRIPTION=?, AMOUNT=?, COST=? WHERE RELEVANT_ID_NUM=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=?,PART_COST=? WHERE INSTALLATION_ID=?");
         int counter = 0;
-        while(counter < partsData.size())
+        while(counter < installedPartsData.size())
         {
-            editPart.setString(1, partsData.get(counter).getpartName());
-            editPart.setString(2, partsData.get(counter).getpartDesc());
-            editPart.setInt(3, partsData.get(counter).getAmount());
-            editPart.setDouble(4, partsData.get(counter).getCost());
-            editPart.setInt(5, partsData.get(counter).getID());
+            editInstalledPart.setString(1, installedPartsData.get(counter).getREG_NUM());
+            editInstalledPart.setString(2, installedPartsData.get(counter).getINST_DATE());
+            editInstalledPart.setString(3, installedPartsData.get(counter).getEXP_DATE());
+            editInstalledPart.setString(4, installedPartsData.get(counter).getCUST_NAME());
+            editInstalledPart.setInt(5, installedPartsData.get(counter).getVEHICLE_ID());
+            editInstalledPart.setInt(6, installedPartsData.get(counter).getPART_COST());
+            editInstalledPart.setInt(7, installedPartsData.get(counter).getPART_ID());
+            editInstalledPart.setInt(8, installedPartsData.get(counter).getINST_ID());
+           
             
-            editPart.executeUpdate();
+            editInstalledPart.executeUpdate();
             
             counter++;
         }
         
-        getPart();
+        getinstalledPart();
     }
-    
+    public void deleteInstalledPart() throws SQLException
+    {
+        PreparedStatement deleteInstalledPart = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE REG_NUM=?," +
+                 " INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME= ?,"
+                + "VEHICLE_ID= ?,+ PART_COST WHERE INSTALLATION_ID=?");
+        int counter = 0;
+        while(counter < installedPartsData.size())
+        {
+            deleteInstalledPart.setString(1, installedPartsData.get(counter).getREG_NUM());
+            deleteInstalledPart.setString(2, installedPartsData.get(counter).getINST_DATE());
+            deleteInstalledPart.setString(2, installedPartsData.get(counter).getEXP_DATE());
+            deleteInstalledPart.setString(2, installedPartsData.get(counter).getCUST_NAME());
+            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getVEHICLE_ID());
+            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getPART_COST());
+            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getPART_ID());
+            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getINST_ID());
+           
+            
+            deleteInstalledPart.executeUpdate();
+            
+            counter++;
+        }
+        
+        getinstalledPart();
+    }
     public static Database getInstance()
     {
         return db;
