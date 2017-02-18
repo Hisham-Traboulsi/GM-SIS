@@ -43,6 +43,10 @@ public class installedPart
         
     }
     
+    /**
+     *
+     * @return
+     */
     public int getINST_ID()
     {
         return INST_ID.get();
@@ -99,7 +103,7 @@ public class installedPart
     {
        return EXP_DATE;
     }
-    public StringProperty partDescProperty()
+    public StringProperty CUST_NAME()
     {
        return CUST_NAME;
     }

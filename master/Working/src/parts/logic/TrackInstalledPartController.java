@@ -10,11 +10,15 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 /**
  * FXML Controller class
  *
@@ -56,15 +60,59 @@ public class TrackInstalledPartController implements Initializable {
         
          try {
             ObservableList<installedPart> installedPartsData = Database.getInstance().getinstalledPart();
+            installedPartsTable.setEditable(true);
 
             INST_ID.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
             PART_ID.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
             VEHICLE_ID.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_ID"));
             PART_COST.setCellValueFactory(new PropertyValueFactory<>("PART_COST"));
+            
             REG_NUM.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
-            INST_DATE.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
+            REG_NUM.setCellFactory(TextFieldTableCell.forTableColumn());
+            REG_NUM.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
+                }
+            }
+            );
+            
+            INST_DATE.setCellValueFactory(new PropertyValueFactory<>("INSTALLATION_DATE"));
+            INST_DATE.setCellFactory(TextFieldTableCell.forTableColumn());
+            INST_DATE.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
+                }
+            }
+            );
+           
             EXP_DATE.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
-            CUST_NAME.setCellValueFactory(new PropertyValueFactory<>("CUST_NAME"));
+            EXP_DATE.setCellFactory(TextFieldTableCell.forTableColumn());
+            EXP_DATE.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
+                }
+            }
+            );
+            CUST_NAME.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_FULLNAME"));
+            CUST_NAME.setCellFactory(TextFieldTableCell.forTableColumn());
+            CUST_NAME.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setCUST_NAME(t.getNewValue());
+                }
+            }
+            );
 
             installedPartsTable.setItems(installedPartsData);
             
@@ -76,13 +124,12 @@ public class TrackInstalledPartController implements Initializable {
         }
     } 
     
-    public void trackInstalledParts()
+    
+        public void updatePart() throws SQLException
     {
-        //selected = (ObservableList) usersTable.getRowFactory();
-        //System.out.println(selected);
-
-
+        Database.getInstance().editInstalledPart();
     }
+    
       
     
 }
