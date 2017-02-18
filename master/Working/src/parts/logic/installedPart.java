@@ -6,10 +6,10 @@
 package parts.logic;
 
 import javafx.beans.property.IntegerProperty;
-//import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-//import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -25,17 +25,17 @@ public class installedPart
     private IntegerProperty PART_ID;
     private StringProperty CUST_NAME;
     private IntegerProperty VEHICLE_ID;
-    private IntegerProperty PART_COST;
+    private DoubleProperty PART_COST;
     
     
    public installedPart(int INST_ID, String REG_NUM, String INST_DATE, String EXP_DATE,int PART_ID, 
-           String CUST_NAME,int VEHICLE_ID, int PART_COST)
+           String CUST_NAME,int VEHICLE_ID, double PART_COST)
            
     {
         this.INST_ID =  new SimpleIntegerProperty(INST_ID);
         this.PART_ID =  new SimpleIntegerProperty(PART_ID);
         this.VEHICLE_ID =  new SimpleIntegerProperty(VEHICLE_ID);
-        this.PART_COST =  new SimpleIntegerProperty(PART_COST);
+        this.PART_COST =  new SimpleDoubleProperty(PART_COST);
         this.REG_NUM = new SimpleStringProperty(REG_NUM);
         this.INST_DATE = new SimpleStringProperty(INST_DATE);
         this.EXP_DATE= new SimpleStringProperty(EXP_DATE);
@@ -60,7 +60,7 @@ public class installedPart
     {
         return VEHICLE_ID.get();
     }
-    public int getPART_COST()
+    public double getPART_COST()
     {
         return PART_COST.get();
     }
@@ -126,7 +126,7 @@ public class installedPart
         this.VEHICLE_ID.set(VEHICLE_ID);        
     }
     
-    public void setPART_COST(int PART_COST)
+    public void setPART_COST(double PART_COST)
     {
         this.PART_COST.set(PART_COST);        
     }

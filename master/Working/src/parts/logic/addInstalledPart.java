@@ -57,7 +57,7 @@ public class addInstalledPart implements Initializable {
             int INSTID = Integer.parseInt(INST_ID.getText());
             int PARTID = Integer.parseInt(PART_ID.getText());
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
-            int PARTCOST = Integer.parseInt(PART_COST.getText());
+            double PARTCOST = Double.parseDouble(PART_COST.getText());
             String REGNUM = (REG_NUM.getText());
             String INSTDATE = (INST_DATE.getText());
             String EXPDATE = (EXP_DATE.getText());

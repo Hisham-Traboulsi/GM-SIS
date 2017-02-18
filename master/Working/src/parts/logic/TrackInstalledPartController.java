@@ -33,13 +33,13 @@ public class TrackInstalledPartController implements Initializable {
     private TableView<installedPart> installedPartsTable = new TableView<installedPart>();
 
     @FXML
-    private TableColumn INST_ID;
+    private TableColumn <installedPart, Integer>INST_ID;
     @FXML
-    private TableColumn PART_ID;
+    private TableColumn <installedPart, Integer>PART_ID;
     @FXML
-    private TableColumn VEHICLE_ID;
+    private TableColumn <installedPart, Integer>VEHICLE_ID;
     @FXML
-    private TableColumn PART_COST;
+    private TableColumn <installedPart, Double>PART_COST;
 
     @FXML
     private TableColumn<installedPart, String> REG_NUM;
@@ -79,7 +79,7 @@ public class TrackInstalledPartController implements Initializable {
             }
             );
             
-            INST_DATE.setCellValueFactory(new PropertyValueFactory<>("INSTALLATION_DATE"));
+            INST_DATE.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
             INST_DATE.setCellFactory(TextFieldTableCell.forTableColumn());
             INST_DATE.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
@@ -102,7 +102,7 @@ public class TrackInstalledPartController implements Initializable {
                 }
             }
             );
-            CUST_NAME.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_FULLNAME"));
+            CUST_NAME.setCellValueFactory(new PropertyValueFactory<>("CUST_NAME"));
             CUST_NAME.setCellFactory(TextFieldTableCell.forTableColumn());
             CUST_NAME.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {

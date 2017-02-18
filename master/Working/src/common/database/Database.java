@@ -231,7 +231,7 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart(int INST_ID, String REG_NUM, String INST_DATE, 
-            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, int PART_COST)
+            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, double PART_COST)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -245,7 +245,7 @@ public final class Database
            add.setInt(5, PART_ID);
            add.setString(6, CUST_NAME);
            add.setInt(7, VEHICLE_ID);
-           add.setInt(8, PART_COST);
+           add.setDouble(8, PART_COST);
   
            add.execute();
            add.close();
@@ -305,7 +305,7 @@ public final class Database
             int PART_ID = rs.getInt("PART_ID");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            int PART_COST = rs.getInt("PART_COST");
+            double PART_COST = rs.getInt("PART_COST");
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
@@ -360,7 +360,7 @@ public final class Database
             editInstalledPart.setString(3, installedPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, installedPartsData.get(counter).getCUST_NAME());
             editInstalledPart.setInt(5, installedPartsData.get(counter).getVEHICLE_ID());
-            editInstalledPart.setInt(6, installedPartsData.get(counter).getPART_COST());
+            editInstalledPart.setDouble(6, installedPartsData.get(counter).getPART_COST());
             editInstalledPart.setInt(7, installedPartsData.get(counter).getPART_ID());
             editInstalledPart.setInt(8, installedPartsData.get(counter).getINST_ID());
            
@@ -385,7 +385,7 @@ public final class Database
             deleteInstalledPart.setString(2, installedPartsData.get(counter).getEXP_DATE());
             deleteInstalledPart.setString(2, installedPartsData.get(counter).getCUST_NAME());
             deleteInstalledPart.setInt(3, installedPartsData.get(counter).getVEHICLE_ID());
-            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getPART_COST());
+            deleteInstalledPart.setDouble(3, installedPartsData.get(counter).getPART_COST());
             deleteInstalledPart.setInt(3, installedPartsData.get(counter).getPART_ID());
             deleteInstalledPart.setInt(3, installedPartsData.get(counter).getINST_ID());
            
