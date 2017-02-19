@@ -60,10 +60,12 @@ public class TrackInstalledPartController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        try {
+        /*try {
             ObservableList<installedPart> installedPartsData = Database.getInstance().getinstalledPart();
             installedPartsTable.setEditable(true);
-
+               
+            
+            
            INST_ID.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
             PART_ID.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
             VEHICLE_ID.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_ID"));
@@ -123,7 +125,7 @@ public class TrackInstalledPartController implements Initializable {
         catch (SQLException ex) 
         {
             ex.printStackTrace();
-        }
+       }*/
     } 
     
     
@@ -134,15 +136,70 @@ public class TrackInstalledPartController implements Initializable {
     
        public void searchPart() throws SQLException
     {
-         ObservableList  <installedPart> search;
-         //int registration = Integer.parseInt(searchBox.getText());
-        String registration=searchBox.getText();
-     
-        search = Database.getInstance().searchInstalledPart(registration);
-       // Database.getInstance().searchInstalledPart();
+       String searchVal=searchBox.getText();
+       ObservableList  <installedPart> searchPartsData = Database.getInstance().searchInstalledPart(searchVal);
        
-       System.out.print("test");
+       installedPartsTable.setEditable(true);
+       
+        
+           INST_ID.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
+            PART_ID.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
+            VEHICLE_ID.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_ID"));
+            PART_COST.setCellValueFactory(new PropertyValueFactory<>("PART_COST"));
+            
+            REG_NUM.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
+            REG_NUM.setCellFactory(TextFieldTableCell.forTableColumn());
+            REG_NUM.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
+                }
+            }
+            );
+            
+            INST_DATE.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
+            INST_DATE.setCellFactory(TextFieldTableCell.forTableColumn());
+            INST_DATE.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
+                }
+            }
+            );
+           
+            EXP_DATE.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
+            EXP_DATE.setCellFactory(TextFieldTableCell.forTableColumn());
+            EXP_DATE.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
+                }
+            }
+            );
+            CUST_NAME.setCellValueFactory(new PropertyValueFactory<>("CUST_NAME"));
+            CUST_NAME.setCellFactory(TextFieldTableCell.forTableColumn());
+            CUST_NAME.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
+                @Override
+                public void handle(CellEditEvent<installedPart, String> t) {
+                    ((installedPart) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setCUST_NAME(t.getNewValue());
+                }
+            }
+            );
+
+            
+            installedPartsTable.setItems(searchPartsData);
+            
+            //selected = (ObservableList) usersTable.getSelectionModel();
+        } 
+        
     }
     
     
-}

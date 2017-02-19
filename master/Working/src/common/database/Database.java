@@ -317,16 +317,16 @@ public final class Database
         return installedPartsData;
     }
       /*Author Sergio*/
-    public ObservableList<installedPart> searchInstalledPart(String registration ) throws SQLException
+    public ObservableList<installedPart> searchInstalledPart(String searchVal ) throws SQLException
     {   
         try{
         PreparedStatement searchInstalledPart = null;
-        installedPartsData = FXCollections.observableArrayList();
+        searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("SELECT * FROM PARTS_INSTALLATION WHERE REG_NUM=?");
+        searchInstalledPart = preparedStatement("SELECT * FROM 'PARTS_INSTALLATION' WHERE REG_NUM LIKE '%" + searchVal +  "%' OR" + " CUSTOMER_FULLNAME LIKE '%" + searchVal +"%'" );
         
-        searchInstalledPart.setString(1,registration);
+        //searchInstalledPart.setString(1,searchVal);
         
         
         ResultSet rs = searchInstalledPart.executeQuery();
@@ -343,10 +343,10 @@ public final class Database
             double PART_COST = rs.getInt("PART_COST");
             
             
-            installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
+            installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
             EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
             
-            installedPartsData.add(installedPart);
+            searchPartsData.add(searchedPart);
         }
         
         }
@@ -355,7 +355,7 @@ public final class Database
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
-        return installedPartsData;
+        return searchPartsData;
     }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
@@ -395,16 +395,16 @@ public final class Database
     {
         PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=?,PART_COST=? WHERE INSTALLATION_ID=?");
         int counter = 0;
-        while(counter < installedPartsData.size())
+        while(counter < searchPartsData.size())
         {
-            editInstalledPart.setString(1, installedPartsData.get(counter).getREG_NUM());
-            editInstalledPart.setString(2, installedPartsData.get(counter).getINST_DATE());
-            editInstalledPart.setString(3, installedPartsData.get(counter).getEXP_DATE());
-            editInstalledPart.setString(4, installedPartsData.get(counter).getCUST_NAME());
-            editInstalledPart.setInt(5, installedPartsData.get(counter).getVEHICLE_ID());
-            editInstalledPart.setDouble(6, installedPartsData.get(counter).getPART_COST());
-            editInstalledPart.setInt(7, installedPartsData.get(counter).getPART_ID());
-            editInstalledPart.setInt(8, installedPartsData.get(counter).getINST_ID());
+            editInstalledPart.setString(1, searchPartsData.get(counter).getREG_NUM());
+            editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
+            editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
+            editInstalledPart.setString(4, searchPartsData.get(counter).getCUST_NAME());
+            editInstalledPart.setInt(5, searchPartsData.get(counter).getVEHICLE_ID());
+            editInstalledPart.setDouble(6, searchPartsData.get(counter).getPART_COST());
+            editInstalledPart.setInt(7, searchPartsData.get(counter).getPART_ID());
+            editInstalledPart.setInt(8, searchPartsData.get(counter).getINST_ID());
            
             
             editInstalledPart.executeUpdate();
