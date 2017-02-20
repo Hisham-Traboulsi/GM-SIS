@@ -6,6 +6,7 @@
 package common.logic;
 
 import common.Main;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.URL;
 import javafx.event.ActionEvent;
@@ -15,6 +16,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -180,6 +183,40 @@ public class MenuBarController
             border.setCenter(addInstalledPartPane);
         }
         catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    public void logOut(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            
+           JFrame frame = new JFrame();
+           Object[] options = {"Yes","No"};
+           int n = JOptionPane.showOptionDialog(frame,
+            "Are you sure you want to logout",
+            "LOG OUT",
+             JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.WARNING_MESSAGE,
+             null,
+             options,
+             options[1]);
+              if (n == JOptionPane.YES_OPTION) {
+      
+                 {
+                   URL logOutUrl = getClass().getResource("/common/gui/Login.fxml");
+                   AnchorPane logOutPane = FXMLLoader.load(logOutUrl);
+            
+                   BorderPane border = Main.getRoot();
+            
+                    border.setCenter(logOutPane);
+            }
+        }
+        }
+        catch(HeadlessException | IOException ex)
         {
             ex.printStackTrace();
         }

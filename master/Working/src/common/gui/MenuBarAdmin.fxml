@@ -37,5 +37,9 @@
                 <Menu mnemonicParsing="false" text="Specialist Repairs">
               
                 </Menu>
+      <Menu mnemonicParsing="false" onAction="#logOut" text="Log Out">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+         </items></Menu>
             </menus>
         </MenuBar>
