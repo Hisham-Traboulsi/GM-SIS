@@ -5,14 +5,26 @@
  */
 package common.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,9 +53,43 @@ public class AddUserController implements Initializable {
     @FXML
     private RadioButton Admin_Radio;
     
+    @FXML
+    private TableView<SystemUser> usersTable = new TableView<SystemUser>();
+
+    @FXML
+    private TableColumn id_Col;
+
+    @FXML
+    private TableColumn<SystemUser, String> firstName_Col;
+
+    @FXML
+    private TableColumn<SystemUser, String> surname_Col;
+
+    @FXML
+    private TableColumn<SystemUser, String> password_Col;
+
+    @FXML
+    private TableColumn<SystemUser, String> admin_Col;
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        try {
+            ObservableList<SystemUser> usersData = Database.getInstance().getAllUsers();
+
+            id_Col.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            firstName_Col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            surname_Col.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            password_Col.setCellValueFactory(new PropertyValueFactory<>("password"));
+            admin_Col.setCellValueFactory(new PropertyValueFactory<>("admin"));
+            
+            usersTable.setItems(usersData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
     }   
     
     public void addSyUser()
@@ -73,6 +119,21 @@ public class AddUserController implements Initializable {
             JOptionPane.showMessageDialog(null, "System user was not added");
         }
         
+        try
+        {            
+            URL addUserUrl = getClass().getResource("/common/gui/AddUser.fxml");
+            AnchorPane addUserPane = FXMLLoader.load(addUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addUserPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        refresh();
         clearButton();
     }
     
@@ -82,6 +143,23 @@ public class AddUserController implements Initializable {
         FirstName_Box.clear();
         Surname_Box.clear();
         Password_Box.clear();
+    }
+    
+    public void refresh()
+    {
+        try
+        {            
+            URL addUserUrl = getClass().getResource("/common/gui/AddUser.fxml");
+            AnchorPane addUserPane = FXMLLoader.load(addUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addUserPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
     }
     
 }

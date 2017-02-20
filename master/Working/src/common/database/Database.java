@@ -161,13 +161,13 @@ public final class Database
     
     public ObservableList<SystemUser> getAllUsers() throws SQLException
     {   
-        PreparedStatement allUsers = null;
+        PreparedStatement allUsersStmt = null;
         
          usersData = FXCollections.observableArrayList();
         
        
-        allUsers = preparedStatement("SELECT * FROM AUTHENTICATION");
-        ResultSet rs = allUsers.executeQuery();
+        allUsersStmt = preparedStatement("SELECT * FROM AUTHENTICATION");
+        ResultSet rs = allUsersStmt.executeQuery();
         
         while(rs.next())
         {
@@ -186,22 +186,29 @@ public final class Database
     
     public void editUser() throws SQLException
     {
-        PreparedStatement editUser = preparedStatement("UPDATE AUTHENTICATION SET FIRST_NAME=?, SURNAME=?, PASSWORD=?, ADMIN=? WHERE ID=?");
+        PreparedStatement editUserStmt = preparedStatement("UPDATE AUTHENTICATION SET FIRST_NAME=?, SURNAME=?, PASSWORD=?, ADMIN=? WHERE ID=?");
         int counter = 0;
         while(counter < usersData.size())
         {
-            editUser.setString(1, usersData.get(counter).getfirstName());
-            editUser.setString(2, usersData.get(counter).getSurname());
-            editUser.setString(3, usersData.get(counter).getPassword());
-            editUser.setString(4, usersData.get(counter).getAdmin());
-            editUser.setInt(5, usersData.get(counter).getID());
+            editUserStmt.setString(1, usersData.get(counter).getfirstName());
+            editUserStmt.setString(2, usersData.get(counter).getSurname());
+            editUserStmt.setString(3, usersData.get(counter).getPassword());
+            editUserStmt.setString(4, usersData.get(counter).getAdmin());
+            editUserStmt.setInt(5, usersData.get(counter).getID());
             
-            editUser.executeUpdate();
+            editUserStmt.executeUpdate();
             
             counter++;
         }
         
         getAllUsers();
+    }
+    
+    public void removeUser(int id) throws SQLException
+    {
+        PreparedStatement removeUserStmt = preparedStatement("DELETE FROM AUTHENTICATION WHERE ID=?");
+        removeUserStmt.setInt(1, id);
+        removeUserStmt.executeUpdate();
     }
     /*Author Sergio*/
     public boolean addPart(int ID, String name, String description, int amount, double cost)

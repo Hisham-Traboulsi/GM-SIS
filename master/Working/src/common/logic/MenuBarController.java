@@ -216,6 +216,7 @@ public class MenuBarController
                    BorderPane border = Main.getRoot();
             
                     border.setCenter(logOutPane);
+                    border.setTop(null);
          /*Parent home_page_parent = FXMLLoader.load(getClass().getResource("/common/gui/Login.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();*/

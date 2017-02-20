@@ -5,16 +5,21 @@
  */
 package common.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -70,12 +75,30 @@ public class RemoveUserController implements Initializable {
         }
     } 
     
-    public void remove()
+    public void remove() throws SQLException
     {
-        //selected = (ObservableList) usersTable.getRowFactory();
-        //System.out.println(selected);
-
-
+        selected = usersTable.getSelectionModel().getSelectedItems();   
+        //System.out.println(selected.get(0).getID());
+        Database.getInstance().removeUser(selected.get(0).getID());
+        refresh();
+    }
+    
+    public void refresh()
+    {
+        try
+        {   
+            URL editUserUrl = getClass().getResource("/common/gui/RemoveUser.fxml");
+            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(editUserPane);
+            
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
     }
     
 }

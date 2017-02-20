@@ -4,44 +4,55 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.AddUserController">
    <children>
-      <Button layoutX="333.0" layoutY="437.0" mnemonicParsing="false" onAction="#addSyUser" text="Submit" />
-      <Button layoutX="424.0" layoutY="437.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="54.0" text="Clear" />
-      <Label layoutX="207.0" layoutY="150.0" text="ID NUMBER:" textFill="WHITE">
+      <Button layoutX="354.0" layoutY="526.0" mnemonicParsing="false" onAction="#addSyUser" text="Submit" />
+      <Button layoutX="443.0" layoutY="526.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="54.0" text="Clear" />
+      <Label layoutX="46.0" layoutY="443.0" text="ID NUMBER" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Label layoutX="205.0" layoutY="209.0" text="FIRST NAME:" textFill="WHITE">
+      <Label layoutX="227.0" layoutY="443.0" text="FIRST NAME" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Label layoutX="219.0" layoutY="268.0" text="SURNAME:" textFill="WHITE">
+      <Label layoutX="426.0" layoutY="443.0" text="SURNAME" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Label layoutX="207.0" layoutY="332.0" text="PASSWORD:" textFill="WHITE">
+      <Label layoutX="643.0" layoutY="443.0" text="PASSWORD" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <PasswordField fx:id="Password_Box" layoutX="337.0" layoutY="330.0" />
-      <TextField fx:id="Surname_Box" layoutX="337.0" layoutY="266.0" />
-      <TextField fx:id="FirstName_Box" layoutX="337.0" layoutY="207.0" />
-      <TextField fx:id="ID_Box" layoutX="337.0" layoutY="148.0" />
-      <Label layoutX="296.0" layoutY="17.0" prefHeight="81.0" prefWidth="208.0" text="ADD USER" textFill="WHITE">
+      <PasswordField fx:id="Password_Box" layoutX="599.0" layoutY="480.0" />
+      <TextField fx:id="Surname_Box" layoutX="387.0" layoutY="480.0" />
+      <TextField fx:id="FirstName_Box" layoutX="186.0" layoutY="480.0" />
+      <TextField fx:id="ID_Box" layoutX="28.0" layoutY="480.0" prefHeight="31.0" prefWidth="135.0" />
+      <Label layoutX="339.0" prefHeight="70.0" prefWidth="208.0" text="ADD USER" textFill="WHITE">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <Label layoutX="235.0" layoutY="389.0" prefHeight="28.0" prefWidth="76.0" text="ADMIN:" textFill="WHITE">
+      <Label layoutX="793.0" layoutY="443.0" prefHeight="28.0" prefWidth="76.0" text="ADMIN" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <RadioButton fx:id="Admin_Radio" layoutX="339.0" layoutY="392.0" mnemonicParsing="false" />
+      <RadioButton fx:id="Admin_Radio" layoutX="811.0" layoutY="485.0" mnemonicParsing="false" />
+      <TableView id="usersTable" fx:id="usersTable" layoutX="29.0" layoutY="74.0" prefHeight="353.0" prefWidth="813.0">
+         <columns>
+            <TableColumn id="id_Col" fx:id="id_Col" prefWidth="151.0" text="ID" />
+            <TableColumn id="firstName_Col" fx:id="firstName_Col" prefWidth="168.0" text="First Name" />
+            <TableColumn id="surname_Col" fx:id="surname_Col" prefWidth="196.0" text="Surname" />
+            <TableColumn id="password_Col" fx:id="password_Col" prefWidth="163.0" text="Password" />
+            <TableColumn id="admin_Col" fx:id="admin_Col" prefWidth="134.0" text="Admin" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
