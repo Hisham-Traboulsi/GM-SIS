@@ -12,12 +12,17 @@ import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javafx.scene.control.MenuBar;
 
 /**
  *
@@ -191,8 +196,6 @@ public class MenuBarController
     {
         try
         {
-            addMenuBar();
-            
             
            JFrame frame = new JFrame();
            Object[] options = {"Yes","No"};
@@ -213,6 +216,9 @@ public class MenuBarController
                    BorderPane border = Main.getRoot();
             
                     border.setCenter(logOutPane);
+         /*Parent home_page_parent = FXMLLoader.load(getClass().getResource("/common/gui/Login.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();*/
             }
         }
         }
