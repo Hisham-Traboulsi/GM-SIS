@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.AddCustomerController">
+   <children>
+      <Label layoutX="429.0" layoutY="14.0" prefHeight="70.0" prefWidth="343.0" text="ADD CUSTOMER" textFill="WHITE">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <TableView layoutX="15.0" layoutY="103.0" prefHeight="404.0" prefWidth="1171.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
+          <TableColumn fx:id="fullNameCol" prefWidth="204.0" text="Full Name" />
+            <TableColumn fx:id="vehicleRegCol" prefWidth="154.0" text="Vehicle Registration" />
+            <TableColumn fx:id="addressCol" prefWidth="194.0" text="Address" />
+            <TableColumn fx:id="postCodeCol" prefWidth="86.0" text="Post Code" />
+            <TableColumn fx:id="phoneCol" prefWidth="173.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="167.0" text="Email" />
+            <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
