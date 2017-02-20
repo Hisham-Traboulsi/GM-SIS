@@ -199,7 +199,12 @@ public class TrackInstalledPartController implements Initializable {
             
             //selected = (ObservableList) usersTable.getSelectionModel();
         } 
+       public void clearButton(){
+          
+           searchBox.clear();
+           installedPartsTable.getItems().clear();
+       }
+   }
         
-    }
     
     
