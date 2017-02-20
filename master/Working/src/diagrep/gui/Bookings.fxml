@@ -38,7 +38,7 @@
           <TableColumn minWidth="0.0" prefWidth="164.0" text="Check" />
         </columns>
       </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="116.0" layoutX="20.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" width="688.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="116.0" layoutX="23.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" width="704.0" />
       <TextField layoutX="882.0" layoutY="94.0" prefHeight="25.0" prefWidth="249.0" />
       <Label layoutX="776.0" layoutY="95.0" text="Search Booking: ">
          <font>
