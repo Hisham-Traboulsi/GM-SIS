@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,37 +11,46 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addPart">
    <children>
-      <Text fill="WHITE" layoutX="559.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID">
+      <Text fill="WHITE" layoutX="254.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="559.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
+      <Text fill="WHITE" layoutX="254.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="559.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost">
+      <Text fill="WHITE" layoutX="254.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="559.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Description">
+      <Text fill="WHITE" layoutX="254.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Description">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partID" layoutX="677.0" layoutY="154.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partName" layoutX="677.0" layoutY="194.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partCost" layoutX="677.0" layoutY="243.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextArea fx:id="partDesc" layoutX="561.0" layoutY="365.0" prefHeight="123.0" prefWidth="232.0" />
-      <Button fx:id="add" layoutX="626.0" layoutY="523.0" mnemonicParsing="false" onAction="#add" text="Add" />
-      <Text fill="WHITE" layoutX="559.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
+      <TextField fx:id="partID" layoutX="372.0" layoutY="144.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partName" layoutX="372.0" layoutY="184.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partCost" layoutX="372.0" layoutY="233.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextArea fx:id="partDesc" layoutX="256.0" layoutY="355.0" prefHeight="123.0" prefWidth="232.0" />
+      <Button layoutX="321.0" layoutY="513.0" mnemonicParsing="false" onAction="#add" text="Submit" />
+      <Text fill="WHITE" layoutX="254.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partAmount" layoutX="677.0" layoutY="288.0" prefHeight="25.0" prefWidth="112.0" />
-      <Button fx:id="clearButton" layoutX="701.0" layoutY="523.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
-      <Text fill="#f8f4f4" layoutX="483.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add part to inventory">
+      <TextField fx:id="partAmount" layoutX="372.0" layoutY="278.0" prefHeight="25.0" prefWidth="112.0" />
+      <Button fx:id="clearButton" layoutX="396.0" layoutY="513.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
+      <Text fill="#f8f4f4" layoutX="402.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts Inventory">
          <font>
             <Font size="43.0" />
          </font>
       </Text>
+      <TableView fx:id="partsTable" layoutX="591.0" layoutY="145.0" prefHeight="292.0" prefWidth="536.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="95.0" text="Part ID" />
+          <TableColumn fx:id="partNameCol" prefWidth="104.0" text="Part Name" />
+            <TableColumn fx:id="partDescCol" prefWidth="116.0" text="Description" />
+            <TableColumn fx:id="costCol" prefWidth="100.0" text="Cost" />
+            <TableColumn fx:id="amountCol" prefWidth="120.0" text="Stock" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

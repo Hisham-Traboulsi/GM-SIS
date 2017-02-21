@@ -157,24 +157,7 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    public void trackPart(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL trackPartUrl = getClass().getResource("/parts/gui/trackPart.fxml");
-            AnchorPane trackPartPane = FXMLLoader.load(trackPartUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(trackPartPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+    
     public void trackInstalledPart(ActionEvent event)
     {
         try
