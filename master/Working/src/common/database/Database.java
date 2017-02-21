@@ -259,6 +259,7 @@ public final class Database
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
@@ -290,6 +291,7 @@ public final class Database
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
@@ -387,6 +389,7 @@ public final class Database
         }
         catch(SQLException ex)
         {
+            JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
