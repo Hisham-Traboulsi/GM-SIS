@@ -95,24 +95,24 @@ public class AddCustomerController implements Initializable {
         privateRadio.setToggleGroup(group);
         businessRadio.setToggleGroup(group);
         
-        try
-        {
-            ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
+        //try
+        //{
+            //ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
             
-            idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            fullNameCol.setCellValueFactory(new PropertyValueFactory<>("FULLNAME"));
-            vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_REG"));
+            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
+            //fullNameCol.setCellValueFactory(new PropertyValueFactory<>("FULLNAME"));
+            //vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_REG"));
             //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             
             
-        }
-        catch(SQLException ex)
-        {
-            ex.printStackTrace();
-        }
+        //}
+        //catch(SQLException ex)
+        //{
+           // ex.printStackTrace();
+        //}
        
     }    
     
