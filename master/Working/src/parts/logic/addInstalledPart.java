@@ -132,16 +132,16 @@ public class addInstalledPart implements Initializable {
         
            
             INST_ID_view.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
-            INST_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            /*INST_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             INST_ID_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,Integer>>() {
                 @Override
-                public void handle(CellEditEvent<installedPart, Integer> t) {
-                    ((installedPart) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setINST_ID(t.getNewValue());
+                public void handle(CellEditEvent<Part, Integer> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setAmount(t.getNewValue());
                 }
             }
-            );
+            */
             
            
             PART_ID_view.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));

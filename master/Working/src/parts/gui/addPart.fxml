@@ -43,7 +43,7 @@
             <Font size="43.0" />
          </font>
       </Text>
-      <TableView fx:id="partsTable" layoutX="591.0" layoutY="145.0" prefHeight="292.0" prefWidth="536.0">
+      <TableView fx:id="partsTable" layoutX="591.0" layoutY="145.0" prefHeight="334.0" prefWidth="536.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="95.0" text="Part ID" />
           <TableColumn fx:id="partNameCol" prefWidth="104.0" text="Part Name" />
@@ -52,5 +52,6 @@
             <TableColumn fx:id="amountCol" prefWidth="120.0" text="Stock" />
         </columns>
       </TableView>
+      <Button layoutX="833.0" layoutY="513.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
    </children>
 </AnchorPane>
