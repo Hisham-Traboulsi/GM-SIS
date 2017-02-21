@@ -428,7 +428,6 @@ public final class Database
         
         return deleted;
     }
-    
     public void editInstalledPart() throws SQLException
     {
         PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=?,PART_COST=? WHERE INSTALLATION_ID=?");
@@ -451,6 +450,27 @@ public final class Database
         }
         
         getinstalledPart();
+    }
+    
+    public void editPart() throws SQLException
+    {
+        PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET NAME=?,DESCRIPTION=?,AMOUNT=?,COST=? WHERE RELEVANT_ID_NUM=?");
+        int counter = 0;
+        while(counter <partsData.size())
+        {
+            //editPart.setInt(1, partsData.get(counter).getID());
+            editPart.setString(1, partsData.get(counter).getpartName());
+            editPart.setString(2, partsData.get(counter).getpartDesc());
+            editPart.setInt(3, partsData.get(counter).getAmount());
+            editPart.setDouble(4, partsData.get(counter).getCost());
+            editPart.setInt(5, partsData.get(counter).getID());
+          
+            editPart.executeUpdate();
+            
+            counter++;
+        }
+        
+        getPart();
     }
     public void deleteInstalledPart() throws SQLException
     {
