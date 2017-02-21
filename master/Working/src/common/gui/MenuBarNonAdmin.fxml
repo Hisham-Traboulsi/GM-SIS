@@ -5,36 +5,39 @@
 <?import javafx.scene.control.MenuItem?>
 
 <MenuBar layoutY="-2.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="common.logic.MenuBarController">
-            <menus>
-                <Menu mnemonicParsing="false" text=" Customer Accounts ">
-            
-                </Menu>
+    <menus>
+        <Menu mnemonicParsing="false" text=" Customer Accounts ">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
+                        
+            </items>  
+        </Menu>
           
-                <Menu mnemonicParsing="false" text=" Vehicle Records ">
+        <Menu mnemonicParsing="false" text=" Vehicle Records ">
            
-                </Menu>
+        </Menu>
           
-                <Menu mnemonicParsing="false" text=" Diagnosis and Repair Bookings ">
+        <Menu mnemonicParsing="false" text=" Diagnosis and Repair Bookings ">
               
-                </Menu>
+        </Menu>
           
-                <Menu mnemonicParsing="false" text=" Parts ">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#addPart" text="Add part to inventory" />
-                        <MenuItem mnemonicParsing="false" onAction="#trackPart" text="View parts inventory" />
-                        <MenuItem mnemonicParsing="false" onAction="#addInstalledPart" text="Install part on vehicle" />
-                        <MenuItem mnemonicParsing="false" onAction="#trackInstalledPart" text="View installed parts" />
-                    </items>    
+        <Menu mnemonicParsing="false" text=" Parts ">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#addPart" text="Add part to inventory" />
+                <MenuItem mnemonicParsing="false" onAction="#trackPart" text="View parts inventory" />
+                <MenuItem mnemonicParsing="false" onAction="#addInstalledPart" text="Install part on vehicle" />
+                <MenuItem mnemonicParsing="false" onAction="#trackInstalledPart" text="View installed parts" />
+            </items>    
   
-                </Menu>
+        </Menu>
           
-                <Menu mnemonicParsing="false" text=" Specialist Repairs ">
+        <Menu mnemonicParsing="false" text=" Specialist Repairs ">
               
-                </Menu>
-                <Menu mnemonicParsing="false" text=" Logout " onAction="#logOut">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Logout"/>
-                    </items>     
-                </Menu>
-            </menus>
-        </MenuBar>
+        </Menu>
+        <Menu mnemonicParsing="false" text=" Logout " onAction="#logOut">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Logout"/>
+            </items>     
+        </Menu>
+    </menus>
+</MenuBar>

@@ -14,7 +14,9 @@
                     </items>   
                 </Menu>
                 <Menu mnemonicParsing="false" text="Customer Accounts">
-            
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
+                    </items>   
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Vehicle Records">

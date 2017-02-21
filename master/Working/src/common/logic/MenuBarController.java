@@ -120,6 +120,25 @@ public class MenuBarController
         }
     }
     
+    public void addCustomer(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL addCustomerUrl = getClass().getResource("/customers/gui/AddCustomer.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(addCustomerUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addCustomerPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public void addPart(ActionEvent event)
     {
         try

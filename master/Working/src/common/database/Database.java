@@ -6,6 +6,7 @@
 package common.database;
 
 import common.logic.SystemUser;
+import customers.logic.Customers;
 import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ public final class Database
     private PreparedStatement stmt;
     
     private ObservableList<SystemUser> usersData;
+    private ObservableList<Customers> customerData;
     private ObservableList<Part> partsData;
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
@@ -210,6 +212,32 @@ public final class Database
         removeUserStmt.setInt(1, id);
         removeUserStmt.executeUpdate();
     }
+    
+    public ObservableList<Customers> getAllCustomers() throws SQLException
+    {
+        PreparedStatement allCustomersStmt = preparedStatement("SELECT * FROM CUSTOMERS"); 
+                
+        customerData = FXCollections.observableArrayList();
+        ResultSet rs = allCustomersStmt.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("CUSTOMER_ID");
+            String fullName = rs.getString("FULLNAME");
+            String address = rs.getString("ADDRESS");
+            String postCode = rs.getString("POSTCODE");
+            String phone = rs.getString("PHONE");
+            String type = rs.getString("TYPE");
+            String email = rs.getString("EMAIL");
+            String vehicleReg = rs.getString("VEHICLE_REG");
+            
+            Customers customer = new Customers(id, fullName, vehicleReg, address, postCode, phone, email, type);
+            
+            customerData.add(customer);
+        }
+        return customerData;
+    }
+    
     /*Author Sergio*/
     public boolean addPart(int ID, String name, String description, int amount, double cost)
     {
