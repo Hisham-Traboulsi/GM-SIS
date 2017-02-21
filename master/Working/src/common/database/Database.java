@@ -454,7 +454,7 @@ public final class Database
     
     public void editPart() throws SQLException
     {
-        PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET NAME=?,DESCRIPTION=?,AMOUNT=?,COST=? WHERE RELEVANT_ID_NUM=?");
+       try{ PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET NAME=?,DESCRIPTION=?,AMOUNT=?,COST=? WHERE RELEVANT_ID_NUM=?");
         int counter = 0;
         while(counter <partsData.size())
         {
@@ -471,6 +471,13 @@ public final class Database
         }
         
         getPart();
+       }
+       catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            
+        }
     }
     public void deleteInstalledPart() throws SQLException
     {
