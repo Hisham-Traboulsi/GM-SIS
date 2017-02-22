@@ -479,30 +479,12 @@ public final class Database
             
         }
     }
-    public void deleteInstalledPart() throws SQLException
+      public void removeInstalledPart(int id) throws SQLException
     {
-        PreparedStatement deleteInstalledPart = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE REG_NUM=?," +
-                 " INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME= ?,"
-                + "VEHICLE_ID= ?,+ PART_COST WHERE INSTALLATION_ID=?");
-        int counter = 0;
-        while(counter < installedPartsData.size())
-        {
-            deleteInstalledPart.setString(1, installedPartsData.get(counter).getREG_NUM());
-            deleteInstalledPart.setString(2, installedPartsData.get(counter).getINST_DATE());
-            deleteInstalledPart.setString(2, installedPartsData.get(counter).getEXP_DATE());
-            deleteInstalledPart.setString(2, installedPartsData.get(counter).getCUST_NAME());
-            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getVEHICLE_ID());
-            deleteInstalledPart.setDouble(3, installedPartsData.get(counter).getPART_COST());
-            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getPART_ID());
-            deleteInstalledPart.setInt(3, installedPartsData.get(counter).getINST_ID());
-           
-            
-            deleteInstalledPart.executeUpdate();
-            
-            counter++;
-        }
         
-        getinstalledPart();
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE PART_ID="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeInstalledPartStmt.executeUpdate();
     }
     public static Database getInstance()
     {

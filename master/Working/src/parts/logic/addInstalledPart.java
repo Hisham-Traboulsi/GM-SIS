@@ -6,13 +6,16 @@
 /*Author Sergio*/
 package parts.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -22,6 +25,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -262,7 +267,32 @@ public class addInstalledPart implements Initializable {
                     + "To search:<br/>Enter search parameter and press search button<br/><br/><html>"
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
     }
-        
+      public void remove() throws SQLException
+    {
+        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
+        //System.out.println(selected.get(0).getID());
+       // int id=Integer.parseInt(selected.get(0).getPART_ID());
+        Database.getInstance().removeInstalledPart(selected.get(0).getPART_ID());
+        refresh();
+    }
+    
+    public void refresh()
+    {
+        try
+        {   
+            URL editUserUrl = getClass().getResource("/parts/gui/addInstalledPart.fxml");
+            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(editUserPane);
+            
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }  
 }
 
     
