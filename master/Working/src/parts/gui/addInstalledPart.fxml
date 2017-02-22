@@ -72,5 +72,6 @@
       <Button layoutX="579.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
       <Button layoutX="832.0" layoutY="590.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
       <TextField fx:id="searchBox" layoutX="683.0" layoutY="144.0" />
+      <Button layoutX="1087.0" layoutY="80.0" mnemonicParsing="false" onAction="#help" text="Help" />
    </children>
 </AnchorPane>

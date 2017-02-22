@@ -26,6 +26,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -237,7 +238,7 @@ public class addInstalledPart implements Initializable {
     public void clearButton()
     {
     searchBox.clear();
-    installedPartsTable.getItems().clear();
+    //installedPartsTable.getItems().clear();
     INST_ID.clear();
     PART_ID.clear();
     VEHICLE_ID.clear();
@@ -253,7 +254,14 @@ public class addInstalledPart implements Initializable {
         
        
     } 
-    
+    public void help()
+    {
+        JOptionPane.showMessageDialog(null,
+                "<html>To add a part to a vehicle :<br />Fill in all the textfields and click on submit button<br/><br/> "
+                    + "To update  a part:<br/>Double click on a cell, input new value, press enter and press update button<br/><br/>"
+                    + "To search:<br/>Enter search parameter and press search button<br/><br/><html>"
+                    + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
+    }
         
 }
 

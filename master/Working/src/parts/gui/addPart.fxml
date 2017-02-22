@@ -53,5 +53,6 @@
         </columns>
       </TableView>
       <Button layoutX="833.0" layoutY="513.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
+      <Button layoutX="1005.0" layoutY="73.0" mnemonicParsing="false" onAction="#help" text="Help" />
    </children>
 </AnchorPane>

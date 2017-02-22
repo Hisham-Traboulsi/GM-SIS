@@ -29,6 +29,8 @@ import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -144,7 +146,13 @@ public class addPart implements Initializable {
     
         Database.getInstance().editPart();
     }
-    
+    public void help()
+    {
+        JOptionPane.showMessageDialog(null,
+                "<html>To add a part:<br />Fill in all the textfields and click on submit button<br/><br/> "
+                    + "To update stock of a part:<br/>Double click on the Stock cell, input new value, press enter and press update button<br/><br/>"
+                    + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
+    }
    
     
         
