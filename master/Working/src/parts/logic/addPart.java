@@ -6,13 +6,16 @@
 /*Author Sergio*/
 package parts.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -25,6 +28,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -145,6 +150,7 @@ public class addPart implements Initializable {
         //int amount=Integer.parseInt(partAmount.getText());
     
         Database.getInstance().editPart();
+        refresh();
     }
     public void help()
     {
@@ -153,7 +159,23 @@ public class addPart implements Initializable {
                     + "To update stock of a part:<br/>Double click on the Stock cell, input new value, press enter and press update button<br/><br/>"
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
     }
-   
+    public void refresh()
+    {/*
+        try
+        {   
+            URL editUserUrl = getClass().getResource("/parts/gui/addPart.fxml");
+            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(editUserPane);
+            
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }*/
+    }  
     
         
 }

@@ -278,7 +278,7 @@ public class addInstalledPart implements Initializable {
     
     public void refresh()
     {
-        try
+        /*try
         {   
             URL editUserUrl = getClass().getResource("/parts/gui/addInstalledPart.fxml");
             AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
@@ -292,8 +292,8 @@ public class addInstalledPart implements Initializable {
         {
             ex.printStackTrace();
         }
-    }  
+    }*/  
 }
 
     
-
+}
