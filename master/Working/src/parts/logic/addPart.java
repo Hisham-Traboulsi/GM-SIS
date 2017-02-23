@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -83,6 +84,9 @@ public class addPart implements Initializable {
 
     @FXML
     private TableColumn costCol;
+    @FXML
+    private ObservableList<Part> list=FXCollections.observableArrayList();
+    
    
     @FXML
    public boolean add()
@@ -98,8 +102,9 @@ public class addPart implements Initializable {
   
       
       added = Database.getInstance().addPart(id,name,desc,amount,cost);
-        
+      refresh();
       return added;
+      
       
     }
    
@@ -110,7 +115,7 @@ public class addPart implements Initializable {
     partDesc.clear();
     partAmount.clear();
     partCost.clear();
-    
+    refresh();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -160,21 +165,35 @@ public class addPart implements Initializable {
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
     }
     public void refresh()
-    {/*
-        try
-        {   
-            URL editUserUrl = getClass().getResource("/parts/gui/addPart.fxml");
-            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
+    {try {
+            ObservableList<Part> partsData = Database.getInstance().getPart();
+
+            partsTable.setEditable(true);
             
-            BorderPane border = Main.getRoot();
+            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+            partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            amountCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Part,Integer>>() {
+                @Override
+                public void handle(CellEditEvent<Part, Integer> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setAmount(t.getNewValue());
+                    }
+            }
+            );
             
-            border.setCenter(editUserPane);
+            costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+
+            partsTable.setItems(partsData);
             
-        }
-        catch(IOException ex)
+        } 
+        catch (SQLException ex) 
         {
             ex.printStackTrace();
-        }*/
+        }
     }  
     
         

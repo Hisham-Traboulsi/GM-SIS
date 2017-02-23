@@ -35,6 +35,7 @@ public final class Database
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     
+    
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
