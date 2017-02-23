@@ -20,8 +20,9 @@
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Vehicle Records">
-           
-                </Menu>
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#addVehicle" text="Add Vehicle" />
+         </items></Menu>
           
                 <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
               

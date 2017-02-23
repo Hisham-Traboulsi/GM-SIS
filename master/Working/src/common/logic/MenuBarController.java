@@ -158,6 +158,25 @@ public class MenuBarController
         }
     }
     
+    public void addVehicle(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL addPartUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
+            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     
     public void addInstalledPart(ActionEvent event)
     {
