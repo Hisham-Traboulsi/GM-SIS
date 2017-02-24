@@ -24,9 +24,7 @@
         <Menu mnemonicParsing="false" text=" Parts ">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#addPart" text="Add part to inventory" />
-                <MenuItem mnemonicParsing="false" onAction="#trackPart" text="View parts inventory" />
-                <MenuItem mnemonicParsing="false" onAction="#addInstalledPart" text="Install part on vehicle" />
-                <MenuItem mnemonicParsing="false" onAction="#trackInstalledPart" text="View installed parts" />
+                <MenuItem mnemonicParsing="false" onAction="#addInstalledPart" text="Install part on vehicle" />               
             </items>    
   
         </Menu>

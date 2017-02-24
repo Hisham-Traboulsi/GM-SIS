@@ -51,6 +51,13 @@ public class LoginController implements Initializable {
     
     private boolean admin;
     
+    private static LoginController lc = new LoginController();
+    
+    public static LoginController getInstance()
+    {
+        return lc;
+    }
+    
     @FXML
     private void LogInButton(ActionEvent event) throws SQLException, IOException {
          
@@ -103,12 +110,18 @@ public class LoginController implements Initializable {
       //this assigns either true or false depending on the result we get from the authentication method
       allow_access = Database.getInstance().authentication(id, password_box.getText());
       admin = Database.getInstance().isAdmin(id);
+      System.out.println(admin);
       return allow_access;
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
+    
+    public boolean getAdmin()
+    {
+        return admin;
+    }
     
 }

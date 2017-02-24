@@ -6,20 +6,16 @@
 package common.logic;
 
 import common.Main;
+import common.logic.LoginController;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javafx.scene.control.MenuBar;
@@ -28,7 +24,7 @@ import javafx.scene.control.MenuBar;
  *
  * @author hisha
  */
-public class MenuBarController 
+public class MenuBarController
 {
     @FXML
     private MenuItem addUser;
@@ -44,13 +40,23 @@ public class MenuBarController
     private MenuItem trackPart;
     @FXML
     private MenuItem trackInstalledPart;*/
-    
+     
     public void addMenuBar()
     {
         try
-        {
-            URL menuBarUrl = getClass().getResource("/common/gui/MenuBarAdmin.fxml");
-            MenuBar menuBarPane = FXMLLoader.load(menuBarUrl);
+        {   
+            MenuBar menuBarPane = null;
+            
+            //if()
+            //{
+                URL menuBarUrl = getClass().getResource("/common/gui/MenuBarAdmin.fxml");
+                menuBarPane = FXMLLoader.load(menuBarUrl);
+            //}
+            //else
+            //{
+               // URL menuBarUrl = getClass().getResource("/common/gui/MenuBarNonAdmin.fxml");
+               // menuBarPane = FXMLLoader.load(menuBarUrl);
+            //}
             
             BorderPane pane = Main.getRoot();
             
