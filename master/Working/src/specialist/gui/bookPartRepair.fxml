@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -47,6 +48,18 @@
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
+                  <Label layoutX="121.0" layoutY="492.0" text="Expected Delivery Date:" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="341.0" layoutY="493.0" />
+                  <Label layoutX="121.0" layoutY="525.0" text="Expected Return Date:" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="341.0" layoutY="526.0" />
                </children>
                <stylesheets>
                   <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />
