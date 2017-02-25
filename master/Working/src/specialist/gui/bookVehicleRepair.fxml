@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -31,32 +32,32 @@
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Text fill="WHITE" layoutX="106.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Number">
+                  <Text fill="WHITE" layoutX="106.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Number:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="107.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model">
+                  <Text fill="WHITE" layoutX="107.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="109.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make">
+                  <Text fill="WHITE" layoutX="109.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="108.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Engine Size">
+                  <Text fill="WHITE" layoutX="108.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Engine Size:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="109.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Type">
+                  <Text fill="WHITE" layoutX="109.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Type:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="110.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour">
+                  <Text fill="WHITE" layoutX="110.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour:">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -73,6 +74,18 @@
                   <URL value="@../../common/gui/common_style.css" />
                </stylesheets>
             </AnchorPane>
+            <Label layoutX="110.0" layoutY="502.0" text="Expected Delivery Date:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="330.0" layoutY="503.0" />
+            <Label layoutX="110.0" layoutY="535.0" text="Expected Return Date:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="330.0" layoutY="536.0" />
          </children>
       </AnchorPane>
    </children>
