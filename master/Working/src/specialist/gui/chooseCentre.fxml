@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
       <AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320">
          <children>
             <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../SEProject/master/Working/src/common/gui/common_style.css">
+            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
                <children>
                   <MenuBar layoutY="-2.0">
                      <menus>
@@ -33,6 +34,10 @@
                   <Button layoutX="121.0" layoutY="408.0" mnemonicParsing="false" text="Outstanding" />
                   <Button layoutX="121.0" layoutY="440.0" mnemonicParsing="false" text="Search" />
                </children>
+               <stylesheets>
+                  <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />
+                  <URL value="@../../common/gui/common_style.css" />
+               </stylesheets>
             </AnchorPane>
          </children>
       </AnchorPane>
