@@ -97,7 +97,7 @@ public class AddUserController implements Initializable {
         boolean added = false;
         String isAdmin = "N";
         
-        int id = Integer.parseInt(ID_Box.getText());
+        int id = 0;
         
         if(Admin_Radio.isSelected())
         {
@@ -108,7 +108,15 @@ public class AddUserController implements Initializable {
             isAdmin = "N";
         }
         
-        added = Database.getInstance().addSysUser(id, FirstName_Box.getText(), Surname_Box.getText(), Password_Box.getText(), isAdmin);
+        if(FirstName_Box.getText().isEmpty() || Surname_Box.getText().isEmpty() || Password_Box.getText().isEmpty() || isAdmin.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields are required: \n FirstName\n Surname\n Password\n Admin ");
+        }
+        else
+        {
+            id = Integer.parseInt(ID_Box.getText());
+            added = Database.getInstance().addSysUser(id, FirstName_Box.getText(), Surname_Box.getText(), Password_Box.getText(), isAdmin);
+        }
         
         if(added)
         {

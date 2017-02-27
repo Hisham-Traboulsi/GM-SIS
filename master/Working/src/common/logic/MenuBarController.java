@@ -40,6 +40,8 @@ public class MenuBarController
     private MenuItem trackPart;
     @FXML
     private MenuItem trackInstalledPart;*/
+    
+    private boolean admin = LoginController.admin;
      
     public void addMenuBar()
     {
@@ -47,16 +49,16 @@ public class MenuBarController
         {   
             MenuBar menuBarPane = null;
             
-            //if()
-            //{
+            if(admin)
+            {
                 URL menuBarUrl = getClass().getResource("/common/gui/MenuBarAdmin.fxml");
                 menuBarPane = FXMLLoader.load(menuBarUrl);
-            //}
-            //else
-            //{
-               // URL menuBarUrl = getClass().getResource("/common/gui/MenuBarNonAdmin.fxml");
-               // menuBarPane = FXMLLoader.load(menuBarUrl);
-            //}
+            }
+            else
+            {
+                URL menuBarUrl = getClass().getResource("/common/gui/MenuBarNonAdmin.fxml");
+                menuBarPane = FXMLLoader.load(menuBarUrl);
+            }
             
             BorderPane pane = Main.getRoot();
             

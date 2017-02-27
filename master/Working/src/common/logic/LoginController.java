@@ -49,14 +49,8 @@ public class LoginController implements Initializable {
     @FXML
     private Button LogInButton;
     
-    private boolean admin;
+    protected static boolean admin;
     
-    private static LoginController lc = new LoginController();
-    
-    public static LoginController getInstance()
-    {
-        return lc;
-    }
     
     @FXML
     private void LogInButton(ActionEvent event) throws SQLException, IOException {
@@ -87,7 +81,7 @@ public class LoginController implements Initializable {
         {   JOptionPane.showMessageDialog(null,"Invalid credentials, please try again");
             id_box.clear();
             password_box.clear();
-          //  invalid_label.setText("Sorry, invalid credentials");  
+          //invalid_label.setText("Sorry, invalid credentials");  
         }
         
     }
@@ -95,23 +89,24 @@ public class LoginController implements Initializable {
     {
             id_box.clear();
             password_box.clear();
-            //invalid_label.setText("");
     }
     
     public boolean isValidCredentials() throws SQLException
     {
-      //System.out.println("We are in the is valid credentials method");
-      boolean allow_access=false;
-      
-      int id = Integer.parseInt(id_box.getText());
-  
-      //System.out.println("Accessing the authentication method");
-      
-      //this assigns either true or false depending on the result we get from the authentication method
-      allow_access = Database.getInstance().authentication(id, password_box.getText());
-      admin = Database.getInstance().isAdmin(id);
-      System.out.println(admin);
-      return allow_access;
+        boolean allow_access=false;
+
+        if(id_box.getText().isEmpty() || password_box.getText().isEmpty())
+        {
+              JOptionPane.showMessageDialog(null, "Username and Password are both required fields they can't be left empty");
+        }
+        else
+        {
+              int id = Integer.parseInt(id_box.getText());
+              allow_access = Database.getInstance().authentication(id, password_box.getText());
+              admin = Database.getInstance().isAdmin(id);
+              System.out.println(admin);
+        }
+        return allow_access;
     }
     
     @Override
@@ -123,5 +118,4 @@ public class LoginController implements Initializable {
     {
         return admin;
     }
-    
 }
