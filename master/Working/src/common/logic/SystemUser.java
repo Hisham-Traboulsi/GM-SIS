@@ -31,6 +31,14 @@ public class SystemUser
         this.admin = new SimpleStringProperty(admin);
     }
     
+    public SystemUser(String firstName, String surname, String password, String admin)
+    {
+        this.firstName = new SimpleStringProperty(firstName);
+        this.surname = new SimpleStringProperty(surname);
+        this.password = new SimpleStringProperty(password);
+        this.admin = new SimpleStringProperty(admin);
+    }
+    
     public int getID()
     {
         return id.get();

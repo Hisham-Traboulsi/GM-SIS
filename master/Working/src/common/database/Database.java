@@ -135,14 +135,14 @@ public final class Database
         
     }
     
-    public boolean addSysUser(int ID, String firstName, String surname, String password, String admin)
+    public boolean addSysUser(String firstName, String surname, String password, String admin)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
            add = preparedStatement("INSERT INTO AUTHENTICATION VALUES (?, ?, ?, ?, ?)"); 
-           add.setInt(1, ID);
+           add.setString(1, null);
            add.setString(2, firstName);
            add.setString(3, surname);
            add.setString(4, password);

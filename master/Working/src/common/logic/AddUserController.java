@@ -41,8 +41,6 @@ public class AddUserController implements Initializable {
     @FXML
     private TextField FirstName_Box;
     
-    @FXML
-    private TextField ID_Box;
     
     @FXML
     private TextField Surname_Box;
@@ -114,8 +112,7 @@ public class AddUserController implements Initializable {
         }
         else
         {
-            id = Integer.parseInt(ID_Box.getText());
-            added = Database.getInstance().addSysUser(id, FirstName_Box.getText(), Surname_Box.getText(), Password_Box.getText(), isAdmin);
+            added = Database.getInstance().addSysUser(FirstName_Box.getText(), Surname_Box.getText(), Password_Box.getText(), isAdmin);
         }
         
         if(added)
@@ -147,7 +144,7 @@ public class AddUserController implements Initializable {
     
     public void clearButton()
     {
-        ID_Box.clear();
+       
         FirstName_Box.clear();
         Surname_Box.clear();
         Password_Box.clear();
