@@ -107,7 +107,7 @@ public class addInstalledPart implements Initializable {
       
       boolean added=false;
       
-            int INSTID = Integer.parseInt(INST_ID.getText());
+            //int INSTID = Integer.parseInt(INST_ID.getText());
             int PARTID = Integer.parseInt(PART_ID.getText());
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
             double PARTCOST = Double.parseDouble(PART_COST.getText());
@@ -118,7 +118,7 @@ public class addInstalledPart implements Initializable {
             
   
       
-      added = Database.getInstance().addInstalledPart(INSTID, REGNUM, INSTDATE,
+      added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
               EXPDATE,PARTID, CUSTNAME,VEHICLEID,PARTCOST);
         
       return added;
@@ -278,22 +278,8 @@ public class addInstalledPart implements Initializable {
     
     public void refresh()
     {
-        /*try
-        {   
-            URL editUserUrl = getClass().getResource("/parts/gui/addInstalledPart.fxml");
-            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(editUserPane);
-            
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }*/  
-}
+        
+    }
 
     
 }

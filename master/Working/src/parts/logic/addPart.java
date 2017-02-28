@@ -94,14 +94,14 @@ public class addPart implements Initializable {
       partsTable.getItems().clear();
       boolean added=false;
       
-      int id = Integer.parseInt(partID.getText());
+      //int id = Integer.parseInt(partID.getText());
       String name = (partName.getText());
       String desc = (partDesc.getText());
       int amount = Integer.parseInt(partAmount.getText());
       double cost = Double.parseDouble(partCost.getText());
   
       
-      added = Database.getInstance().addPart(id,name,desc,amount,cost);
+      added = Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
       return added;
       

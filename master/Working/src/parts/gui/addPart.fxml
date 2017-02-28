@@ -13,10 +13,6 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addPart">
    <children>
-      <Text fill="WHITE" layoutX="254.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID">
-         <font>
-            <Font size="19.0" />
-         </font></Text>
       <Text fill="WHITE" layoutX="254.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
@@ -29,7 +25,6 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partID" layoutX="372.0" layoutY="144.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="partName" layoutX="372.0" layoutY="184.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="partCost" layoutX="372.0" layoutY="233.0" prefHeight="25.0" prefWidth="112.0" />
       <TextArea fx:id="partDesc" layoutX="256.0" layoutY="355.0" prefHeight="123.0" prefWidth="232.0" />
