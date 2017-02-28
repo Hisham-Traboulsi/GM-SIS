@@ -5,12 +5,15 @@
  */
 package customers.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -18,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +36,7 @@ public class AddCustomerController implements Initializable {
      * Initializes the controller class.
      */
     
-     @FXML
+    @FXML
     private TableView<Customers> customerTable = new TableView<Customers>();
 
     @FXML
@@ -54,9 +59,6 @@ public class AddCustomerController implements Initializable {
      
     @FXML
     private TableColumn<Customers, String> typeCol;
-    
-    @FXML
-    private TextField idBox;
     
     @FXML
     private TextField fullNameBox;
@@ -101,7 +103,7 @@ public class AddCustomerController implements Initializable {
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
             
             customerTable.setItems(customerData);
-        }
+        }   
         catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -109,17 +111,65 @@ public class AddCustomerController implements Initializable {
     }  
     
     public void addCustomer()
-    {//|| fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty()
-        //if(idBox.getText().isEmpty())
-        //{
-            JOptionPane.showMessageDialog(null, "All fields are required \n ID \n Full Name \n Address \n Post Code \n Phone \n Email");
-        //}
+    {
+        boolean added = false;
+        
+        String type = "";
+        
+        if(privateRadio.isSelected())
+        {
+            type = "P";
+        }
+        else if(businessRadio.isSelected())
+        {
+            type = "B";
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please Select a type");
+            return;
+        }
+        
+        if(fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields are required: \n FirstName\n Surname\n Password\n Admin ");
+        }
+        else
+        {
+            added = Database.getInstance().addCustomer(fullNameBox.getText(), addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
+        }
+        
+        if(added)
+        {
+            JOptionPane.showMessageDialog(null, "Customer was added");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Customer was not added");
+        }
+        refresh();
+        clear();
     }
     
+    public void refresh()
+    {
+        try
+        {            
+            URL addUserUrl = getClass().getResource("/customers/gui/AddCustomer.fxml");
+            AnchorPane addUserPane = FXMLLoader.load(addUserUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addUserPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
     public void clear()
     {
-        idBox.clear();
         fullNameBox.clear();
         addressBox.clear();
         postCodeBox.clear();
