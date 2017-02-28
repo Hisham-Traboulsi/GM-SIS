@@ -240,14 +240,14 @@ public final class Database
     }
     
     /*Author Sergio*/
-    public boolean addPart(int ID, String name, String description, int amount, double cost)
+    public boolean addPart(String name, String description, int amount, double cost)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
            add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
-           add.setInt(1, ID);
+           add.setString(1, null);
            add.setString(2, name);
            add.setString(3, description);
            add.setInt(4, amount);
@@ -268,7 +268,7 @@ public final class Database
         return added;
     }
     /*Author Sergio*/
-    public boolean addInstalledPart(int INST_ID, String REG_NUM, String INST_DATE, 
+    public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
             String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, double PART_COST)
     {
         PreparedStatement add = null;
@@ -276,7 +276,7 @@ public final class Database
         try
         {
            add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
-           add.setInt(1, INST_ID);
+           add.setString(1, null);
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
