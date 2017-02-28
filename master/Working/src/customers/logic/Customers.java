@@ -18,18 +18,26 @@ public class Customers
 {
     private IntegerProperty id;
     private StringProperty fullName;
-    private StringProperty vehicleReg;
     private StringProperty address;
     private StringProperty postCode;
     private StringProperty phone;
     private StringProperty email;
     private StringProperty type;
     
-    public Customers(int id, String fullName, String vehicleReg, String address, String postCode, String phone, String email, String type)
+    public Customers(int id, String fullName, String address, String postCode, String phone, String email, String type)
     {
         this.id = new SimpleIntegerProperty(id);
         this.fullName = new SimpleStringProperty(fullName);
-        this.vehicleReg = new SimpleStringProperty(vehicleReg);
+        this.address = new SimpleStringProperty(address);
+        this.postCode = new SimpleStringProperty(postCode);
+        this.phone = new SimpleStringProperty(phone);
+        this.email = new SimpleStringProperty(email);
+        this.type = new SimpleStringProperty(type);
+    }
+    
+    public Customers(String fullName, String address, String postCode, String phone, String email, String type)
+    {
+        this.fullName = new SimpleStringProperty(fullName);
         this.address = new SimpleStringProperty(address);
         this.postCode = new SimpleStringProperty(postCode);
         this.phone = new SimpleStringProperty(phone);
@@ -45,11 +53,6 @@ public class Customers
     public String getFullName()
     {
         return fullName.get();
-    }
-    
-    public String getVehicleReg()
-    {
-        return vehicleReg.get();
     }
     
     public String getAddress()
@@ -85,10 +88,6 @@ public class Customers
         this.fullName.set(fullName);
     }
 
-    public void setVehicleReg(String vehicleReg) {
-        this.vehicleReg.set(vehicleReg);
-    }
-
     public void setAddress(String address) {
         this.address.set(address);
     }
@@ -113,10 +112,6 @@ public class Customers
         return id;
     }
 
-    public StringProperty VehicleRegProperty() {
-        return vehicleReg;
-    }
-
     public StringProperty AddressProperty() {
         return address;
     }
@@ -135,10 +130,5 @@ public class Customers
 
     public StringProperty TypeProperty() {
         return type;
-    }
-    
-    
-    
-    
-    
+    } 
 }

@@ -216,7 +216,7 @@ public final class Database
     
     public ObservableList<Customers> getAllCustomers() throws SQLException
     {
-        PreparedStatement allCustomersStmt = preparedStatement("SELECT * FROM CUSTOMERS"); 
+        PreparedStatement allCustomersStmt = preparedStatement("SELECT * FROM CUSTOMER_ACCOUNTS"); 
                 
         customerData = FXCollections.observableArrayList();
         ResultSet rs = allCustomersStmt.executeQuery();
@@ -224,15 +224,14 @@ public final class Database
         while(rs.next())
         {
             int id = rs.getInt("CUSTOMER_ID");
-            String fullName = rs.getString("FULLNAME");
+            String fullName = rs.getString("FULL_NAME");
             String address = rs.getString("ADDRESS");
             String postCode = rs.getString("POSTCODE");
             String phone = rs.getString("PHONE");
             String type = rs.getString("TYPE");
             String email = rs.getString("EMAIL");
-            String vehicleReg = rs.getString("VEHICLE_REG");
             
-            Customers customer = new Customers(id, fullName, vehicleReg, address, postCode, phone, email, type);
+            Customers customer = new Customers(id, fullName, address, postCode, phone, email, type);
             
             customerData.add(customer);
         }

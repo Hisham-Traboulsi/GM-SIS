@@ -16,68 +16,55 @@
             <Font size="43.0" />
          </font>
       </Label>
-      <TableView layoutX="15.0" layoutY="103.0" prefHeight="404.0" prefWidth="1171.0">
+      <TableView fx:id="customerTable" layoutX="58.0" layoutY="103.0" prefHeight="404.0" prefWidth="1080.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
           <TableColumn fx:id="fullNameCol" prefWidth="204.0" text="Full Name" />
-            <TableColumn fx:id="vehicleRegCol" prefWidth="154.0" text="Vehicle Registration" />
-            <TableColumn fx:id="addressCol" prefWidth="194.0" text="Address" />
-            <TableColumn fx:id="postCodeCol" prefWidth="86.0" text="Post Code" />
-            <TableColumn fx:id="phoneCol" prefWidth="173.0" text="Phone" />
-            <TableColumn fx:id="emailCol" prefWidth="167.0" text="Email" />
-            <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="addressCol" prefWidth="243.0" text="Address" />
+            <TableColumn fx:id="postCodeCol" prefWidth="89.0" text="Post Code" />
+            <TableColumn fx:id="phoneCol" prefWidth="127.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="169.0" text="Email" />
+            <TableColumn fx:id="typeCol" prefWidth="130.0" text="Type" />
         </columns>
       </TableView>
-      <Button fx:id="submit" layoutX="520.0" layoutY="620.0" mnemonicParsing="false" text="Submit" />
+      <Button fx:id="submit" layoutX="520.0" layoutY="620.0" mnemonicParsing="false" text="Submit" onAction="#addCustomer" />
       <Button fx:id="clear" layoutX="610.0" layoutY="620.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
-      <Label layoutX="25.0" layoutY="519.0" text="Customer ID" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="idBox" layoutX="25.0" layoutY="555.0" prefHeight="31.0" prefWidth="100.0" />
-      <TextField fx:id="fullNameBox" layoutX="139.0" layoutY="555.0" />
-      <TextField fx:id="vehicleRegBox" layoutX="341.0" layoutY="555.0" prefHeight="31.0" prefWidth="122.0" />
-      <TextField fx:id="addressBox" layoutX="477.0" layoutY="555.0" />
-      <TextField fx:id="postCodeBox" layoutX="676.0" layoutY="555.0" prefHeight="31.0" prefWidth="92.0" />
-      <TextField fx:id="phoneBox" layoutX="784.0" layoutY="555.0" prefHeight="31.0" prefWidth="138.0" />
-      <TextField fx:id="emailBox" layoutX="937.0" layoutY="555.0" prefHeight="31.0" prefWidth="148.0" />
-      <RadioButton fx:id="privateRadio" layoutX="1101.0" layoutY="543.0" mnemonicParsing="false" text="Private" textFill="WHITE">
+      <TextField fx:id="fullNameBox" layoutX="73.0" layoutY="559.0" />
+      <TextField fx:id="addressBox" layoutX="292.0" layoutY="559.0" prefHeight="31.0" prefWidth="214.0" />
+      <TextField fx:id="postCodeBox" layoutX="541.0" layoutY="559.0" prefHeight="31.0" prefWidth="92.0" />
+      <TextField fx:id="phoneBox" layoutX="672.0" layoutY="559.0" prefHeight="31.0" prefWidth="138.0" />
+      <TextField fx:id="emailBox" layoutX="842.0" layoutY="559.0" prefHeight="31.0" prefWidth="214.0" />
+      <RadioButton fx:id="privateRadio" layoutX="1078.0" layoutY="547.0" mnemonicParsing="false" text="Private" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="businessRadio" layoutX="1101.0" layoutY="574.0" mnemonicParsing="false" text="Business" textFill="WHITE">
+      <RadioButton fx:id="businessRadio" layoutX="1078.0" layoutY="578.0" mnemonicParsing="false" text="Business" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </RadioButton>
-      <Label layoutX="192.0" layoutY="519.0" text="Full Name" textFill="WHITE">
+      <Label layoutX="126.0" layoutY="519.0" text="Full Name" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="328.0" layoutY="520.0" text="Vehicle Registration" textFill="WHITE">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="534.0" layoutY="520.0" text="Address" textFill="WHITE">
+      <Label layoutX="367.0" layoutY="520.0" text="Address" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="676.0" layoutY="520.0" text="Post Code" textFill="WHITE">
+      <Label layoutX="547.0" layoutY="520.0" text="Post Code" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="828.0" layoutY="520.0" text="Phone" textFill="WHITE">
+      <Label layoutX="716.0" layoutY="520.0" text="Phone" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="990.0" layoutY="519.0" text="Email" textFill="WHITE">
+      <Label layoutX="928.0" layoutY="520.0" text="Email" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

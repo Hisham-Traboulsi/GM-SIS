@@ -6,20 +6,19 @@
 package customers.logic;
 
 import common.database.Database;
-import common.logic.SystemUser;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -33,40 +32,34 @@ public class AddCustomerController implements Initializable {
      */
     
      @FXML
-    private TableView<SystemUser> customerTable = new TableView<SystemUser>();
+    private TableView<Customers> customerTable = new TableView<Customers>();
 
     @FXML
     private TableColumn idCol;
 
     @FXML
-    private TableColumn<SystemUser, String> fullNameCol;
+    private TableColumn<Customers, String> fullNameCol;
 
     @FXML
-    private TableColumn<SystemUser, String> vehicleRegCol;
+    private TableColumn<Customers, String> addressCol;
 
     @FXML
-    private TableColumn<SystemUser, String> addressCol;
-
-    @FXML
-    private TableColumn<SystemUser, String> postCodeCol;
+    private TableColumn<Customers, String> postCodeCol;
     
     @FXML
-    private TableColumn<SystemUser, String> phoneCol;
+    private TableColumn<Customers, String> phoneCol;
     
     @FXML
-    private TableColumn<SystemUser, String> emailCol;
+    private TableColumn<Customers, String> emailCol;
      
     @FXML
-    private TableColumn<SystemUser, String> typeCol;
+    private TableColumn<Customers, String> typeCol;
     
     @FXML
     private TextField idBox;
     
     @FXML
     private TextField fullNameBox;
-    
-    @FXML
-    private TextField vehicleRegBox;
     
     @FXML
     private TextField addressBox;
@@ -95,33 +88,39 @@ public class AddCustomerController implements Initializable {
         privateRadio.setToggleGroup(group);
         businessRadio.setToggleGroup(group);
         
-        //try
+        try
+        {
+            ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
+            
+            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+            addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+            postCodeCol.setCellValueFactory(new PropertyValueFactory<>("postCode"));
+            phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+            emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+            typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            
+            customerTable.setItems(customerData);
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        } 
+    }  
+    
+    public void addCustomer()
+    {//|| fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty()
+        //if(idBox.getText().isEmpty())
         //{
-            //ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
-            
-            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            //fullNameCol.setCellValueFactory(new PropertyValueFactory<>("FULLNAME"));
-            //vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLE_REG"));
-            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            //idCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            
-            
+            JOptionPane.showMessageDialog(null, "All fields are required \n ID \n Full Name \n Address \n Post Code \n Phone \n Email");
         //}
-        //catch(SQLException ex)
-        //{
-           // ex.printStackTrace();
-        //}
-       
-    }    
+    }
     
     
     public void clear()
     {
         idBox.clear();
         fullNameBox.clear();
-        vehicleRegBox.clear();
         addressBox.clear();
         postCodeBox.clear();
         phoneBox.clear();

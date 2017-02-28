@@ -90,7 +90,7 @@ public class AddUserController implements Initializable {
         }
     }   
     
-    public void addSyUser()
+    public void addSysUser()
     {
         boolean added = false;
         String isAdmin = "N";
