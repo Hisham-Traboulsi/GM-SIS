@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.RemoveCustomerController">
+    <Label layoutX="396.0" layoutY="14.0" prefHeight="70.0" prefWidth="408.0" text="REMOVE CUSTOMER" textFill="WHITE">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+    <TableView fx:id="customerTable" layoutX="58.0" layoutY="103.0" prefHeight="404.0" prefWidth="1080.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
+          <TableColumn fx:id="fullNameCol" prefWidth="204.0" text="Full Name" />
+            <TableColumn fx:id="addressCol" prefWidth="243.0" text="Address" />
+            <TableColumn fx:id="postCodeCol" prefWidth="89.0" text="Post Code" />
+            <TableColumn fx:id="phoneCol" prefWidth="127.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="169.0" text="Email" />
+            <TableColumn fx:id="typeCol" prefWidth="130.0" text="Type" />
+        </columns>
+      </TableView>
+   <Button  layoutX="566.0" layoutY="549.0" mnemonicParsing="false" text="Remove" onAction="#remove" />
+</AnchorPane>
