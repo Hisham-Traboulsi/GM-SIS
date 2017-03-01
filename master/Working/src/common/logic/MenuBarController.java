@@ -147,6 +147,27 @@ public class MenuBarController
         }
     }
     
+    public void removeCustomer(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL removeCustomerUrl = getClass().getResource("/customers/gui/RemoveCustomer.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(removeCustomerUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addCustomerPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    
     public void addPart(ActionEvent event)
     {
         try

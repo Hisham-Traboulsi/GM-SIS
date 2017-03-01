@@ -238,11 +238,15 @@ public final class Database
         return customerData;
     }
     
-     public void removeCustomer(int id) throws SQLException
+     public void removeCustomer(int id) 
     {
-        PreparedStatement removeUserStmt = preparedStatement("DELETE FROM AUTHENTICATION WHERE ID=?");
-        removeUserStmt.setInt(1, id);
-        removeUserStmt.executeUpdate();
+        try{
+            PreparedStatement removeCustomerStmt = preparedStatement("DELETE FROM CUSTOMER_ACCOUNTS WHERE CUSTOMER_ID=?");
+            removeCustomerStmt.setInt(1, id);
+            removeCustomerStmt.executeUpdate();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
     }
     
     public boolean addCustomer(String fullName, String address, String postCode, String phone, String email, String type)
