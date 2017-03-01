@@ -238,6 +238,45 @@ public final class Database
         return customerData;
     }
     
+     public void removeCustomer(int id) 
+    {
+        try{
+            PreparedStatement removeCustomerStmt = preparedStatement("DELETE FROM CUSTOMER_ACCOUNTS WHERE CUSTOMER_ID=?");
+            removeCustomerStmt.setInt(1, id);
+            removeCustomerStmt.executeUpdate();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public boolean addCustomer(String fullName, String address, String postCode, String phone, String email, String type)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        
+        try
+        {
+            add = preparedStatement("INSERT INTO CUSTOMER_ACCOUNTS VALUES(?,?,?,?,?,?,?)");
+            add.setString(1, null);
+            add.setString(2, fullName);
+            add.setString(3, address);
+            add.setString(4, postCode);
+            add.setString(5, phone);
+            add.setString(6, email);
+            add.setString(7, type);
+            
+            add.execute();
+            add.close();
+            added = true;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return added;
+    }
+    
     /*Author Sergio*/
     public boolean addPart(String name, String description, int amount, double cost)
     {

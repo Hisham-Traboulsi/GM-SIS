@@ -9,7 +9,7 @@
         <Menu mnemonicParsing="false" text=" Customer Accounts ">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
-                        
+                <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Remove Customers" />         
             </items>  
         </Menu>
           

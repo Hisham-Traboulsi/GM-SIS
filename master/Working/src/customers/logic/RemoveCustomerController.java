@@ -15,22 +15,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
  *
  * @author hisha
  */
-public class AddCustomerController implements Initializable {
+public class RemoveCustomerController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -60,36 +56,11 @@ public class AddCustomerController implements Initializable {
     @FXML
     private TableColumn<Customers, String> typeCol;
     
-    @FXML
-    private TextField fullNameBox;
-    
-    @FXML
-    private TextField addressBox;
-    
-    @FXML
-    private TextField postCodeBox;
-    
-    @FXML
-    private TextField phoneBox;
-    
-    @FXML
-    private TextField emailBox;
-    
-    @FXML
-    private RadioButton privateRadio;
-    
-    @FXML
-    private RadioButton businessRadio;
-    
-    final ToggleGroup group = new ToggleGroup();
+     private ObservableList<Customers> selected = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        // TODO
-        privateRadio.setToggleGroup(group);
-        businessRadio.setToggleGroup(group);
-        
         try
         {
             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
@@ -108,76 +79,32 @@ public class AddCustomerController implements Initializable {
         {
             ex.printStackTrace();
         } 
-    }  
+    } 
     
-    public void addCustomer()
+    public void remove() throws SQLException
     {
-        boolean added = false;
-        
-        String type = "";
-        
-        if(privateRadio.isSelected())
-        {
-            type = "P";
-        }
-        else if(businessRadio.isSelected())
-        {
-            type = "B";
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Please Select a type");
-            return;
-        }
-        
-        if(fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields are required: \n FirstName\n Surname\n Password\n Admin ");
-        }
-        else
-        {
-            added = Database.getInstance().addCustomer(fullNameBox.getText(), addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
-        }
-        
-        if(added)
-        {
-            JOptionPane.showMessageDialog(null, "Customer was added");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Customer was not added");
-        }
+        selected = customerTable.getSelectionModel().getSelectedItems();   
+        System.out.println(selected.get(0).getID());
+        Database.getInstance().removeCustomer(selected.get(0).getID());
         refresh();
-        clear();
     }
     
     public void refresh()
     {
         try
-        {            
-            URL addUserUrl = getClass().getResource("/customers/gui/AddCustomer.fxml");
-            AnchorPane addUserPane = FXMLLoader.load(addUserUrl);
+        {   
+            URL editUserUrl = getClass().getResource("/customers/gui/RemoveCustomer.fxml");
+            AnchorPane editUserPane = FXMLLoader.load(editUserUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(addUserPane);
+            border.setCenter(editUserPane);
+            
         }
         catch(IOException ex)
         {
             ex.printStackTrace();
         }
-    }
-    
-    public void clear()
-    {
-        fullNameBox.clear();
-        addressBox.clear();
-        postCodeBox.clear();
-        phoneBox.clear();
-        emailBox.clear();
-        
-        privateRadio.setSelected(false);
-        businessRadio.setSelected(false);
     }
     
 }
