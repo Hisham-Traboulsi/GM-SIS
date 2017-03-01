@@ -166,6 +166,25 @@ public class MenuBarController
         }
     }
     
+    public void editCustomer(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL editCustomerUrl = getClass().getResource("/customers/gui/EditCustomer.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(editCustomerUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addCustomerPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     
     
     public void addPart(ActionEvent event)

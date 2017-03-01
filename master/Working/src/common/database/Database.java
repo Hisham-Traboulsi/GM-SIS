@@ -277,6 +277,28 @@ public final class Database
         return added;
     }
     
+    public void editCustomer() throws SQLException
+    {
+        PreparedStatement editCustomerStmt = preparedStatement("UPDATE CUSTOMER_ACCOUNTS SET FULL_NAME=?, ADDRESS=?, POSTCODE=?, PHONE=?, TYPE=?, EMAIL=? WHERE CUSTOMER_ID=?");
+        int counter = 0;
+        while(counter < customerData.size())
+        {
+            editCustomerStmt.setString(1, customerData.get(counter).getFullName());
+            editCustomerStmt.setString(2, customerData.get(counter).getAddress());
+            editCustomerStmt.setString(3, customerData.get(counter).getPostCode());
+            editCustomerStmt.setString(4, customerData.get(counter).getPhone());
+            editCustomerStmt.setString(5, customerData.get(counter).getType());
+            editCustomerStmt.setString(6, customerData.get(counter).getEmail());
+            editCustomerStmt.setInt(7, customerData.get(counter).getID());
+            
+            editCustomerStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getAllCustomers();
+    }
+    
     /*Author Sergio*/
     public boolean addPart(String name, String description, int amount, double cost)
     {
