@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -50,9 +51,9 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField REG_NUM;
     @FXML
-    private TextField INST_DATE;
+    private DatePicker INST_DATE;
     @FXML
-    private TextField EXP_DATE;
+    private DatePicker EXP_DATE;
     @FXML
     private TextField PART_ID;
     @FXML
@@ -76,6 +77,8 @@ public class addInstalledPart implements Initializable {
      */
     @FXML
     private TableView<installedPart> installedPartsTable = new TableView<installedPart>();
+    
+    
 
     @FXML
     private TableColumn <installedPart, Integer>INST_ID_view;
@@ -102,7 +105,7 @@ public class addInstalledPart implements Initializable {
 
          
     @FXML
-   public boolean add()
+   public boolean add() throws SQLException
     {
       
       boolean added=false;
@@ -112,16 +115,22 @@ public class addInstalledPart implements Initializable {
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
             double PARTCOST = Double.parseDouble(PART_COST.getText());
             String REGNUM = (REG_NUM.getText());
-            String INSTDATE = (INST_DATE.getText());
-            String EXPDATE = (EXP_DATE.getText());
+            String INSTDATE = (INST_DATE.getEditor().getText());
+            String EXPDATE = (EXP_DATE.getEditor().getText());
             String CUSTNAME = (CUST_NAME.getText());
             
   
       
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
               EXPDATE,PARTID, CUSTNAME,VEHICLEID,PARTCOST);
-        
+      updateAmount();
       return added;
+    }
+   public void updateAmount() throws SQLException
+    {
+        int ID=Integer.parseInt(PART_ID.getText());
+        Database.getInstance().updateStock(ID);
+        //return ID;
     }
       public void updatePart() throws SQLException
     {
@@ -249,8 +258,8 @@ public class addInstalledPart implements Initializable {
     VEHICLE_ID.clear();
     PART_COST.clear();
     REG_NUM.clear();
-    INST_DATE.clear();
-    EXP_DATE.clear();
+    INST_DATE.getEditor().clear();
+    EXP_DATE.getEditor().clear();
     CUST_NAME.clear();
     
     }
@@ -280,6 +289,7 @@ public class addInstalledPart implements Initializable {
     {
         
     }
+    
 
     
 }

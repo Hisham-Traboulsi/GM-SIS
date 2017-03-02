@@ -514,6 +514,24 @@ public final class Database
         
         getinstalledPart();
     }
+    public void updateStock(int ID) throws SQLException
+    {
+        try
+        {
+        PreparedStatement updateStock = preparedStatement("UPDATE PARTS_TRACKING SET AMOUNT=AMOUNT-1 WHERE RELEVANT_ID_NUM=" + ID);
+
+        //updateStock.setInt(1,ID);
+        updateStock.executeUpdate();
+        
+        getinstalledPart();
+        }
+    
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+        }
+    }
     
     public void editPart() throws SQLException
     {
