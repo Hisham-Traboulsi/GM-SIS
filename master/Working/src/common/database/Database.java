@@ -7,6 +7,7 @@ package common.database;
 
 import common.logic.SystemUser;
 import customers.logic.Customers;
+import vehicles.logic.Vehicle;
 import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,7 @@ public final class Database
     private ObservableList<SystemUser> usersData;
     private ObservableList<Customers> customerData;
     private ObservableList<Part> partsData;
+    private ObservableList<Vehicle> vehicleData;
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     
@@ -547,6 +549,76 @@ public final class Database
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
     }
+      
+      /*Author Sam*/
+    public ObservableList<Vehicle> getVehicle() throws SQLException {
+
+        PreparedStatement getVehicle = null;
+        vehicleData = FXCollections.observableArrayList();
+
+        getVehicle = preparedStatement("SELECT * FROM VEHICLE_RECORD");
+        ResultSet rs = getVehicle.executeQuery();
+
+        while (rs.next()) {
+            String regnum = rs.getString("REG_NUM");
+            String model = rs.getString("MODEL");
+            String make = rs.getString("MAKE");
+            String engine = rs.getString("ENGINE_SIZE");
+            String fueltype = rs.getString("FUEL_TYPE");
+            String colour = rs.getString("COLOUR");
+            String motdate = rs.getString("MOT_RENEWAL_DATE ");
+            String lastservice = rs.getString("PREVIOUS_SERVICE_DATE");
+            String mileage = rs.getString("CURRENT_MILEAGE");
+            String warranty = rs.getString("WARRANTY");
+            String warrantycompany = rs.getString("WARRANTY_COMPANY");
+            String warrantyaddress = rs.getString("WARRANTY_ADDRESS");
+            String warrantyexpiry = rs.getString("WARRANTY_EXPIRY");
+                    
+                    
+                    
+
+            Vehicle vehicle = new Vehicle(regnum,  model,  make, engine, fueltype, colour, motdate, lastservice, mileage, warranty, warrantycompany, warrantyaddress, warrantyexpiry);
+
+            vehicleData.add(vehicle);
+        }
+        return vehicleData;
+    }
+    
+    /*Author Sam*/
+    public boolean addVehicle(String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry) {
+        PreparedStatement add = null;
+        boolean added = false;
+        try {
+            add = preparedStatement("INSERT INTO VEHICLE_RECORD VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            add.setString(1, regnum);
+            add.setString(2, model);
+            add.setString(3, make);
+            add.setString(4, engine);
+            add.setString(5, fueltype);
+            add.setString(6, colour);
+            add.setString(7, motdate);
+            add.setString(8, lastservice);
+            add.setString(9, mileage);
+            add.setString(10, warranty);
+            add.setString(11, warrantycompany);
+            add.setString(12, warrantyaddress);
+            add.setString(13, warrantyexpiry);
+
+            add.execute();
+            add.close();
+            added = true;
+            JOptionPane.showMessageDialog(null, "Vehicle successfully added");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+
+        return added;
+    }
+
+      
+   
     public static Database getInstance()
     {
         return db;
