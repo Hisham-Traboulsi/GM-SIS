@@ -16,8 +16,6 @@ import javafx.beans.property.StringProperty;
  */
 public class Vehicle {
     
-    private IntegerProperty id;
-    private StringProperty vehicletype;
     private StringProperty regnum;
     private StringProperty model;
     private StringProperty make;
@@ -52,17 +50,7 @@ public class Vehicle {
         this.warrantyexpiry = new SimpleStringProperty(warrantyexpiry);
     }
     
-    public int getID()
-    {
-        return id.get();
-    }
-    
-    public String getVehicleType()
-    {
-        return vehicletype.get();
-    }
-    
-    public String regnum()
+    public String getRegnum()
     {
         return regnum.get();
     }
@@ -98,7 +86,7 @@ public class Vehicle {
         return motdate.get();
     }
     
-    public String lastService()
+    public String getLastService()
     {
         return lastservice.get();
     }
@@ -113,15 +101,72 @@ public class Vehicle {
         return warranty.get();
     }
     
-    public void setID(int id)
+    public StringProperty regnumProperty()
     {
-        this.id.set(id);
+       return regnum;
     }
     
-    public void setVehicleType(String vehicletype)
+    public StringProperty modelProperty()
     {
-        this.vehicletype.set(vehicletype);
+       return model;
     }
+    
+    public StringProperty makeProperty()
+    {
+       return make;
+    }
+    
+    public StringProperty engineProperty()
+    {
+       return engine;
+    }
+    
+    public StringProperty fueltypeProperty()
+    {
+       return fueltype;
+    }
+    
+    public StringProperty colourProperty()
+    {
+       return colour;
+    }
+    
+    public StringProperty motdateProperty()
+    {
+       return motdate;
+    }
+    
+    public StringProperty lastserviceProperty()
+    {
+       return lastservice;
+    }
+    
+    public StringProperty mileageProperty()
+    {
+       return mileage;
+    }
+    
+    public StringProperty warrantyProperty()
+    {
+       return warranty;
+    }
+    
+    public StringProperty warrantycompanyProperty()
+    {
+       return warrantycompany;
+    }
+    
+    public StringProperty warrantyaddressProperty()
+    {
+       return warrantyaddress;
+    }
+    
+    public StringProperty warrantyexpiryProperty()
+    {
+       return warrantyexpiry;
+    }
+
+    ////
     
     public void setRegNum(String regnum)
     {
@@ -171,6 +216,21 @@ public class Vehicle {
     public void setWarranty(String warranty)
     {
         this.warranty.set(warranty);
+    }
+    
+    public void setWarrantyCompany(String warrantycompany)
+    {
+        this.warrantycompany.set(warrantycompany);
+    }
+    
+    public void setWarrantyAddress(String warrantyaddress)
+    {
+        this.warrantyaddress.set(warrantyaddress);
+    }
+    
+    public void setWarrantyExpiry(String warrantyexpiry)
+    {
+        this.warrantyexpiry.set(warrantyexpiry);
     }
     
 }

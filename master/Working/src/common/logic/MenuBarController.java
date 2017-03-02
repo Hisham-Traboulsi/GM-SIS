@@ -206,13 +206,13 @@ public class MenuBarController
         }
     }
     
-    public void addVehicle(ActionEvent event)
+    public void vehicleHomepage(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL addPartUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
+            URL addPartUrl = getClass().getResource("/vehicles/gui/VRHomepage.fxml");
             AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
             
             BorderPane border = Main.getRoot();
