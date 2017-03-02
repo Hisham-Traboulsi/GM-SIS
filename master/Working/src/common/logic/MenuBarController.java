@@ -262,6 +262,26 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+    
+    public void chooseCenter(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL chooseCenterUrl = getClass().getResource("/specialist/gui/chooseCentre.fxml");
+            AnchorPane chooseCenterPane = FXMLLoader.load(chooseCenterUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(chooseCenterPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public void logOut(ActionEvent event)
     {
         try
@@ -298,4 +318,6 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+    
+    
 }

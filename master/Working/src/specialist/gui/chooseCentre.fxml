@@ -9,13 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="temp.project.ChooseCentreController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.ChooseCentreController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320">
-         <children>
-            <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
-               <children>
+      
                   <MenuBar layoutY="-2.0">
                      <menus>
                         <Menu mnemonicParsing="false" text="Add User" />
@@ -45,7 +41,4 @@
                   <URL value="@../../common/gui/common_style.css" />
                </stylesheets>
             </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
-</AnchorPane>
+         

@@ -39,7 +39,9 @@
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Specialist Repairs">
-              
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#chooseCenter" text="Choose Center" />
+                    </items>  
                 </Menu>
       <Menu mnemonicParsing="false" onAction="#logOut" text="Log Out">
          <items>
