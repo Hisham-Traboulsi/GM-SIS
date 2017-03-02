@@ -566,7 +566,7 @@ public final class Database
             String engine = rs.getString("ENGINE_SIZE");
             String fueltype = rs.getString("FUEL_TYPE");
             String colour = rs.getString("COLOUR");
-            String motdate = rs.getString("MOT_RENEWAL_DATE ");
+            String motdate = rs.getString("MOT_RENEWAL_DATE");
             String lastservice = rs.getString("PREVIOUS_SERVICE_DATE");
             String mileage = rs.getString("CURRENT_MILEAGE");
             String warranty = rs.getString("WARRANTY");

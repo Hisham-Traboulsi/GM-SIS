@@ -101,6 +101,7 @@ public class Vehicle {
         return warranty.get();
     }
     
+    ////
     public StringProperty regnumProperty()
     {
        return regnum;

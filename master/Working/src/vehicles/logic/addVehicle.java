@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -44,15 +45,9 @@ public class addVehicle implements Initializable {
     @FXML
     private TextField mileage;
     @FXML
-    private DatePicker motrenewal;
-    @FXML
-    private DatePicker servicedate;
-    @FXML
     private Button add;
     @FXML
     private Button back;
-    @FXML
-    private Label ourLabel;
     @FXML
     private RadioButton yes;
     @FXML
@@ -68,7 +63,13 @@ public class addVehicle implements Initializable {
     @FXML
     private Label expirydate_text;
     @FXML
-    private DatePicker expirydate;
+    private TextField expirydate;
+    @FXML
+    private ToggleGroup warranty;
+    @FXML
+    private TextField motdate;
+    @FXML
+    private TextField lastservice;
 
     /**
      * Initializes the controller class.
@@ -83,13 +84,7 @@ public class addVehicle implements Initializable {
         expirydate_text.setVisible(false);
         expirydate.setVisible(false);
     }
-
-    @FXML
-    private void changeLabel(ActionEvent e) {
-        System.out.println("Hello World!");
-        ourLabel.setText("Hello World!");
-    }
-
+    
     @FXML
     private void goBack(ActionEvent e) {
         try {
@@ -122,6 +117,23 @@ public class addVehicle implements Initializable {
             expirydate_text.setVisible(false);
             expirydate.setVisible(false);
         }
+    }
+    
+    @FXML
+    public void clearButton()
+    {
+    regnum.clear();
+    model.clear();
+    make.clear();
+    engine.clear();
+    fueltype.clear();
+    colour.clear();
+    motdate.clear();
+    lastservice.clear();
+    mileage.clear();
+    companyname.clear();
+    companyaddress.clear();
+    expirydate.clear();
     }
 
 }
