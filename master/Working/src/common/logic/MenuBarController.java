@@ -185,9 +185,6 @@ public class MenuBarController
         }
     }
      
-    
-     
-     
     public void removeCustomer(ActionEvent event)
     {
         try
