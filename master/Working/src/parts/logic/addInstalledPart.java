@@ -77,6 +77,8 @@ public class addInstalledPart implements Initializable {
      */
     @FXML
     private TableView<installedPart> installedPartsTable = new TableView<installedPart>();
+    
+    
 
     @FXML
     private TableColumn <installedPart, Integer>INST_ID_view;
