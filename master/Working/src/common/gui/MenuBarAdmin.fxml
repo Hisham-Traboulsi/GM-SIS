@@ -42,6 +42,7 @@
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#chooseCenter" text="Choose Center" />
                         <MenuItem mnemonicParsing="false" onAction="#bookPartRepair" text="Book Part Repair" />
+                        <MenuItem mnemonicParsing="false" onAction="#bookVehicleRepair" text="Book Vehicle Repair" />
                     </items>  
                 </Menu>
       <Menu mnemonicParsing="false" onAction="#logOut" text="Log Out">

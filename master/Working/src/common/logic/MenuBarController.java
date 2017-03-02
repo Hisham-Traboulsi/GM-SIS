@@ -299,6 +299,24 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+        public void bookVehicleRepair(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL bookVehicleRepairUrl = getClass().getResource("/specialist/gui/bookVehicleRepair.fxml");
+            AnchorPane bookVehicleRepairPane = FXMLLoader.load(bookVehicleRepairUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(bookVehicleRepairPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
     public void logOut(ActionEvent event)
     {
