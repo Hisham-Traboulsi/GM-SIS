@@ -7,54 +7,52 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.ChooseCentreController">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="specialist.logic.BookPartRepairController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320">
+      <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16" minWidth="69" />
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
-               <children>
-                  <Label layoutX="124.0" layoutY="236.0" text="Part Name:" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Label>
-                  <TextArea layoutX="306.0" layoutY="230.0" prefHeight="13.0" prefWidth="319.0" />
-                  <Label layoutX="124.0" layoutY="291.0" text="Description:" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextArea layoutX="306.0" layoutY="285.0" prefHeight="122.0" prefWidth="320.0" />
-                  <Label layoutX="123.0" layoutY="431.0" text="ID Number:" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextArea layoutX="305.0" layoutY="425.0" prefHeight="13.0" prefWidth="319.0" />
-                  <Label layoutX="370.0" layoutY="71.0" text="Parts Repair">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="121.0" layoutY="492.0" text="Expected Delivery Date:" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <DatePicker layoutX="341.0" layoutY="493.0" />
-                  <Label layoutX="121.0" layoutY="525.0" text="Expected Return Date:" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <DatePicker layoutX="341.0" layoutY="526.0" />
-               </children>
-               <stylesheets>
-                  <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />
-                  <URL value="@../../common/gui/common_style.css" />
-               </stylesheets>
-            </AnchorPane>
+            <Label layoutX="124.0" layoutY="236.0" text="Part Name:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="306.0" layoutY="230.0" prefHeight="13.0" prefWidth="319.0" />
+            <Label layoutX="124.0" layoutY="291.0" text="Description:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="306.0" layoutY="285.0" prefHeight="122.0" prefWidth="320.0" />
+            <Label layoutX="123.0" layoutY="431.0" text="ID Number:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="305.0" layoutY="425.0" prefHeight="13.0" prefWidth="319.0" />
+            <Label layoutX="370.0" layoutY="71.0" text="Parts Repair">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="121.0" layoutY="492.0" text="Expected Delivery Date:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="341.0" layoutY="493.0" />
+            <Label layoutX="121.0" layoutY="525.0" text="Expected Return Date:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="341.0" layoutY="526.0" />
          </children>
+         <stylesheets>
+            <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />
+            <URL value="@../../common/gui/common_style.css" />
+         </stylesheets>
       </AnchorPane>
    </children>
 </AnchorPane>
