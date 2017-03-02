@@ -147,6 +147,47 @@ public class MenuBarController
         }
     }
     
+    public void ScheduledMain(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL ScheduledMainUrl = getClass().getResource("/diagrep/gui/ScheduledMaintenance.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(ScheduledMainUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addCustomerPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+     public void BookRepair(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL BookRepairUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(BookRepairUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addCustomerPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+     
+    
+     
+     
     public void removeCustomer(ActionEvent event)
     {
         try

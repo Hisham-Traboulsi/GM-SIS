@@ -13,6 +13,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#removeUser" text="Remove Users" /> 
                     </items>   
                 </Menu>
+                
                 <Menu mnemonicParsing="false" text="Customer Accounts">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
@@ -22,15 +23,19 @@
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Vehicle Records">
-         <items>
-            <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="Homepage" />
-            <MenuItem mnemonicParsing="false" onAction="#addVehicle" text="Add Vehicle" />
-         </items></Menu>
-          
-                <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
-              
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="Homepage" />
+                        <MenuItem mnemonicParsing="false" onAction="#addVehicle" text="Add Vehicle" />
+                    </items>
                 </Menu>
-          
+                        
+                <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#BookRepair" text="Diagnosis and Repairs Bookings" />
+                        <MenuItem mnemonicParsing="false" onAction="#ScheduledMain" text="Scheduled Maintenance" />
+                    </items>
+                </Menu>
+                
                 <Menu mnemonicParsing="false" text="Parts">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#addPart" text="Inventory" />
