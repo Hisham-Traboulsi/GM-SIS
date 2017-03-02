@@ -38,6 +38,6 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="895.0" layoutY="108.0" prefHeight="31.0" prefWidth="254.0"  onAction="#searchByVehicleReg"/>
+      <TextField layoutX="895.0" layoutY="108.0" onAction="#searchByVehicleReg" prefHeight="31.0" prefWidth="254.0" />
    </children>
 </AnchorPane>
