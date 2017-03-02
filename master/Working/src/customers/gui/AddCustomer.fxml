@@ -11,12 +11,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.AddCustomerController">
    <children>
-      <Label layoutX="429.0" layoutY="14.0" prefHeight="70.0" prefWidth="343.0" text="ADD CUSTOMER" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="343.0" text="ADD CUSTOMER" textFill="WHITE">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <TableView fx:id="customerTable" layoutX="58.0" layoutY="103.0" prefHeight="404.0" prefWidth="1080.0">
+      <TableView fx:id="customerTable" layoutX="21.0" layoutY="102.0" prefHeight="404.0" prefWidth="1158.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
           <TableColumn fx:id="fullNameCol" prefWidth="204.0" text="Full Name" />
@@ -24,10 +24,11 @@
             <TableColumn fx:id="postCodeCol" prefWidth="89.0" text="Post Code" />
             <TableColumn fx:id="phoneCol" prefWidth="127.0" text="Phone" />
             <TableColumn fx:id="emailCol" prefWidth="169.0" text="Email" />
-            <TableColumn fx:id="typeCol" prefWidth="130.0" text="Type" />
+            <TableColumn fx:id="typeCol" prefWidth="82.0" text="Type" />
+            <TableColumn prefWidth="124.0" text="Vehicle Reg" />
         </columns>
       </TableView>
-      <Button fx:id="submit" layoutX="520.0" layoutY="620.0" mnemonicParsing="false" text="Submit" onAction="#addCustomer" />
+      <Button fx:id="submit" layoutX="520.0" layoutY="620.0" mnemonicParsing="false" onAction="#addCustomer" text="Submit" />
       <Button fx:id="clear" layoutX="610.0" layoutY="620.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
       <TextField fx:id="fullNameBox" layoutX="73.0" layoutY="559.0" />
       <TextField fx:id="addressBox" layoutX="292.0" layoutY="559.0" prefHeight="31.0" prefWidth="214.0" />
