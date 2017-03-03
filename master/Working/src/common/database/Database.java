@@ -660,6 +660,34 @@ public final class Database
         }
         return spcData;
     }
+    
+    /*Author Sergio*/
+    public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO SPECIALIST_CENTRES VALUES (?, ?, ?, ?)"); 
+           add.setString(1, SPC_NAME);
+           add.setString(2, SPC_ADDRESS);
+           add.setInt(3, SPC_PHONE);
+           add.setString(4, SPC_EMAIL);
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"SPC successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
 
       
    
