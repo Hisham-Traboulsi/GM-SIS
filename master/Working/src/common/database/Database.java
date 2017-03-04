@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import parts.logic.Part;
 import parts.logic.installedPart;
+import specialist.logic.SPC;
 //import parts.logic.PartsController;
 
 /**
@@ -36,7 +37,7 @@ public final class Database
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
-    
+    private ObservableList<SPC> spcData;
     
     private Database(String DBFileName)
     {
@@ -632,6 +633,59 @@ public final class Database
             System.err.println("Unable to access table or table doesnt exist");
         }
 
+        return added;
+    }
+    
+    /*Author Shiraj*/
+    public ObservableList<SPC> getSPC() throws SQLException
+    {   
+        
+        PreparedStatement getSPC = null;
+        spcData = FXCollections.observableArrayList();
+        
+       
+        getSPC = preparedStatement("SELECT * FROM SPECIALIST_CENTRES");
+        ResultSet rs = getSPC.executeQuery();
+        
+        while(rs.next())
+        {
+            String spcName = rs.getString("NAME");
+            String spcAddress = rs.getString("ADDRESS");
+            int spcPhone = rs.getInt("PHONE");
+            String spcEmail = rs.getString("EMAIL");
+            
+            SPC spc = new SPC(spcName, spcAddress, spcPhone, spcEmail);
+            
+            spcData.add(spc);
+        }
+        return spcData;
+    }
+    
+    /*Author Sergio*/
+    public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO SPECIALIST_CENTRES VALUES (?, ?, ?, ?)"); 
+           add.setString(1, SPC_NAME);
+           add.setString(2, SPC_ADDRESS);
+           add.setInt(3, SPC_PHONE);
+           add.setString(4, SPC_EMAIL);
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"SPC successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
         return added;
     }
 

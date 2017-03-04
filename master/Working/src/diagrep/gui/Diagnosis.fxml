@@ -4,11 +4,10 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -17,30 +16,41 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Label layoutX="94.0" layoutY="95.0" text="Check Conducted:">
+      <Label layoutX="532.0" layoutY="96.0" text="Diagnosis Date:" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="103.0" layoutY="130.0" text="Machanic Name:">
+      <DatePicker layoutX="652.0" layoutY="94.0" prefHeight="25.0" prefWidth="249.0" />
+      <ComboBox layoutX="206.0" layoutY="236.0" prefHeight="25.0" prefWidth="198.0" />
+      <ChoiceBox layoutX="652.0" layoutY="132.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField layoutX="206.0" layoutY="273.0" prefHeight="25.0" prefWidth="164.0" />
+      <Label layoutX="95.0" layoutY="276.0" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="600.0" layoutY="135.0" text="Time:" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="221.0" layoutY="93.0" prefHeight="25.0" prefWidth="249.0" />
-      <ComboBox layoutX="221.0" layoutY="128.0" prefHeight="25.0" prefWidth="198.0" />
-      <ChoiceBox layoutX="518.0" layoutY="93.0" prefHeight="25.0" prefWidth="164.0" />
-      <TableView layoutX="58.0" layoutY="237.0" prefHeight="405.0" prefWidth="886.0">
-        <columns>
-          <TableColumn prefWidth="921.0" text="Vehicle Part" />
-          <TableColumn minWidth="0.0" prefWidth="164.0" text="Check" />
-        </columns>
-      </TableView>
-      <TextField layoutX="518.0" layoutY="128.0" prefHeight="25.0" prefWidth="164.0" />
-      <Label layoutX="464.0" layoutY="131.0" text="Milage:">
+      <TextField layoutX="206.0" layoutY="120.0" />
+      <TextField layoutX="206.0" layoutY="157.0" />
+      <Text fill="WHITE" layoutX="108.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Number">
          <font>
-            <Font size="14.0" />
+            <Font size="19.0" />
          </font>
-      </Label>
+      </Text>
+      <Text fill="WHITE" layoutX="109.0" layoutY="546.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Full Name">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="234.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Mileage">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
