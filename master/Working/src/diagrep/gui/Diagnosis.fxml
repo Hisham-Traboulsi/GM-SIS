@@ -3,8 +3,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -52,11 +50,70 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <TableView layoutX="164.0" layoutY="279.0" prefHeight="387.0" prefWidth="525.0">
-        <columns>
-          <TableColumn prefWidth="450.5" text="Diagnosis" />
-          <TableColumn minWidth="0.0" prefWidth="74.5" text="Check" />
-        </columns>
-      </TableView>
+      <Text fill="WHITE" layoutX="246.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Body Exterior">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="196.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Electrical / Controls">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="125.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Front Suspension / Steering">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="219.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rear Suspension">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="228.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exhaust System">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="246.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brake System">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="146.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Road Test &amp; Final Checks">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="523.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interior / Luggage Compartment">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="618.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Engine Compartment">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="649.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wheels and Tyres">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="691.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transmission">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="695.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel System">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="698.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Underbody">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
