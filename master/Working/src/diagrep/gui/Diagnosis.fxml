@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -85,35 +87,50 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="523.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interior / Luggage Compartment">
+      <Text fill="WHITE" layoutX="642.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interior / Luggage Compartment">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="618.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Engine Compartment">
+      <Text fill="WHITE" layoutX="737.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Engine Compartment">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="649.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wheels and Tyres">
+      <Text fill="WHITE" layoutX="768.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wheels and Tyres">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="691.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transmission">
+      <Text fill="WHITE" layoutX="810.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transmission">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="695.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel System">
+      <Text fill="WHITE" layoutX="814.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel System">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="698.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Underbody">
+      <Text fill="WHITE" layoutX="817.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Underbody">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
+      <ChoiceBox layoutX="363.0" layoutY="314.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="351.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="920.0" layoutY="391.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="919.0" layoutY="357.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="530.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="493.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="455.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="418.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="363.0" layoutY="384.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="919.0" layoutY="320.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="920.0" layoutY="424.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="920.0" layoutY="499.0" prefHeight="25.0" prefWidth="126.0" />
+      <ChoiceBox layoutX="920.0" layoutY="461.0" prefHeight="25.0" prefWidth="126.0" />
+      <Button layoutX="884.0" layoutY="531.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Submit Diagnosis" />
+      <Button layoutX="719.0" layoutY="531.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Book Repair" />
    </children>
 </AnchorPane>
