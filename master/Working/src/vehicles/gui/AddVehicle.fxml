@@ -55,9 +55,9 @@
       <TextField fx:id="fueltype" layoutX="696.0" layoutY="344.0" prefHeight="25.0" prefWidth="170.0" />
       <TextField fx:id="colour" layoutX="696.0" layoutY="396.0" prefHeight="25.0" prefWidth="170.0" />
       <TextField fx:id="mileage" layoutX="696.0" layoutY="577.0" prefHeight="25.0" prefWidth="170.0" />
-      <Button fx:id="add" layoutX="1083.0" layoutY="639.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Add" />
+      <Button fx:id="add" layoutX="1083.0" layoutY="639.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="71.0" text="Add" />
       <Button fx:id="back" layoutX="976.0" layoutY="639.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="71.0" text="Back" />
-      <Text fill="WHITE" layoutX="516.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Vehicle">
+      <Text fill="WHITE" layoutX="55.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD VEHICLE">
          <font>
             <Font size="43.0" />
          </font>
