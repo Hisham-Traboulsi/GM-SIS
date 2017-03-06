@@ -535,19 +535,19 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(int partID) throws SQLException
+    public void calculateBill(int vehicleID) throws SQLException
     { 
         double cost=0.0;
         String custName="";
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT PART_COST,CUSTOMER_FULLNAME FROM PARTS_INSTALLATION WHERE PART_ID=" + partID);
+        PreparedStatement getBill= preparedStatement("SELECT PART_COST,CUSTOMER_FULLNAME FROM PARTS_INSTALLATION WHERE VEHICLE_ID=" + vehicleID);
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
         {
-            cost= cost + rs.getDouble("PART_COST");
+            cost= cost + rs.getDouble("VEHICLE_ID");
             custName=rs.getString("CUSTOMER_FULLNAME");
         }
         
