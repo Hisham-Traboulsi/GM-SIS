@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import parts.logic.Part;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 //import parts.logic.PartsController;
 
 /**
@@ -38,7 +40,7 @@ public final class Database
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
-    
+        
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
@@ -532,6 +534,33 @@ public final class Database
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
         }
+    }
+    public void calculateBill(int partID) throws SQLException
+    { 
+        double cost=0.0;
+        String custName="";
+        try
+        {
+            
+        PreparedStatement getBill= preparedStatement("SELECT PART_COST,CUSTOMER_FULLNAME FROM PARTS_INSTALLATION WHERE PART_ID=" + partID);
+
+        ResultSet rs = getBill.executeQuery();
+        while(rs.next())
+        {
+            cost= cost + rs.getDouble("PART_COST");
+            custName=rs.getString("CUSTOMER_FULLNAME");
+        }
+        
+        JOptionPane.showMessageDialog(null,"The bill for " + custName + " adds up to £ " + cost);
+        }
+        
+    
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+        }
+
     }
     
     public void editPart() throws SQLException

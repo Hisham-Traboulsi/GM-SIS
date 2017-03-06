@@ -57,6 +57,8 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField PART_ID;
     @FXML
+    private TextField PART_ID_BILL;
+    @FXML
     private TextField CUST_NAME;
     @FXML
     private TextField VEHICLE_ID;
@@ -131,6 +133,12 @@ public class addInstalledPart implements Initializable {
         int ID=Integer.parseInt(PART_ID.getText());
         Database.getInstance().updateStock(ID);
         //return ID;
+    }
+   public void getBill() throws SQLException
+    {
+        int partID=Integer.parseInt(PART_ID_BILL.getText());
+        Database.getInstance().calculateBill(partID);
+        
     }
       public void updatePart() throws SQLException
     {
