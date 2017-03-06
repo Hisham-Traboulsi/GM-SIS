@@ -131,7 +131,7 @@
       <ChoiceBox layoutX="920.0" layoutY="499.0" prefHeight="25.0" prefWidth="126.0" />
       <ChoiceBox layoutX="920.0" layoutY="461.0" prefHeight="25.0" prefWidth="126.0" />
       <Button layoutX="884.0" layoutY="531.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Submit Diagnosis" />
-      <Button layoutX="719.0" layoutY="531.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Book Repair" />
+      <Button layoutX="719.0" layoutY="531.0" mnemonicParsing="false" onAction="#BookRepairButton" prefHeight="36.0" prefWidth="162.0" text="Book Repair" />
       <Button layoutX="801.0" layoutY="573.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Show All Bookings" />
    </children>
 </AnchorPane>

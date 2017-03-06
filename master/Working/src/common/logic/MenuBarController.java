@@ -154,11 +154,29 @@ public class MenuBarController
             addMenuBar();
             
             URL ScheduledMainUrl = getClass().getResource("/diagrep/gui/ScheduledMaintenance.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(ScheduledMainUrl);
+            AnchorPane ScheduledMainPane = FXMLLoader.load(ScheduledMainUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(addCustomerPane);
+            border.setCenter(ScheduledMainPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    public void RepairBookings(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL RepairBookingsUrl = getClass().getResource("/diagrep/gui/Repairs.fxml");
+            AnchorPane RepairBookingsPane = FXMLLoader.load(RepairBookingsUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(RepairBookingsPane);
         }
         catch(IOException ex)
         {
@@ -166,25 +184,7 @@ public class MenuBarController
         }
     }
     
-     public void BookRepair(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL BookRepairUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(BookRepairUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(addCustomerPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-     
+    
     public void removeCustomer(ActionEvent event)
     {
         try
