@@ -166,14 +166,14 @@ public class MenuBarController
         }
     }
     
-     public void BookRepair(ActionEvent event)
+     public void Booking(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL BookRepairUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(BookRepairUrl);
+            URL BookingUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(BookingUrl);
             
             BorderPane border = Main.getRoot();
             
