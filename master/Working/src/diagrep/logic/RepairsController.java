@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author ernes
  */
-public class DiagnosisController implements Initializable {
+public class RepairsController implements Initializable {
 
     /**
      * Initializes the controller class.
