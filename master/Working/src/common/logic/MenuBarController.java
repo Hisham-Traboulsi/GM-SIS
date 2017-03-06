@@ -165,15 +165,14 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    
-     public void Booking(ActionEvent event)
+    public void RepairBookings(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL BookingUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(BookingUrl);
+            URL RepairBookingsUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
+            AnchorPane addCustomerPane = FXMLLoader.load(RepairBookingsUrl);
             
             BorderPane border = Main.getRoot();
             
@@ -184,7 +183,8 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-     
+    
+    
     public void removeCustomer(ActionEvent event)
     {
         try
