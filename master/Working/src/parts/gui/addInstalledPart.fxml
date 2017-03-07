@@ -28,7 +28,6 @@
       <TextField fx:id="PART_ID" layoutX="296.0" layoutY="281.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="CUST_NAME" layoutX="296.0" layoutY="324.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="VEHICLE_ID" layoutX="296.0" layoutY="373.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="PART_COST" layoutX="296.0" layoutY="418.0" prefHeight="17.0" prefWidth="112.0" />
       <Text fill="WHITE" layoutX="73.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID">
          <font>
             <Font size="19.0" />
@@ -41,20 +40,15 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="82.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost">
-         <font>
-            <Font size="19.0" />
-         </font></Text>
       <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="348.0" prefWidth="748.0">
         <columns>
           <TableColumn fx:id="INST_ID_view" prefWidth="95.0" text="Installation ID" />
-          <TableColumn fx:id="REG_NUM_view" prefWidth="131.0" text="Vehicle Registration" />
-            <TableColumn fx:id="INST_DATE_view" prefWidth="104.0" text="Installation Date" />
-            <TableColumn fx:id="EXP_DATE_view" prefWidth="119.0" text="Warranty Expiration" />
-            <TableColumn fx:id="PART_ID_view" prefWidth="53.0" text="Part ID" />
-            <TableColumn fx:id="CUST_NAME_view" prefWidth="108.0" text="Customer Name" />
-            <TableColumn fx:id="PART_COST_view" prefWidth="58.0" text="Part Cost" />
-            <TableColumn fx:id="VEHICLE_ID_view" prefWidth="79.0" text="Vehicle ID" />
+          <TableColumn fx:id="REG_NUM_view" prefWidth="142.0" text="Vehicle Registration" />
+            <TableColumn fx:id="INST_DATE_view" prefWidth="108.0" text="Installation Date" />
+            <TableColumn fx:id="EXP_DATE_view" prefWidth="132.0" text="Warranty Expiration" />
+            <TableColumn fx:id="PART_ID_view" prefWidth="60.0" text="Part ID" />
+            <TableColumn fx:id="CUST_NAME_view" prefWidth="112.0" text="Customer Name" />
+            <TableColumn fx:id="VEHICLE_ID_view" prefWidth="98.0" text="Vehicle ID" />
         </columns>
       </TableView>
       <Button layoutX="579.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />

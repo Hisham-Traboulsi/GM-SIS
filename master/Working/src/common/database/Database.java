@@ -334,13 +334,13 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, double PART_COST)
+            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?)"); 
            add.setString(1, null);
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
@@ -348,7 +348,7 @@ public final class Database
            add.setInt(5, PART_ID);
            add.setString(6, CUST_NAME);
            add.setInt(7, VEHICLE_ID);
-           add.setDouble(8, PART_COST);
+           
   
            add.execute();
            add.close();
@@ -409,11 +409,11 @@ public final class Database
             int PART_ID = rs.getInt("PART_ID");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            double PART_COST = rs.getInt("PART_COST");
+            
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -443,11 +443,11 @@ public final class Database
             int PART_ID = rs.getInt("PART_ID");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            double PART_COST = rs.getInt("PART_COST");
+            
             
             
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -496,7 +496,7 @@ public final class Database
     }
     public void editInstalledPart() throws SQLException
     {
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=?,PART_COST=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -505,7 +505,7 @@ public final class Database
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getCUST_NAME());
             editInstalledPart.setInt(5, searchPartsData.get(counter).getVEHICLE_ID());
-            editInstalledPart.setDouble(6, searchPartsData.get(counter).getPART_COST());
+            
             editInstalledPart.setInt(7, searchPartsData.get(counter).getPART_ID());
             editInstalledPart.setInt(8, searchPartsData.get(counter).getINST_ID());
            
@@ -542,13 +542,13 @@ public final class Database
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT PART_COST,CUSTOMER_FULLNAME FROM PARTS_INSTALLATION WHERE VEHICLE_ID=" + vehicleID);
+        PreparedStatement getBill= preparedStatement("SELECT PART_COST FROM PARTS_TRACKING,PARTS_INSTALLED WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND VEHICLE_ID=" + vehicleID);
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
         {
             cost= cost + rs.getDouble("VEHICLE_ID");
-            custName=rs.getString("CUSTOMER_FULLNAME");
+            custName="NON";
         }
         
         JOptionPane.showMessageDialog(null,"The bill for " + custName + " adds up to £ " + cost);
@@ -593,7 +593,7 @@ public final class Database
       public void removeInstalledPart(int id) throws SQLException
     {
         
-        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE PART_ID="+ id);
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
     }
