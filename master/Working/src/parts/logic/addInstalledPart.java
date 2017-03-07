@@ -139,6 +139,7 @@ public class addInstalledPart implements Initializable {
     {
         int ID=Integer.parseInt(PART_ID.getText());
         Database.getInstance().updateStock(ID);
+        Database.getInstance().partBelowZero();
         //return ID;
     }
    public void getBill() throws SQLException

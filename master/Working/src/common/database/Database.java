@@ -354,6 +354,7 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"Part successfully added");
+           
         }
         catch(SQLException ex)
         {
@@ -363,6 +364,14 @@ public final class Database
         }
         
         return added;
+    }
+    public void partBelowZero() throws SQLException 
+    {
+ 
+        PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
+        partBelowZero.executeUpdate();
+        
+        
     }
     /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException
