@@ -81,38 +81,10 @@ public class VRHomepageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
-        searchField.setPromptText("Search");
+        loadTable();
+                
+        searchField.setPromptText("Search...");
         searchField.setFont(Font.font("SanSerif", 15));
-
-        
-
-        // Table
-        try {
-
-            ObservableList<Vehicle> vehicleData = Database.getInstance().getVehicle();
-
-            vehicleTable.setEditable(true);
-
-            regnumCol.setCellValueFactory(new PropertyValueFactory<>("regnum"));
-            modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
-            makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
-            engineCol.setCellValueFactory(new PropertyValueFactory<>("engine"));
-            fueltypeCol.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
-            colourCol.setCellValueFactory(new PropertyValueFactory<>("colour"));
-            motdateCol.setCellValueFactory(new PropertyValueFactory<>("motdate"));
-            lastserviceCol.setCellValueFactory(new PropertyValueFactory<>("lastservice"));
-            mileageCol.setCellValueFactory(new PropertyValueFactory<>("mileage"));
-            warrantyCol.setCellValueFactory(new PropertyValueFactory<>("warranty"));
-            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
-            warrantyaddressCol.setCellValueFactory(new PropertyValueFactory<>("warrantyaddress"));
-            warrantyexpiryCol.setCellValueFactory(new PropertyValueFactory<>("warrantyexpiry"));
-
-            vehicleTable.setItems(vehicleData);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
 
         // Search Bar
         FilteredList<Vehicle> filteredData = new FilteredList<>(data, e -> true);
@@ -134,7 +106,51 @@ public class VRHomepageController implements Initializable {
             SortedList<Vehicle> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(vehicleTable.comparatorProperty());
             vehicleTable.setItems(sortedData);
+            loadTable();
             });
+        
+        
+    }
+    
+    @FXML
+    public void loadTable()
+    {
+        // Table
+        try {
+
+            ObservableList<Vehicle> vehicleData = Database.getInstance().getVehicle();
+
+            vehicleTable.setEditable(true);
+
+            regnumCol.setCellValueFactory(new PropertyValueFactory<>("regnum"));
+            regnumCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            regnumCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setRegNum(t.getNewValue());
+                }
+            }
+            );
+            modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
+            makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
+            engineCol.setCellValueFactory(new PropertyValueFactory<>("engine"));
+            fueltypeCol.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
+            colourCol.setCellValueFactory(new PropertyValueFactory<>("colour"));
+            motdateCol.setCellValueFactory(new PropertyValueFactory<>("motdate"));
+            lastserviceCol.setCellValueFactory(new PropertyValueFactory<>("lastservice"));
+            mileageCol.setCellValueFactory(new PropertyValueFactory<>("mileage"));
+            warrantyCol.setCellValueFactory(new PropertyValueFactory<>("warranty"));
+            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
+            warrantyaddressCol.setCellValueFactory(new PropertyValueFactory<>("warrantyaddress"));
+            warrantyexpiryCol.setCellValueFactory(new PropertyValueFactory<>("warrantyexpiry"));
+
+            vehicleTable.setItems(vehicleData);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -150,5 +166,18 @@ public class VRHomepageController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    @FXML
+    public void update() throws SQLException
+    {
+        Database.getInstance().editVehicle();
+        loadTable();
+    }
+    
+    @FXML
+    public void refresh()
+    {
+        loadTable();
     }
 }

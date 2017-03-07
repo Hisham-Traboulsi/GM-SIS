@@ -725,5 +725,35 @@ public final class Database
         return db;
     }
 
+    public void editVehicle() throws SQLException {
+        {
+        PreparedStatement editVehicleStmt = preparedStatement("UPDATE VEHICLE_RECORD SET MAKE=?, MODEL=?, ENGINE_SIZE=?, FUEL_TYPE=?, COLOUR=?, MOT_RENEWAL_DATE=?, PREVIOUS_SERVICE_DATE=?, CURRENT_MILEAGE=?, WARRANTY=?, WARRANTY_COMPANY=?, WARRANTY_ADDRESS=?, WARRANTY_EXPIRY=? WHERE REG_NUM=?");
+        int counter = 0;
+        while(counter < vehicleData.size())
+        {
+            editVehicleStmt.setString(1, vehicleData.get(counter).getModel());
+            editVehicleStmt.setString(2, vehicleData.get(counter).getMake());
+            editVehicleStmt.setString(3, vehicleData.get(counter).getEngine());
+            editVehicleStmt.setString(4, vehicleData.get(counter).getFuelType());
+            editVehicleStmt.setString(5, vehicleData.get(counter).getColour());
+            editVehicleStmt.setString(6, vehicleData.get(counter).getMotDate());
+            editVehicleStmt.setString(7, vehicleData.get(counter).getLastService());
+            editVehicleStmt.setString(8, vehicleData.get(counter).getMileage());
+            editVehicleStmt.setString(9, vehicleData.get(counter).getWarranty());
+            editVehicleStmt.setString(10, vehicleData.get(counter).getWarrantyCompany());
+            editVehicleStmt.setString(11, vehicleData.get(counter).getWarrantyAddress());
+            editVehicleStmt.setString(12, vehicleData.get(counter).getWarrantyExpiry());
+            editVehicleStmt.setString(12, vehicleData.get(counter).getRegnum());
+            
+            
+            editVehicleStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getVehicle();
+    }
+    }
+
     
 }
