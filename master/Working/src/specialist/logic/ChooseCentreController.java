@@ -92,10 +92,10 @@ public class ChooseCentreController implements Initializable {
 
             SPCtable.setEditable(true);
             
-            //SPC_NAME_view.setCellValueFactory(new PropertyValueFactory<>("NAME"));
-            //SPC_ADDRESS_view.setCellValueFactory(new PropertyValueFactory<>("ADDRESS"));
-            //SPC_PHONE_view.setCellValueFactory(new PropertyValueFactory<>("PHONE"));
-            //SPC_EMAIL_view.setCellValueFactory(new PropertyValueFactory<>("EMAIL"));
+            SPC_NAME_view.setCellValueFactory(new PropertyValueFactory<>("NAME"));
+            SPC_ADDRESS_view.setCellValueFactory(new PropertyValueFactory<>("ADDRESS"));
+            SPC_PHONE_view.setCellValueFactory(new PropertyValueFactory<>("PHONE"));
+            SPC_EMAIL_view.setCellValueFactory(new PropertyValueFactory<>("EMAIL"));
           
 
             SPCtable.setItems(spcData);
