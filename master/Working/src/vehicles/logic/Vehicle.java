@@ -101,6 +101,21 @@ public class Vehicle {
         return warranty.get();
     }
     
+    public String getWarrantyCompany()
+    {
+        return warrantycompany.get();
+    }
+    
+    public String getWarrantyAddress()
+    {
+        return warrantyaddress.get();
+    }
+    
+    public String getWarrantyExpiry()
+    {
+        return warrantyexpiry.get();
+    }
+    
     ////
     public StringProperty regnumProperty()
     {

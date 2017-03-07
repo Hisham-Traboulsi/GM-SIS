@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import parts.logic.Part;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 //import parts.logic.PartsController;
 
 /**
@@ -38,7 +40,7 @@ public final class Database
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
-    
+        
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
@@ -332,13 +334,13 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID, double PART_COST)
+            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?)"); 
            add.setString(1, null);
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
@@ -346,7 +348,7 @@ public final class Database
            add.setInt(5, PART_ID);
            add.setString(6, CUST_NAME);
            add.setInt(7, VEHICLE_ID);
-           add.setDouble(8, PART_COST);
+           
   
            add.execute();
            add.close();
@@ -407,11 +409,11 @@ public final class Database
             int PART_ID = rs.getInt("PART_ID");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            double PART_COST = rs.getInt("PART_COST");
+            
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -441,11 +443,11 @@ public final class Database
             int PART_ID = rs.getInt("PART_ID");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            double PART_COST = rs.getInt("PART_COST");
+            
             
             
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID,PART_COST);
+            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -494,7 +496,7 @@ public final class Database
     }
     public void editInstalledPart() throws SQLException
     {
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=?,PART_COST=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -503,7 +505,7 @@ public final class Database
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getCUST_NAME());
             editInstalledPart.setInt(5, searchPartsData.get(counter).getVEHICLE_ID());
-            editInstalledPart.setDouble(6, searchPartsData.get(counter).getPART_COST());
+            
             editInstalledPart.setInt(7, searchPartsData.get(counter).getPART_ID());
             editInstalledPart.setInt(8, searchPartsData.get(counter).getINST_ID());
            
@@ -532,6 +534,33 @@ public final class Database
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
         }
+    }
+    public void calculateBill(int vehicleID) throws SQLException
+    { 
+        double cost=0.0;
+        String custName="";
+        try
+        {
+            
+        PreparedStatement getBill= preparedStatement("SELECT PART_COST FROM PARTS_TRACKING,PARTS_INSTALLED WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND VEHICLE_ID=" + vehicleID);
+
+        ResultSet rs = getBill.executeQuery();
+        while(rs.next())
+        {
+            cost= cost + rs.getDouble("VEHICLE_ID");
+            custName="NON";
+        }
+        
+        JOptionPane.showMessageDialog(null,"The bill for " + custName + " adds up to £ " + cost);
+        }
+        
+    
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+        }
+
     }
     
     public void editPart() throws SQLException
@@ -564,7 +593,7 @@ public final class Database
       public void removeInstalledPart(int id) throws SQLException
     {
         
-        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE PART_ID="+ id);
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
     }
@@ -694,6 +723,36 @@ public final class Database
     public static Database getInstance()
     {
         return db;
+    }
+
+    public void editVehicle() throws SQLException {
+        {
+        PreparedStatement editVehicleStmt = preparedStatement("UPDATE VEHICLE_RECORD SET MAKE=?, MODEL=?, ENGINE_SIZE=?, FUEL_TYPE=?, COLOUR=?, MOT_RENEWAL_DATE=?, PREVIOUS_SERVICE_DATE=?, CURRENT_MILEAGE=?, WARRANTY=?, WARRANTY_COMPANY=?, WARRANTY_ADDRESS=?, WARRANTY_EXPIRY=? WHERE REG_NUM=?");
+        int counter = 0;
+        while(counter < vehicleData.size())
+        {
+            editVehicleStmt.setString(1, vehicleData.get(counter).getModel());
+            editVehicleStmt.setString(2, vehicleData.get(counter).getMake());
+            editVehicleStmt.setString(3, vehicleData.get(counter).getEngine());
+            editVehicleStmt.setString(4, vehicleData.get(counter).getFuelType());
+            editVehicleStmt.setString(5, vehicleData.get(counter).getColour());
+            editVehicleStmt.setString(6, vehicleData.get(counter).getMotDate());
+            editVehicleStmt.setString(7, vehicleData.get(counter).getLastService());
+            editVehicleStmt.setString(8, vehicleData.get(counter).getMileage());
+            editVehicleStmt.setString(9, vehicleData.get(counter).getWarranty());
+            editVehicleStmt.setString(10, vehicleData.get(counter).getWarrantyCompany());
+            editVehicleStmt.setString(11, vehicleData.get(counter).getWarrantyAddress());
+            editVehicleStmt.setString(12, vehicleData.get(counter).getWarrantyExpiry());
+            editVehicleStmt.setString(12, vehicleData.get(counter).getRegnum());
+            
+            
+            editVehicleStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getVehicle();
+    }
     }
 
     

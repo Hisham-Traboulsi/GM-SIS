@@ -33,6 +33,10 @@ import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
 import javax.swing.JOptionPane;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -50,18 +54,18 @@ public class addInstalledPart implements Initializable {
     private TextField INST_ID;
     @FXML
     private TextField REG_NUM;
-    @FXML
-    private DatePicker INST_DATE;
+    
     @FXML
     private DatePicker EXP_DATE;
     @FXML
     private TextField PART_ID;
     @FXML
+    private TextField VEHICLE_ID_BILL;
+    @FXML
     private TextField CUST_NAME;
     @FXML
     private TextField VEHICLE_ID;
-    @FXML
-    private TextField PART_COST;
+   
 ;
     
     @FXML
@@ -86,9 +90,7 @@ public class addInstalledPart implements Initializable {
     private TableColumn <installedPart, Integer>PART_ID_view;
     @FXML
     private TableColumn <installedPart, Integer>VEHICLE_ID_view;
-    @FXML
-    private TableColumn <installedPart, Double>PART_COST_view;
-
+   
     @FXML
     private TableColumn<installedPart, String> REG_NUM_view;
     @FXML
@@ -106,23 +108,30 @@ public class addInstalledPart implements Initializable {
          
     @FXML
    public boolean add() throws SQLException
-    {
+    { 
+       DateFormat df = new SimpleDateFormat("dd/MM/yy");
+       Date dateobj = new Date();
+       
+       Calendar cal = Calendar.getInstance();
+       Date today = cal.getTime();
+       cal.add(Calendar.DATE, 364); // to get previous year add -1
+       Date nextYear = cal.getTime();
       
       boolean added=false;
       
             //int INSTID = Integer.parseInt(INST_ID.getText());
             int PARTID = Integer.parseInt(PART_ID.getText());
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
-            double PARTCOST = Double.parseDouble(PART_COST.getText());
+           
             String REGNUM = (REG_NUM.getText());
-            String INSTDATE = (INST_DATE.getEditor().getText());
-            String EXPDATE = (EXP_DATE.getEditor().getText());
+            String INSTDATE = (df.format(dateobj));
+            String EXPDATE = (df.format(nextYear));
             String CUSTNAME = (CUST_NAME.getText());
             
   
       
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
-              EXPDATE,PARTID, CUSTNAME,VEHICLEID,PARTCOST);
+              EXPDATE,PARTID, CUSTNAME,VEHICLEID);
       updateAmount();
       return added;
     }
@@ -131,6 +140,15 @@ public class addInstalledPart implements Initializable {
         int ID=Integer.parseInt(PART_ID.getText());
         Database.getInstance().updateStock(ID);
         //return ID;
+    }
+   public void getBill() throws SQLException
+    {
+        //int vehicleID=Integer.parseInt(VEHICLE_ID_BILL.getText());
+        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
+        //Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
+        //int vehicle_ID=selected.get(0).getVEHICLE_ID();
+        Database.getInstance().calculateBill(Integer.parseInt(VEHICLE_ID_BILL.getText()));
+        
     }
       public void updatePart() throws SQLException
     {
@@ -147,16 +165,6 @@ public class addInstalledPart implements Initializable {
         
            
             INST_ID_view.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
-            /*INST_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-            INST_ID_view.setOnEditCommit(
-                    new EventHandler<CellEditEvent<installedPart,Integer>>() {
-                @Override
-                public void handle(CellEditEvent<Part, Integer> t) {
-                    ((Part) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setAmount(t.getNewValue());
-                }
-            }
-            */
             
            
             PART_ID_view.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
@@ -183,17 +191,7 @@ public class addInstalledPart implements Initializable {
             }
             );
             
-            PART_COST_view.setCellValueFactory(new PropertyValueFactory<>("PART_COST"));
-            PART_COST_view.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-            PART_COST_view.setOnEditCommit(
-                    new EventHandler<CellEditEvent<installedPart,Double>>() {
-                @Override
-                public void handle(CellEditEvent<installedPart, Double> t) {
-                    ((installedPart) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setPART_COST(t.getNewValue());
-                }
-            }
-            );
+            
             
             REG_NUM_view.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
             REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -252,14 +250,10 @@ public class addInstalledPart implements Initializable {
     public void clearButton()
     {
     searchBox.clear();
-    //installedPartsTable.getItems().clear();
-    INST_ID.clear();
+    installedPartsTable.getItems().clear();
     PART_ID.clear();
     VEHICLE_ID.clear();
-    PART_COST.clear();
     REG_NUM.clear();
-    INST_DATE.getEditor().clear();
-    EXP_DATE.getEditor().clear();
     CUST_NAME.clear();
     
     }
@@ -275,21 +269,17 @@ public class addInstalledPart implements Initializable {
                     + "To update  a part:<br/>Double click on a cell, input new value, press enter and press update button<br/><br/>"
                     + "To search:<br/>Enter search parameter and press search button<br/><br/><html>"
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
+        
     }
       public void remove() throws SQLException
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        //System.out.println(selected.get(0).getID());
-       // int id=Integer.parseInt(selected.get(0).getPART_ID());
-        Database.getInstance().removeInstalledPart(selected.get(0).getPART_ID());
-        refresh();
+        Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
+        searchPart();
     }
     
-    public void refresh()
-    {
-        
-    }
     
+   
 
     
 }
