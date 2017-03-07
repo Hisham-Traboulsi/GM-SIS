@@ -33,7 +33,7 @@
                     <items>
                         
                         <MenuItem mnemonicParsing="false" onAction="#ScheduledMain" text="Scheduled Maintenance" />
-                       
+                       <MenuItem mnemonicParsing="false" onAction="#Book" text="Bookings" /> 
                         
                     </items>
                 </Menu>

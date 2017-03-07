@@ -127,6 +127,24 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+    public void Book(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL BookUrl = getClass().getResource("/diagrep/gui/BookingRepairs.fxml");
+            AnchorPane BookPane = FXMLLoader.load(BookUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(BookPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
     public void addCustomer(ActionEvent event)
     {
