@@ -54,7 +54,7 @@
       <TextField fx:id="searchBox" layoutX="683.0" layoutY="144.0" />
       <ImageView fitHeight="85.0" fitWidth="91.0" layoutX="1030.0" layoutY="64.0" onMousePressed="#help" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@help-icon.png" />
+            <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
       <Button layoutX="796.0" layoutY="504.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
@@ -62,27 +62,27 @@
       <Button layoutX="666.0" layoutY="504.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
       <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="260.0" layoutY="536.0">
          <image>
-            <Image url="@add1.png" />
+            <Image url="@../img/add1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="52.0" layoutX="670.0" layoutY="539.0">
          <image>
-            <Image url="@delete-128.png" />
+            <Image url="@../img/delete-128.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
          <image>
-            <Image url="@magnify-128.png" />
+            <Image url="@../img/magnify-128.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="798.0" layoutY="536.0">
          <image>
-            <Image url="@sync-128.png" />
+            <Image url="@../img/sync-128.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="928.0" layoutY="539.0">
          <image>
-            <Image url="@current-bill-01-128.png" />
+            <Image url="@../img/current-bill-01-128.png" />
          </image>
       </ImageView>
    </children>
