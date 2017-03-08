@@ -114,12 +114,12 @@ public class addInstalledPart implements Initializable {
        
        Calendar cal = Calendar.getInstance();
        Date today = cal.getTime();
-       cal.add(Calendar.DATE, 364); // to get previous year add -1
+       cal.add(Calendar.DATE, 364); 
        Date nextYear = cal.getTime();
       
       boolean added=false;
       
-            //int INSTID = Integer.parseInt(INST_ID.getText());
+
             int PARTID = Integer.parseInt(PART_ID.getText());
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
            
@@ -144,12 +144,15 @@ public class addInstalledPart implements Initializable {
     }
    public void getBill() throws SQLException
     {
-        //int vehicleID=Integer.parseInt(VEHICLE_ID_BILL.getText());
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        //Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
-        //int vehicle_ID=selected.get(0).getVEHICLE_ID();
-        Database.getInstance().calculateBill(Integer.parseInt(VEHICLE_ID_BILL.getText()));
-        
+        Database.getInstance().calculateBill(selected.get(0).getVEHICLE_ID(),selected.get(0).getCUST_NAME());
+        searchPart();
+    }
+    public void remove() throws SQLException
+    {
+        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
+        Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
+        searchPart();
     }
       public void updatePart() throws SQLException
     {
@@ -272,12 +275,7 @@ public class addInstalledPart implements Initializable {
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
         
     }
-      public void remove() throws SQLException
-    {
-        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
-        searchPart();
-    }
+     
     
     
    

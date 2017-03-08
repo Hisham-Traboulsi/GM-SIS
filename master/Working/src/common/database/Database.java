@@ -544,23 +544,23 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(int vehicleID) throws SQLException
+    public void calculateBill(int vehicleID,String name) throws SQLException 
     { 
         double cost=0.0;
-        String custName="";
+        String custName=name;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT PART_COST FROM PARTS_TRACKING,PARTS_INSTALLED WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND VEHICLE_ID=" + vehicleID);
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND VEHICLE_ID=" + vehicleID);
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
         {
-            cost= cost + rs.getDouble("VEHICLE_ID");
-            custName="NON";
+            cost= cost + rs.getDouble("COST");
+          //custName=rs.getString("CUSTOMER_FULLNAME)");
         }
         
-        JOptionPane.showMessageDialog(null,"The bill for " + custName + " adds up to £ " + cost);
+        JOptionPane.showMessageDialog(null,"The bill for " + name + " adds up to £ " + cost);
         }
         
     
