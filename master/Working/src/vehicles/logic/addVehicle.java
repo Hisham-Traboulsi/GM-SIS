@@ -13,11 +13,14 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -79,6 +82,8 @@ public class addVehicle implements Initializable {
     private TextField motdate;
     @FXML
     private TextField lastservice;
+    @FXML
+    private ComboBox<String> chooseVehicle;
 
     /**
      * Initializes the controller class.
@@ -86,28 +91,181 @@ public class addVehicle implements Initializable {
     @Override
 
     public void initialize(URL url, ResourceBundle rb) {
+
+        //adding items to choice box
+        chooseVehicle.getItems().addAll(
+                "Ford Focus 1.2L Petrol",
+                "Ford Fiesta 1.4L Petrol",
+                "Volkswagen Golf 1.6L Petrol",
+                "Volkswagen Scirocco 1.4L Petrol",
+                "Honda Civic 1.6L Petrol",
+                "Honda Jazz 1.2L Petrol",
+                "Vauxhall Corsa 1.2L Petrol",
+                "Vauxhall Corsa 1.4L Petrol",
+                "Vauxhall Astra 1.4L Petrol",
+                "Vauxhall Astra 1.6L Petrol",
+                "Toyota Yaris 1.2L Petrol",
+                "Peugeot 308 1.6L Diesel",
+                "Nissan Micra 1.0L Petrol",
+                "Daewoo Matiz 1.0L Petrol",
+                "Audi TT 1.4L Petrol",
+                "Audi A3 1.4L Petrol",
+                "Audi A5 1.6L Petrol",
+                "Audi A6 2.0L Petrol",
+                "Range Rover Evoque 2.0L Diesel",
+                "Merecedes C Class 1.6L Petrol"
+        );
+
+        //Listen for selection changes
+        chooseVehicle.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> chooseVehicle(newValue));
+
         companyname_text.setVisible(false);
         companyname.setVisible(false);
         companyaddress_text.setVisible(false);
         companyaddress.setVisible(false);
         expirydate_text.setVisible(false);
         expirydate.setVisible(false);
+
     }
 
     @FXML
+    public void chooseVehicle(String newValue) 
+    {
+            if(newValue.equals("Ford Focus 1.2L Petrol"))
+            {
+                model.setText("Ford");
+                make.setText("Focus");
+                engine.setText("1.2");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Ford Fiesta 1.4L Petrol"))
+            {
+                model.setText("Ford");
+                make.setText("Fiesta");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Volkswagen Golf 1.6L Petrol"))
+            {
+                model.setText("Volkswagen");
+                make.setText("Golf");
+                engine.setText("1.6");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Volkswagen Scirocco 1.4L Petrol"))
+            {
+                model.setText("Volkswagen");
+                make.setText("Scirocco");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Honda Civic 1.6L Petrol"))
+            {
+                model.setText("Honda");
+                make.setText("Civic");
+                engine.setText("1.6");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Honda Jazz 1.2L Petrol"))
+            {
+                model.setText("Honda");
+                make.setText("Jazz");
+                engine.setText("1.2");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Vauxhall Corsa 1.2L Petrol"))
+            {
+                model.setText("Vauxhall");
+                make.setText("Corsa");
+                engine.setText("1.2");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Vauxhall Corsa 1.4L Petrol"))
+            {
+                model.setText("Vauxhall");
+                make.setText("Corsa");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Vauxhall Astra 1.4L Petrol"))
+            {
+                model.setText("Vauxhall");
+                make.setText("Astra");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Vauxhall Astra 1.6L Petrol"))
+            {
+                model.setText("Vauxhall");
+                make.setText("Astra");
+                engine.setText("1.6");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Toyota Yaris 1.2L Petrol"))
+            {
+                model.setText("Toyota");
+                make.setText("Yaris");
+                engine.setText("1.2");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Peugeot 308 1.6L Diesel"))
+            {
+                model.setText("Peugeot");
+                make.setText("308");
+                engine.setText("1.6");
+                fueltype.setText("Diesel");
+            }else if(newValue.equals("Nissan Micra 1.0L Petrol"))
+            {
+                model.setText("Nissan");
+                make.setText("Micra");
+                engine.setText("1.0");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Daewoo Matiz 1.0L Petrol"))
+            {
+                model.setText("Daewoo");
+                make.setText("Matiz");
+                engine.setText("1.0");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Audi TT 1.4L Petrol"))
+            {
+                model.setText("Audi");
+                make.setText("TT");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Audi A3 1.4L Petrol"))
+            {
+                model.setText("Audi");
+                make.setText("A3");
+                engine.setText("1.4");
+                fueltype.setText("Petrol");
+            }
+            else if(newValue.equals("Audi A5 1.6L Petrol"))
+            {
+                model.setText("Audi");
+                make.setText("A5");
+                engine.setText("1.6");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Audi A6 2.0L Petrol"))
+            {
+                model.setText("Audi");
+                make.setText("A6");
+                engine.setText("2.0");
+                fueltype.setText("Petrol");
+            }else if(newValue.equals("Range Rover Evoque 2.0L Diesel"))
+            {
+                model.setText("Range Rover");
+                make.setText("Evoque");
+                engine.setText("2.0");
+                fueltype.setText("Diesel");
+            }else if(newValue.equals("Merecedes C Class 1.6L Petrol"))
+            {
+                model.setText("Mercedes");
+                make.setText("C Class");
+                engine.setText("1.6");
+                fueltype.setText("Petrol");
+            }
+    }
+    
+    @FXML
     private void goBack(ActionEvent e) {
-        try
-        {
-            
+        try {
+
             URL addPartUrl = getClass().getResource("/vehicles/gui/VehicleHomepage.fxml");
             AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
-            
+
             BorderPane border = Main.getRoot();
-            
+
             border.setCenter(addPartPane);
-        }
-        catch(IOException ex)
-        {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -131,6 +289,7 @@ public class addVehicle implements Initializable {
         }
     }
 
+    @FXML
     public void add() {
 
         String vregnum = (regnum.getText());
@@ -155,19 +314,16 @@ public class addVehicle implements Initializable {
         String vwarrantyexpiry = (expirydate.getText());
 
         Database.getInstance().addVehicle(vregnum, vmodel, vmake, vengine, vfueltype, vcolour, vmotdate, vlastservice, vmileage, vwarranty, vwarrantycompany, vwarrantyaddress, vwarrantyexpiry);
-        
-        try
-        {
-            
+
+        try {
+
             URL addPartUrl = getClass().getResource("/vehicles/gui/VehicleHomepage.fxml");
             AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
-            
+
             BorderPane border = Main.getRoot();
-            
+
             border.setCenter(addPartPane);
-        }
-        catch(IOException ex)
-        {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 

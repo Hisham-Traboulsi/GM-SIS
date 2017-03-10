@@ -106,13 +106,11 @@ public class VRHomepageController implements Initializable {
             SortedList<Vehicle> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(vehicleTable.comparatorProperty());
             vehicleTable.setItems(sortedData);
-            loadTable();
             });
         
         
     }
     
-    @FXML
     public void loadTable()
     {
         // Table
@@ -153,7 +151,6 @@ public class VRHomepageController implements Initializable {
         }
     }
 
-    @FXML
     private void addVehicle(ActionEvent e) {
         try {
 
