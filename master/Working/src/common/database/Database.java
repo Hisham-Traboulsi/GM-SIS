@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import parts.logic.Part;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
+import specialist.logic.centreName;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 //import parts.logic.PartsController;
@@ -40,6 +41,7 @@ public final class Database
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
+    private ObservableList<centreName> spcname;
         
     private Database(String DBFileName)
     {
@@ -698,6 +700,29 @@ public final class Database
         }
         return spcData;
     }
+    
+        public ObservableList<centreName> getSPCname() throws SQLException
+    {   
+        
+        PreparedStatement getSPCname = null;
+        spcname = FXCollections.observableArrayList();
+        
+       
+        getSPCname = preparedStatement("SELECT NAME FROM SPECIALIST_CENTRES");
+        ResultSet rs = getSPCname.executeQuery();
+        
+        while(rs.next())
+        {
+            String spcName = rs.getString("NAME");
+
+            
+            centreName spc = new centreName(spcName);
+            
+            spcname.add(spc);
+        }
+        return spcname;
+    }
+    
     
     /*Author Sergio*/
     public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
