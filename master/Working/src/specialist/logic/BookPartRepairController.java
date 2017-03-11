@@ -34,18 +34,28 @@ public class BookPartRepairController implements Initializable {
      */
     
     @FXML
+        ComboBox spcBox;
+    @FXML
         ComboBox partNameBox;
-        @FXML
-    private ObservableList<Part> list=FXCollections.observableArrayList();
+        //@FXML
+ //   private ObservableList<Part> list=FXCollections.observableArrayList();
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
+            
+        ObservableList<SPC> spcData = Database.getInstance().getSPC();
+
+            spcBox.setItems(spcData);
+            
+            
+            
             ObservableList<Part> partsData = Database.getInstance().getPart();
-            
-            
+
+            partNameBox.setItems(partsData);
+
 
             
         } 
@@ -56,4 +66,4 @@ public class BookPartRepairController implements Initializable {
     } 
     }    
     
-}
+
