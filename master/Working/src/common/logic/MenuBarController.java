@@ -356,7 +356,43 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    
+          public void Outstanding(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL OutstandingUrl = getClass().getResource("/specialist/gui/Outstanding.fxml");
+            AnchorPane OutstandingPane = FXMLLoader.load(OutstandingUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(OutstandingPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    } 
+          public void Returned(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL ReturnedUrl = getClass().getResource("/specialist/gui/returned.fxml");
+            AnchorPane ReturnedPane = FXMLLoader.load(ReturnedUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(ReturnedPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }        
+        
     public void logOut(ActionEvent event)
     {
         try
