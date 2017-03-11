@@ -45,8 +45,8 @@ public class BookPartRepairController implements Initializable {
     @FXML
     private TableColumn amountCol;
 
-    @FXML
-    private TableColumn costCol;
+  //  @FXML
+   // private TableColumn costCol;
     @FXML
     private ObservableList<Part> list=FXCollections.observableArrayList();
     
@@ -76,18 +76,18 @@ public class BookPartRepairController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
             partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
             amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-            amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-            amountCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Part,Integer>>() {
-                @Override
-                public void handle(TableColumn.CellEditEvent<Part, Integer> t) {
-                    ((Part) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setAmount(t.getNewValue());
-                    }
-            }
-            );
+           // amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            //amountCol.setOnEditCommit(
+              //      new EventHandler<TableColumn.CellEditEvent<Part,Integer>>() {
+               // @Override
+                //public void handle(TableColumn.CellEditEvent<Part, Integer> t) {
+                  //  ((Part) t.getTableView().getItems().get(
+                    //        t.getTablePosition().getRow())).setAmount(t.getNewValue());
+                    //}
+            //}
+            //);
             
-            costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+            //costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
             partsTable.setItems(partsData);
             
