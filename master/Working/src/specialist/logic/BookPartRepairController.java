@@ -51,7 +51,7 @@ public class BookPartRepairController implements Initializable {
     private ObservableList<Part> list=FXCollections.observableArrayList();
     
     @FXML
-        ComboBox<centreName> spcBox;
+        ComboBox spcBox;
     @FXML
         ComboBox partNameBox;
         //@FXML
@@ -65,8 +65,8 @@ public class BookPartRepairController implements Initializable {
             
         ObservableList<centreName> spcData = Database.getInstance().getSPCname();
 
-            spcBox.setItems(spcData);
-            
+        
+            spcBox.setItems(spcData);            
             
             ObservableList<Part> partsData = Database.getInstance().getPart();
 
