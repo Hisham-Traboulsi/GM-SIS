@@ -21,8 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import parts.logic.Part;
-
+import vehicles.logic.Vehicle;
 
 /**
  * FXML Controller class
@@ -55,7 +54,7 @@ public class ChooseCentreController implements Initializable {
     private TableView<SPC> SPCtable = new TableView<SPC>();
    
    @FXML
-    private TableColumn SPC_NAME_view;
+    private TableColumn<SPC, String> SPC_NAME_view;
     @FXML
     private TableColumn SPC_ADDRESS_view;
     @FXML
@@ -87,10 +86,12 @@ public class ChooseCentreController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try {
             ObservableList<SPC> spcData = Database.getInstance().getSPC();
 
             SPCtable.setEditable(true);
+
             
             SPC_NAME_view.setCellValueFactory(new PropertyValueFactory<>("NAME"));
             SPC_ADDRESS_view.setCellValueFactory(new PropertyValueFactory<>("ADDRESS"));
@@ -106,5 +107,5 @@ public class ChooseCentreController implements Initializable {
             ex.printStackTrace();
         }
     }    
-    
+
 }
