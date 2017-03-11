@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
@@ -29,9 +30,25 @@ import parts.logic.Part;
  */
 public class BookPartRepairController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+ @FXML
+    private TableView<Part> partsTable = new TableView<Part>();
+
+    @FXML
+    private TableColumn idCol;
+
+    @FXML
+    private TableColumn<Part, String> partNameCol;
+
+    @FXML
+    private TableColumn<Part, String> partDescCol;
+
+    @FXML
+    private TableColumn amountCol;
+
+    @FXML
+    private TableColumn costCol;
+    @FXML
+    private ObservableList<Part> list=FXCollections.observableArrayList();
     
     @FXML
         ComboBox spcBox;
@@ -51,12 +68,30 @@ public class BookPartRepairController implements Initializable {
             spcBox.setItems(spcData);
             
             
-            
             ObservableList<Part> partsData = Database.getInstance().getPart();
 
-            partNameBox.setItems(partsData);
+            partsTable.setEditable(true);
+            
+            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+            partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            amountCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Part,Integer>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Part, Integer> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setAmount(t.getNewValue());
+                    }
+            }
+            );
+            
+            costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
-
+            partsTable.setItems(partsData);
+            
+          
             
         } 
         catch (SQLException ex) 
