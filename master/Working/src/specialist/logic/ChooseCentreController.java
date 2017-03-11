@@ -55,13 +55,13 @@ public class ChooseCentreController implements Initializable {
     private TableView<SPC> SPCtable = new TableView<SPC>();
    
    @FXML
-    private TableColumn <SPC, String>SPC_NAME_view;
+    private TableColumn SPC_NAME_view;
     @FXML
-    private TableColumn <SPC, String>SPC_ADDRESS_view;
+    private TableColumn SPC_ADDRESS_view;
     @FXML
-    private TableColumn <SPC, Integer>SPC_PHONE_view;
+    private TableColumn SPC_PHONE_view;
     @FXML
-    private TableColumn <SPC, String>SPC_EMAIL_view;
+    private TableColumn SPC_EMAIL_view;
     
     private ObservableList<SPC> list=FXCollections.observableArrayList();
     

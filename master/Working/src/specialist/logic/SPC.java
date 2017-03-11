@@ -25,13 +25,13 @@ public class SPC
 
     
     
-   public SPC(String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
+   public SPC(String spcName, String spcAddress, int spcPhone, String spcEmail)
            
     {
-        this.SPC_NAME =  new SimpleStringProperty(SPC_NAME);
-        this.SPC_ADDRESS =  new SimpleStringProperty(SPC_ADDRESS);
-        this.SPC_PHONE =  new SimpleIntegerProperty(SPC_PHONE);
-        this.SPC_EMAIL =  new SimpleStringProperty(SPC_EMAIL);
+        this.SPC_NAME =  new SimpleStringProperty(spcName);
+        this.SPC_ADDRESS =  new SimpleStringProperty(spcAddress);
+        this.SPC_PHONE =  new SimpleIntegerProperty(spcPhone);
+        this.SPC_EMAIL =  new SimpleStringProperty(spcEmail);
 
     }
     

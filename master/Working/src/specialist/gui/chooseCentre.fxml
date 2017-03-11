@@ -21,10 +21,10 @@
             </Label>
             <TableView fx:id="SPCtable" layoutX="380.0" layoutY="179.0" prefHeight="393.0" prefWidth="648.0">
                <columns>
-                  <TableColumn fx:id="SPC_NAME_VIEW" prefWidth="111.0" text="Name" />
-                  <TableColumn fx:id="SPC_ADDRESS_VIEW" prefWidth="196.33331298828125" text="Address" />
-                  <TableColumn fx:id="SPC_PHONE_VIEW" prefWidth="144.66668701171875" text="Phone" />
-                  <TableColumn fx:id="SPC_EMAIL_VIEW" minWidth="0.0" prefWidth="196.0" text="Email" />
+                  <TableColumn fx:id="SPC_NAME_view" prefWidth="111.0" text="Name" />
+                  <TableColumn fx:id="SPC_ADDRESS_view" prefWidth="196.33331298828125" text="Address" />
+                  <TableColumn fx:id="SPC_PHONE_view" prefWidth="144.66668701171875" text="Phone" />
+                  <TableColumn fx:id="SPC_EMAIL_view" minWidth="0.0" prefWidth="196.0" text="Email" />
                </columns>
             </TableView>
             <TextField fx:id="SPC_NAME" layoutX="195.0" layoutY="257.0" />
