@@ -126,8 +126,30 @@ public class addPart implements Initializable {
             partsTable.setEditable(true);
             
             idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+            partNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            partNameCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Part,String>>() {
+                @Override
+                public void handle(CellEditEvent<Part, String> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setpartName(t.getNewValue());
+                }
+            }
+            );
             partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+            partDescCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            partDescCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Part,String>>() {
+                @Override
+                public void handle(CellEditEvent<Part, String> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setpartDesc(t.getNewValue());
+                }
+            }
+            );
+            
             amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
             amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             amountCol.setOnEditCommit(
@@ -141,6 +163,16 @@ public class addPart implements Initializable {
             );
             
             costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+            costCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+            costCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Part,Double>>() {
+                @Override
+                public void handle(CellEditEvent<Part, Double> t) {
+                    ((Part) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setCost(t.getNewValue());
+                }
+            }
+            );
 
             partsTable.setItems(partsData);
             

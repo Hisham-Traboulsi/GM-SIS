@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -65,6 +66,8 @@ public class addInstalledPart implements Initializable {
     private TextField CUST_NAME;
     @FXML
     private TextField VEHICLE_ID;
+    @FXML
+    private ComboBox regComb;
    
 ;
     
@@ -153,6 +156,9 @@ public class addInstalledPart implements Initializable {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
         Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
         searchPart();
+    }
+    public void regComb()//throws SQLException
+    {
     }
       public void updatePart() throws SQLException
     {

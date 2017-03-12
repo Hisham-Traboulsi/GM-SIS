@@ -472,6 +472,24 @@ public final class Database
         }
         return searchPartsData;
     }
+     /*Author Sergio*/
+    public void fillRegCombo()
+    {
+        
+        try{
+         PreparedStatement fill = preparedStatement("SELECT * FROM VEHICLE");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+        {
+         String reg=rs.getString("REG_NUM");
+        }
+        }
+        catch(SQLException ex)
+        {
+        }
+    
+           
+    }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
     {
