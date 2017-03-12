@@ -732,11 +732,12 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO SPECIALIST_CENTRES VALUES (?, ?, ?, ?)"); 
-           add.setString(1, SPC_NAME);
-           add.setString(2, SPC_ADDRESS);
-           add.setInt(3, SPC_PHONE);
-           add.setString(4, SPC_EMAIL);
+           add = preparedStatement("INSERT INTO SPECIALIST_CENTRES VALUES (?, ?, ?, ?, ?)"); 
+           add.setString(1, null);
+           add.setString(2, SPC_NAME);
+           add.setString(3, SPC_ADDRESS);
+           add.setInt(4, SPC_PHONE);
+           add.setString(5, SPC_EMAIL);
 
            add.execute();
            add.close();
