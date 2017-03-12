@@ -57,32 +57,43 @@ public class SPC
         return SPC_EMAIL.get();
     }
  
-      
-      
-      
+     public StringProperty SPC_NAMEProperty()
+    {
+        return SPC_NAME;
+    }
+    
+    public StringProperty SPC_ADDRESSProperty()
+    {
+       return SPC_ADDRESS;
+    }     
+          
+    public StringProperty SPC_EMAILProperty()
+    {
+       return SPC_EMAIL;
+    }         
       
     /*
     
     
     
     */
-    public void setSPC_NAME(String SPC_NAME)
+    public void setSPC_NAME(String spcName)
     {
-        this.SPC_NAME.set(SPC_NAME);        
+        this.SPC_NAME.set(spcName);        
     }
-    public void setSPC_ADDRESS(String SPC_ADDRESS)
+    public void setSPC_ADDRESS(String spcAddress)
     {
-        this.SPC_ADDRESS.set(SPC_ADDRESS);        
-    }
-    
-    public void setSPC_PHONE(int SPC_PHONE)
-    {
-        this.SPC_PHONE.set(SPC_PHONE);        
+        this.SPC_ADDRESS.set(spcAddress);        
     }
     
-    public void setSPC_EMAIL(String SPC_EMAIL)
+    public void setSPC_PHONE(int spcPhone)
     {
-        this.SPC_EMAIL.set(SPC_EMAIL);        
+        this.SPC_PHONE.set(spcPhone);        
+    }
+    
+    public void setSPC_EMAIL(String spcEmail)
+    {
+        this.SPC_EMAIL.set(spcEmail);        
     }
   
  

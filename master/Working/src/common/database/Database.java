@@ -724,7 +724,7 @@ public final class Database
     }
     
     
-    /*Author Sergio*/
+    /*Author Shiraj*/
     public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
     {
         PreparedStatement add = null;
