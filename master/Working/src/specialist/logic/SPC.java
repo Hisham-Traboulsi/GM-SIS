@@ -18,20 +18,22 @@ import javafx.beans.property.StringProperty;
  */
 public class SPC
 {
-    private StringProperty SPC_NAME;
-    private StringProperty SPC_ADDRESS;
-    private IntegerProperty SPC_PHONE;
-    private StringProperty SPC_EMAIL;
+    private IntegerProperty idNum;
+    private StringProperty spcName;
+    private StringProperty spcAddress;
+    private IntegerProperty spcPhone;
+    private StringProperty spcEmail;
 
     
     
-   public SPC(String spcName, String spcAddress, int spcPhone, String spcEmail)
+   public SPC(int idNum, String spcName, String spcAddress, int spcPhone, String spcEmail)
            
     {
-        this.SPC_NAME =  new SimpleStringProperty(spcName);
-        this.SPC_ADDRESS =  new SimpleStringProperty(spcAddress);
-        this.SPC_PHONE =  new SimpleIntegerProperty(spcPhone);
-        this.SPC_EMAIL =  new SimpleStringProperty(spcEmail);
+        this.idNum =  new SimpleIntegerProperty(idNum);
+        this.spcName =  new SimpleStringProperty(spcName);
+        this.spcAddress =  new SimpleStringProperty(spcAddress);
+        this.spcPhone =  new SimpleIntegerProperty(spcPhone);
+        this.spcEmail =  new SimpleStringProperty(spcEmail);
 
     }
     
@@ -39,37 +41,47 @@ public class SPC
      *
      * @return
      */
+   
+       public int getIDnum()
+    {
+        return idNum.get();
+    }
+       
     public String getSPC_NAME()
     {
-        return SPC_NAME.get();
+        return spcName.get();
     }
     
     public String getSPC_ADDRESS()
     {
-        return SPC_ADDRESS.get();
+        return spcAddress.get();
     }
     public int getSPC_PHONE()
     {
-        return SPC_PHONE.get();
+        return spcPhone.get();
     }
     public String getSPC_EMAIL()
     {
-        return SPC_EMAIL.get();
+        return spcEmail.get();
     }
  
      public StringProperty SPC_NAMEProperty()
     {
-        return SPC_NAME;
+        return spcName;
     }
     
     public StringProperty SPC_ADDRESSProperty()
     {
-       return SPC_ADDRESS;
+       return spcAddress;
+    }
+    public IntegerProperty SPC_PHONEProperty()
+    {
+       return spcPhone;
     }     
           
     public StringProperty SPC_EMAILProperty()
     {
-       return SPC_EMAIL;
+       return spcEmail;
     }         
       
     /*
@@ -77,23 +89,28 @@ public class SPC
     
     
     */
+        public void setIDnum(int idNum)
+    {
+        this.idNum.set(idNum);        
+    }
+        
     public void setSPC_NAME(String spcName)
     {
-        this.SPC_NAME.set(spcName);        
+        this.spcName.set(spcName);        
     }
     public void setSPC_ADDRESS(String spcAddress)
     {
-        this.SPC_ADDRESS.set(spcAddress);        
+        this.spcAddress.set(spcAddress);        
     }
     
     public void setSPC_PHONE(int spcPhone)
     {
-        this.SPC_PHONE.set(spcPhone);        
+        this.spcPhone.set(spcPhone);        
     }
     
     public void setSPC_EMAIL(String spcEmail)
     {
-        this.SPC_EMAIL.set(spcEmail);        
+        this.spcEmail.set(spcEmail);        
     }
   
  

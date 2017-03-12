@@ -19,12 +19,13 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="SPCtable" layoutX="380.0" layoutY="179.0" prefHeight="393.0" prefWidth="648.0">
+            <TableView fx:id="SPCtable" layoutX="380.0" layoutY="179.0" prefHeight="393.0" prefWidth="672.0">
                <columns>
-                  <TableColumn fx:id="SPC_NAME_view" prefWidth="111.0" text="Name" />
-                  <TableColumn fx:id="SPC_ADDRESS_view" prefWidth="196.33331298828125" text="Address" />
-                  <TableColumn fx:id="SPC_PHONE_view" prefWidth="144.66668701171875" text="Phone" />
-                  <TableColumn fx:id="SPC_EMAIL_view" minWidth="0.0" prefWidth="196.0" text="Email" />
+                  <TableColumn fx:id="SPC_ID_view" prefWidth="111.0" text="ID" />
+                  <TableColumn fx:id="SPC_NAME_view" prefWidth="109.0" text="NAME" />
+                  <TableColumn fx:id="SPC_ADDRESS_view" prefWidth="147.66668701171875" text="Address" />
+                  <TableColumn fx:id="SPC_PHONE_view" minWidth="0.0" prefWidth="108.33331298828125" text="Phone" />
+                  <TableColumn fx:id="SPC_EMAIL_view" prefWidth="248.33331298828125" text="Email" />
                </columns>
             </TableView>
             <TextField fx:id="SPC_NAME" layoutX="195.0" layoutY="257.0" />

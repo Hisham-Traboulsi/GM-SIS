@@ -689,12 +689,13 @@ public final class Database
         
         while(rs.next())
         {
+            int idNum = rs.getInt("IDnum");
             String spcName = rs.getString("NAME");
             String spcAddress = rs.getString("ADDRESS");
             int spcPhone = rs.getInt("PHONE");
             String spcEmail = rs.getString("EMAIL");
             
-            SPC spc = new SPC(spcName, spcAddress, spcPhone, spcEmail);
+            SPC spc = new SPC(idNum, spcName, spcAddress, spcPhone, spcEmail);
             
             spcData.add(spc);
         }
