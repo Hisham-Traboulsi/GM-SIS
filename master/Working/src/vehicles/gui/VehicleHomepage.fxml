@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1207.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vehicles.logic.VRHomepageController">
    <children>
-      <TableView fx:id="vehicleTable" layoutX="-7.0" layoutY="94.0" prefHeight="468.0" prefWidth="1208.0">
+      <TableView fx:id="vehicleTable" layoutX="4.0" layoutY="95.0" prefHeight="468.0" prefWidth="1191.0">
         <columns>
           <TableColumn fx:id="regnumCol" prefWidth="101.99993896484375" text="Reg Num" />
           <TableColumn fx:id="modelCol" prefWidth="88.0" text="Model" />

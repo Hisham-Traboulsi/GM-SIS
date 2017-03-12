@@ -10,6 +10,7 @@ import common.database.Database;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,9 +80,9 @@ public class addVehicle implements Initializable {
     @FXML
     private ToggleGroup warranty;
     @FXML
-    private TextField motdate;
+    private DatePicker motdate;
     @FXML
-    private TextField lastservice;
+    private DatePicker lastservice;
     @FXML
     private ComboBox<String> chooseVehicle;
 
@@ -128,7 +129,6 @@ public class addVehicle implements Initializable {
 
     }
 
-    @FXML
     public void chooseVehicle(String newValue) 
     {
             if(newValue.equals("Ford Focus 1.2L Petrol"))
@@ -298,8 +298,8 @@ public class addVehicle implements Initializable {
         String vengine = (engine.getText());
         String vfueltype = (fueltype.getText());
         String vcolour = (colour.getText());
-        String vmotdate = (motdate.getText());
-        String vlastservice = (lastservice.getText());
+        String vmotdate = motdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String vlastservice = lastservice.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String vmileage = (mileage.getText());
 
         String vwarranty = "";
@@ -337,8 +337,8 @@ public class addVehicle implements Initializable {
         engine.clear();
         fueltype.clear();
         colour.clear();
-        motdate.clear();
-        lastservice.clear();
+        motdate.setValue(null);
+        lastservice.setValue(null);
         mileage.clear();
         companyname.clear();
         companyaddress.clear();
