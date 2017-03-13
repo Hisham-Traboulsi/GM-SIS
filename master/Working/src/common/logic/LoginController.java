@@ -90,6 +90,12 @@ public class LoginController implements Initializable {
             id_box.clear();
             password_box.clear();
     }
+    @FXML
+    public void forgotPassword()
+            
+    {
+       JOptionPane.showMessageDialog(null,"If you forgot your password, please contact your system administrator");
+    }
     
     public boolean isValidCredentials() throws SQLException
     {
