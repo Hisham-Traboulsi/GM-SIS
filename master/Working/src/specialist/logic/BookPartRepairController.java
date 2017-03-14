@@ -25,6 +25,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import parts.logic.Part;
 
+
 /**
  * FXML Controller class
  *
@@ -67,22 +68,20 @@ public class BookPartRepairController implements Initializable {
    public boolean sumbit() throws SQLException
     {
       
-      boolean added=false;
+    boolean added=false;
             selected = partsTable.getSelectionModel().getSelectedItems();   
 
             //int INSTID = Integer.parseInt(INST_ID.getText());
             String SPC = (spcBox.getPromptText());
-            //int PARTID = (id.getCellData(id));
-           // String PARTNAME = (partName.getSelected());
+            int PARTID = selected.get(0).getID();
+            String PARTNAME = selected.get(0).getpartName();
             String DELIVDATE = (deliveryDate.getPromptText());
             String RETURNDATE = (returnDate.getPromptText());
          
-           added = Database.getInstance().bookSPCPart(SPC, selected.get(0).getID(),selected.get(0).getpartName(), DELIVDATE, RETURNDATE);
-            
-  
-   //   added = Database.getInstance().bookSPCPart( SPC, PARTNAME,
-     //         DELIVDATE,RETURNDATE);
-      return added;
+           added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+
+      
+        return added;
     }
     
     
