@@ -148,7 +148,7 @@ public class addInstalledPart implements Initializable {
    public void getBill() throws SQLException
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().calculateBill(selected.get(0).getVEHICLE_ID(),selected.get(0).getCUST_NAME());
+        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUST_NAME());
         searchPart();
     }
     public void remove() throws SQLException
