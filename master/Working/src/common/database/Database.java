@@ -770,6 +770,35 @@ public final class Database
         
         return added;
     }
+    
+     /*Author Shiraj*/
+    public boolean bookSPCPart( String SPC, String PARTNAME, String DELIVDATE, String RETURNDATE)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?)"); 
+           add.setString(1, SPC);
+           add.setString(2, PARTNAME);
+           add.setString(3, DELIVDATE);
+           add.setString(4, RETURNDATE);
+        
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Booked");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
 
       
    
