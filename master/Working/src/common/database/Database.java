@@ -772,14 +772,15 @@ public final class Database
     }
     
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, String PARTNAME, String DELIVDATE, String RETURNDATE)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
            add.setString(1, SPC);
+           add.setInt(2, PARTID);
            add.setString(2, PARTNAME);
            add.setString(3, DELIVDATE);
            add.setString(4, RETURNDATE);

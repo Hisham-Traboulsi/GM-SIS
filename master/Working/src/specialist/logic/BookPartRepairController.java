@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -46,8 +47,9 @@ public class BookPartRepairController implements Initializable {
     @FXML
     private TableColumn amount;
 
-  //  @FXML
-   // private TableColumn costCol;
+    @FXML
+    private Button bookButton;
+   
     @FXML
     private ObservableList<Part> list=FXCollections.observableArrayList();
     
@@ -57,6 +59,31 @@ public class BookPartRepairController implements Initializable {
         DatePicker deliveryDate;
     @FXML
         DatePicker returnDate;
+    
+    private ObservableList<Part> selected = null;
+
+    
+    @FXML
+   public boolean sumbit() throws SQLException
+    {
+      
+      boolean added=false;
+            selected = partsTable.getSelectionModel().getSelectedItems();   
+
+            //int INSTID = Integer.parseInt(INST_ID.getText());
+            String SPC = (spcBox.getPromptText());
+            //int PARTID = (id.getCellData(id));
+           // String PARTNAME = (partName.getSelected());
+            String DELIVDATE = (deliveryDate.getPromptText());
+            String RETURNDATE = (returnDate.getPromptText());
+         
+           added = Database.getInstance().bookSPCPart(SPC, selected.get(0).getID(),selected.get(0).getpartName(), DELIVDATE, RETURNDATE);
+            
+  
+   //   added = Database.getInstance().bookSPCPart( SPC, PARTNAME,
+     //         DELIVDATE,RETURNDATE);
+      return added;
+    }
     
     
     @Override
@@ -101,26 +128,6 @@ public class BookPartRepairController implements Initializable {
         }
         
     } 
-    
-    
-        @FXML
-   public boolean sumbit() throws SQLException
-    {
-      
-      boolean added=false;
-      
-            //int INSTID = Integer.parseInt(INST_ID.getText());
-            String SPC = (spcBox.getPromptText());
-            //int PARTID = (id.getCellData(id));
-            String PARTNAME = (partName.getText());
-            String DELIVDATE = (deliveryDate.getPromptText());
-            String RETURNDATE = (returnDate.getPromptText());
-            
-  
-      added = Database.getInstance().bookSPCPart( SPC, PARTNAME,
-              DELIVDATE,RETURNDATE);
-      return added;
-    }
     }    
     
 
