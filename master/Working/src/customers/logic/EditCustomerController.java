@@ -12,10 +12,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -160,78 +163,6 @@ public class EditCustomerController implements Initializable {
             ex.printStackTrace();
         } 
     }    
-    
-    public void searchByName()
-    {
-        searchCustomer.textProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable o) {
-                if(searchCustomer.textProperty().get().isEmpty())
-                {
-                    customerTable.setItems(customerData);
-                    return;
-                }
-                 
-                ObservableList<Customers> tableItems = FXCollections.observableArrayList();
-                
-                ObservableList<TableColumn<Customers, ?>> cols = customerTable.getColumns();
-                
-                for(int i=0; i<customerData.size(); i++)
-                {
-                    for(int j=1; j<2; j++)
-                    {
-                        TableColumn col = cols.get(j);
-                        String cellValue = col.getCellData(customerData.get(i)).toString();
-                        cellValue = cellValue.toLowerCase();                        
-                        if(cellValue.contains(searchCustomer.textProperty().get().toLowerCase()))
-                        {
-                            System.out.println("Found!!!");
-                            tableItems.add(customerData.get(i));
-                            break;
-                        }
-                    }
-                }
-                
-                customerTable.setItems(tableItems);
-            }
-        });
-    }
-    
-    public void searchByVehicleReg()
-    {
-        searchCustomer.textProperty().addListener(new InvalidationListener(){          
-   
-            @Override
-            public void invalidated(Observable o) 
-            {
-                if(searchCustomer.textProperty().get().isEmpty()) 
-                {
-                    customerTable.setItems(customerData);
-                    return;
-                }
-
-                ObservableList<Customers> tableItems = FXCollections.observableArrayList();
-
-                ObservableList<TableColumn<Customers, ?>> cols = customerTable.getColumns();
-
-                for(int i=0; i<customerData.size(); i++) 
-                {
-                    for(int j=1; j<2; j++) 
-                    {
-                        TableColumn col = cols.get(j);
-                        String cellValue = col.getCellData(customerData.get(i)).toString();
-                        cellValue = cellValue.toLowerCase();
-                        if(cellValue.contains(searchCustomer.textProperty().get().toLowerCase())) 
-                        {
-                            tableItems.add(customerData.get(i));
-                            break;
-                        }                        
-                    }
-                }
-                customerTable.setItems(tableItems);
-            }
-        });
-    }
     
     public void edit() throws SQLException
     {

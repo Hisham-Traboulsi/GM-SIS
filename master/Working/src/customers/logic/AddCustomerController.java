@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -26,7 +27,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javax.swing.Popup;
@@ -115,9 +118,10 @@ public class AddCustomerController implements Initializable {
             customerTable.setRowFactory( tv -> {
                 TableRow<Customers> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
+                    
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                         Customers rowData = row.getItem();
-                        Object [] options = {"Add Vehicle", "Book Appointment"};
+                        Object [] options = {"Add Vehicle", "Book Appointment", "Display Info"};
                         int selection = JOptionPane.showOptionDialog(null,
                         "Would you like to",
                         "Customers Options",
@@ -125,7 +129,50 @@ public class AddCustomerController implements Initializable {
                         JOptionPane.DEFAULT_OPTION,
                         null,
                         options,
-                        options[1]);       
+                        null); 
+                        
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
+                            try {
+                                URL addVehiclesUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
+                                AnchorPane addVehiclesPane = FXMLLoader.load(addVehiclesUrl);
+
+                                BorderPane border = Main.getRoot();
+
+                                border.setCenter(addVehiclesPane);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        else if(selection == 1)
+                        {
+                            try {
+                                URL bookingsUrl = getClass().getResource("/diagrep/gui/BookingRepairs.fxml");
+                                AnchorPane bookingPane = FXMLLoader.load(bookingsUrl);
+
+                                BorderPane border = Main.getRoot();
+
+                                border.setCenter(bookingPane);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }        
+                        }
+                        else if(selection == 2)
+                        {
+                            try {
+                                Stage stage = new Stage();
+                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Customer Info");
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                            
+                        }
                     }
                 });
                 return row ;
