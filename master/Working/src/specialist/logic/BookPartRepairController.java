@@ -15,7 +15,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,28 +36,54 @@ public class BookPartRepairController implements Initializable {
     private TableView<Part> partsTable = new TableView<Part>();
 
     @FXML
-    private TableColumn idCol;
+    private TableColumn id;
 
     @FXML
-    private TableColumn<Part, String> partNameCol;
+    private TableColumn<Part, String> partName;
 
     @FXML
-    private TableColumn<Part, String> partDescCol;
+    private TableColumn<Part, String> partDesc;
 
     @FXML
-    private TableColumn amountCol;
+    private TableColumn amount;
 
-  //  @FXML
-   // private TableColumn costCol;
+    @FXML
+    private Button bookButton;
+   
     @FXML
     private ObservableList<Part> list=FXCollections.observableArrayList();
     
     @FXML
         ComboBox spcBox;
     @FXML
-        ComboBox partNameBox;
-        //@FXML
- //   private ObservableList<Part> list=FXCollections.observableArrayList();
+        DatePicker deliveryDate;
+    @FXML
+        DatePicker returnDate;
+    
+    private ObservableList<Part> selected = null;
+
+    
+    @FXML
+   public boolean sumbit() throws SQLException
+    {
+      
+      boolean added=false;
+            selected = partsTable.getSelectionModel().getSelectedItems();   
+
+            //int INSTID = Integer.parseInt(INST_ID.getText());
+            String SPC = (spcBox.getPromptText());
+            //int PARTID = (id.getCellData(id));
+           // String PARTNAME = (partName.getSelected());
+            String DELIVDATE = (deliveryDate.getPromptText());
+            String RETURNDATE = (returnDate.getPromptText());
+         
+           added = Database.getInstance().bookSPCPart(SPC, selected.get(0).getID(),selected.get(0).getpartName(), DELIVDATE, RETURNDATE);
+            
+  
+   //   added = Database.getInstance().bookSPCPart( SPC, PARTNAME,
+     //         DELIVDATE,RETURNDATE);
+      return added;
+    }
     
     
     @Override
@@ -72,10 +100,10 @@ public class BookPartRepairController implements Initializable {
 
             partsTable.setEditable(true);
             
-            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
-            partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
-            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            id.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            partName.setCellValueFactory(new PropertyValueFactory<>("partName"));
+            partDesc.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
            // amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             //amountCol.setOnEditCommit(
               //      new EventHandler<TableColumn.CellEditEvent<Part,Integer>>() {
@@ -98,6 +126,7 @@ public class BookPartRepairController implements Initializable {
         {
             ex.printStackTrace();
         }
+        
     } 
     }    
     

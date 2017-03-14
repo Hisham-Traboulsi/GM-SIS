@@ -570,7 +570,7 @@ public final class Database
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND REG_NUM=" + regNum);
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND REG_NUM=" + "'" + regNum + "'");
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
@@ -760,6 +760,36 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"SPC successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+    
+     /*Author Shiraj*/
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
+           add.setString(1, SPC);
+           add.setInt(2, PARTID);
+           add.setString(2, PARTNAME);
+           add.setString(3, DELIVDATE);
+           add.setString(4, RETURNDATE);
+        
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Booked");
         }
         catch(SQLException ex)
         {
