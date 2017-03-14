@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -91,6 +90,5 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <ComboBox fx:id="regComb" layoutX="274.0" layoutY="169.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

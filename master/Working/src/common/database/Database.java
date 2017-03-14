@@ -532,11 +532,10 @@ public final class Database
             editInstalledPart.setString(1, searchPartsData.get(counter).getREG_NUM());
             editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
-            editInstalledPart.setString(4, searchPartsData.get(counter).getCUST_NAME());
-            editInstalledPart.setInt(5, searchPartsData.get(counter).getVEHICLE_ID());
-            
-            editInstalledPart.setInt(7, searchPartsData.get(counter).getPART_ID());
-            editInstalledPart.setInt(8, searchPartsData.get(counter).getINST_ID());
+            editInstalledPart.setInt(4, searchPartsData.get(counter).getPART_ID());
+            editInstalledPart.setString(5, searchPartsData.get(counter).getCUST_NAME());
+            editInstalledPart.setInt(6, searchPartsData.get(counter).getVEHICLE_ID());
+            editInstalledPart.setInt(7, searchPartsData.get(counter).getINST_ID());
            
             
             editInstalledPart.executeUpdate();
