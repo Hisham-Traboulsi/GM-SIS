@@ -11,19 +11,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import javax.swing.Popup;
 
 /**
  * FXML Controller class
@@ -83,6 +89,10 @@ public class AddCustomerController implements Initializable {
     
     final ToggleGroup group = new ToggleGroup();
     
+    private static BorderPane root = new BorderPane();
+    
+    Stage stage = new Stage();
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
@@ -101,6 +111,25 @@ public class AddCustomerController implements Initializable {
             phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
             emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            
+            customerTable.setRowFactory( tv -> {
+                TableRow<Customers> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                        Customers rowData = row.getItem();
+                        Object [] options = {"Add Vehicle", "Book Appointment"};
+                        int selection = JOptionPane.showOptionDialog(null,
+                        "Would you like to",
+                        "Customers Options",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        options[1]);       
+                    }
+                });
+                return row ;
+            });
             
             customerTable.setItems(customerData);
         }   

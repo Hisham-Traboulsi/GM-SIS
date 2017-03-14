@@ -163,36 +163,35 @@ public class EditCustomerController implements Initializable {
     
     public void searchByName()
     {
-        searchCustomer.textProperty().addListener(new InvalidationListener(){          
-   
+        searchCustomer.textProperty().addListener(new InvalidationListener() {
             @Override
-            public void invalidated(Observable o) 
-            {
-                if(searchCustomer.textProperty().get().isEmpty()) 
+            public void invalidated(Observable o) {
+                if(searchCustomer.textProperty().get().isEmpty())
                 {
                     customerTable.setItems(customerData);
                     return;
                 }
-
+                 
                 ObservableList<Customers> tableItems = FXCollections.observableArrayList();
-
+                
                 ObservableList<TableColumn<Customers, ?>> cols = customerTable.getColumns();
-
-                for(int i=0; i<customerData.size(); i++) 
+                
+                for(int i=0; i<customerData.size(); i++)
                 {
-                    for(int j=1; j<2; j++) 
+                    for(int j=1; j<2; j++)
                     {
                         TableColumn col = cols.get(j);
                         String cellValue = col.getCellData(customerData.get(i)).toString();
-                        cellValue = cellValue.toLowerCase();
-                        if(cellValue.contains(searchCustomer.textProperty().get().toLowerCase())) 
+                        cellValue = cellValue.toLowerCase();                        
+                        if(cellValue.contains(searchCustomer.textProperty().get().toLowerCase()))
                         {
+                            System.out.println("Found!!!");
                             tableItems.add(customerData.get(i));
                             break;
-                        }                        
+                        }
                     }
                 }
-
+                
                 customerTable.setItems(tableItems);
             }
         });
