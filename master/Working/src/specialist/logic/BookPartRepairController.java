@@ -63,7 +63,7 @@ public class BookPartRepairController implements Initializable {
         
         try {
             
-        ObservableList<centreName> spcData = Database.getInstance().getSPCname();
+        ObservableList<String> spcData = Database.getInstance().getSPCName();
 
         
             spcBox.setItems(spcData);            

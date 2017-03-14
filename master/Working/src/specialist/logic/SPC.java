@@ -49,7 +49,7 @@ public class SPC
        
     public String getSPC_NAME()
     {
-        return spcName.get();
+        return this.spcName.get();
     }
     
     public String getSPC_ADDRESS()
