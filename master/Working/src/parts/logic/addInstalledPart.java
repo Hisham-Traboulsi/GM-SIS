@@ -172,8 +172,6 @@ public class addInstalledPart implements Initializable {
        
        installedPartsTable.setEditable(true);
        
-        
-           
             INST_ID_view.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
             
            
