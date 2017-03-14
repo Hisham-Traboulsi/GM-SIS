@@ -719,11 +719,11 @@ public final class Database
         return spcData;
     }
     
-        public ObservableList<centreName> getSPCname() throws SQLException
+        public ObservableList<String> getSPCName() throws SQLException
     {   
         
         PreparedStatement getSPCname = null;
-        spcname = FXCollections.observableArrayList();
+        ObservableList<String> spcname = FXCollections.observableArrayList();
         
        
         getSPCname = preparedStatement("SELECT NAME FROM SPECIALIST_CENTRES");
@@ -734,9 +734,9 @@ public final class Database
             String spcName = rs.getString("NAME");
 
             
-            centreName spc = new centreName(spcName);
+            //centreName spc = new centreName(spcName);
             
-            spcname.add(spc);
+            spcname.add(spcName);
         }
         return spcname;
     }
