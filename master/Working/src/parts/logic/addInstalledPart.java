@@ -67,9 +67,9 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField VEHICLE_ID;
     @FXML
-    private ComboBox regComb;
+    private ComboBox<String> regComb;
    
-;
+
     
     @FXML
     private Button add;
@@ -269,9 +269,17 @@ public class addInstalledPart implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       
+        regComb.getItems().addAll(
+                "Clutch");
+       //regComb.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) -> choosePart(newValue));
     } 
+    /*public void choosePart(String newValue)
+    {
+        if(newValue.equals("clutch"))
+        {
+        
+        }
+    }*/
     public void help()
     {
         JOptionPane.showMessageDialog(null,
