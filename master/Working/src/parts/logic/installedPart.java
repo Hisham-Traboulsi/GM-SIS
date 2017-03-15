@@ -22,18 +22,18 @@ public class installedPart
     private StringProperty REG_NUM;
     private StringProperty INST_DATE;
     private StringProperty EXP_DATE;
-    private IntegerProperty PART_ID;
+    private StringProperty PART_NAME;
     private StringProperty CUST_NAME;
     private IntegerProperty VEHICLE_ID;
     
     
     
-   public installedPart(int INST_ID, String REG_NUM, String INST_DATE, String EXP_DATE,int PART_ID, 
+   public installedPart(int INST_ID, String REG_NUM, String INST_DATE, String EXP_DATE,String PART_NAME, 
            String CUST_NAME,int VEHICLE_ID)
            
     {
         this.INST_ID =  new SimpleIntegerProperty(INST_ID);
-        this.PART_ID =  new SimpleIntegerProperty(PART_ID);
+        this.PART_NAME =  new SimpleStringProperty(PART_NAME);
         this.VEHICLE_ID =  new SimpleIntegerProperty(VEHICLE_ID);
         
         this.REG_NUM = new SimpleStringProperty(REG_NUM);
@@ -52,9 +52,9 @@ public class installedPart
         return INST_ID.get();
     }
     
-    public int getPART_ID()
+    public String getPART_NAME()
     {
-        return PART_ID.get();
+        return PART_NAME.get();
     }
     public int getVEHICLE_ID()
     {
@@ -113,9 +113,9 @@ public class installedPart
     {
         this.INST_ID.set(INST_ID);        
     }
-    public void setPART_ID(int PART_ID)
+    public void setPART_NAME(String PART_NAME)
     {
-        this.PART_ID.set(PART_ID);        
+        this.PART_NAME.set(PART_NAME);        
     }
     
     public void setVEHICLE_ID(int VEHICLE_ID)

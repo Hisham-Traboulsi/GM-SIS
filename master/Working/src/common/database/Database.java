@@ -18,6 +18,7 @@ import specialist.logic.SPC;
 import specialist.logic.centreName;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 //import parts.logic.PartsController;
 
 /**
@@ -42,6 +43,8 @@ public final class Database
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
     private ObservableList<centreName> spcname;
+    
+    private ComboBox regComb;
         
     private Database(String DBFileName)
     {
@@ -336,7 +339,7 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,int PART_ID, String CUST_NAME,int VEHICLE_ID)
+            String EXP_DATE,String PART_NAME, String CUST_NAME,int VEHICLE_ID)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -347,7 +350,7 @@ public final class Database
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
-           add.setInt(5, PART_ID);
+           add.setString(5, PART_NAME);
            add.setString(6, CUST_NAME);
            add.setInt(7, VEHICLE_ID);
            
@@ -417,14 +420,14 @@ public final class Database
             String REG_NUM = rs.getString("REG_NUM");
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
-            int PART_ID = rs.getInt("PART_ID");
+            String PART_NAME = rs.getString("PART_NAME");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
             
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
+            EXP_DATE,PART_NAME, CUST_NAME,VEHICLE_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -451,14 +454,14 @@ public final class Database
             String REG_NUM = rs.getString("REG_NUM");
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
-            int PART_ID = rs.getInt("PART_ID");
+            String PART_NAME = rs.getString("PART_NAME");
             String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
             int VEHICLE_ID = rs.getInt("VEHICLE_ID");
             
             
             
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_ID, CUST_NAME,VEHICLE_ID);
+            EXP_DATE,PART_NAME, CUST_NAME,VEHICLE_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -473,22 +476,23 @@ public final class Database
         return searchPartsData;
     }
      /*Author Sergio*/
-    public void fillRegCombo()
+    public ObservableList<String> fillRegCombo()
     {
         
+        ObservableList<String> regComb1 = FXCollections.observableArrayList();
         try{
-         PreparedStatement fill = preparedStatement("SELECT * FROM VEHICLE");
+         PreparedStatement fill = preparedStatement("SELECT NAME FROM PARTS_TRACKING");
          ResultSet rs = fill.executeQuery();
          while(rs.next())
-        {
-         String reg=rs.getString("REG_NUM");
-        }
+            {
+              regComb1.add(rs.getString("name"));
+            }
+               
         }
         catch(SQLException ex)
         {
         }
-    
-           
+           return regComb1;
     }
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
@@ -525,14 +529,14 @@ public final class Database
     }
     public void editInstalledPart() throws SQLException
     {
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_ID= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
             editInstalledPart.setString(1, searchPartsData.get(counter).getREG_NUM());
             editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
-            editInstalledPart.setInt(4, searchPartsData.get(counter).getPART_ID());
+            editInstalledPart.setString(4, searchPartsData.get(counter).getPART_NAME());
             editInstalledPart.setString(5, searchPartsData.get(counter).getCUST_NAME());
             editInstalledPart.setInt(6, searchPartsData.get(counter).getVEHICLE_ID());
             editInstalledPart.setInt(7, searchPartsData.get(counter).getINST_ID());
@@ -545,11 +549,11 @@ public final class Database
         
         getinstalledPart();
     }
-    public void updateStock(int ID) throws SQLException
+    public void updateStock(String partname) throws SQLException
     {
         try
         {
-        PreparedStatement updateStock = preparedStatement("UPDATE PARTS_TRACKING SET AMOUNT=AMOUNT-1 WHERE RELEVANT_ID_NUM=" + ID);
+        PreparedStatement updateStock = preparedStatement("UPDATE PARTS_TRACKING SET AMOUNT=AMOUNT-1 WHERE name=" + "'" + partname + "'");
 
         //updateStock.setInt(1,ID);
         updateStock.executeUpdate();
@@ -563,14 +567,14 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(int vehicleID,String name) throws SQLException 
+    public void calculateBill(String regNum,String name) throws SQLException 
     { 
         double cost=0.0;
         String custName=name;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND VEHICLE_ID=" + vehicleID);
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND REG_NUM=" + "'" + regNum + "'");
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
@@ -719,11 +723,11 @@ public final class Database
         return spcData;
     }
     
-        public ObservableList<centreName> getSPCname() throws SQLException
+        public ObservableList<String> getSPCName() throws SQLException
     {   
         
         PreparedStatement getSPCname = null;
-        spcname = FXCollections.observableArrayList();
+        ObservableList<String> spcname = FXCollections.observableArrayList();
         
        
         getSPCname = preparedStatement("SELECT NAME FROM SPECIALIST_CENTRES");
@@ -734,9 +738,9 @@ public final class Database
             String spcName = rs.getString("NAME");
 
             
-            centreName spc = new centreName(spcName);
+            //centreName spc = new centreName(spcName);
             
-            spcname.add(spc);
+            spcname.add(spcName);
         }
         return spcname;
     }
@@ -760,6 +764,36 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"SPC successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+    
+     /*Author Shiraj*/
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
+           add.setString(1, SPC);
+           add.setInt(2, PARTID);
+           add.setString(2, PARTNAME);
+           add.setString(3, DELIVDATE);
+           add.setString(4, RETURNDATE);
+        
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Booked");
         }
         catch(SQLException ex)
         {
