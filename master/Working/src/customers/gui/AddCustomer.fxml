@@ -22,10 +22,9 @@
           <TableColumn fx:id="fullNameCol" prefWidth="204.0" text="Full Name" />
             <TableColumn fx:id="addressCol" prefWidth="243.0" text="Address" />
             <TableColumn fx:id="postCodeCol" prefWidth="89.0" text="Post Code" />
-            <TableColumn fx:id="phoneCol" prefWidth="127.0" text="Phone" />
-            <TableColumn fx:id="emailCol" prefWidth="169.0" text="Email" />
-            <TableColumn fx:id="typeCol" prefWidth="82.0" text="Type" />
-            <TableColumn prefWidth="124.0" text="Vehicle Reg" />
+            <TableColumn fx:id="phoneCol" prefWidth="178.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="259.0" text="Email" />
+            <TableColumn fx:id="typeCol" prefWidth="67.0" text="Type" />
         </columns>
       </TableView>
       <Button fx:id="submit" layoutX="520.0" layoutY="620.0" mnemonicParsing="false" onAction="#addCustomer" text="Submit" />

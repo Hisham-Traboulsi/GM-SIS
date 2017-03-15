@@ -27,12 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import javax.swing.Popup;
 
 /**
  * FXML Controller class
@@ -94,7 +92,7 @@ public class AddCustomerController implements Initializable {
     
     private static BorderPane root = new BorderPane();
     
-    Stage stage = new Stage();
+    protected static Customers rowData;
  
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -120,7 +118,7 @@ public class AddCustomerController implements Initializable {
                 row.setOnMouseClicked(event -> {
                     
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                        Customers rowData = row.getItem();
+                        rowData = row.getItem();
                         Object [] options = {"Add Vehicle", "Book Appointment", "Display Info"};
                         int selection = JOptionPane.showOptionDialog(null,
                         "Would you like to",
@@ -159,19 +157,17 @@ public class AddCustomerController implements Initializable {
                             }        
                         }
                         else if(selection == 2)
-                        {
-                            try {
-                                Stage stage = new Stage();
-                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));
+                        {                   
+                            try {                                
+                                Stage stage = new Stage();                                
+                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));                                                                
                                 stage.setScene(new Scene(root));
-                                stage.setTitle("Customer Info");
+                                stage.setTitle("Customer Info");                                
                                 stage.initModality(Modality.APPLICATION_MODAL);
                                 stage.showAndWait();
                             } catch (IOException ex) {
                                 Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            
-                            
+                            }                           
                         }
                     }
                 });
@@ -255,5 +251,5 @@ public class AddCustomerController implements Initializable {
         privateRadio.setSelected(false);
         businessRadio.setSelected(false);
     }
-    
+   
 }
