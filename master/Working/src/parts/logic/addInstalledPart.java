@@ -59,7 +59,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private DatePicker EXP_DATE;
     @FXML
-    private TextField PART_ID;
+    private TextField PART_NAME;
     @FXML
     private TextField VEHICLE_ID_BILL;
     @FXML
@@ -67,7 +67,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField VEHICLE_ID;
     @FXML
-    private ComboBox<String> regComb;
+    private ComboBox regComb;
    
 
     
@@ -90,7 +90,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TableColumn <installedPart, Integer>INST_ID_view;
     @FXML
-    private TableColumn <installedPart, Integer>PART_ID_view;
+    private TableColumn <installedPart, String>PART_NAME_view;
     @FXML
     private TableColumn <installedPart, Integer>VEHICLE_ID_view;
    
@@ -123,7 +123,7 @@ public class addInstalledPart implements Initializable {
       boolean added=false;
       
 
-            int PARTID = Integer.parseInt(PART_ID.getText());
+            String PARTNAME = (String) regComb.getValue();
             int VEHICLEID = Integer.parseInt(VEHICLE_ID.getText());
            
             String REGNUM = (REG_NUM.getText());
@@ -134,21 +134,21 @@ public class addInstalledPart implements Initializable {
   
       
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
-              EXPDATE,PARTID, CUSTNAME,VEHICLEID);
+              EXPDATE,PARTNAME, CUSTNAME,VEHICLEID);
       updateAmount();
       return added;
     }
    public void updateAmount() throws SQLException
     {
-        int ID=Integer.parseInt(PART_ID.getText());
-        Database.getInstance().updateStock(ID);
+        String partname=PART_NAME.getText();
+        Database.getInstance().updateStock(partname);
         Database.getInstance().partBelowZero();
         //return ID;
     }
    public void getBill() throws SQLException
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().calculateBill(selected.get(0).getVEHICLE_ID(),selected.get(0).getCUST_NAME());
+        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUST_NAME());
         searchPart();
     }
     public void remove() throws SQLException
@@ -157,9 +157,12 @@ public class addInstalledPart implements Initializable {
         Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
         searchPart();
     }
-    public void regComb()//throws SQLException
+   /* public void regComb()//throws SQLException
     {
-    }
+        
+      Database.getInstance().fillRegCombo();
+        
+    }*/
       public void updatePart() throws SQLException
     {
         Database.getInstance().editInstalledPart();
@@ -167,24 +170,23 @@ public class addInstalledPart implements Initializable {
     
        public void searchPart() throws SQLException
     {
+        
        String searchVal=searchBox.getText();
        ObservableList  <installedPart> searchPartsData = Database.getInstance().searchInstalledPart(searchVal);
        
        installedPartsTable.setEditable(true);
        
-        
-           
             INST_ID_view.setCellValueFactory(new PropertyValueFactory<>("INST_ID"));
             
            
-            PART_ID_view.setCellValueFactory(new PropertyValueFactory<>("PART_ID"));
-            PART_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-            PART_ID_view.setOnEditCommit(
-                    new EventHandler<CellEditEvent<installedPart,Integer>>() {
+           PART_NAME_view.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
+            PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            PART_NAME_view.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
-                public void handle(CellEditEvent<installedPart, Integer> t) {
+                public void handle(CellEditEvent<installedPart, String> t) {
                     ((installedPart) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setPART_ID(t.getNewValue());
+                            t.getTablePosition().getRow())).setPART_NAME(t.getNewValue());
                 }
             }
             );
@@ -261,25 +263,33 @@ public class addInstalledPart implements Initializable {
     {
     searchBox.clear();
     installedPartsTable.getItems().clear();
-    PART_ID.clear();
+    PART_NAME.clear();
     VEHICLE_ID.clear();
     REG_NUM.clear();
     CUST_NAME.clear();
     
     }
+    public void partBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        //regComb = new ComboBox();
+        regComb.setItems(regComb1);
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        regComb.getItems().addAll(
-                "Clutch");
+       /// partBox();
+       partBox();
+        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        //regComb = new ComboBox();
+        regComb.setItems(regComb1);
+        
        //regComb.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) -> choosePart(newValue));
     } 
-    /*public void choosePart(String newValue)
-    {
-        if(newValue.equals("clutch"))
-        {
-        
-        }
-    }*/
+    
     public void help()
     {
         JOptionPane.showMessageDialog(null,

@@ -25,10 +25,9 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <TextField fx:id="PART_ID" layoutX="274.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="CUST_NAME" layoutX="275.0" layoutY="350.0" prefHeight="25.0" prefWidth="112.0" />
       <TextField fx:id="VEHICLE_ID" layoutX="274.0" layoutY="437.0" prefHeight="25.0" prefWidth="112.0" />
-      <Text fill="WHITE" layoutX="77.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part ID">
+      <Text fill="WHITE" layoutX="77.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
@@ -46,7 +45,7 @@
           <TableColumn fx:id="REG_NUM_view" prefWidth="142.0" text="Vehicle Registration" />
             <TableColumn fx:id="INST_DATE_view" prefWidth="108.0" text="Installation Date" />
             <TableColumn fx:id="EXP_DATE_view" prefWidth="132.0" text="Warranty Expiration" />
-            <TableColumn fx:id="PART_ID_view" prefWidth="60.0" text="Part ID" />
+            <TableColumn fx:id="PART_NAME_view" prefWidth="60.0" text="Part Name" />
             <TableColumn fx:id="CUST_NAME_view" prefWidth="112.0" text="Customer Name" />
             <TableColumn fx:id="VEHICLE_ID_view" prefWidth="98.0" text="Vehicle ID" />
         </columns>
@@ -91,7 +90,6 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <ComboBox fx:id="regComb" layoutX="255.0" layoutY="299.0" prefWidth="150.0" />
-      <Text layoutX="111.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name" />
+      <ComboBox fx:id="regComb" layoutX="273.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
    </children>
 </AnchorPane>
