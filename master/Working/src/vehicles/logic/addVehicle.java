@@ -76,7 +76,7 @@ public class addVehicle implements Initializable {
     @FXML
     private Label expirydate_text;
     @FXML
-    private TextField expirydate;
+    private DatePicker expirydate;
     @FXML
     private ToggleGroup warranty;
     @FXML
@@ -298,8 +298,8 @@ public class addVehicle implements Initializable {
         String vengine = (engine.getText());
         String vfueltype = (fueltype.getText());
         String vcolour = (colour.getText());
-        String vmotdate = motdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String vlastservice = lastservice.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String vmotdate = motdate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String vlastservice = lastservice.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         String vmileage = (mileage.getText());
 
         String vwarranty = "";
@@ -311,7 +311,7 @@ public class addVehicle implements Initializable {
 
         String vwarrantycompany = (companyname.getText());
         String vwarrantyaddress = (companyaddress.getText());
-        String vwarrantyexpiry = (expirydate.getText());
+        String vwarrantyexpiry = expirydate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         Database.getInstance().addVehicle(vregnum, vmodel, vmake, vengine, vfueltype, vcolour, vmotdate, vlastservice, vmileage, vwarranty, vwarrantycompany, vwarrantyaddress, vwarrantyexpiry);
 
@@ -342,7 +342,7 @@ public class addVehicle implements Initializable {
         mileage.clear();
         companyname.clear();
         companyaddress.clear();
-        expirydate.clear();
+        expirydate.setValue(null);
     }
 
 }

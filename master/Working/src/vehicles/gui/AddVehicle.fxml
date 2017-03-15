@@ -100,7 +100,6 @@
          </font>
       </Label>
       <Button layoutX="585.0" layoutY="590.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="71.0" text="Clear" />
-      <TextField fx:id="expirydate" layoutX="229.0" layoutY="483.0" prefHeight="25.0" prefWidth="170.0" />
       <Text fill="WHITE" layoutX="885.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quick select:">
          <font>
             <Font size="19.0" />
@@ -109,5 +108,6 @@
       <ComboBox fx:id="chooseVehicle" layoutX="1001.0" layoutY="58.0" prefHeight="25.0" prefWidth="170.0" />
       <DatePicker fx:id="motdate" layoutX="694.0" layoutY="378.0" prefHeight="25.0" prefWidth="170.0" />
       <DatePicker fx:id="lastservice" layoutX="695.0" layoutY="441.0" prefHeight="25.0" prefWidth="170.0" />
+      <DatePicker fx:id="expirydate" layoutX="228.0" layoutY="483.0" prefHeight="25.0" prefWidth="170.0" />
    </children>
 </AnchorPane>
