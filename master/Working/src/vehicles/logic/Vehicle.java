@@ -37,7 +37,7 @@ public class Vehicle {
         
         this.regnum= new SimpleStringProperty(regnum);
         this.model=  new SimpleStringProperty(model);
-        this.make = new SimpleStringProperty(engine);
+        this.make = new SimpleStringProperty(make);
         this.engine = new SimpleStringProperty(engine);
         this.fueltype = new SimpleStringProperty(fueltype);
         this.colour = new SimpleStringProperty(colour);
@@ -219,7 +219,7 @@ public class Vehicle {
         this.motdate.set(motdate);
     }
     
-    public void lastService(String lastservice)
+    public void setLastService(String lastservice)
     {
         this.lastservice.set(lastservice);
     }

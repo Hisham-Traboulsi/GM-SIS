@@ -65,7 +65,7 @@ public class BookPartRepairController implements Initializable {
 
     
     @FXML
-   public boolean sumbit() throws SQLException
+   public boolean submit() throws SQLException
     {
       
     boolean added=false;

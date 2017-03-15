@@ -45,7 +45,7 @@
                   <TableColumn fx:id="amount" minWidth="6.0" prefWidth="79.0" text="Stock" />
                </columns>
             </TableView>
-      <Button fx:id="bookButton" layoutX="344.0" layoutY="582.0" mnemonicParsing="false" onAction="submit" text="Book" />
+      <Button fx:id="bookButton" layoutX="344.0" layoutY="582.0" mnemonicParsing="false" onAction="#submit" text="Book" />
          </children>
          <stylesheets>
             <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />

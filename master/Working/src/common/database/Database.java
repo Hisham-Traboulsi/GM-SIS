@@ -818,8 +818,9 @@ public final class Database
         int counter = 0;
         while(counter < vehicleData.size())
         {
-            editVehicleStmt.setString(1, vehicleData.get(counter).getModel());
-            editVehicleStmt.setString(2, vehicleData.get(counter).getMake());
+            
+            editVehicleStmt.setString(1, vehicleData.get(counter).getMake());
+            editVehicleStmt.setString(2, vehicleData.get(counter).getModel());
             editVehicleStmt.setString(3, vehicleData.get(counter).getEngine());
             editVehicleStmt.setString(4, vehicleData.get(counter).getFuelType());
             editVehicleStmt.setString(5, vehicleData.get(counter).getColour());
@@ -830,7 +831,7 @@ public final class Database
             editVehicleStmt.setString(10, vehicleData.get(counter).getWarrantyCompany());
             editVehicleStmt.setString(11, vehicleData.get(counter).getWarrantyAddress());
             editVehicleStmt.setString(12, vehicleData.get(counter).getWarrantyExpiry());
-            editVehicleStmt.setString(12, vehicleData.get(counter).getRegnum());
+            editVehicleStmt.setString(13, vehicleData.get(counter).getRegnum());
             
             
             editVehicleStmt.executeUpdate();
