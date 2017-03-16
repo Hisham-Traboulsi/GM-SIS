@@ -43,6 +43,8 @@ public class ReturnedController implements Initializable {
     private TableColumn returnDateCol;
     
     private ObservableList<Returned> list=FXCollections.observableArrayList();
+        private ObservableList<Returned> selected = null;
+
             
             
     @Override
@@ -68,6 +70,15 @@ public class ReturnedController implements Initializable {
         {
             ex.printStackTrace();
         }
+    }
+       public void remove() throws SQLException
+    {
+        selected = ReturnedPartTable.getSelectionModel().getSelectedItems();   
+        
+        int RETURNEDID = selected.get(0).getBOOKINGID();
+        
+        Database.getInstance().removeReturnedPart(RETURNEDID);
+        
     }
     }    
     
