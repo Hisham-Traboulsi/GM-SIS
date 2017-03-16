@@ -7,7 +7,9 @@ package specialist.logic;
 
 import common.database.Database;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
@@ -57,9 +60,9 @@ public class BookPartRepairController implements Initializable {
     @FXML
         ComboBox spcBox;
     @FXML
-        DatePicker deliveryDate;
+        TextField deliveryDate;
     @FXML
-        DatePicker returnDate;
+        TextField returnDate;
     
     private ObservableList<Part> selected = null;
 
@@ -72,11 +75,11 @@ public class BookPartRepairController implements Initializable {
             selected = partsTable.getSelectionModel().getSelectedItems();   
 
             //int INSTID = Integer.parseInt(INST_ID.getText());
-            String SPC = (spcBox.getPromptText());
+            String SPC = (String) spcBox.getValue();
             int PARTID = selected.get(0).getID();
             String PARTNAME = selected.get(0).getpartName();
-            String DELIVDATE = (deliveryDate.getPromptText());
-            String RETURNDATE = (returnDate.getPromptText());
+            String DELIVDATE = (deliveryDate.getText());
+            String RETURNDATE = (returnDate.getText());
          
            added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
 

@@ -785,9 +785,9 @@ public final class Database
            add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
            add.setString(1, SPC);
            add.setInt(2, PARTID);
-           add.setString(2, PARTNAME);
-           add.setString(3, DELIVDATE);
-           add.setString(4, RETURNDATE);
+           add.setString(3, PARTNAME);
+           add.setString(4, DELIVDATE);
+           add.setString(5, RETURNDATE);
         
 
            add.execute();
