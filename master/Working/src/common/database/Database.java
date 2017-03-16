@@ -909,6 +909,41 @@ public final class Database
         
         return added;
     }
+      public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
+              String FUEL, String COLOUR, String DELIVDATE, String RETURNDATE)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO OUTSTANDING_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+           
+           add.setString(1, null);
+           add.setString(2, SPC);
+           add.setString(3, REGNUM);
+           add.setString(4, MAKE);
+           add.setString(5, MODEL);
+           add.setString(6, ENGINE);
+           add.setString(7, FUEL);
+           add.setString(8, COLOUR);
+           add.setString(9, DELIVDATE);
+           add.setString(10, RETURNDATE);
+        
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Booked");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
       
    
     public static Database getInstance()
