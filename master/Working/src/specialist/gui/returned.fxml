@@ -16,7 +16,7 @@
       </Label>
       <TableView fx:id="ReturnedPartTable" layoutX="18.0" layoutY="175.0" prefHeight="342.0" prefWidth="590.0">
          <columns>
-            <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Booking ID" />
+            <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Return ID" />
             <TableColumn fx:id="spcNameCol" prefWidth="75.0" text="SPC" />
             <TableColumn fx:id="partIDCol" prefWidth="75.0" text="Part ID" />
             <TableColumn fx:id="partNameCol" prefWidth="112.33332824707031" text="Part Name" />
