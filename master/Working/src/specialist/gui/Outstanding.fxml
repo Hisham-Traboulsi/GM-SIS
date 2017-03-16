@@ -16,8 +16,9 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="OutstandingPartTable" layoutX="8.0" layoutY="165.0" prefHeight="342.0" prefWidth="511.0">
+            <TableView fx:id="OutstandingPartTable" layoutX="8.0" layoutY="165.0" prefHeight="342.0" prefWidth="590.0">
               <columns>
+                  <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Booking ID" />
                 <TableColumn fx:id="spcNameCol" prefWidth="75.0" text="SPC" />
                 <TableColumn fx:id="partIDCol" prefWidth="75.0" text="Part ID" />
                   <TableColumn fx:id="partNameCol" prefWidth="112.33332824707031" text="Part Name" />
@@ -25,7 +26,7 @@
                   <TableColumn fx:id="returnDateCol" prefWidth="126.33334350585938" text="Return Date" />
               </columns>
             </TableView>
-            <Button layoutX="332.0" layoutY="549.0" mnemonicParsing="false" text="Returned" />
+            <Button fx:id="returnButton" layoutX="332.0" layoutY="549.0" mnemonicParsing="false" text="Returned" />
             <TableView layoutX="633.0" layoutY="166.0" prefHeight="341.0" prefWidth="551.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />

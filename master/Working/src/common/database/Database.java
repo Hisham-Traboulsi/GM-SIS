@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
+import specialist.logic.Returned;
 //import parts.logic.PartsController;
 
 /**
@@ -44,6 +45,7 @@ public final class Database
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
     private ObservableList<Outstanding> outPartsData;
+    private ObservableList<Returned> retPartsData;
     private ObservableList<centreName> spcname;
     
     private ComboBox regComb;
@@ -737,18 +739,53 @@ public final class Database
         
         while(rs.next())
         {
+            int bookingID = rs.getInt("bookingID");
             String spcName = rs.getString("spcName");
             int partID = rs.getInt("partID");
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             
-            Outstanding outstandingpart = new Outstanding(spcName, partID, partName, deliveryDate, returnDate);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate);
             
             outPartsData.add(outstandingpart);
         }
         return outPartsData;
     }
+    
+     public void removeOutstandingPart(int id) throws SQLException
+    {
+        
+        PreparedStatement removeOutstandingPartStmt = preparedStatement("DELETE FROM OUTSTANDING WHERE BOOK_ID="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeOutstandingPartStmt.executeUpdate();
+    }
+    
+     public ObservableList<Returned> getReturnedParts() throws SQLException
+    {   
+        
+        PreparedStatement getReturnedParts = null;
+        retPartsData = FXCollections.observableArrayList();
+        
+       
+        getReturnedParts = preparedStatement("SELECT * FROM RETURNED_PARTS");
+        ResultSet rs = getReturnedParts.executeQuery();
+        
+        while(rs.next())
+        {
+            String spcName = rs.getString("spcName");
+            int partID = rs.getInt("partID");
+            String partName = rs.getString("partName");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            Returned returnedpart = new Returned(spcName, partID, partName, deliveryDate, returnDate);
+            
+            retPartsData.add(returnedpart);
+        }
+        return retPartsData;
+    }
+    
         public ObservableList<String> getSPCName() throws SQLException
     {   
         
@@ -808,12 +845,14 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
-           add.setString(1, SPC);
-           add.setInt(2, PARTID);
-           add.setString(3, PARTNAME);
-           add.setString(4, DELIVDATE);
-           add.setString(5, RETURNDATE);
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+           
+           add.setString(1, null);
+           add.setString(2, SPC);
+           add.setInt(3, PARTID);
+           add.setString(4, PARTNAME);
+           add.setString(5, DELIVDATE);
+           add.setString(6, RETURNDATE);
         
 
            add.execute();
@@ -837,7 +876,7 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?)"); 
            add.setString(1, SPC);
            add.setInt(2, PARTID);
            add.setString(3, PARTNAME);
@@ -848,7 +887,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
-           JOptionPane.showMessageDialog(null,"Booked");
+           JOptionPane.showMessageDialog(null,"Returned");
         }
         catch(SQLException ex)
         {

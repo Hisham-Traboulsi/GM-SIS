@@ -14,8 +14,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Shiraj Miah
  */
-public class Outstanding {
-    private IntegerProperty bookingID;
+public class Returned {
     private StringProperty spcName;
     private IntegerProperty partID;
     private StringProperty partName;
@@ -23,10 +22,10 @@ public class Outstanding {
     private StringProperty returnDate;
     
 
-public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate)
+public Returned(String spcName, int partID, String partName, String deliveryDate, String returnDate)
            
     {
-        this.bookingID =  new SimpleIntegerProperty(bookingID);
+        
         this.spcName =  new SimpleStringProperty(spcName);
         this.partID =  new SimpleIntegerProperty(partID);        
         this.partName =  new SimpleStringProperty(partName);
@@ -35,10 +34,7 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
 
     }
 
-       public int getBOOKINGID()
-    {
-        return bookingID.get();
-    }
+
        
     public String getSPCNAME()
     {
@@ -87,10 +83,7 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     }
     
     
-        public void setIDnum(int bookingID)
-    {
-        this.bookingID.set(bookingID);        
-    }
+
         
     public void setSPCNAME(String spcName)
     {

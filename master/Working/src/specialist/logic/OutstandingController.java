@@ -26,6 +26,10 @@ public class OutstandingController implements Initializable {
 
 @FXML
     private TableView<Outstanding> OutstandingPartTable = new TableView<Outstanding>();
+
+   
+   @FXML
+    private TableColumn bookingIDCol; 
    
    @FXML
     private TableColumn spcNameCol; 
@@ -52,6 +56,7 @@ public class OutstandingController implements Initializable {
 
             OutstandingPartTable.setEditable(true);
 
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
@@ -84,5 +89,18 @@ public class OutstandingController implements Initializable {
 
       
         return added;
+    }
+   public void remove() throws SQLException
+    {
+        selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
+
+        String SPC = selected.get(0).getSPCNAME();
+        int PARTID = selected.get(0).getPARTID();
+        String PARTNAME = selected.get(0).getPARTNAME();
+        String DELIVDATE = selected.get(0).getDELIVERYDATE();
+        String RETURNDATE = selected.get(0).getRETURNDATE();  
+        
+        //Database.getInstance().removeOutstandingPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+        
     }
 }

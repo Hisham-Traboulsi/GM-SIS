@@ -5,9 +5,17 @@
  */
 package specialist.logic;
 
+import common.database.Database;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -16,12 +24,46 @@ import javafx.fxml.Initializable;
  */
 public class ReturnedController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+@FXML
+    private TableView<Returned> ReturnedPartTable = new TableView<Returned>();
+   
+   @FXML
+    private TableColumn spcNameCol; 
+   
+   @FXML
+    private TableColumn partIDCol;
+    @FXML
+    private TableColumn partNameCol;
+    @FXML
+    private TableColumn deliveryDateCol;
+    @FXML
+    private TableColumn returnDateCol;
+    
+    private ObservableList<Returned> list=FXCollections.observableArrayList();
+            
+            
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        try {
+            ObservableList<Returned> retPartsData = Database.getInstance().getReturnedParts();
+
+            ReturnedPartTable.setEditable(true);
+
+            spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
+            returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+          
+
+            ReturnedPartTable.setItems(retPartsData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+    }
     }    
     
-}
