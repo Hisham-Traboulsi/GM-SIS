@@ -88,7 +88,7 @@ public class OutstandingController implements Initializable {
          
            added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
 
-           //remove();
+           remove();
       
         return added;
         
