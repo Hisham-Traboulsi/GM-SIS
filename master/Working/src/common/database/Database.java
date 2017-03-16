@@ -19,6 +19,7 @@ import specialist.logic.centreName;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import specialist.logic.Outstanding;
 //import parts.logic.PartsController;
 
 /**
@@ -42,6 +43,7 @@ public final class Database
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
+    private ObservableList<Outstanding> outPartsData;
     private ObservableList<centreName> spcname;
     
     private ComboBox regComb;
@@ -723,6 +725,30 @@ public final class Database
         return spcData;
     }
     
+    public ObservableList<Outstanding> getOutstandingParts() throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingParts = null;
+        outPartsData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingParts = preparedStatement("SELECT * FROM OUTSTANDING_PARTS");
+        ResultSet rs = getOutstandingParts.executeQuery();
+        
+        while(rs.next())
+        {
+            String spcName = rs.getString("spcName");
+            int partID = rs.getInt("partID");
+            String partName = rs.getString("partName");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            Outstanding outstandingpart = new Outstanding(spcName, partID, partName, deliveryDate, returnDate);
+            
+            outPartsData.add(outstandingpart);
+        }
+        return outPartsData;
+    }
         public ObservableList<String> getSPCName() throws SQLException
     {   
         
