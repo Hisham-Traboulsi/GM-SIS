@@ -78,7 +78,8 @@ public class OutstandingController implements Initializable {
       
     boolean added=false;
             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
-
+            
+            int BOOKINGID = selected.get(0).getBOOKINGID();
             String SPC = selected.get(0).getSPCNAME();
             int PARTID = selected.get(0).getPARTID();
             String PARTNAME = selected.get(0).getPARTNAME();
@@ -87,20 +88,19 @@ public class OutstandingController implements Initializable {
          
            added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
 
+           //remove();
       
         return added;
+        
     }
+   
    public void remove() throws SQLException
     {
         selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
-
-        String SPC = selected.get(0).getSPCNAME();
-        int PARTID = selected.get(0).getPARTID();
-        String PARTNAME = selected.get(0).getPARTNAME();
-        String DELIVDATE = selected.get(0).getDELIVERYDATE();
-        String RETURNDATE = selected.get(0).getRETURNDATE();  
         
-        //Database.getInstance().removeOutstandingPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+        int BOOKINGID = selected.get(0).getBOOKINGID();
+        
+        Database.getInstance().removeOutstandingPart(BOOKINGID);
         
     }
 }

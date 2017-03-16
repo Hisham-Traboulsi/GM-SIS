@@ -15,6 +15,7 @@ import javafx.beans.property.StringProperty;
  * @author Shiraj Miah
  */
 public class Returned {
+    private IntegerProperty bookingID;
     private StringProperty spcName;
     private IntegerProperty partID;
     private StringProperty partName;
@@ -22,10 +23,10 @@ public class Returned {
     private StringProperty returnDate;
     
 
-public Returned(String spcName, int partID, String partName, String deliveryDate, String returnDate)
+public Returned(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate)
            
     {
-        
+        this.bookingID =  new SimpleIntegerProperty(bookingID);
         this.spcName =  new SimpleStringProperty(spcName);
         this.partID =  new SimpleIntegerProperty(partID);        
         this.partName =  new SimpleStringProperty(partName);
@@ -34,7 +35,12 @@ public Returned(String spcName, int partID, String partName, String deliveryDate
 
     }
 
-
+       public int getBOOKINGID()
+    {
+        return bookingID.get();
+    }
+       
+       
        
     public String getSPCNAME()
     {
@@ -83,7 +89,10 @@ public Returned(String spcName, int partID, String partName, String deliveryDate
     }
     
     
-
+        public void setIDnum(int bookingID)
+    {
+        this.bookingID.set(bookingID);        
+    }
         
     public void setSPCNAME(String spcName)
     {

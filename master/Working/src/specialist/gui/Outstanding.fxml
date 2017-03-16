@@ -26,7 +26,7 @@
                   <TableColumn fx:id="returnDateCol" prefWidth="126.33334350585938" text="Return Date" />
               </columns>
             </TableView>
-            <Button fx:id="returnButton" layoutX="332.0" layoutY="549.0" mnemonicParsing="false" text="Returned" />
+            <Button fx:id="returnButton" layoutX="332.0" layoutY="549.0" mnemonicParsing="false" onAction="#returned" text="Returned" />
             <TableView layoutX="633.0" layoutY="166.0" prefHeight="341.0" prefWidth="551.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />

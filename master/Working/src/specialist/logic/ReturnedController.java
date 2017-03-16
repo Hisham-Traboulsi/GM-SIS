@@ -28,6 +28,9 @@ public class ReturnedController implements Initializable {
     private TableView<Returned> ReturnedPartTable = new TableView<Returned>();
    
    @FXML
+    private TableColumn bookingIDCol; 
+   
+   @FXML
     private TableColumn spcNameCol; 
    
    @FXML
@@ -49,7 +52,8 @@ public class ReturnedController implements Initializable {
             ObservableList<Returned> retPartsData = Database.getInstance().getReturnedParts();
 
             ReturnedPartTable.setEditable(true);
-
+            
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));

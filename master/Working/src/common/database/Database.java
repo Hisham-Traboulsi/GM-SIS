@@ -753,10 +753,10 @@ public final class Database
         return outPartsData;
     }
     
-     public void removeOutstandingPart(int id) throws SQLException
+     public void removeOutstandingPart(int bookingID) throws SQLException
     {
         
-        PreparedStatement removeOutstandingPartStmt = preparedStatement("DELETE FROM OUTSTANDING WHERE BOOK_ID="+ id);
+        PreparedStatement removeOutstandingPartStmt = preparedStatement("DELETE FROM OUTSTANDING_PARTS WHERE bookingID="+ bookingID);
       // removeInstalledPartStmt.setInt(1, id);
         removeOutstandingPartStmt.executeUpdate();
     }
@@ -773,13 +773,14 @@ public final class Database
         
         while(rs.next())
         {
+            int returnID = rs.getInt("returnID");
             String spcName = rs.getString("spcName");
             int partID = rs.getInt("partID");
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             
-            Returned returnedpart = new Returned(spcName, partID, partName, deliveryDate, returnDate);
+            Returned returnedpart = new Returned(returnID, spcName, partID, partName, deliveryDate, returnDate);
             
             retPartsData.add(returnedpart);
         }
@@ -870,18 +871,20 @@ public final class Database
         return added;
     }
 
-     public boolean returnedSPCPart( String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?)"); 
-           add.setString(1, SPC);
-           add.setInt(2, PARTID);
-           add.setString(3, PARTNAME);
-           add.setString(4, DELIVDATE);
-           add.setString(5, RETURNDATE);
+           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+         
+           add.setString(1, null);
+           add.setString(2, SPC);
+           add.setInt(3, PARTID);
+           add.setString(4, PARTNAME);
+           add.setString(5, DELIVDATE);
+           add.setString(6, RETURNDATE);
         
 
            add.execute();
