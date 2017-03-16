@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
+import specialist.logic.OutstandingVehicle;
 import specialist.logic.Returned;
 //import parts.logic.PartsController;
 
@@ -46,6 +47,8 @@ public final class Database
     private ObservableList<SPC> spcData;
     private ObservableList<Outstanding> outPartsData;
     private ObservableList<Returned> retPartsData;
+    private ObservableList<OutstandingVehicle> outVehicleData;
+    //private ObservableList<Returned> retPartsData;
     private ObservableList<centreName> spcname;
     
     private ComboBox regComb;
@@ -943,6 +946,33 @@ public final class Database
         }
         
         return added;
+    }
+       public ObservableList<OutstandingVehicle> getOutstandingVehicles() throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingVehicles = null;
+        outVehicleData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingVehicles = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES");
+        ResultSet rs = getOutstandingVehicles.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            OutstandingVehicle outstandingvehicle = new OutstandingVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate);
+            
+            outVehicleData.add(outstandingvehicle);
+        }
+        return outVehicleData;
     }
       
    

@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Shiraj Miah
  */
 public class OutstandingController implements Initializable {
-
+//parts table
 @FXML
     private TableView<Outstanding> OutstandingPartTable = new TableView<Outstanding>();
 
@@ -46,12 +46,39 @@ public class OutstandingController implements Initializable {
     private ObservableList<Outstanding> list=FXCollections.observableArrayList();
     private ObservableList<Outstanding> selected = null;
 
+    // vehicle table
+    @FXML
+    private TableView<OutstandingVehicle> OutstandingVehicleTable = new TableView<OutstandingVehicle>();
+
+   
+   @FXML
+    private TableColumn bookingIDvehicleCol; 
+ 
+     @FXML
+    private TableColumn spcNameVehicleCol; 
+     
+   @FXML
+    private TableColumn vehicleRegCol; 
+   
+   @FXML
+    private TableColumn vehicleMakeCol;
+    @FXML
+    private TableColumn vehicleModelCol;
+    @FXML
+    private TableColumn vehicleDeliveryCol;
+    @FXML
+    private TableColumn vehicleReturnCol;
+    
+    private ObservableList<OutstandingVehicle> list2=FXCollections.observableArrayList();
+    private ObservableList<OutstandingVehicle> selected2 = null;
+
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
+            //populate part table
             ObservableList<Outstanding> outPartsData = Database.getInstance().getOutstandingParts();
 
             OutstandingPartTable.setEditable(true);
@@ -65,6 +92,29 @@ public class OutstandingController implements Initializable {
           
 
             OutstandingPartTable.setItems(outPartsData);
+            
+                    } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+           
+                try {
+              //populate vehicle table
+            ObservableList<OutstandingVehicle> outVehicleData = Database.getInstance().getOutstandingVehicles();
+
+            OutstandingVehicleTable.setEditable(true);
+
+            bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            OutstandingVehicleTable.setItems(outVehicleData);
             
         } 
         catch (SQLException ex) 

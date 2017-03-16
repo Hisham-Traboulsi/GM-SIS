@@ -9,8 +9,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.OutstandingController">
    <children>
-      <AnchorPane id="AnchorPane" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" scaleShape="false" stylesheets="@../../common/gui/common_style.css">
-         <children>
             <Label layoutX="252.0" layoutY="71.0" text="Outstanding">
                <font>
                   <Font name="System Bold" size="36.0" />
@@ -30,8 +28,9 @@
             <TableView fx:id="OutstandingVehicleTable" layoutX="633.0" layoutY="166.0" prefHeight="341.0" prefWidth="551.0">
               <columns>
                 <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Booking ID" />
+                  <TableColumn fx:id="spcNameVehicleCol" prefWidth="75.0" text="SPC" />
                 <TableColumn fx:id="vehicleRegCol" prefWidth="75.0" text="Registration" />
-                  <TableColumn fx:id="vehiceMakeCol" prefWidth="75.0" text="Make" />
+                  <TableColumn fx:id="vehicleMakeCol" prefWidth="75.0" text="Make" />
                   <TableColumn fx:id="vehicleModelCol" prefWidth="120.0" text="Model" />
                   <TableColumn fx:id="vehicleDeliveryCol" prefWidth="100.0" text="Delivery Date" />
                   <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="92.0" text="Return Date" />
@@ -39,5 +38,3 @@
             </TableView>
          </children>
       </AnchorPane>
-   </children>
-</AnchorPane>
