@@ -40,6 +40,8 @@ public class OutstandingController implements Initializable {
     private TableColumn returnDateCol;
     
     private ObservableList<Outstanding> list=FXCollections.observableArrayList();
+    private ObservableList<Outstanding> selected = null;
+
     
     
     @Override
@@ -65,5 +67,22 @@ public class OutstandingController implements Initializable {
             ex.printStackTrace();
         }
     }    
-    
+      @FXML
+   public boolean returned() throws SQLException
+    {
+      
+    boolean added=false;
+            selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
+
+            String SPC = selected.get(0).getSPCNAME();
+            int PARTID = selected.get(0).getPARTID();
+            String PARTNAME = selected.get(0).getPARTNAME();
+            String DELIVDATE = selected.get(0).getDELIVERYDATE();
+            String RETURNDATE = selected.get(0).getRETURNDATE();
+         
+           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+
+      
+        return added;
+    }
 }
