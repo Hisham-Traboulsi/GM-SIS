@@ -1018,12 +1018,12 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             
-            OutstandingVehicle outstandingvehicle = new OutstandingVehicle(bookingID, spcName,
+            OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
                     regNum, make, model, deliveryDate, returnDate);
             
-            outVehicleSearchData.add(outstandingvehicle);
+            outVehicleSearchData.add(outstandingvehiclesearch);
         }
-        return outVehicleData;
+        return outVehicleSearchData;
     }
        
      public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException

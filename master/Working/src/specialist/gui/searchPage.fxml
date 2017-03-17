@@ -29,7 +29,7 @@
             <TableColumn fx:id="returnCol" prefWidth="137.3333740234375" text="Return" />
          </columns>
       </TableView>
-      <Button fx:id="spcSearch" layoutX="302.0" layoutY="179.0" mnemonicParsing="false" onAction="#reload" text="Search" />
+      <Button fx:id="spcSearch" layoutX="302.0" layoutY="179.0" mnemonicParsing="false" onAction="#load" text="Search" />
       <Button fx:id="regSearch" layoutX="954.0" layoutY="177.0" mnemonicParsing="false" text="Search" />
    </children>
 </AnchorPane>

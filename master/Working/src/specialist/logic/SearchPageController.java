@@ -29,6 +29,8 @@ public class SearchPageController implements Initializable {
     @FXML
     ComboBox spcBox;
     @FXML
+    private TableView<OutstandingVehicle> SearchTable = new TableView<OutstandingVehicle>();
+    @FXML
     private TableColumn regCol;
     @FXML
     private TableColumn spcCol;
@@ -44,8 +46,7 @@ public class SearchPageController implements Initializable {
     private Button spcSearch;
     @FXML
     private Button regSearch;
-    @FXML
-    private TableView SearchTable;
+
     @FXML
     private TableColumn bookingCol;
             
@@ -54,11 +55,9 @@ public class SearchPageController implements Initializable {
         try {
             
         ObservableList<String> spcData = Database.getInstance().getSPCName();
+         spcBox.setItems(spcData); 
 
-        
-            spcBox.setItems(spcData); 
-
-            
+            //load();
         } 
         catch (SQLException ex) 
         {
@@ -67,9 +66,10 @@ public class SearchPageController implements Initializable {
     }    
 
     @FXML
-    private void spcSearch(ActionEvent event) {      
+    private void load() {      
+        
             String SPCNAME = (String) spcBox.getValue();
-
+            //System.out.println(SPCNAME);
                 try {
               //populate vehicle table
             ObservableList<OutstandingVehicle> outVehicleSearchData = Database.getInstance().getOutstandingVehiclesFromSPC(SPCNAME);
