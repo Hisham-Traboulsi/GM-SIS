@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import parts.logic.Part;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
-import specialist.logic.centreName;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
@@ -50,9 +49,8 @@ public final class Database
     private ObservableList<Outstanding> outPartsData;
     private ObservableList<Returned> retPartsData;
     private ObservableList<OutstandingVehicle> outVehicleData;
-    private ObservableList<ReturnedVehicle> retVehicleData;
-    private ObservableList<centreName> spcname;
-    
+    private ObservableList<OutstandingVehicle> outVehicleSearchData;
+    private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
         
     private Database(String DBFileName)
@@ -939,7 +937,7 @@ public final class Database
         return added;
     }
       public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
-              String FUEL, String COLOUR, String DELIVDATE, String RETURNDATE)
+              String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -955,8 +953,8 @@ public final class Database
            add.setString(6, ENGINE);
            add.setString(7, FUEL);
            add.setString(8, COLOUR);
-           add.setString(9, DELIVDATE);
-           add.setString(10, RETURNDATE);
+           add.setString(9, "" +DELIVDATE);
+           add.setString(10, "" +RETURNDATE);
         
 
            add.execute();
@@ -1000,6 +998,34 @@ public final class Database
         }
         return outVehicleData;
     }
+         public ObservableList<OutstandingVehicle> getOutstandingVehiclesFromSPC(String SPCNAME) throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingVehiclesFromSPC = null;
+        outVehicleSearchData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingVehiclesFromSPC = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE spcName ='" +SPCNAME+"';");
+        ResultSet rs = getOutstandingVehiclesFromSPC.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            OutstandingVehicle outstandingvehicle = new OutstandingVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate);
+            
+            outVehicleSearchData.add(outstandingvehicle);
+        }
+        return outVehicleData;
+    }
+       
      public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException
     {   
         

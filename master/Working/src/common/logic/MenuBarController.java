@@ -338,6 +338,24 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+    public void spcSearchPage(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL searchPageUrl = getClass().getResource("/specialist/gui/searchPage.fxml");
+            AnchorPane searchPagePane = FXMLLoader.load(searchPageUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(searchPagePane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
         public void bookVehicleRepair(ActionEvent event)
     {
         try

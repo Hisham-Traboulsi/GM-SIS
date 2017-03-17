@@ -8,13 +8,17 @@ package specialist.logic;
 import common.database.Database;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,12 +32,11 @@ import vehicles.logic.Vehicle;
  */
 public class BookVehicleRepairController implements Initializable {
 
+    LocalDate delivDate = null;
+    LocalDate returnDate = null;
     @FXML
         ComboBox spcBox;
-        @FXML
-        TextField deliveryDate;
-    @FXML
-        TextField returnDate;
+
     @FXML
         Button bookButton;
     
@@ -60,6 +63,12 @@ public class BookVehicleRepairController implements Initializable {
     
     private ObservableList<Vehicle> list=FXCollections.observableArrayList();
     private ObservableList<Vehicle> selected = null;
+    @FXML
+    private Label label;
+    @FXML
+    private DatePicker deliveryDatePicker;
+    @FXML
+    private DatePicker returnDatePicker;
 
     
     @FXML
@@ -76,8 +85,8 @@ public class BookVehicleRepairController implements Initializable {
             String ENGINE = selected.get(0).getEngine();
             String FUEL  = selected.get(0).getFuelType();
             String COLOUR = selected.get(0).getColour();
-            String DELIVDATE = (deliveryDate.getText());
-            String RETURNDATE = (returnDate.getText());
+            LocalDate DELIVDATE = delivDate;
+            LocalDate RETURNDATE = returnDate;
 
          
            added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE);
@@ -118,5 +127,16 @@ public class BookVehicleRepairController implements Initializable {
         }
       
     }    
+
+    @FXML
+    private void getDeliveryDate(ActionEvent event) {
+        delivDate = deliveryDatePicker.getValue();
+        //System.out.println(delivDate);
+    }
+
+    @FXML
+    private void getReturnDate(ActionEvent event) {
+        returnDate = returnDatePicker.getValue();
+    }
     
 }
