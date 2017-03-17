@@ -9,10 +9,12 @@ import common.database.Database;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,6 +38,9 @@ import parts.logic.Part;
  * @author Shiraj Miah
  */
 public class BookPartRepairController implements Initializable {
+    
+    LocalDate delivDate = null;
+    LocalDate returnDate = null;
 
  @FXML
     private TableView<Part> partsTable = new TableView<Part>();
@@ -54,17 +60,18 @@ public class BookPartRepairController implements Initializable {
     @FXML
     private Button bookButton;
    
-    @FXML
-    private ObservableList<Part> list=FXCollections.observableArrayList();
     
     @FXML
         ComboBox spcBox;
-    @FXML
-        TextField deliveryDate;
-    @FXML
-        TextField returnDate;
+
     
     private ObservableList<Part> selected = null;
+    @FXML
+    private Label label;
+    @FXML
+    private DatePicker deliveryDatePicker;
+    @FXML
+    private DatePicker returnDatePicker;
 
     
     @FXML
@@ -78,8 +85,8 @@ public class BookPartRepairController implements Initializable {
             String SPC = (String) spcBox.getValue();
             int PARTID = selected.get(0).getID();
             String PARTNAME = selected.get(0).getpartName();
-            String DELIVDATE = (deliveryDate.getText());
-            String RETURNDATE = (returnDate.getText());
+            LocalDate DELIVDATE = delivDate;
+            LocalDate RETURNDATE = returnDate;
          
            added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
 
@@ -106,18 +113,6 @@ public class BookPartRepairController implements Initializable {
             partName.setCellValueFactory(new PropertyValueFactory<>("partName"));
             partDesc.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
             amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-           // amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-            //amountCol.setOnEditCommit(
-              //      new EventHandler<TableColumn.CellEditEvent<Part,Integer>>() {
-               // @Override
-                //public void handle(TableColumn.CellEditEvent<Part, Integer> t) {
-                  //  ((Part) t.getTableView().getItems().get(
-                    //        t.getTablePosition().getRow())).setAmount(t.getNewValue());
-                    //}
-            //}
-            //);
-            
-            //costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
             partsTable.setItems(partsData);
             
@@ -130,6 +125,18 @@ public class BookPartRepairController implements Initializable {
         }
         
     } 
+    
+
+    @FXML
+    private void getDeliveryDate(ActionEvent event) {
+        delivDate = deliveryDatePicker.getValue();
+        //System.out.println(delivDate);
+    }
+
+    @FXML
+    private void getReturnDate(ActionEvent event) {
+        returnDate = returnDatePicker.getValue();
+    }
     }    
     
 

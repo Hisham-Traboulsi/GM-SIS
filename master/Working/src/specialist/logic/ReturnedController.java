@@ -127,7 +127,7 @@ public class ReturnedController implements Initializable {
         int RETURNEDID = selected.get(0).getBOOKINGID();
         
         Database.getInstance().removeReturnedPart(RETURNEDID);
-        
+        reload();
     }
        
     public void removeVehicle() throws SQLException
@@ -137,7 +137,53 @@ public class ReturnedController implements Initializable {
         int RETURNEDID = selected2.get(0).getBOOKINGIDVEHICLE();
         
         Database.getInstance().removeReturnedVehicle(RETURNEDID);
-        
+        reload();
     }
+    public void reload(){
+  
+        try {
+            ObservableList<Returned> retPartsData = Database.getInstance().getReturnedParts();
+
+            ReturnedPartTable.setEditable(true);
+            
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
+            returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+          
+
+            ReturnedPartTable.setItems(retPartsData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        
+            try {
+              //populate vehicle table
+            ObservableList<ReturnedVehicle> retVehicleData = Database.getInstance().getReturnedVehicles();
+
+            ReturnedVehicleTable.setEditable(true);
+
+            bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            ReturnedVehicleTable.setItems(retVehicleData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }   
+}
     }    
     

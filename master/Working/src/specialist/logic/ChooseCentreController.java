@@ -65,6 +65,8 @@ public class ChooseCentreController implements Initializable {
     private TableColumn SPC_EMAIL_view;
     
     private ObservableList<SPC> list=FXCollections.observableArrayList();
+        private ObservableList<SPC> selected = null;
+
     
     @FXML
    public boolean add() throws SQLException
@@ -81,9 +83,41 @@ public class ChooseCentreController implements Initializable {
   
       added = Database.getInstance().addSPC( SPCNAME, SPCADDRESS,
               SPCPHONE,SPCEMAIL);
+      reload();
       return added;
     }
+   public void remove() throws SQLException
+    {
+        selected = SPCtable.getSelectionModel().getSelectedItems();   
+        
+        int ID = selected.get(0).getIDnum();
+        
+        Database.getInstance().removeSPC(ID);
+        reload();
+        
+    }
     
+   public void reload(){
+       try {
+            ObservableList<SPC> spcData = Database.getInstance().getSPC();
+
+            SPCtable.setEditable(true);
+
+            SPC_ID_view.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
+            SPC_NAME_view.setCellValueFactory(new PropertyValueFactory<>("SPC_NAME"));
+            SPC_ADDRESS_view.setCellValueFactory(new PropertyValueFactory<>("SPC_ADDRESS"));
+            SPC_PHONE_view.setCellValueFactory(new PropertyValueFactory<>("SPC_PHONE"));
+            SPC_EMAIL_view.setCellValueFactory(new PropertyValueFactory<>("SPC_EMAIL"));
+          
+
+            SPCtable.setItems(spcData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+   }
     
     
     @Override

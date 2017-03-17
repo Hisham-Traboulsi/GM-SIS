@@ -9,6 +9,7 @@ import common.logic.SystemUser;
 import customers.logic.Customers;
 import vehicles.logic.Vehicle;
 import java.sql.*;
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
@@ -866,8 +867,17 @@ public final class Database
         return added;
     }
     
+    public void removeSPC(int ID) throws SQLException
+    {
+        
+        PreparedStatement removeSPCStmt = preparedStatement("DELETE FROM SPECIALIST_CENTRES WHERE IDnum="+ ID);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeSPCStmt.executeUpdate();
+        JOptionPane.showMessageDialog(null,"Successfully Removed");
+    }
+    
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -879,8 +889,8 @@ public final class Database
            add.setString(2, SPC);
            add.setInt(3, PARTID);
            add.setString(4, PARTNAME);
-           add.setString(5, DELIVDATE);
-           add.setString(6, RETURNDATE);
+           add.setString(5, "" +DELIVDATE);
+           add.setString(6, "" +RETURNDATE);
         
 
            add.execute();

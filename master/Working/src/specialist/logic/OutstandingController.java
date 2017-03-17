@@ -139,7 +139,7 @@ public class OutstandingController implements Initializable {
            added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
 
            remove();
-      
+           reload();
         return added;
         
     }
@@ -160,6 +160,7 @@ public class OutstandingController implements Initializable {
            added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE);
 
            remove2();
+           reload();
       
         return added;
         
@@ -184,4 +185,52 @@ public class OutstandingController implements Initializable {
         Database.getInstance().removeOutstandingVehicle(BOOKINGID);
         
     }
+   
+   public void reload(){
+         
+        try {
+            //populate part table
+            ObservableList<Outstanding> outPartsData = Database.getInstance().getOutstandingParts();
+
+            OutstandingPartTable.setEditable(true);
+
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
+            returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+          
+
+            OutstandingPartTable.setItems(outPartsData);
+            
+                    } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+           
+                try {
+              //populate vehicle table
+            ObservableList<OutstandingVehicle> outVehicleData = Database.getInstance().getOutstandingVehicles();
+
+            OutstandingVehicleTable.setEditable(true);
+
+            bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            OutstandingVehicleTable.setItems(outVehicleData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+   }
 }

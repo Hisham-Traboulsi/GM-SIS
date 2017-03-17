@@ -12,7 +12,7 @@
    <children>
      
             <Button fx:id="addButton" layoutX="182.0" layoutY="542.0" mnemonicParsing="false" onAction="#add" text="Add" />
-            <Button fx:id="removeButton" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" text="Remove" />
+            <Button fx:id="removeButton" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
             <Button layoutX="320.0" layoutY="541.0" mnemonicParsing="false" text="Edit" />
             <Label layoutX="252.0" layoutY="71.0" text="Specialist Repairs">
                <font>
