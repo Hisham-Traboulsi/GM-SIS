@@ -31,10 +31,11 @@
             <TableColumn fx:id="spcNameVehicleCol" prefWidth="75.0" text="SPC" />
             <TableColumn fx:id="vehicleRegCol" prefWidth="75.0" text="Registration" />
             <TableColumn fx:id="vehicleMakeCol" prefWidth="75.0" text="Make" />
-            <TableColumn fx:id="vehicleModelCol" prefWidth="120.0" text="Model" />
-            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="100.0" text="Delivery Date" />
-            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="92.0" text="Return Date" />
+            <TableColumn fx:id="vehicleModelCol" prefWidth="87.0" text="Model" />
+            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="82.0" text="Delivery Date" />
+            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="143.0" text="Return Date" />
          </columns>
       </TableView>
+      <Button layoutX="837.0" layoutY="547.0" mnemonicParsing="false" onAction="#removeVehicle" text="Remove Returned Vehicle" />
    </children>
 </AnchorPane>

@@ -129,5 +129,15 @@ public class ReturnedController implements Initializable {
         Database.getInstance().removeReturnedPart(RETURNEDID);
         
     }
+       
+    public void removeVehicle() throws SQLException
+    {
+        selected2 = ReturnedVehicleTable.getSelectionModel().getSelectedItems();   
+        
+        int RETURNEDID = selected2.get(0).getBOOKINGIDVEHICLE();
+        
+        Database.getInstance().removeReturnedVehicle(RETURNEDID);
+        
+    }
     }    
     

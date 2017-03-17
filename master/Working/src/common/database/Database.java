@@ -779,6 +779,14 @@ public final class Database
         removeReturnedPartStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
+     public void removeReturnedVehicle(int returnedID) throws SQLException
+    {
+        
+        PreparedStatement removeReturnedVehicleStmt = preparedStatement("DELETE FROM RETURNED_VEHICLES WHERE returnID="+ returnedID);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeReturnedVehicleStmt.executeUpdate();
+        JOptionPane.showMessageDialog(null,"Successfully Removed");
+    }
      
      public ObservableList<Returned> getReturnedParts() throws SQLException
     {   
