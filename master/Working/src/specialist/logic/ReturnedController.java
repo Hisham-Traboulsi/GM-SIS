@@ -44,6 +44,32 @@ public class ReturnedController implements Initializable {
     
     private ObservableList<Returned> list=FXCollections.observableArrayList();
         private ObservableList<Returned> selected = null;
+        
+        //returned vehicle
+        @FXML
+    private TableView<ReturnedVehicle> ReturnedVehicleTable = new TableView<ReturnedVehicle>();
+
+   
+   @FXML
+    private TableColumn bookingIDvehicleCol; 
+ 
+     @FXML
+    private TableColumn spcNameVehicleCol; 
+     
+   @FXML
+    private TableColumn vehicleRegCol; 
+   
+   @FXML
+    private TableColumn vehicleMakeCol;
+    @FXML
+    private TableColumn vehicleModelCol;
+    @FXML
+    private TableColumn vehicleDeliveryCol;
+    @FXML
+    private TableColumn vehicleReturnCol;
+    
+    private ObservableList<ReturnedVehicle> list2=FXCollections.observableArrayList();
+    private ObservableList<ReturnedVehicle> selected2 = null;
 
             
             
@@ -64,6 +90,29 @@ public class ReturnedController implements Initializable {
           
 
             ReturnedPartTable.setItems(retPartsData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        
+            try {
+              //populate vehicle table
+            ObservableList<ReturnedVehicle> retVehicleData = Database.getInstance().getReturnedVehicles();
+
+            ReturnedVehicleTable.setEditable(true);
+
+            bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            ReturnedVehicleTable.setItems(retVehicleData);
             
         } 
         catch (SQLException ex) 

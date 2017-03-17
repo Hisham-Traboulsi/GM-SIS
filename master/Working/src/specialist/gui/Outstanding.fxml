@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.OutstandingController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.OutstandingController">
    <children>
             <Label layoutX="252.0" layoutY="71.0" text="Outstanding">
                <font>
@@ -36,5 +36,6 @@
                   <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="92.0" text="Return Date" />
               </columns>
             </TableView>
+      <Button fx:id="vehicleReturnButton" layoutX="891.0" layoutY="549.0" mnemonicParsing="false" onAction="#returnedVehicle" text="Returned" />
          </children>
       </AnchorPane>

@@ -129,7 +129,7 @@ public class OutstandingController implements Initializable {
     boolean added=false;
             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
             
-            int BOOKINGID = selected.get(0).getBOOKINGID();
+           // int BOOKINGID = selected.get(0).getBOOKINGID();
             String SPC = selected.get(0).getSPCNAME();
             int PARTID = selected.get(0).getPARTID();
             String PARTNAME = selected.get(0).getPARTNAME();
@@ -143,6 +143,27 @@ public class OutstandingController implements Initializable {
         return added;
         
     }
+   public boolean returnedVehicle() throws SQLException
+    {
+      
+    boolean added=false;
+            selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
+            
+            //int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
+            String SPC = selected2.get(0).getSPCNAMEVEHICLE();
+            String REGNUM = selected2.get(0).getREGNUM();
+            String VEHICLEMAKE = selected2.get(0).getVEHICLEMAKE();
+            String VEHICLEMODEL = selected2.get(0).getVEHICLEMODEL();
+            String DELIVDATE = selected2.get(0).getDELIVERYDATEVEHICLE();
+            String RETURNDATE = selected2.get(0).getRETURNDATEVEHICLE();
+         
+           added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE);
+
+           remove2();
+      
+        return added;
+        
+    }
    
    public void remove() throws SQLException
     {
@@ -151,6 +172,16 @@ public class OutstandingController implements Initializable {
         int BOOKINGID = selected.get(0).getBOOKINGID();
         
         Database.getInstance().removeOutstandingPart(BOOKINGID);
+        
+    }
+
+   public void remove2() throws SQLException
+    {
+        selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
+        
+        int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
+        
+        Database.getInstance().removeOutstandingVehicle(BOOKINGID);
         
     }
 }

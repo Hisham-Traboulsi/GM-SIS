@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
 import specialist.logic.OutstandingVehicle;
 import specialist.logic.Returned;
+import specialist.logic.ReturnedVehicle;
 //import parts.logic.PartsController;
 
 /**
@@ -48,7 +49,7 @@ public final class Database
     private ObservableList<Outstanding> outPartsData;
     private ObservableList<Returned> retPartsData;
     private ObservableList<OutstandingVehicle> outVehicleData;
-    //private ObservableList<Returned> retPartsData;
+    private ObservableList<ReturnedVehicle> retVehicleData;
     private ObservableList<centreName> spcname;
     
     private ComboBox regComb;
@@ -763,6 +764,13 @@ public final class Database
       // removeInstalledPartStmt.setInt(1, id);
         removeOutstandingPartStmt.executeUpdate();
     }
+     public void removeOutstandingVehicle(int bookingID) throws SQLException
+    {
+        
+        PreparedStatement removeOutstandingVehicleStmt = preparedStatement("DELETE FROM OUTSTANDING_VEHICLES WHERE bookingID="+ bookingID);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeOutstandingVehicleStmt.executeUpdate();
+    }
      public void removeReturnedPart(int returnedID) throws SQLException
     {
         
@@ -973,6 +981,65 @@ public final class Database
             outVehicleData.add(outstandingvehicle);
         }
         return outVehicleData;
+    }
+     public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException
+    {   
+        
+        PreparedStatement getReturnedVehicles = null;
+        retVehicleData = FXCollections.observableArrayList();
+        
+       
+        getReturnedVehicles = preparedStatement("SELECT * FROM RETURNED_VEHICLES");
+        ResultSet rs = getReturnedVehicles.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("returnID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            ReturnedVehicle returnedvehicle = new ReturnedVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate);
+            
+            retVehicleData.add(returnedvehicle);
+        }
+        return retVehicleData;
+    }
+       
+       public boolean returnedSPCVehicle(String SPC, String REGNUM, String VEHICLEMAKE, String VEHICLEMODEL, String DELIVDATE, String RETURNDATE)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO RETURNED_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+         
+           add.setString(1, null);
+           add.setString(2, SPC);
+           add.setString(3, REGNUM);
+           add.setString(4, VEHICLEMAKE);
+           add.setString(5, VEHICLEMODEL);
+           add.setString(6, DELIVDATE);
+           add.setString(7, RETURNDATE);
+        
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Returned");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
     }
       
    
