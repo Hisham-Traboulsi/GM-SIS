@@ -15,45 +15,45 @@
       <Label fx:id="label" layoutX="131.0" layoutY="125.0" minHeight="16" minWidth="69" />
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label layoutX="370.0" layoutY="71.0" text="Vehicle Repair">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="370.0" layoutY="71.0" text="Vehicle Repair" AnchorPane.bottomAnchor="565.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="384.0" AnchorPane.topAnchor="82.0">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="vehicleTable" layoutX="116.0" layoutY="199.0" prefHeight="286.0" prefWidth="623.0">
+            <TableView fx:id="vehicleTable" layoutX="299.0" layoutY="197.0" prefHeight="286.0" prefWidth="623.0">
               <columns>
                 <TableColumn fx:id="vehicleRegCol" prefWidth="91.0" text="Reg Number" />
-                <TableColumn fx:id="vehicleMakeCol" prefWidth="79.0" text="Make" />
-                  <TableColumn fx:id="vehicleModelCol" prefWidth="86.0" text="Model" />
-                  <TableColumn fx:id="vehicleEngineCol" prefWidth="110.0" text="Engine" />
-                  <TableColumn fx:id="vehicleFuelCol" prefWidth="99.0" text="Fuel" />
-                  <TableColumn fx:id="vehicleColourCol" prefWidth="82.0" text="Colour" />
+                <TableColumn fx:id="vehicleMakeCol" prefWidth="111.0" text="Make" />
+                  <TableColumn fx:id="vehicleModelCol" prefWidth="144.0" text="Model" />
+                  <TableColumn fx:id="vehicleEngineCol" prefWidth="60.0" text="Engine" />
+                  <TableColumn fx:id="vehicleFuelCol" prefWidth="59.0" text="Fuel" />
+                  <TableColumn fx:id="vehicleColourCol" prefWidth="157.0" text="Colour" />
               </columns>
             </TableView>
-            <Button fx:id="bookButton" layoutX="330.0" layoutY="587.0" mnemonicParsing="false" onAction="#submit" text="Book" />
+            <Button fx:id="bookButton" layoutX="583.0" layoutY="585.0" mnemonicParsing="false" onAction="#submit" text="Book" />
          </children>
          <stylesheets>
             <URL value="@../../../../SEProject/master/Working/src/common/gui/common_style.css" />
             <URL value="@../../common/gui/common_style.css" />
          </stylesheets>
       </AnchorPane>
-      <Label layoutX="115.0" layoutY="507.0" text="Expected Delivery Date:" textFill="WHITE">
+      <Label layoutX="322.0" layoutY="507.0" text="Expected Delivery Date:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="115.0" layoutY="540.0" text="Expected Return Date:" textFill="WHITE">
+      <Label layoutX="322.0" layoutY="540.0" text="Expected Return Date:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="spcBox" layoutX="299.0" layoutY="164.0" prefHeight="25.0" prefWidth="319.0" />
-      <Label layoutX="117.0" layoutY="163.0" text="SPC:" textFill="WHITE">
+      <ComboBox fx:id="spcBox" layoutX="535.0" layoutY="164.0" prefHeight="25.0" prefWidth="319.0" />
+      <Label layoutX="353.0" layoutY="163.0" text="SPC:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <DatePicker fx:id="deliveryDatePicker" layoutX="346.0" layoutY="506.0" onAction="#getDeliveryDate" />
-      <DatePicker fx:id="returnDatePicker" layoutX="346.0" layoutY="539.0" onAction="#getReturnDate" />
+      <DatePicker fx:id="deliveryDatePicker" layoutX="553.0" layoutY="506.0" onAction="#getDeliveryDate" />
+      <DatePicker fx:id="returnDatePicker" layoutX="553.0" layoutY="539.0" onAction="#getReturnDate" />
    </children>
 </AnchorPane>

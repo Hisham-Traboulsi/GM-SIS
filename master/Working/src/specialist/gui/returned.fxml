@@ -9,33 +9,43 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" scaleShape="false" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.ReturnedController">
    <children>
-      <Label layoutX="252.0" layoutY="71.0" text="Returned">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="252.0" layoutY="71.0" text="Returned" AnchorPane.bottomAnchor="565.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="384.0" AnchorPane.topAnchor="82.0">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="ReturnedPartTable" layoutX="18.0" layoutY="175.0" prefHeight="342.0" prefWidth="590.0">
+      <TableView fx:id="ReturnedPartTable" layoutX="19.0" layoutY="166.0" prefHeight="224.0" prefWidth="822.0">
          <columns>
             <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Return ID" />
-            <TableColumn fx:id="spcNameCol" prefWidth="75.0" text="SPC" />
-            <TableColumn fx:id="partIDCol" prefWidth="75.0" text="Part ID" />
-            <TableColumn fx:id="partNameCol" prefWidth="112.33332824707031" text="Part Name" />
-            <TableColumn fx:id="deliveryDateCol" prefWidth="120.66665649414062" text="Delivery Date" />
-            <TableColumn fx:id="returnDateCol" prefWidth="126.33334350585938" text="Return Date" />
+            <TableColumn fx:id="spcNameCol" prefWidth="250.0" text="SPC" />
+            <TableColumn fx:id="partIDCol" prefWidth="50.0" text="Part ID" />
+            <TableColumn fx:id="partNameCol" prefWidth="120.0" text="Part Name" />
+            <TableColumn fx:id="deliveryDateCol" prefWidth="163.0" text="Delivery Date" />
+            <TableColumn fx:id="returnDateCol" prefWidth="163.0" text="Return Date" />
          </columns>
       </TableView>
-      <Button layoutX="60.0" layoutY="547.0" mnemonicParsing="false" onAction="#remove" text="Remove Returned Part" />
-      <TableView fx:id="ReturnedVehicleTable" layoutX="643.0" layoutY="176.0" prefHeight="341.0" prefWidth="551.0">
+      <Button layoutX="875.0" layoutY="268.0" mnemonicParsing="false" onAction="#remove" text="Remove Returned Part" />
+      <TableView fx:id="ReturnedVehicleTable" layoutX="19.0" layoutY="444.0" prefHeight="224.0" prefWidth="955.0">
          <columns>
-            <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Booking ID" />
-            <TableColumn fx:id="spcNameVehicleCol" prefWidth="75.0" text="SPC" />
-            <TableColumn fx:id="vehicleRegCol" prefWidth="75.0" text="Registration" />
-            <TableColumn fx:id="vehicleMakeCol" prefWidth="75.0" text="Make" />
-            <TableColumn fx:id="vehicleModelCol" prefWidth="87.0" text="Model" />
-            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="82.0" text="Delivery Date" />
-            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="143.0" text="Return Date" />
+            <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Return ID" />
+            <TableColumn fx:id="spcNameVehicleCol" prefWidth="230.0" text="SPC" />
+            <TableColumn fx:id="vehicleRegCol" prefWidth="100.0" text="Registration" />
+            <TableColumn fx:id="vehicleMakeCol" prefWidth="95.0" text="Make" />
+            <TableColumn fx:id="vehicleModelCol" prefWidth="141.0" text="Model" />
+            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="163.0" text="Delivery Date" />
+            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="163.0" text="Return Date" />
          </columns>
       </TableView>
-      <Button layoutX="837.0" layoutY="547.0" mnemonicParsing="false" onAction="#removeVehicle" text="Remove Returned Vehicle" />
+      <Button layoutX="992.0" layoutY="545.0" mnemonicParsing="false" onAction="#removeVehicle" text="Remove Returned Vehicle" />
+      <Label layoutX="18.0" layoutY="138.0" text="Parts">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="416.0" text="Vehicles">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

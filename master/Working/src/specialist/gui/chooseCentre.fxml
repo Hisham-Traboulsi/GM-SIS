@@ -11,43 +11,43 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" scaleShape="false" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="specialist.logic.ChooseCentreController">
    <children>
      
-            <Button fx:id="addButton" layoutX="182.0" layoutY="542.0" mnemonicParsing="false" onAction="#add" text="Add" />
-            <Button fx:id="removeButton" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
-            <Button fx:id="clearButton" layoutX="320.0" layoutY="541.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
-            <Label layoutX="252.0" layoutY="71.0" text="Specialist Repairs">
+            <Button fx:id="addButton" layoutX="91.0" layoutY="432.0" mnemonicParsing="false" onAction="#add" text="Add" />
+            <Button fx:id="removeButton" layoutX="974.0" layoutY="589.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+            <Button fx:id="clearButton" layoutX="153.0" layoutY="431.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="82.0" text="Specialist Repair Centres" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="SPCtable" layoutX="380.0" layoutY="179.0" prefHeight="393.0" prefWidth="672.0">
+            <TableView fx:id="SPCtable" layoutX="288.0" layoutY="179.0" prefHeight="393.0" prefWidth="884.0">
                <columns>
-                  <TableColumn fx:id="SPC_ID_view" prefWidth="111.0" text="ID" />
-                  <TableColumn fx:id="SPC_NAME_view" prefWidth="109.0" text="NAME" />
-                  <TableColumn fx:id="SPC_ADDRESS_view" prefWidth="147.66668701171875" text="Address" />
-                  <TableColumn fx:id="SPC_PHONE_view" minWidth="0.0" prefWidth="108.33331298828125" text="Phone" />
-                  <TableColumn fx:id="SPC_EMAIL_view" prefWidth="248.33331298828125" text="Email" />
+                  <TableColumn fx:id="SPC_ID_view" prefWidth="79.0" text="ID" />
+                  <TableColumn fx:id="SPC_NAME_view" prefWidth="165.0" text="NAME" />
+                  <TableColumn fx:id="SPC_ADDRESS_view" prefWidth="252.0" text="Address" />
+                  <TableColumn fx:id="SPC_PHONE_view" minWidth="0.0" prefWidth="163.0" text="Phone" />
+                  <TableColumn fx:id="SPC_EMAIL_view" prefWidth="224.0" text="Email" />
                </columns>
             </TableView>
-            <TextField fx:id="SPC_NAME" layoutX="195.0" layoutY="257.0" />
-            <TextField fx:id="SPC_ADDRESS" layoutX="195.0" layoutY="296.0" />
-            <TextField fx:id="SPC_PHONE" layoutX="195.0" layoutY="338.0" />
-            <TextField fx:id="SPC_EMAIL" layoutX="195.0" layoutY="380.0" />
-            <Label layoutX="130.0" layoutY="254.0" text="Name">
+            <TextField fx:id="SPC_NAME" layoutX="109.0" layoutY="257.0" />
+            <TextField fx:id="SPC_ADDRESS" layoutX="109.0" layoutY="296.0" />
+            <TextField fx:id="SPC_PHONE" layoutX="109.0" layoutY="338.0" />
+            <TextField fx:id="SPC_EMAIL" layoutX="109.0" layoutY="380.0" />
+            <Label layoutX="44.0" layoutY="254.0" text="Name">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="117.0" layoutY="293.0" text="Address">
+            <Label layoutX="31.0" layoutY="293.0" text="Address">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="128.0" layoutY="337.0" text="Phone">
+            <Label layoutX="42.0" layoutY="337.0" text="Phone">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="128.0" layoutY="377.0" text="Email">
+            <Label layoutX="42.0" layoutY="377.0" text="Email">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
