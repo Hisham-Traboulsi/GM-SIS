@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -49,6 +50,8 @@ public class SearchPageController implements Initializable {
 
     @FXML
     private TableColumn bookingCol;
+    @FXML
+    private TextField regField;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -95,4 +98,33 @@ public class SearchPageController implements Initializable {
         
     }
     
+    @FXML
+        private void loadregsearch() {      
+        
+            String REGIS  = regField.getText();
+            String REG = REGIS.toUpperCase();
+                try {
+              //populate vehicle table
+            ObservableList<OutstandingVehicle> outVehicleSearchData = Database.getInstance().getOutstandingVehiclesFromReg(REG);
+
+            SearchTable.setEditable(true);
+
+            bookingCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));            
+            regCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            spcCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            makeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            modelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            deliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            returnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            SearchTable.setItems(outVehicleSearchData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        
+    }
 }

@@ -17,19 +17,19 @@
          </font>
       </Label>
       <ComboBox fx:id="spcBox" layoutX="95.0" layoutY="179.0" prefWidth="150.0" promptText="Search by SPC" />
-      <TextField layoutX="763.0" layoutY="179.0" promptText="Search by Reg" />
-      <TableView fx:id="SearchTable" layoutX="244.0" layoutY="250.0" prefHeight="391.0" prefWidth="708.0">
+      <TextField fx:id="regField" layoutX="763.0" layoutY="179.0" promptText="Search by Reg" />
+      <TableView fx:id="SearchTable" layoutX="88.0" layoutY="250.0" prefHeight="391.0" prefWidth="1024.0">
          <columns>
             <TableColumn fx:id="bookingCol" prefWidth="75.0" text="Booking ID" />
-            <TableColumn fx:id="spcCol" prefWidth="90.33331298828125" text="SPC" />
-            <TableColumn fx:id="regCol" prefWidth="121.66668701171875" text="Registration" />
-            <TableColumn fx:id="makeCol" prefWidth="146.6666259765625" text="Make" />
-            <TableColumn fx:id="modelCol" minWidth="7.0" prefWidth="105.3333740234375" text="Model" />
-            <TableColumn fx:id="deliveryCol" prefWidth="106.6666259765625" text="Delivery" />
-            <TableColumn fx:id="returnCol" prefWidth="137.3333740234375" text="Return" />
+            <TableColumn fx:id="spcCol" prefWidth="195.66665649414062" text="SPC" />
+            <TableColumn fx:id="regCol" prefWidth="157.33334350585938" text="Registration" />
+            <TableColumn fx:id="makeCol" prefWidth="143.0" text="Make" />
+            <TableColumn fx:id="modelCol" minWidth="7.0" prefWidth="170.6666259765625" text="Model" />
+            <TableColumn fx:id="deliveryCol" prefWidth="146.33331298828125" text="Delivery" />
+            <TableColumn fx:id="returnCol" prefWidth="139.0" text="Return" />
          </columns>
       </TableView>
       <Button fx:id="spcSearch" layoutX="302.0" layoutY="179.0" mnemonicParsing="false" onAction="#load" text="Search" />
-      <Button fx:id="regSearch" layoutX="954.0" layoutY="177.0" mnemonicParsing="false" text="Search" />
+      <Button fx:id="regSearch" layoutX="954.0" layoutY="177.0" mnemonicParsing="false" onAction="#loadregsearch" text="Search" />
    </children>
 </AnchorPane>

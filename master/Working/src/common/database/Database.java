@@ -720,7 +720,7 @@ public final class Database
             int idNum = rs.getInt("IDnum");
             String spcName = rs.getString("NAME");
             String spcAddress = rs.getString("ADDRESS");
-            int spcPhone = rs.getInt("PHONE");
+            String spcPhone = rs.getString("PHONE");
             String spcEmail = rs.getString("EMAIL");
             
             SPC spc = new SPC(idNum, spcName, spcAddress, spcPhone, spcEmail);
@@ -837,7 +837,7 @@ public final class Database
     
     
     /*Author Shiraj*/
-    public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, int SPC_PHONE, String SPC_EMAIL)
+    public boolean addSPC( String SPC_NAME, String SPC_ADDRESS, String SPC_PHONE, String SPC_EMAIL)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -847,7 +847,7 @@ public final class Database
            add.setString(1, null);
            add.setString(2, SPC_NAME);
            add.setString(3, SPC_ADDRESS);
-           add.setInt(4, SPC_PHONE);
+           add.setString(4, SPC_PHONE);
            add.setString(5, SPC_EMAIL);
 
            add.execute();
@@ -1025,7 +1025,35 @@ public final class Database
         }
         return outVehicleSearchData;
     }
+     
+          public ObservableList<OutstandingVehicle> getOutstandingVehiclesFromReg(String REG) throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingVehiclesFromReg = null;
+        outVehicleSearchData = FXCollections.observableArrayList();
+        
        
+        getOutstandingVehiclesFromReg = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE regNum ='" +REG+"';");
+        ResultSet rs = getOutstandingVehiclesFromReg.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            
+            OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate);
+            
+            outVehicleSearchData.add(outstandingvehiclesearch);
+        }
+        return outVehicleSearchData;
+    }
+         
      public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException
     {   
         

@@ -21,18 +21,18 @@ public class SPC
     private IntegerProperty idNum;
     private StringProperty spcName;
     private StringProperty spcAddress;
-    private IntegerProperty spcPhone;
+    private StringProperty spcPhone;
     private StringProperty spcEmail;
 
     
     
-   public SPC(int idNum, String spcName, String spcAddress, int spcPhone, String spcEmail)
+   public SPC(int idNum, String spcName, String spcAddress, String spcPhone, String spcEmail)
            
     {
         this.idNum =  new SimpleIntegerProperty(idNum);
         this.spcName =  new SimpleStringProperty(spcName);
         this.spcAddress =  new SimpleStringProperty(spcAddress);
-        this.spcPhone =  new SimpleIntegerProperty(spcPhone);
+        this.spcPhone =  new SimpleStringProperty(spcPhone);
         this.spcEmail =  new SimpleStringProperty(spcEmail);
 
     }
@@ -56,7 +56,7 @@ public class SPC
     {
         return spcAddress.get();
     }
-    public int getSPC_PHONE()
+    public String getSPC_PHONE()
     {
         return spcPhone.get();
     }
@@ -74,7 +74,7 @@ public class SPC
     {
        return spcAddress;
     }
-    public IntegerProperty SPC_PHONEProperty()
+    public StringProperty SPC_PHONEProperty()
     {
        return spcPhone;
     }     
@@ -103,7 +103,7 @@ public class SPC
         this.spcAddress.set(spcAddress);        
     }
     
-    public void setSPC_PHONE(int spcPhone)
+    public void setSPC_PHONE(String spcPhone)
     {
         this.spcPhone.set(spcPhone);        
     }

@@ -13,7 +13,7 @@
      
             <Button fx:id="addButton" layoutX="182.0" layoutY="542.0" mnemonicParsing="false" onAction="#add" text="Add" />
             <Button fx:id="removeButton" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
-            <Button layoutX="320.0" layoutY="541.0" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="clearButton" layoutX="320.0" layoutY="541.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
             <Label layoutX="252.0" layoutY="71.0" text="Specialist Repairs">
                <font>
                   <Font name="System Bold" size="36.0" />

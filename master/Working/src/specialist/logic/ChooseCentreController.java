@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -74,16 +75,21 @@ public class ChooseCentreController implements Initializable {
       
       boolean added=false;
       
-            //int INSTID = Integer.parseInt(INST_ID.getText());
+      
             String SPCNAME = (SPC_NAME.getText());
             String SPCADDRESS = (SPC_ADDRESS.getText());
-            int SPCPHONE = Integer.parseInt(SPC_PHONE.getText());
+            String SPCPHONE = (SPC_PHONE.getText());
             String SPCEMAIL = (SPC_EMAIL.getText());
-            
+ 
+            if (!validNumber(SPCPHONE))  {
+                            //JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
+            }        
+            else{
   
       added = Database.getInstance().addSPC( SPCNAME, SPCADDRESS,
               SPCPHONE,SPCEMAIL);
       reload();
+            }
       return added;
     }
    public void remove() throws SQLException
@@ -95,6 +101,35 @@ public class ChooseCentreController implements Initializable {
         Database.getInstance().removeSPC(ID);
         reload();
         
+    }
+   
+      public void clearFields()
+    {
+        SPC_NAME.clear();
+        SPC_ADDRESS.clear();
+        SPC_PHONE.clear();
+        SPC_EMAIL.clear();
+        
+    }
+   
+       public boolean validNumber(String phone)
+    {
+       int length = phone.length();
+       if(length == 0 || length < 11)
+       {
+           JOptionPane.showMessageDialog(null, "Enter valid 11 digit number!");
+           return false;
+       }
+       
+       for(int i = 0; i<length; i++)
+       {
+           if(phone.charAt(i) < '0' || phone.charAt(i) > '9')
+           {
+               JOptionPane.showMessageDialog(null, "Enter valid 11 digit number");
+               return false;
+           }
+       }
+       return true;
     }
     
    public void reload(){
