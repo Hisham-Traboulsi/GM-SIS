@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 public class AddUserController implements Initializable {
 
     /**
-     * Initializes the controller class.
+     * initialises the controller class.
      */
     
     @FXML
@@ -165,4 +165,23 @@ public class AddUserController implements Initializable {
         }
     }
     
+    public boolean checkIsInteger(String number)
+    {
+       int length = number.length();
+       if(length == 0 || length < 11)
+       {
+           JOptionPane.showMessageDialog(null, "The number's length you entered was less than 11 digits or you entered no digits at all");
+           return false;
+       }
+       
+       for(int i = 0; i<length; i++)
+       {
+           if(number.charAt(i) < '0' || number.charAt(i) > '9')
+           {
+               JOptionPane.showMessageDialog(null, "Please enter a number without any letters");
+               return false;
+           }
+       }
+       return true;
+    }
 }

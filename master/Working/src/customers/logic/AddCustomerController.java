@@ -201,10 +201,21 @@ public class AddCustomerController implements Initializable {
             JOptionPane.showMessageDialog(null, "Please Select a type");
             return;
         }
-        
+       
         if(fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "All fields are required: \n FirstName\n Surname\n Password\n Admin ");
+            JOptionPane.showMessageDialog(null, "All fields are required: \n Full Name\n Address\n Post Code\n Phone\n Email");
+            return;
+        }
+        else if((fullNameBox.getText().chars().allMatch(Character::isLetter)) == false)
+        {
+            JOptionPane.showMessageDialog(null, "Full Name must only consist of letters");
+            return;
+        }
+        else if(!checkIsInteger(phoneBox.getText()))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
+            return;
         }
         else
         {
@@ -250,6 +261,36 @@ public class AddCustomerController implements Initializable {
         
         privateRadio.setSelected(false);
         businessRadio.setSelected(false);
+    }
+    
+    public boolean checkIsInteger(String number)
+    {
+       int length = number.length();
+       if(length == 0 || length < 11)
+       {
+           JOptionPane.showMessageDialog(null, "The number's length you entered was less than 11 digits or you entered no digits at all");
+           return false;
+       }
+       
+       for(int i = 0; i<length; i++)
+       {
+           if(number.charAt(i) < '0' || number.charAt(i) > '9')
+           {
+               JOptionPane.showMessageDialog(null, "Please enter a number WITHOUT any letters");
+               return false;
+           }
+       }
+       return true;
+    }
+    
+    public boolean isValiEmail(String email)
+    {
+        if(!email.contains("@"))
+        {
+            JOptionPane.showMessageDialog(null, "This is not a valid email");
+            return false;
+        }
+        return true;
     }
    
 }
