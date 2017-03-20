@@ -31,8 +31,8 @@
                         
                 <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#Book" text="Bookings" />
-                        <MenuItem mnemonicParsing="false" onAction="#ScheduledMain" text="Scheduled Maintenance" />
+                        <MenuItem mnemonicParsing="false" onAction="#Book" text="Add Bookings" />
+                       
                       
                         
                     </items>

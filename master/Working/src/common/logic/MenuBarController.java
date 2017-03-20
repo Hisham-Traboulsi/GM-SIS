@@ -133,7 +133,7 @@ public class MenuBarController
         {
             addMenuBar();
             
-            URL BookUrl = getClass().getResource("/diagrep/gui/BookingRepairs.fxml");
+            URL BookUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
             AnchorPane BookPane = FXMLLoader.load(BookUrl);
             
             BorderPane border = Main.getRoot();
