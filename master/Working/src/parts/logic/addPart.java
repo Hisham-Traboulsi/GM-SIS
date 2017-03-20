@@ -200,17 +200,17 @@ public class addPart implements Initializable {
     {try {
             ObservableList<Part> partsData = Database.getInstance().getPart();
 
-            partsTable.setEditable(true);
+    partsTable.setEditable(true);
             
-            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
-            partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
-            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-            amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-            amountCol.setOnEditCommit(
-                    new EventHandler<CellEditEvent<Part,Integer>>() {
-                @Override
-                public void handle(CellEditEvent<Part, Integer> t) {
+    idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    partNameCol.setCellValueFactory(new PropertyValueFactory<>("partName"));
+    partDescCol.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+    amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    amountCol.setOnEditCommit(
+    new EventHandler<CellEditEvent<Part,Integer>>() {
+            @Override
+    public void handle(CellEditEvent<Part, Integer> t) {
                     ((Part) t.getTableView().getItems().get(
                             t.getTablePosition().getRow())).setAmount(t.getNewValue());
                     }

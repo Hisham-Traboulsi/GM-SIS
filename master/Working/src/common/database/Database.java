@@ -23,6 +23,7 @@ import specialist.logic.Outstanding;
 import specialist.logic.OutstandingVehicle;
 import specialist.logic.Returned;
 import specialist.logic.ReturnedVehicle;
+import diagrep.logic.Book;
 //import parts.logic.PartsController;
 
 /**
@@ -52,6 +53,7 @@ public final class Database
     private ObservableList<OutstandingVehicle> outVehicleSearchData;
     private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
+    private ObservableList<Book> BookData;
         
     private Database(String DBFileName)
     {
@@ -317,7 +319,7 @@ public final class Database
     }
     
     /*Author Sergio*/
-    public boolean addPart(String name, String description, int amount, double cost)
+   public boolean addPart(String name, String description, int amount, double cost)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1150,6 +1152,67 @@ public final class Database
         getVehicle();
     }
     }
-
+    
+    
+        public boolean addBook(int BookingMechanic, String BookingDate, String BookingRegNum, int BookingMileage, String BookingTime,int BookingVehicle, String BookingName)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?, ? ,? ,?)"); 
+           add.setString(1, null);
+           add.setInt(2, BookingMechanic);
+           add.setString(3, BookingDate);
+           add.setString(4, BookingRegNum);
+           add.setInt(5, BookingMileage);
+           add.setString(6, BookingTime);
+           add.setInt(7, BookingVehicle);
+           add.setString(8, BookingName);
+  
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Booking successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, Booking not added");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+        
+        public ObservableList<Book> getBook() throws SQLException
+    {   
+        
+        PreparedStatement getBook = null;
+        BookData = FXCollections.observableArrayList();
+        
+       
+        getBook = preparedStatement("SELECT * FROM DIAGNOSIS_REPAIR_BOOKINGS");
+        ResultSet rs = getBook.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("BOOKING_ID");
+            int BookingMechanic = rs.getInt("MECHANIC_ID");
+            String BookingDate = rs.getString("BOOKING_DATE");
+            String BookingRegNum = rs.getString("REG_NUM");
+            int BookingMileage = rs.getInt("CURRENT_MILEAGE");
+            String BookingTime = rs.getString("BOOKING_TIME");
+            int BookingVehicle = rs.getInt("VEHICLE_ID");
+            String BookingName = rs.getString("COSTUMER_FULLNAME");
+            
+            Book book = new Book(id, BookingMechanic, BookingDate, BookingRegNum, BookingMileage, BookingTime, BookingVehicle, BookingName );
+            
+            BookData.add(book);
+        }
+        return BookData;
+    }
     
 }
+
+
