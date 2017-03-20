@@ -50,7 +50,10 @@ public class AddCustomerController implements Initializable {
     private TableColumn idCol;
 
     @FXML
-    private TableColumn<Customers, String> fullNameCol;
+    private TableColumn<Customers, String> firstNameCol;
+    
+    @FXML
+    private TableColumn<Customers, String> surnameCol;
 
     @FXML
     private TableColumn<Customers, String> addressCol;
@@ -68,7 +71,10 @@ public class AddCustomerController implements Initializable {
     private TableColumn<Customers, String> typeCol;
     
     @FXML
-    private TextField fullNameBox;
+    private TextField firstNameBox;
+    
+    @FXML
+    private TextField surnameBox;
     
     @FXML
     private TextField addressBox;
@@ -106,7 +112,8 @@ public class AddCustomerController implements Initializable {
             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
             
             idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+            firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            surnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
             addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             postCodeCol.setCellValueFactory(new PropertyValueFactory<>("postCode"));
             phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -202,14 +209,14 @@ public class AddCustomerController implements Initializable {
             return;
         }
        
-        if(fullNameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
+        if(firstNameBox.getText().isEmpty() ||surnameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "All fields are required: \n Full Name\n Address\n Post Code\n Phone\n Email");
             return;
         }
-        else if((fullNameBox.getText().chars().allMatch(Character::isLetter)) == false)
+        else if((firstNameBox.getText().chars().allMatch(Character::isLetter)) == false || surnameBox.getText().chars().allMatch(Character::isLetter) == false)
         {
-            JOptionPane.showMessageDialog(null, "Full Name must only consist of letters");
+            JOptionPane.showMessageDialog(null, "First Name and Surname must only consist of letters");
             return;
         }
         else if(!checkIsInteger(phoneBox.getText()))
@@ -219,7 +226,7 @@ public class AddCustomerController implements Initializable {
         }
         else
         {
-            added = Database.getInstance().addCustomer(fullNameBox.getText(), addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
+            added = Database.getInstance().addCustomer(firstNameBox.getText(), surnameBox.getText(),addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
         }
         
         if(added)
@@ -253,7 +260,8 @@ public class AddCustomerController implements Initializable {
     
     public void clear()
     {
-        fullNameBox.clear();
+        firstNameBox.clear();
+        surnameBox.clear();
         addressBox.clear();
         postCodeBox.clear();
         phoneBox.clear();

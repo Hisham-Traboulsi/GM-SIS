@@ -17,17 +17,19 @@ import javafx.beans.property.StringProperty;
 public class Customers 
 {
     private IntegerProperty id;
-    private StringProperty fullName;
+    private StringProperty firstName;
+    private StringProperty surname;
     private StringProperty address;
     private StringProperty postCode;
     private StringProperty phone;
     private StringProperty email;
     private StringProperty type;
     
-    public Customers(int id, String fullName, String address, String postCode, String phone, String email, String type)
+    public Customers(int id, String firstName, String surname,String address, String postCode, String phone, String email, String type)
     {
         this.id = new SimpleIntegerProperty(id);
-        this.fullName = new SimpleStringProperty(fullName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.surname = new SimpleStringProperty(surname);
         this.address = new SimpleStringProperty(address);
         this.postCode = new SimpleStringProperty(postCode);
         this.phone = new SimpleStringProperty(phone);
@@ -35,9 +37,10 @@ public class Customers
         this.type = new SimpleStringProperty(type);
     }
     
-    public Customers(String fullName, String address, String postCode, String phone, String email, String type)
+    public Customers(String firstName ,String surname ,String address, String postCode, String phone, String email, String type)
     {
-        this.fullName = new SimpleStringProperty(fullName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.surname = new SimpleStringProperty(surname);
         this.address = new SimpleStringProperty(address);
         this.postCode = new SimpleStringProperty(postCode);
         this.phone = new SimpleStringProperty(phone);
@@ -50,9 +53,14 @@ public class Customers
         return id.get();
     }
     
-    public String getFullName()
+    public String getFirstName()
     {
-        return fullName.get();
+        return firstName.get();
+    }
+    
+    public String getSurname()
+    {
+        return surname.get();
     }
     
     public String getAddress()
@@ -84,8 +92,12 @@ public class Customers
         this.id.set(id);
     }
 
-    public void setFullName(String fullName) {
-        this.fullName.set(fullName);
+    public void setFirstName(String firstName) {
+        this.firstName.set(firstName);
+    }
+    
+    public void setSurname(String surename){
+        this.surname.set(surename);
     }
 
     public void setAddress(String address) {
@@ -110,6 +122,14 @@ public class Customers
 
     public IntegerProperty getId() {
         return id;
+    }
+    
+    public StringProperty FirstNameProperty(){
+        return firstName;
+    }
+    
+    public StringProperty SurnameProperty(){
+        return surname;
     }
 
     public StringProperty AddressProperty() {

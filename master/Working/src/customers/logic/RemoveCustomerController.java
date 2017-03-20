@@ -39,7 +39,10 @@ public class RemoveCustomerController implements Initializable {
     private TableColumn idCol;
 
     @FXML
-    private TableColumn<Customers, String> fullNameCol;
+    private TableColumn<Customers, String> firstNameCol;
+    
+    @FXML
+    private TableColumn<Customers, String> surnameCol;
 
     @FXML
     private TableColumn<Customers, String> addressCol;
@@ -66,7 +69,8 @@ public class RemoveCustomerController implements Initializable {
             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
             
             idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+            firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            surnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
             addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
             postCodeCol.setCellValueFactory(new PropertyValueFactory<>("postCode"));
             phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));

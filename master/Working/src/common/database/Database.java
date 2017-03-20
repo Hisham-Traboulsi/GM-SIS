@@ -235,7 +235,7 @@ public final class Database
     
     public ObservableList<Customers> getAllCustomers() throws SQLException
     {
-        PreparedStatement allCustomersStmt = preparedStatement("SELECT * FROM CUSTOMER_ACCOUNTS"); 
+        PreparedStatement allCustomersStmt = preparedStatement("SELECT * FROM CUSTOMERS"); 
                 
         customerData = FXCollections.observableArrayList();
         ResultSet rs = allCustomersStmt.executeQuery();
@@ -243,14 +243,15 @@ public final class Database
         while(rs.next())
         {
             int id = rs.getInt("CUSTOMER_ID");
-            String fullName = rs.getString("FULL_NAME");
+            String firstName = rs.getString("FIRST_NAME");
+            String surname = rs.getString("SURNAME");
             String address = rs.getString("ADDRESS");
             String postCode = rs.getString("POSTCODE");
             String phone = rs.getString("PHONE");
             String type = rs.getString("TYPE");
             String email = rs.getString("EMAIL");
             
-            Customers customer = new Customers(id, fullName, address, postCode, phone, email, type);
+            Customers customer = new Customers(id, firstName, surname, address, postCode, phone, email, type);
             
             customerData.add(customer);
         }
@@ -260,7 +261,7 @@ public final class Database
      public void removeCustomer(int id) 
     {
         try{
-            PreparedStatement removeCustomerStmt = preparedStatement("DELETE FROM CUSTOMER_ACCOUNTS WHERE CUSTOMER_ID=?");
+            PreparedStatement removeCustomerStmt = preparedStatement("DELETE FROM CUSTOMERS WHERE CUSTOMER_ID=?");
             removeCustomerStmt.setInt(1, id);
             removeCustomerStmt.executeUpdate();
         }catch(SQLException ex){
@@ -268,21 +269,22 @@ public final class Database
         }
     }
     
-    public boolean addCustomer(String fullName, String address, String postCode, String phone, String email, String type)
+    public boolean addCustomer(String firstName, String surname,String address, String postCode, String phone, String email, String type)
     {
         PreparedStatement add = null;
         boolean added = false;
         
         try
         {
-            add = preparedStatement("INSERT INTO CUSTOMER_ACCOUNTS VALUES(?,?,?,?,?,?,?)");
+            add = preparedStatement("INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?,?,?)");
             add.setString(1, null);
-            add.setString(2, fullName);
-            add.setString(3, address);
-            add.setString(4, postCode);
-            add.setString(5, phone);
-            add.setString(6, email);
-            add.setString(7, type);
+            add.setString(2, firstName);
+            add.setString(3, surname);
+            add.setString(4, address);
+            add.setString(5, postCode);
+            add.setString(6, phone);
+            add.setString(7, email);
+            add.setString(8, type);
             
             add.execute();
             add.close();
@@ -298,17 +300,18 @@ public final class Database
     
     public void editCustomer() throws SQLException
     {
-        PreparedStatement editCustomerStmt = preparedStatement("UPDATE CUSTOMER_ACCOUNTS SET FULL_NAME=?, ADDRESS=?, POSTCODE=?, PHONE=?, TYPE=?, EMAIL=? WHERE CUSTOMER_ID=?");
+        PreparedStatement editCustomerStmt = preparedStatement("UPDATE CUSTOMERS SET FIRST_NAME=?, SURNAME=?, ADDRESS=?, POSTCODE=?, PHONE=?, TYPE=?, EMAIL=? WHERE CUSTOMER_ID=?");
         int counter = 0;
         while(counter < customerData.size())
         {
-            editCustomerStmt.setString(1, customerData.get(counter).getFullName());
-            editCustomerStmt.setString(2, customerData.get(counter).getAddress());
-            editCustomerStmt.setString(3, customerData.get(counter).getPostCode());
-            editCustomerStmt.setString(4, customerData.get(counter).getPhone());
-            editCustomerStmt.setString(5, customerData.get(counter).getType());
-            editCustomerStmt.setString(6, customerData.get(counter).getEmail());
-            editCustomerStmt.setInt(7, customerData.get(counter).getID());
+            editCustomerStmt.setString(1, customerData.get(counter).getFirstName());
+            editCustomerStmt.setString(2, customerData.get(counter).getSurname());
+            editCustomerStmt.setString(3, customerData.get(counter).getAddress());
+            editCustomerStmt.setString(4, customerData.get(counter).getPostCode());
+            editCustomerStmt.setString(5, customerData.get(counter).getPhone());
+            editCustomerStmt.setString(6, customerData.get(counter).getType());
+            editCustomerStmt.setString(7, customerData.get(counter).getEmail());
+            editCustomerStmt.setInt(8, customerData.get(counter).getID());
             
             editCustomerStmt.executeUpdate();
             

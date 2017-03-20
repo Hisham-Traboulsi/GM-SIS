@@ -27,7 +27,10 @@ public class DisplayInfoController implements Initializable {
     private Label customerID;
     
     @FXML
-    private Label fullName;
+    private Label firstName;
+    
+    @FXML
+    private Label surname;
     
     @FXML
     private Label address;
@@ -55,11 +58,11 @@ public class DisplayInfoController implements Initializable {
     public void displayInfo()
     {
         customerID.setText(Integer.toString(rowData.getID()));
-        fullName.setText(rowData.getFullName());
+        firstName.setText(rowData.getFirstName());
+        surname.setText(rowData.getSurname());
         address.setText(rowData.getAddress());
         postCode.setText(rowData.getPostCode());
         phone.setText(rowData.getPhone());
         type.setText(rowData.getType());
-     
     }
 }

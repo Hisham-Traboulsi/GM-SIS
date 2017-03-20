@@ -7,18 +7,11 @@ package customers.logic;
 
 import common.Main;
 import common.database.Database;
-import common.logic.SystemUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +42,10 @@ public class EditCustomerController implements Initializable {
     private TableColumn idCol;
 
     @FXML
-    private TableColumn<Customers, String> fullNameCol;
+    private TableColumn<Customers, String> firstNameCol;
+    
+    @FXML
+    private TableColumn<Customers, String> surnameCol;
 
     @FXML
     private TableColumn<Customers, String> addressCol;
@@ -83,14 +79,26 @@ public class EditCustomerController implements Initializable {
             
             idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
             
-            fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-            fullNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-            fullNameCol.setOnEditCommit(
+            firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            firstNameCol.setOnEditCommit(
                     new EventHandler<TableColumn.CellEditEvent<Customers, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Customers, String> t) {
                     ((Customers) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setFullName(t.getNewValue());
+                            t.getTablePosition().getRow())).setFirstName(t.getNewValue());
+                }
+            }
+            );
+            
+            surnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            surnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            surnameCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Customers, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Customers, String> t) {
+                    ((Customers) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSurname(t.getNewValue());
                 }
             }
             );
