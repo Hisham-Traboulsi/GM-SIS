@@ -165,18 +165,18 @@ public class MenuBarController
         }
     }
     
-    public void ScheduledMain(ActionEvent event)
+    public void Diagnosis(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL ScheduledMainUrl = getClass().getResource("/diagrep/gui/ScheduledMaintenance.fxml");
-            AnchorPane ScheduledMainPane = FXMLLoader.load(ScheduledMainUrl);
+            URL DiagnosisUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
+            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(ScheduledMainPane);
+            border.setCenter(DiagnosisPane);
         }
         catch(IOException ex)
         {

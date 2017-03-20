@@ -32,6 +32,7 @@
                 <Menu mnemonicParsing="false" text="Diagnosis and Repair Bookings">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#Book" text="Add Bookings" />
+                        <MenuItem mnemonicParsing="false" onAction="#Diagnosis" text="Diagnosis" />
                        
                       
                         
