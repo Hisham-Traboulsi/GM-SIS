@@ -11,7 +11,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -63,14 +71,14 @@ public class EditCustomerController implements Initializable {
     private TableColumn<Customers, String> typeCol;
     
     @FXML
-    private TextField searchCustomer;
+    private TextField searchCustomer = new TextField();
     
     @FXML
     private ObservableList<Customers> customerData;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
-    {
+    { 
        try
         {
             customerData = Database.getInstance().getAllCustomers();
@@ -176,6 +184,11 @@ public class EditCustomerController implements Initializable {
     {
         Database.getInstance().editCustomer();
         refresh();
+    }
+    
+    public void search()
+    {
+         
     }
     
     public void refresh()
