@@ -1038,7 +1038,7 @@ public final class Database
         outVehicleSearchData = FXCollections.observableArrayList();
         
        
-        getOutstandingVehiclesFromReg = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE regNum ='" +REG+"';");
+        getOutstandingVehiclesFromReg = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE regNum LIKE '%" +REG+"%';");
         ResultSet rs = getOutstandingVehiclesFromReg.executeQuery();
         
         while(rs.next())
