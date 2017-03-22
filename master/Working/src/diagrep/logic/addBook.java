@@ -96,9 +96,10 @@ public class addBook implements Initializable {
     
     public boolean add()
     {
+      BookingTable.getItems().clear();
       boolean added=false;
       
-      
+      //int INSTID = Integer.parseInt(INST_ID.getText());
       int Mechanic = Integer.parseInt(BookingMechanic.getText());
       String Date = (BookingDate.getText());
       String RegNum = (BookingRegNum.getText());
@@ -109,22 +110,39 @@ public class addBook implements Initializable {
  
       
       added = Database.getInstance().addBook(Mechanic,Date,RegNum,Mileage,Time,Vehicle,Name);
-      
+     
       return added;
       
     }
     
+    public void refresh()
+    {
+        try
+        {            
+            URL BookUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
+            AnchorPane BookPane = FXMLLoader.load(BookUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(BookPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODOtry
-        try{
+        
+            try{
             ObservableList<Book> BookData = Database.getInstance().getBook();
             
             BookingTable.setEditable(true);
             
-            idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-            MechanicCol.setCellValueFactory(new PropertyValueFactory<>("Mechanic"));
+            idCol.setCellValueFactory(new PropertyValueFactory<>("BookingID"));
+            MechanicCol.setCellValueFactory(new PropertyValueFactory<>("MechanicID"));
             DateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("RegNum"));
             MileageCol.setCellValueFactory(new PropertyValueFactory<>("Mileage"));
@@ -139,10 +157,10 @@ public class addBook implements Initializable {
         {
             ex.printStackTrace();
         }
+   
+    }
+    
+}
         
-        
-        
-    } 
-    }    
 
 

@@ -20,24 +20,24 @@ import javafx.beans.property.StringProperty;
 public class Book {
     
     private IntegerProperty id;
-    private IntegerProperty BookingMechanic;
-    private StringProperty BookingDate;
-    private StringProperty BookingRegNum;
-    private IntegerProperty BookingMileage;
-    private StringProperty BookingTime;
-    private IntegerProperty BookingVehicle;
-    private StringProperty BookingName;
+    private IntegerProperty Mechanic;
+    private StringProperty Date;
+    private StringProperty RegNum;
+    private IntegerProperty Mileage;
+    private StringProperty Time;
+    private IntegerProperty Vehicle;
+    private StringProperty Name;
     
-    public Book(int id, int BookingMechanic, String BookingDate, String BookingRegNum, int BookingMileage, String BookingTime, int BookingVehicle, String BookingName)
+    public Book(int id, int Mechanic, String Date, String RegNum, int Mileage, String Time, int Vehicle, String Name)
     {
         this.id =  new SimpleIntegerProperty(id);
-        this.BookingMechanic = new SimpleIntegerProperty(BookingMechanic);
-        this.BookingDate= new SimpleStringProperty(BookingDate);
-        this.BookingRegNum= new SimpleStringProperty(BookingRegNum);
-        this.BookingMileage=  new SimpleIntegerProperty(BookingMileage);
-        this.BookingTime= new SimpleStringProperty(BookingTime);
-        this.BookingVehicle=  new SimpleIntegerProperty(BookingVehicle);
-        this.BookingName= new SimpleStringProperty(BookingName);
+        this.Mechanic = new SimpleIntegerProperty(Mechanic);
+        this.Date= new SimpleStringProperty(Date);
+        this.RegNum= new SimpleStringProperty(RegNum);
+        this.Mileage=  new SimpleIntegerProperty(Mileage);
+        this.Time= new SimpleStringProperty(Time);
+        this.Vehicle=  new SimpleIntegerProperty(Vehicle);
+        this.Name= new SimpleStringProperty(Name);
         
     }
     
@@ -46,76 +46,76 @@ public class Book {
         return id.get();
     }
     
-    public int getBookingMechanic()
+    public int getMechanic()
     {
-        return BookingMechanic.get();
+        return Mechanic.get();
     }
     
-    public String getBookingDate()
+    public String getDate()
     {
-        return BookingDate.get();
+        return Date.get();
     }
     
-    public String getBookingRegNum()
+    public String getRegNum()
     {
-        return BookingRegNum.get();
+        return RegNum.get();
     }
     
-    public int getBookingMileage()
+    public int getMileage()
     {
-        return BookingMileage.get();
+        return Mileage.get();
     }
     
-    public String getBookingTime()
+    public String getTime()
     {
-        return BookingTime.get();
+        return Time.get();
     }
     
-    public int getBookingVehicle()
+    public int getVehicle()
     {
-        return BookingVehicle.get();
+        return Vehicle.get();
     }
     
-    public String getBookingName()
+    public String getName()
     {
-        return BookingName.get();
-    }
-    
-    
-    public IntegerProperty BookingMechanicProperty()
-    {
-        return BookingMechanic;
-    }
-    
-    public StringProperty BookingDateProperty()
-    {
-       return BookingDate;
-    }
-    
-    public StringProperty BookingRegNumProperty()
-    {
-       return BookingRegNum;
-    }
-    
-    public IntegerProperty BookingMileageProperty()
-    {
-       return BookingMileage;
+        return Name.get();
     }
     
     
-    public StringProperty BookingTimeProperty()
+    public IntegerProperty MechanicProperty()
     {
-       return BookingTime;
+        return Mechanic;
     }
     
-    public IntegerProperty BookingVehicleProperty()
+    public StringProperty DateProperty()
     {
-       return BookingVehicle;
+       return Date;
     }
     
-     public StringProperty BookingNameProperty()
+    public StringProperty RegNumProperty()
     {
-       return BookingName;
+       return RegNum;
+    }
+    
+    public IntegerProperty MileageProperty()
+    {
+       return Mileage;
+    }
+    
+    
+    public StringProperty TimeProperty()
+    {
+       return Time;
+    }
+    
+    public IntegerProperty VehicleProperty()
+    {
+       return Vehicle;
+    }
+    
+     public StringProperty NameProperty()
+    {
+       return Name;
     }
      
      
@@ -125,39 +125,39 @@ public class Book {
         this.id.set(id);        
     }
     
-    public void setBookingMechanic(int BookingMechanic)
+    public void setMechanic(int Mechanic)
     {
-        this.BookingMechanic.set(BookingMechanic);
+        this.Mechanic.set(Mechanic);
     }
     
-    public void setBookingDate(String BookingDate)
+    public void setDate(String Date)
     {
-        this.BookingDate.set(BookingDate);
+        this.Date.set(Date);
     }
     
-    public void setBookingRegNum(String BookingRegNum)
+    public void setRegNum(String RegNum)
     {
-        this.BookingRegNum.set(BookingRegNum);        
+        this.RegNum.set(RegNum);        
     }
     
-    public void setBookingMileage(int BookingMileage)
+    public void setMileage(int Mileage)
     {
-        this.BookingMileage.set(BookingMileage);
+        this.Mileage.set(Mileage);
     }
     
-    public void setBookingTime(String BookingTime)
+    public void setTime(String Time)
     {
-        this.BookingTime.set(BookingTime);        
+        this.Time.set(Time);        
     }
     
-    public void setBookingVehicle(int BookingVehicle)
+    public void setVehicle(int Vehicle)
     {
-        this.BookingVehicle.set(BookingVehicle);
+        this.Vehicle.set(Vehicle);
     }
     
-    public void setBookingName(String BookingName)
+    public void setName(String Name)
     {
-        this.BookingName.set(BookingName);
+        this.Name.set(Name);
     }
     
     

@@ -1157,7 +1157,7 @@ public final class Database
     }
     
     
-        public boolean addBook(int BookingMechanic, String BookingDate, String BookingRegNum, int BookingMileage, String BookingTime,int BookingVehicle, String BookingName)
+        public boolean addBook(int Mechanic, String Date, String RegNum, int Mileage, String Time,int Vehicle, String Name)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1165,13 +1165,13 @@ public final class Database
         {
            add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?, ? ,? ,?)"); 
            add.setString(1, null);
-           add.setInt(2, BookingMechanic);
-           add.setString(3, BookingDate);
-           add.setString(4, BookingRegNum);
-           add.setInt(5, BookingMileage);
-           add.setString(6, BookingTime);
-           add.setInt(7, BookingVehicle);
-           add.setString(8, BookingName);
+           add.setInt(2, Mechanic);
+           add.setString(3, Date);
+           add.setString(4, RegNum);
+           add.setInt(5, Mileage);
+           add.setString(6, Time);
+           add.setInt(7, Vehicle);
+           add.setString(8, Name);
   
            add.execute();
            add.close();
@@ -1201,15 +1201,15 @@ public final class Database
         while(rs.next())
         {
             int id = rs.getInt("BOOKING_ID");
-            int BookingMechanic = rs.getInt("MECHANIC_ID");
-            String BookingDate = rs.getString("BOOKING_DATE");
-            String BookingRegNum = rs.getString("REG_NUM");
-            int BookingMileage = rs.getInt("CURRENT_MILEAGE");
-            String BookingTime = rs.getString("BOOKING_TIME");
-            int BookingVehicle = rs.getInt("VEHICLE_ID");
-            String BookingName = rs.getString("COSTUMER_FULLNAME");
+            int Mechanic = rs.getInt("MECHANIC_ID");
+            String Date = rs.getString("BOOKING_DATE");
+            String RegNum = rs.getString("REG_NUM");
+            int Mileage = rs.getInt("CURRENT_MILEAGE");
+            String Time = rs.getString("BOOKING_TIME");
+            int Vehicle = rs.getInt("VEHICLE_ID");
+            String Name = rs.getString("COSTUMER_FULLNAME");
             
-            Book book = new Book(id, BookingMechanic, BookingDate, BookingRegNum, BookingMileage, BookingTime, BookingVehicle, BookingName );
+            Book book = new Book(id, Mechanic, Date, RegNum, Mileage, Time, Vehicle, Name);
             
             BookData.add(book);
         }

@@ -23,10 +23,10 @@
       <TextField fx:id="BookingMileage" layoutX="672.0" layoutY="212.0" prefHeight="35.0" prefWidth="179.0" />
       <TextField fx:id="BookingRegNum" layoutX="338.0" layoutY="213.0" prefHeight="35.0" prefWidth="179.0" />
       <TextField fx:id="BookingName" layoutX="672.0" layoutY="169.0" prefHeight="35.0" prefWidth="179.0" />
-      <TableView fx:id="BookingTable" layoutX="117.0" layoutY="268.0" prefHeight="378.0" prefWidth="1003.0">
+      <TableView fx:id="BookingTable" layoutX="118.0" layoutY="269.0" prefHeight="378.0" prefWidth="1003.0">
         <columns>
-          <TableColumn fx:id="MechanicCol" prefWidth="103.0" text="Mechanic ID" />
           <TableColumn fx:id="idCol" prefWidth="114.0" text="Booking ID" />
+          <TableColumn fx:id="MechanicCol" prefWidth="103.0" text="Mechanic ID" />
             <TableColumn fx:id="DateCol" minWidth="2.0" prefWidth="102.0" text="Date" />
             <TableColumn fx:id="RegNumCol" prefWidth="127.5" text="Reg Num" />
             <TableColumn fx:id="MileageCol" prefWidth="112.5" text="Mileage" />

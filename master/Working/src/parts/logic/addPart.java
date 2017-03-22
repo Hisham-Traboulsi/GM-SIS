@@ -88,7 +88,7 @@ public class addPart implements Initializable {
     private ObservableList<Part> list=FXCollections.observableArrayList();
     
    
-    @FXML
+    
    public boolean add()
     {
       partsTable.getItems().clear();
@@ -107,6 +107,8 @@ public class addPart implements Initializable {
       
       
     }
+   
+   
    
     public void clearButton()
     {
