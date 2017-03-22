@@ -1163,7 +1163,7 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?, ? ,? ,?)"); 
+           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?, ? ,?)"); 
            add.setString(1, null);
            add.setInt(2, Mechanic);
            add.setString(3, Date);
