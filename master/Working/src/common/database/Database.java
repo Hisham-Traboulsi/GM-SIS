@@ -1118,6 +1118,26 @@ public final class Database
         
         return added;
     }
+       public void editSPC() throws SQLException
+    {
+        PreparedStatement editSPCStmt = preparedStatement("UPDATE SPECIALIST_CENTRES SET NAME=?, ADDRESS=?, PHONE=?, EMAIL=? WHERE IDnum=?");
+        int counter = 0;
+        while(counter < spcData.size())
+        {
+
+            editSPCStmt.setString(1, spcData.get(counter).getSPC_NAME());
+            editSPCStmt.setString(2, spcData.get(counter).getSPC_ADDRESS());
+            editSPCStmt.setString(3, spcData.get(counter).getSPC_PHONE());
+            editSPCStmt.setString(4, spcData.get(counter).getSPC_EMAIL());
+            editSPCStmt.setInt(5, spcData.get(counter).getIDnum());
+            
+            editSPCStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getAllCustomers();
+    }
       
    
     public static Database getInstance()

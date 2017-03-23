@@ -52,6 +52,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+      <Button layoutX="288.0" layoutY="589.0" mnemonicParsing="false" onAction="#edit" text="Update Edit" />
         
    </children>
 </AnchorPane>

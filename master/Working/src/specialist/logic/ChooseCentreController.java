@@ -21,9 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javax.swing.JOptionPane;
-
-/**
+import javax.swing.JOptionPane;/**
  * FXML Controller class
  *
  * @author Shiraj Miah
@@ -131,6 +129,12 @@ public class ChooseCentreController implements Initializable {
        }
        return true;
     }
+       
+           public void edit() throws SQLException
+    {
+        Database.getInstance().editSPC();
+        reload();
+    }
     
    public void reload(){
        try {
@@ -165,10 +169,49 @@ public class ChooseCentreController implements Initializable {
 
             SPC_ID_view.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             SPC_NAME_view.setCellValueFactory(new PropertyValueFactory<>("SPC_NAME"));
+            SPC_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            SPC_NAME_view.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<SPC,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<SPC, String> t) {
+                    ((SPC) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSPC_NAME(t.getNewValue());
+                }
+            }
+            );
             SPC_ADDRESS_view.setCellValueFactory(new PropertyValueFactory<>("SPC_ADDRESS"));
+            SPC_ADDRESS_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            SPC_ADDRESS_view.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<SPC,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<SPC, String> t) {
+                    ((SPC) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSPC_ADDRESS(t.getNewValue());
+                }
+            }
+            );
             SPC_PHONE_view.setCellValueFactory(new PropertyValueFactory<>("SPC_PHONE"));
+            SPC_PHONE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            SPC_PHONE_view.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<SPC,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<SPC, String> t) {
+                    ((SPC) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSPC_PHONE(t.getNewValue());
+                }
+            }
+            );
             SPC_EMAIL_view.setCellValueFactory(new PropertyValueFactory<>("SPC_EMAIL"));
-          
+            SPC_EMAIL_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            SPC_EMAIL_view.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<SPC,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<SPC, String> t) {
+                    ((SPC) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setSPC_EMAIL(t.getNewValue());
+                }
+            }
+            );
 
             SPCtable.setItems(spcData);
             
