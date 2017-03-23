@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
 import specialist.logic.OutstandingVehicle;
 import specialist.logic.Returned;
+import parts.logic.partLog;
 import specialist.logic.ReturnedVehicle;
 import diagrep.logic.Book;
 //import parts.logic.PartsController;
@@ -50,6 +51,8 @@ public final class Database
     private ObservableList<Outstanding> outPartsData;
     private ObservableList<Returned> retPartsData;
     private ObservableList<OutstandingVehicle> outVehicleData;
+    private ObservableList<partLog> deliveredData;
+    private ObservableList<partLog> withdrawnData;
     private ObservableList<OutstandingVehicle> outVehicleSearchData;
     private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
@@ -388,6 +391,60 @@ public final class Database
         PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
         partBelowZero.executeUpdate();
         
+        
+    }
+    public ObservableList<partLog> getDeliveryLog() 
+    {
+        PreparedStatement getPart = null;
+        deliveredData = FXCollections.observableArrayList();
+        
+       try{
+        getPart = preparedStatement("SELECT * FROM PARTS_DELIVERIES");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            
+            String date = rs.getString("Date");
+            String name = rs.getString("Name");
+            
+            partLog part = new partLog(date,name);
+            
+            deliveredData.add(part);
+        }
+        
+       }
+       catch(SQLException ex)
+       {
+       }
+        return deliveredData;
+    }
+    public ObservableList<partLog> getWithdrawalLog()
+    {
+        try{
+         PreparedStatement getPart = null;
+         withdrawnData = FXCollections.observableArrayList();
+        
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_WITHDRAWALS");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            
+            String date = rs.getString("Date");
+            String name = rs.getString("Name");
+            
+            partLog part = new partLog(date,name);
+            
+            withdrawnData.add(part);
+        }
+        }
+        catch(SQLException ex)
+        {
+        }
+        
+        return withdrawnData;
         
     }
     /*Author Sergio*/

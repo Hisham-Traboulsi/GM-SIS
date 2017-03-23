@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/fxml.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.PartLogController">
+   <children>
+      <Text fill="WHITE" layoutX="563.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Log">
+         <font>
+            <Font size="47.0" />
+         </font>
+      </Text>
+      <TableView fx:id="deliveredTable" layoutX="350.0" layoutY="213.0" prefHeight="268.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="deliveredDate" prefWidth="135.0" text="Delivered" />
+          <TableColumn fx:id="deliveredPart" prefWidth="142.0" text="Part Name" />
+        </columns>
+      </TableView>
+      <TableView fx:id="withdrawnTable" layoutX="663.0" layoutY="213.0" prefHeight="268.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="withdrawnDate" prefWidth="137.0" text="Withdrawn" />
+          <TableColumn fx:id="withdrawnPart" prefWidth="140.0" text="Part Name" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

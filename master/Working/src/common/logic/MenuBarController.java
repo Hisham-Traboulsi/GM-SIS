@@ -183,6 +183,24 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+     public void partLog(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL DiagnosisUrl = getClass().getResource("/parts/gui/partLog.fxml");
+            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(DiagnosisPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     
     
