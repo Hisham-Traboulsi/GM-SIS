@@ -13,11 +13,11 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addPart">
    <children>
-      <Text fill="WHITE" layoutX="254.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
+      <Text fill="WHITE" layoutX="257.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="254.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost">
+      <Text fill="WHITE" layoutX="257.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost">
          <font>
             <Font size="19.0" />
          </font></Text>
@@ -25,8 +25,8 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partName" layoutX="372.0" layoutY="184.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partCost" layoutX="372.0" layoutY="233.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partName" layoutX="375.0" layoutY="145.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partCost" layoutX="375.0" layoutY="211.0" prefHeight="25.0" prefWidth="112.0" />
       <TextArea fx:id="partDesc" layoutX="256.0" layoutY="355.0" prefHeight="123.0" prefWidth="232.0" />
       <Button layoutX="321.0" layoutY="513.0" mnemonicParsing="false" onAction="#add" text="Submit" />
       <Text fill="WHITE" layoutX="254.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
@@ -49,11 +49,12 @@
             <TableColumn fx:id="amountCol" prefWidth="120.0" text="Stock" />
         </columns>
       </TableView>
-      <Button layoutX="833.0" layoutY="513.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
+      <Button layoutX="792.0" layoutY="513.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
       <ImageView fitHeight="72.0" fitWidth="76.0" layoutX="1013.0" layoutY="42.0" onDragOver="#help" onMouseClicked="#help" onMouseDragOver="#help" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@help-icon.png" />
          </image>
       </ImageView>
+      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" onAction="#partLog" text="Parts Log" />
    </children>
 </AnchorPane>

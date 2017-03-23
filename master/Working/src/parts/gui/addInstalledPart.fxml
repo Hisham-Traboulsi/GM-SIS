@@ -17,7 +17,6 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="REG_NUM" layoutX="274.0" layoutY="203.0" prefHeight="25.0" prefWidth="112.0" />
       <Button fx:id="add" layoutX="260.0" layoutY="504.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
       <Button fx:id="clearButton" layoutX="349.0" layoutY="504.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="52.0" text="Clear" />
       <Text fill="#f8f4f4" layoutX="126.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Install part on vehicle">
@@ -26,28 +25,23 @@
          </font>
       </Text>
       <TextField fx:id="CUST_NAME" layoutX="275.0" layoutY="350.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="VEHICLE_ID" layoutX="274.0" layoutY="437.0" prefHeight="25.0" prefWidth="112.0" />
       <Text fill="WHITE" layoutX="77.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="77.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Full Name">
-         <font>
-            <Font size="19.0" />
-         </font></Text>
-      <Text fill="WHITE" layoutX="80.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle ID">
+      <Text fill="WHITE" layoutX="77.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer First Name">
          <font>
             <Font size="19.0" />
          </font></Text>
       <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="266.0" prefWidth="748.0">
         <columns>
-          <TableColumn fx:id="INST_ID_view" prefWidth="95.0" text="Installation ID" />
-          <TableColumn fx:id="REG_NUM_view" prefWidth="142.0" text="Vehicle Registration" />
-            <TableColumn fx:id="INST_DATE_view" prefWidth="108.0" text="Installation Date" />
-            <TableColumn fx:id="EXP_DATE_view" prefWidth="132.0" text="Warranty Expiration" />
-            <TableColumn fx:id="PART_NAME_view" prefWidth="60.0" text="Part Name" />
-            <TableColumn fx:id="CUST_NAME_view" prefWidth="112.0" text="Customer Name" />
-            <TableColumn fx:id="VEHICLE_ID_view" prefWidth="98.0" text="Vehicle ID" />
+          <TableColumn fx:id="INST_ID_view" prefWidth="86.0" text="Installation ID" />
+          <TableColumn fx:id="REG_NUM_view" prefWidth="127.0" text="Vehicle Registration" />
+            <TableColumn fx:id="INST_DATE_view" prefWidth="101.0" text="Installation Date" />
+            <TableColumn fx:id="EXP_DATE_view" prefWidth="141.0" text="Warranty Expiration" />
+            <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="85.0" text="Part Name" />
+            <TableColumn fx:id="CUST_NAME_view" prefWidth="90.0" text="Name" />
+            <TableColumn fx:id="CUST_2NAME_view" prefWidth="117.0" text="Surname" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
@@ -60,29 +54,9 @@
       <Button layoutX="796.0" layoutY="504.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
       <Button layoutX="919.0" layoutY="504.0" mnemonicParsing="false" onAction="#getBill" prefHeight="25.0" prefWidth="59.0" text="Bill" />
       <Button layoutX="666.0" layoutY="504.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
-      <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="260.0" layoutY="536.0">
-         <image>
-            <Image url="@../img/add1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="52.0" layoutX="670.0" layoutY="539.0">
-         <image>
-            <Image url="@../img/delete-128.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
          <image>
             <Image url="@../img/magnify-128.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="798.0" layoutY="536.0">
-         <image>
-            <Image url="@../img/sync-128.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="928.0" layoutY="539.0">
-         <image>
-            <Image url="@../img/current-bill-01-128.png" />
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="634.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for installed parts">
@@ -91,5 +65,12 @@
          </font>
       </Text>
       <ComboBox fx:id="regComb" layoutX="273.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
+      <ComboBox fx:id="regCombReg" layoutX="273.0" layoutY="200.0" prefHeight="25.0" prefWidth="112.0" />
+      <Text fill="WHITE" layoutX="77.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Surname">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <TextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" prefHeight="25.0" prefWidth="112.0" />
    </children>
 </AnchorPane>

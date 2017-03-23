@@ -25,6 +25,9 @@ import specialist.logic.Returned;
 import parts.logic.partLog;
 import specialist.logic.ReturnedVehicle;
 import diagrep.logic.Book;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 //import parts.logic.PartsController;
 
 /**
@@ -56,6 +59,8 @@ public final class Database
     private ObservableList<OutstandingVehicle> outVehicleSearchData;
     private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
+    private ComboBox regCombReg;
+    private ComboBox regCombCustName;
     private ObservableList<Book> BookData;
         
     private Database(String DBFileName)
@@ -354,20 +359,21 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, String CUST_NAME,int VEHICLE_ID)
+            String EXP_DATE,String PART_NAME, String CUST_NAME,String CUST_2NAME)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?,? )"); 
            add.setString(1, null);
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
            add.setString(5, PART_NAME);
            add.setString(6, CUST_NAME);
-           add.setInt(7, VEHICLE_ID);
+           add.setString(7, CUST_2NAME);
+           
            
   
            add.execute();
@@ -389,9 +395,57 @@ public final class Database
     {
  
         PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
-        partBelowZero.executeUpdate();
+        partBelowZero.executeUpdate();   
+    }
+    public void addDelivery(String name)
+    {
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        java.util.Date dateobj = new java.util.Date();
+        String date = (df.format(dateobj));
         
+        PreparedStatement add = null;
+     
+        try
+        {
+           add = preparedStatement("INSERT INTO PARTS_DELIVERIES VALUES (?, ?)"); 
+           add.setString(1, date);
+           add.setString(2, name);
+           
+           add.execute();
+           add.close();
+
+        }
+        catch(SQLException ex)
+        {
+        }
+
+    }
+    public void addWithdrawal(String name)
+    {
+        PreparedStatement add = null;
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        java.util.Date dateobj = new java.util.Date();
+        String date = (df.format(dateobj));
         
+        try
+        {
+           add = preparedStatement("INSERT INTO PARTS_WITHDRAWALS VALUES (?, ?)"); 
+           add.setString(1, date);
+           add.setString(2, name);
+           
+           add.execute();
+           add.close();
+           
+           
+           
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+
     }
     public ObservableList<partLog> getDeliveryLog() 
     {
@@ -490,13 +544,14 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
-            int VEHICLE_ID = rs.getInt("VEHICLE_ID");
+            String CUST_NAME = rs.getString("FIRST_NAME");
+            String CUST_2NAME = rs.getString("SURNAME");
+            
             
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUST_NAME,VEHICLE_ID);
+            EXP_DATE,PART_NAME, CUST_NAME, CUST_2NAME);
             
             installedPartsData.add(installedPart);
         }
@@ -510,7 +565,7 @@ public final class Database
         searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("SELECT * FROM 'PARTS_INSTALLATION' WHERE REG_NUM LIKE '%" + searchVal +  "%' OR" + " CUSTOMER_FULLNAME LIKE '%" + searchVal +"%'" );
+        searchInstalledPart = preparedStatement("SELECT * FROM 'PARTS_INSTALLATION' WHERE REG_NUM LIKE '%" + searchVal +  "%' OR" + " FIRST_NAME LIKE '%" + searchVal +"%'OR" + " SURNAME LIKE '%" + searchVal +"%'" );
         
         //searchInstalledPart.setString(1,searchVal);
         
@@ -524,13 +579,11 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            String CUST_NAME = rs.getString("CUSTOMER_FULLNAME");
-            int VEHICLE_ID = rs.getInt("VEHICLE_ID");
-            
-            
-            
+            String CUST_NAME = rs.getString("FIRST_NAME");
+            String CUST_2NAME = rs.getString("SURNAME");
+
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUST_NAME,VEHICLE_ID);
+            EXP_DATE,PART_NAME, CUST_NAME,CUST_2NAME);
             
             searchPartsData.add(searchedPart);
         }
@@ -563,6 +616,25 @@ public final class Database
         }
            return regComb1;
     }
+    public ObservableList<String> fillNumCombo()
+    {
+        
+        ObservableList<String> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT REG_NUM FROM VEHICLE_RECORD");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getString("REG_NUM"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
+    
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
     {
@@ -598,7 +670,7 @@ public final class Database
     }
     public void editInstalledPart() throws SQLException
     {
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_FULLNAME=?,VEHICLE_ID=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,FIRST_NAME=? ,SURNAME=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -607,7 +679,8 @@ public final class Database
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getPART_NAME());
             editInstalledPart.setString(5, searchPartsData.get(counter).getCUST_NAME());
-            editInstalledPart.setInt(6, searchPartsData.get(counter).getVEHICLE_ID());
+            editInstalledPart.setString(6, searchPartsData.get(counter).getCUST_2NAME());
+            
             editInstalledPart.setInt(7, searchPartsData.get(counter).getINST_ID());
            
             
@@ -636,7 +709,7 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(String regNum,String name) throws SQLException 
+    public void calculateBill(String regNum,String name, String sname) throws SQLException 
     { 
         double cost=0.0;
         String custName=name;
@@ -652,7 +725,7 @@ public final class Database
           //custName=rs.getString("CUSTOMER_FULLNAME)");
         }
         
-        JOptionPane.showMessageDialog(null,"The bill for " + name + " adds up to £ " + cost);
+        JOptionPane.showMessageDialog(null,"The bill for " + name + " " + sname + " adds up to £ " + cost);
         }
         
     

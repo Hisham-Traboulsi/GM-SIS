@@ -24,22 +24,24 @@ public class installedPart
     private StringProperty EXP_DATE;
     private StringProperty PART_NAME;
     private StringProperty CUST_NAME;
-    private IntegerProperty VEHICLE_ID;
+    private StringProperty CUST_2NAME;
+   
     
     
     
    public installedPart(int INST_ID, String REG_NUM, String INST_DATE, String EXP_DATE,String PART_NAME, 
-           String CUST_NAME,int VEHICLE_ID)
+           String CUST_NAME, String CUST_2NAME)
            
     {
         this.INST_ID =  new SimpleIntegerProperty(INST_ID);
         this.PART_NAME =  new SimpleStringProperty(PART_NAME);
-        this.VEHICLE_ID =  new SimpleIntegerProperty(VEHICLE_ID);
+   
         
         this.REG_NUM = new SimpleStringProperty(REG_NUM);
         this.INST_DATE = new SimpleStringProperty(INST_DATE);
         this.EXP_DATE= new SimpleStringProperty(EXP_DATE);
         this.CUST_NAME = new SimpleStringProperty(CUST_NAME);
+        this.CUST_2NAME = new SimpleStringProperty(CUST_2NAME);
         
     }
     
@@ -56,10 +58,7 @@ public class installedPart
     {
         return PART_NAME.get();
     }
-    public int getVEHICLE_ID()
-    {
-        return VEHICLE_ID.get();
-    }
+    
    
     public String getREG_NUM()
     {
@@ -78,6 +77,11 @@ public class installedPart
     {
         return CUST_NAME.get();
     }
+       public String getCUST_2NAME()
+    {
+        return CUST_2NAME.get();
+    }
+       
        
     /*
       
@@ -104,6 +108,10 @@ public class installedPart
     {
        return CUST_NAME;
     }
+     public StringProperty CUST_2NAME()
+    {
+       return CUST_2NAME;
+    }
     /*
     
     
@@ -118,10 +126,7 @@ public class installedPart
         this.PART_NAME.set(PART_NAME);        
     }
     
-    public void setVEHICLE_ID(int VEHICLE_ID)
-    {
-        this.VEHICLE_ID.set(VEHICLE_ID);        
-    }
+   
     
   
   
@@ -137,6 +142,10 @@ public class installedPart
       public void setCUST_NAME(String CUST_NAME)
     {
         this.CUST_NAME.set(CUST_NAME);
+    }
+       public void setCUST_2NAME(String CUST_2NAME)
+    {
+        this.CUST_2NAME.set(CUST_2NAME);
     }
     
        public void setEXP_DATE(String EXP_DATE)

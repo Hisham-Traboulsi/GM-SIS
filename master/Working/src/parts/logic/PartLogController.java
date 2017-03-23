@@ -41,13 +41,13 @@ public class PartLogController implements Initializable {
         
         
         ///
-       ObservableList  <partLog> deliveredData = Database.getInstance().getWithdrawalLog();
+       ObservableList  <partLog> deliveredData = Database.getInstance().getDeliveryLog();
         deliveredDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
         deliveredPart.setCellValueFactory(new PropertyValueFactory<>("Name"));
         
         deliveredTable.setItems(deliveredData);
         ///
-      ObservableList  <partLog> withdrawnData = Database.getInstance().getDeliveryLog();
+      ObservableList  <partLog> withdrawnData = Database.getInstance().getWithdrawalLog();
         withdrawnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
         withdrawnPart.setCellValueFactory(new PropertyValueFactory<>("Name"));
         

@@ -13,16 +13,16 @@
             <Font size="47.0" />
          </font>
       </Text>
-      <TableView fx:id="deliveredTable" layoutX="350.0" layoutY="213.0" prefHeight="268.0" prefWidth="278.0">
+      <TableView fx:id="deliveredTable" layoutX="138.0" layoutY="213.0" prefHeight="356.0" prefWidth="490.0">
         <columns>
-          <TableColumn fx:id="deliveredDate" prefWidth="135.0" text="Delivered" />
-          <TableColumn fx:id="deliveredPart" prefWidth="142.0" text="Part Name" />
+          <TableColumn fx:id="deliveredDate" prefWidth="245.0" text="Delivered" />
+          <TableColumn fx:id="deliveredPart" prefWidth="244.0" text="Part Name" />
         </columns>
       </TableView>
-      <TableView fx:id="withdrawnTable" layoutX="663.0" layoutY="213.0" prefHeight="268.0" prefWidth="278.0">
+      <TableView fx:id="withdrawnTable" layoutX="663.0" layoutY="213.0" prefHeight="356.0" prefWidth="514.0">
         <columns>
-          <TableColumn fx:id="withdrawnDate" prefWidth="137.0" text="Withdrawn" />
-          <TableColumn fx:id="withdrawnPart" prefWidth="140.0" text="Part Name" />
+          <TableColumn fx:id="withdrawnDate" prefWidth="257.0" text="Withdrawn" />
+          <TableColumn fx:id="withdrawnPart" prefWidth="272.0" text="Part Name" />
         </columns>
       </TableView>
    </children>

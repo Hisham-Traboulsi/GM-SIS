@@ -14,28 +14,27 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -103,16 +102,26 @@ public class addPart implements Initializable {
       
       added = Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
+      addDeliveryDate();
+
+      clearButton();
+      
       return added;
-      
-      
     }
-   
-   
+   public void addDeliveryDate()
+   {    String name= (partName.getText());
+        Database.getInstance().addDelivery(name);
+   }
+   @FXML
+   public void partLog(ActionEvent event) throws IOException{
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("/parts/gui/partLog.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+   }
    
     public void clearButton()
     {
-    partID.clear();
+    
     partName.clear();
     partDesc.clear();
     partAmount.clear();
