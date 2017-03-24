@@ -300,5 +300,15 @@ public class AddCustomerController implements Initializable {
         }
         return true;
     }
+    
+    public void displayHelp() throws IOException
+    {
+        Stage stage = new Stage();                                
+        Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/HelpMessage.fxml"));                                                                
+        stage.setScene(new Scene(root));
+        stage.setTitle("Help Message");                                
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
    
 }
