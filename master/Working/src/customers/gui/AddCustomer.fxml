@@ -78,10 +78,12 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <ImageView id="help-icon" fitHeight="70.0" fitWidth="54.0" layoutX="1122.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" onMousePressed="#displayHelp">
+      <ImageView id="help-icon" fitHeight="70.0" fitWidth="54.0" layoutX="1122.0" layoutY="14.0" onMousePressed="#displayHelp" pickOnBounds="true" preserveRatio="true">
           <image>
              <Image url="/customers/gui/help-icon.png" />
           </image>
       </ImageView>
+      <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
+      <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />
    </children>
 </AnchorPane>

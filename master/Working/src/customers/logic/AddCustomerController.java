@@ -11,9 +11,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -94,6 +97,12 @@ public class AddCustomerController implements Initializable {
     @FXML
     private RadioButton businessRadio;
     
+    @FXML
+    private TextField searchByName;
+    
+    @FXML
+    private TextField searchByVehicle;
+    
     final ToggleGroup group = new ToggleGroup();
     
     private static BorderPane root = new BorderPane();
@@ -106,6 +115,8 @@ public class AddCustomerController implements Initializable {
         // TODO
         privateRadio.setToggleGroup(group);
         businessRadio.setToggleGroup(group);
+        searchByName.setPromptText("Search By Name");
+        searchByVehicle.setPromptText("Search By Vehicle");
         
         try
         {
@@ -181,7 +192,25 @@ public class AddCustomerController implements Initializable {
                 return row ;
             });
             
-            customerTable.setItems(customerData);
+            FilteredList<Customers> filteredData=new FilteredList<>(customerData,e->true);
+            searchByName.textProperty().addListener((observableValue,oldValue,newValue)->{
+		filteredData.setPredicate((Predicate<? super Customers>)customer->{
+			if(newValue==null||newValue.isEmpty()){
+				return true;
+                        }
+			String lowerCaseFilter=newValue.toLowerCase();
+			if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			return false;
+		});
+            });
+            SortedList<Customers> sortedData=new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(customerTable.comparatorProperty());
+            customerTable.setItems(sortedData);
         }   
         catch(SQLException ex)
         {
