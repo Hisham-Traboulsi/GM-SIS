@@ -38,6 +38,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 
 /**
@@ -118,7 +120,7 @@ public class addInstalledPart implements Initializable {
 
          
     @FXML
-   public boolean add() throws SQLException
+   public boolean add() 
     { 
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
@@ -144,13 +146,25 @@ public class addInstalledPart implements Initializable {
               EXPDATE,PARTNAME, CUSTNAME,CUST2NAME);
       updateAmount();
       addWithdrawalDate();
+      clearButton();
       return added;
     }
+    public void enterPressed(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  add();
+                }
+            }
+    
+    public void enterPressedSearch(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  searchPart();
+                }
+            }
    public void addWithdrawalDate()
    {    String name= (String) regComb.getValue();
         Database.getInstance().addWithdrawal(name);
    }
-   public void updateAmount() throws SQLException
+   public void updateAmount() 
     {
         String partname=PART_NAME.getText();
         Database.getInstance().updateStock(partname);
@@ -175,12 +189,12 @@ public class addInstalledPart implements Initializable {
       Database.getInstance().fillRegCombo();
         
     }*/
-      public void updatePart() throws SQLException
+      public void updatePart() 
     {
         Database.getInstance().editInstalledPart();
     }
     
-       public void searchPart() throws SQLException
+       public void searchPart() 
     {
         
        String searchVal=searchBox.getText();

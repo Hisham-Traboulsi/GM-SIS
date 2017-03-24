@@ -116,7 +116,11 @@ public class addPart implements Initializable {
         Database.getInstance().addDelivery(name);
    }
    
-   
+    public void enterPressed(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  add();
+                }
+            }
     public void clearButton()
     {
     

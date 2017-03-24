@@ -379,7 +379,7 @@ public final class Database
            add.execute();
            add.close();
            added = true;
-           JOptionPane.showMessageDialog(null,"Part successfully added");
+           JOptionPane.showMessageDialog(null,"Part successfully installed");
            
         }
         catch(SQLException ex)
@@ -391,11 +391,16 @@ public final class Database
         
         return added;
     }
-    public void partBelowZero() throws SQLException 
+    public void partBelowZero() 
     {
- 
+          try{
         PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
-        partBelowZero.executeUpdate();   
+        partBelowZero.executeUpdate();  
+          }
+          catch(SQLException ex)
+          {
+              
+          }
     }
     public void addDelivery(String name)
     {
@@ -558,7 +563,7 @@ public final class Database
         return installedPartsData;
     }
       /*Author Sergio*/
-    public ObservableList<installedPart> searchInstalledPart(String searchVal ) throws SQLException
+    public ObservableList<installedPart> searchInstalledPart(String searchVal ) 
     {   
         try{
         PreparedStatement searchInstalledPart = null;
@@ -668,8 +673,9 @@ public final class Database
         
         return deleted;
     }
-    public void editInstalledPart() throws SQLException
+    public void editInstalledPart() 
     {
+        try{
         PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,FIRST_NAME=? ,SURNAME=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
@@ -690,8 +696,13 @@ public final class Database
         }
         
         getinstalledPart();
+        }
+        catch(SQLException ex)
+        {
+            
+        }
     }
-    public void updateStock(String partname) throws SQLException
+    public void updateStock(String partname) 
     {
         try
         {
