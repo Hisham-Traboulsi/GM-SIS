@@ -16,7 +16,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextArea fx:id="helpBox" layoutX="14.0" layoutY="70.0" prefHeight="183.0" prefWidth="573.0" text="1. To add a new customer enter the data in the required&#10;    fields and press the &quot;Submit&quot; button otherwise&#10;    press the &quot;Clear&quot; button to clear data from the fields.&#10;&#10;2. To view the customers options *DOUBLE CLICK* on the &#10;     selected row (customer).&#10;&#10;">
+      <TextArea fx:id="helpBox" layoutX="14.0" layoutY="70.0" prefHeight="183.0" prefWidth="573.0" text="">
          <font>
             <Font size="20.0" />
          </font>

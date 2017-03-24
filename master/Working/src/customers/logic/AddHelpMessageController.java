@@ -30,6 +30,14 @@ public class AddHelpMessageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         helpBox.setEditable(false);
+        
+        helpBox.setText("1. To add a new customer enter the data in the required \n    "
+                + "fields and press the Submit button otherwise \n    "
+                + "press the Clear button to clear data from the fields. \n"
+                + " \n 2. To view the customers options *DOUBLE CLICK* on the \n"
+                + " selected row (customer).");
+        
+        helpBox.wrapTextProperty();
     }    
     
 }
