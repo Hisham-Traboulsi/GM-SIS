@@ -720,14 +720,14 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(String regNum,String name, String sname) throws SQLException 
+    public void calculateBill(String regNum) 
     { 
         double cost=0.0;
-        String custName=name;
+       // String custName=name;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.RELEVANT_ID_NUM=PARTS_INSTALLATION.PART_ID AND REG_NUM=" + "'" + regNum + "'");
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.NAME=PARTS_INSTALLATION.PART_NAME AND REG_NUM=" + "'" + regNum + "'");
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
@@ -736,7 +736,7 @@ public final class Database
           //custName=rs.getString("CUSTOMER_FULLNAME)");
         }
         
-        JOptionPane.showMessageDialog(null,"The bill for " + name + " " + sname + " adds up to £ " + cost);
+        JOptionPane.showMessageDialog(null,"The bill for adds up to £ " + cost);
         }
         
     
@@ -775,12 +775,17 @@ public final class Database
             
         }
     }
-      public void removeInstalledPart(int id) throws SQLException
+      public void removeInstalledPart(int id) 
     {
-        
+        try{
         PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
+        }
+        catch(SQLException ex)
+        {
+            
+        }
     }
       
       /*Author Sam*/
