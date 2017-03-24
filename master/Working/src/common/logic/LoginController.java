@@ -53,16 +53,17 @@ public class LoginController implements Initializable {
     
     protected static boolean admin;
     
-    public void enterPressed(KeyEvent event) {
+    private ActionEvent aEvent;
+    
+    public void enterPressed(KeyEvent event) throws SQLException, IOException {
                 if (event.getCode() == KeyCode.ENTER) {
-                  LogInButton();
+                  LogInButton(aEvent);
                 }
             }
     
     @FXML
-    private void LogInButton() {
+    private void LogInButton(ActionEvent event) throws SQLException, IOException {
          
-        try{
         if (isValidCredentials())
         {
             //invalid_label.setText("");
@@ -85,9 +86,7 @@ public class LoginController implements Initializable {
             pane.setTop(bar);
             pane.setCenter(welcomePane);
         }
-        }
-       catch(Exception ex)
-           
+       else
         {  
             JOptionPane.showMessageDialog(null,"Invalid credentials, please try again");
             id_box.clear();
@@ -104,7 +103,6 @@ public class LoginController implements Initializable {
    
     @FXML
     public void forgotPassword()
-            
     {
        JOptionPane.showMessageDialog(null,"If you forgot your password, please contact your system administrator");
     }
