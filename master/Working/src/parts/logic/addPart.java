@@ -6,8 +6,10 @@
 /*Author Sergio*/
 package parts.logic;
 
+import static com.sun.javafx.tk.Toolkit.getToolkit;
 import common.Main;
 import common.database.Database;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -32,11 +34,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javax.swing.JOptionPane;
 
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -112,12 +114,29 @@ public class addPart implements Initializable {
    {    String name= (partName.getText());
         Database.getInstance().addDelivery(name);
    }
-   @FXML
-   public void partLog(ActionEvent event) throws IOException{
+   
+   /*public void partLog(ActionEvent event)
+   {
+       try{
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("/parts/gui/partLog.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-   }
+       }
+       catch(IOException ex)
+       {
+           ex.printStackTrace();
+       }
+   }*/
+    /*public void partAmountKeyTyped(ActionEvent evt)
+    {
+        char c =evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_DELETE)
+        {
+            //getToolkit().beep();
+           evt.consume();
+            
+        }
+    }*/
    
     public void clearButton()
     {

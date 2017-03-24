@@ -21,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javax.swing.JOptionPane;
@@ -51,10 +53,16 @@ public class LoginController implements Initializable {
     
     protected static boolean admin;
     
+    public void enterPressed(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  LogInButton();
+                }
+            }
     
     @FXML
-    private void LogInButton(ActionEvent event) throws SQLException, IOException {
+    private void LogInButton() {
          
+        try{
         if (isValidCredentials())
         {
             //invalid_label.setText("");
@@ -77,8 +85,11 @@ public class LoginController implements Initializable {
             pane.setTop(bar);
             pane.setCenter(welcomePane);
         }
-        else
-        {   JOptionPane.showMessageDialog(null,"Invalid credentials, please try again");
+        }
+       catch(Exception ex)
+           
+        {  
+            JOptionPane.showMessageDialog(null,"Invalid credentials, please try again");
             id_box.clear();
             password_box.clear();
           //invalid_label.setText("Sorry, invalid credentials");  
@@ -90,6 +101,7 @@ public class LoginController implements Initializable {
             id_box.clear();
             password_box.clear();
     }
+   
     @FXML
     public void forgotPassword()
             

@@ -33,7 +33,7 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partAmount" layoutX="372.0" layoutY="278.0" prefHeight="25.0" prefWidth="112.0" />
+      <TextField fx:id="partAmount" layoutX="372.0" layoutY="278.0" onKeyTyped="#partAmountKeyTyped" prefHeight="25.0" prefWidth="112.0" />
       <Button fx:id="clearButton" layoutX="396.0" layoutY="513.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
       <Text fill="#f8f4f4" layoutX="402.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts Inventory">
          <font>
