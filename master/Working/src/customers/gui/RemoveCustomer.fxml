@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,7 +14,7 @@
             <Font size="43.0" />
          </font>
       </Label>
-    <TableView fx:id="customerTable" layoutX="21.0" layoutY="102.0" prefHeight="404.0" prefWidth="1158.0">
+    <TableView fx:id="customerTable" layoutX="21.0" layoutY="102.0" prefHeight="488.0" prefWidth="1158.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
           <TableColumn fx:id="firstNameCol" prefWidth="204.0" text="First Name" />
@@ -26,4 +27,6 @@
         </columns>
       </TableView>
    <Button layoutX="563.0" layoutY="607.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+   <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
+   <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />
 </AnchorPane>

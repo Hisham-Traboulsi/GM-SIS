@@ -11,12 +11,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -59,11 +63,19 @@ public class RemoveCustomerController implements Initializable {
     @FXML
     private TableColumn<Customers, String> typeCol;
     
+    @FXML
+    private TextField searchByName;
+    
+    @FXML
+    private TextField searchByVehicle;
+    
      private ObservableList<Customers> selected = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        searchByName.setPromptText("Search By Name");
+        searchByVehicle.setPromptText("Search By Vehicle");
         try
         {
             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
@@ -77,7 +89,25 @@ public class RemoveCustomerController implements Initializable {
             emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
             
-            customerTable.setItems(customerData);
+            FilteredList<Customers> filteredData=new FilteredList<>(customerData,e->true);
+            searchByName.textProperty().addListener((observableValue,oldValue,newValue)->{
+		filteredData.setPredicate((Predicate<? super Customers>)customer->{
+			if(newValue==null||newValue.isEmpty()){
+				return true;
+                        }
+			String lowerCaseFilter=newValue.toLowerCase();
+			if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			return false;
+		});
+            });
+            SortedList<Customers> sortedData=new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(customerTable.comparatorProperty());
+            customerTable.setItems(sortedData);
         }   
         catch(SQLException ex)
         {
