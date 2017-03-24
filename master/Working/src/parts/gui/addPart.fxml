@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import parts.textfield.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addPart">
    <children>
@@ -25,15 +26,15 @@
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partName" layoutX="375.0" layoutY="145.0" prefHeight="25.0" prefWidth="112.0" />
-      <TextField fx:id="partCost" layoutX="375.0" layoutY="211.0" prefHeight="25.0" prefWidth="112.0" />
+      <StringTextField fx:id="partName" layoutX="375.0" layoutY="145.0" prefHeight="25.0" prefWidth="118.0" />
+      <DecimalTextField fx:id="partCost" layoutX="375.0" layoutY="211.0" prefHeight="25.0" prefWidth="118.0" />
       <TextArea fx:id="partDesc" layoutX="256.0" layoutY="355.0" prefHeight="123.0" prefWidth="232.0" />
       <Button layoutX="321.0" layoutY="513.0" mnemonicParsing="false" onAction="#add" text="Submit" />
       <Text fill="WHITE" layoutX="254.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TextField fx:id="partAmount" layoutX="372.0" layoutY="278.0" onKeyTyped="#partAmountKeyTyped" prefHeight="25.0" prefWidth="112.0" />
+      <NumberTextField fx:id="partAmount" layoutX="375.0" layoutY="278.0" prefHeight="25.0" prefWidth="118.0" />
       <Button fx:id="clearButton" layoutX="396.0" layoutY="513.0" mnemonicParsing="false" onAction="#clearButton" text="Clear" />
       <Text fill="#f8f4f4" layoutX="402.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts Inventory">
          <font>
@@ -55,6 +56,6 @@
             <Image url="@help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" onAction="#partLog" text="Parts Log" />
+      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" text="Parts Log" />
    </children>
 </AnchorPane>

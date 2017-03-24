@@ -33,6 +33,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -115,28 +116,6 @@ public class addPart implements Initializable {
         Database.getInstance().addDelivery(name);
    }
    
-   /*public void partLog(ActionEvent event)
-   {
-       try{
-        Parent home_page_parent = FXMLLoader.load(getClass().getResource("/parts/gui/partLog.fxml"));
-        Scene home_page_scene = new Scene(home_page_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-       }
-       catch(IOException ex)
-       {
-           ex.printStackTrace();
-       }
-   }*/
-    /*public void partAmountKeyTyped(ActionEvent evt)
-    {
-        char c =evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_DELETE)
-        {
-            //getToolkit().beep();
-           evt.consume();
-            
-        }
-    }*/
    
     public void clearButton()
     {

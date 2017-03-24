@@ -12,7 +12,7 @@
     <children>
         <Button layoutX="577.0" layoutY="455.0" mnemonicParsing="false" onAction="#LogInButton" text="Login" />
         <TextField fx:id="id_box" layoutX="525.0" layoutY="341.0" />
-        <PasswordField fx:id="password_box" layoutX="525.0" layoutY="399.0" onKeyPressed="#enterPressed" onKeyTyped="#enterPressed" />
+        <PasswordField fx:id="password_box" layoutX="525.0" layoutY="399.0" onKeyPressed="#enterPressed" />
         <Label layoutX="389.0" layoutY="342.0" prefHeight="21.0" prefWidth="105.0" text="ID" textFill="WHITE">
             <font>
                 <Font size="20.0" />
