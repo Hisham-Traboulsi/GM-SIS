@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import parts.textfield.*?>
-
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addInstalledPart">
    <children>
       <Text fill="WHITE" layoutX="77.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Number">
@@ -35,23 +34,23 @@
          </font></Text>
       <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="266.0" prefWidth="748.0">
         <columns>
-          <TableColumn fx:id="INST_ID_view" prefWidth="92.0" text="Installation ID" />
-          <TableColumn fx:id="REG_NUM_view" prefWidth="139.0" text="Vehicle Registration" />
-            <TableColumn fx:id="INST_DATE_view" prefWidth="115.0" text="Installation Date" />
-            <TableColumn fx:id="EXP_DATE_view" prefWidth="133.0" text="Warranty Expiration" />
-            <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="87.0" text="Part Name" />
-            <TableColumn fx:id="CUST_NAME_view" prefWidth="90.0" text="Name" />
-            <TableColumn fx:id="CUST_2NAME_view" prefWidth="91.0" text="Surname" />
+          <TableColumn fx:id="INST_ID_view" prefWidth="89.0" text="Installation ID" />
+          <TableColumn fx:id="REG_NUM_view" prefWidth="122.0" text="Vehicle Registration" />
+            <TableColumn fx:id="INST_DATE_view" prefWidth="101.0" text="Installation Date" />
+            <TableColumn fx:id="EXP_DATE_view" prefWidth="121.0" text="Warranty Expiration" />
+            <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="92.0" text="Part Name" />
+            <TableColumn fx:id="CUST_NAME_view" prefWidth="102.0" text="Customer Name" />
+            <TableColumn fx:id="CUST_2NAME_view" prefWidth="120.0" text="Customer Surname" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
-      <NonSpecialCharTextField fx:id="searchBox" layoutX="700.0" layoutY="144.0" prefHeight="25.0" prefWidth="130.0" onKeyPressed="#enterPressedSearch"/>
+      <NonSpecialCharTextField fx:id="searchBox" layoutX="700.0" layoutY="144.0" onKeyPressed="#enterPressedSearch" prefHeight="25.0" prefWidth="130.0" />
       <ImageView fitHeight="85.0" fitWidth="91.0" layoutX="1030.0" layoutY="64.0" onMousePressed="#help" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="796.0" layoutY="504.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
+      <Button layoutX="748.0" layoutY="504.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
       <Button layoutX="919.0" layoutY="504.0" mnemonicParsing="false" onAction="#getBill" prefHeight="25.0" prefWidth="59.0" text="Bill" />
       <Button layoutX="666.0" layoutY="504.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
@@ -71,6 +70,7 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <StringTextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" prefHeight="25.0" prefWidth="114.0" onKeyPressed="#enterPressed"/>
+      <StringTextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" onKeyPressed="#enterPressed" prefHeight="25.0" prefWidth="114.0" />
+      <Button layoutX="841.0" layoutY="504.0" mnemonicParsing="false" text="Bookings" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.EditCustomerController">
    <children>
-     <TableView fx:id="customerTable" layoutX="21.0" layoutY="102.0" prefHeight="404.0" prefWidth="1158.0">
+     <TableView fx:id="customerTable" layoutX="21.0" layoutY="102.0" prefHeight="500.0" prefWidth="1158.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="117.0" text="Customer ID" />
           <TableColumn fx:id="firstNameCol" prefWidth="204.0" text="First Name" />
@@ -28,17 +28,7 @@
          </font>
       </Label>
       <Button layoutX="566.0" layoutY="624.0" mnemonicParsing="false" onAction="#edit" text="Update" />
-      <TextField fx:id="searchCustomerByName" layoutX="151.0" layoutY="599.0" prefHeight="31.0" prefWidth="208.0" onAction="#search" />
-      <Label layoutX="178.0" layoutY="562.0" text="Search By Name :" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="787.0" layoutY="562.0" text="Search By Vehicle Registration No. :" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField layoutX="816.0" layoutY="599.0" prefHeight="31.0" prefWidth="254.0" />
+      <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
+      <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />
    </children>
 </AnchorPane>

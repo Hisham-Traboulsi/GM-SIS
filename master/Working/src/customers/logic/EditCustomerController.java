@@ -12,10 +12,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -30,7 +26,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -71,7 +66,10 @@ public class EditCustomerController implements Initializable {
     private TableColumn<Customers, String> typeCol;
     
     @FXML
-    private TextField searchCustomer = new TextField();
+    private TextField searchByName;
+    
+    @FXML
+    private TextField searchByVehicle;
     
     @FXML
     private ObservableList<Customers> customerData;
@@ -79,6 +77,8 @@ public class EditCustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     { 
+       searchByName.setPromptText("Search By Name");
+       searchByVehicle.setPromptText("Search By Vehicle");
        try
         {
             customerData = Database.getInstance().getAllCustomers();
@@ -171,8 +171,25 @@ public class EditCustomerController implements Initializable {
                 }
             }
             );
-            
-            customerTable.setItems(customerData);
+            FilteredList<Customers> filteredData=new FilteredList<>(customerData,e->true);
+            searchByName.textProperty().addListener((observableValue,oldValue,newValue)->{
+		filteredData.setPredicate((Predicate<? super Customers>)customer->{
+			if(newValue==null||newValue.isEmpty()){
+				return true;
+                        }
+			String lowerCaseFilter=newValue.toLowerCase();
+			if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
+				return true;
+			}
+			return false;
+		});
+            });
+            SortedList<Customers> sortedData=new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(customerTable.comparatorProperty());
+            customerTable.setItems(sortedData);
         }   
         catch(SQLException ex)
         {
@@ -184,11 +201,6 @@ public class EditCustomerController implements Initializable {
     {
         Database.getInstance().editCustomer();
         refresh();
-    }
-    
-    public void search()
-    {
-         
     }
     
     public void refresh()

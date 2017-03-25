@@ -33,6 +33,6 @@
                 <Font size="24.0" />
             </font>
         </Label>
-      <Hyperlink layoutX="538.0" layoutY="503.0" onAction="#forgotPassword" onMouseClicked="#forgotPassword" text="Forgotten password ?" />
+      <Hyperlink layoutX="538.0" layoutY="503.0" onAction="#forgotPassword" text="Forgotten password ?" />
     </children>
 </AnchorPane>

@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -46,6 +45,9 @@ public class DisplayInfoController implements Initializable {
     
     @FXML
     private ComboBox vehicleReg;
+    
+    @FXML
+    private Label bill;
     
     private Customers rowData = AddCustomerController.rowData;
     
