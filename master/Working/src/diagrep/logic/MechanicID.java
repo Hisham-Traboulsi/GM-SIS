@@ -46,112 +46,95 @@ import javax.swing.JOptionPane;
  *
  * @author ernes
  */
-public class addBook implements Initializable {
+public class MechanicID implements Initializable {
 
+     @FXML
+    private TextField MechanicTxt;
     
     @FXML
-    private TextField BookingMechanic;
-    @FXML
-    private TextField BookingDate;
-    @FXML
-    private TextField BookingRegNum;
-    @FXML
-    private TextField BookingMileage;
-    @FXML
-    private TextField BookingTime;
-    @FXML
-    private TextField BookingVehicle;
-    @FXML
-    private TextField BookingName;
+    private TextField NameTxt;
     
     @FXML
-    private TableView<Book> BookingTable = new TableView<Book>();
-
-    @FXML
-    private TableColumn idCol;
-
-    @FXML
-    private TableColumn<Book, Integer> MechanicCol;
-
-    @FXML
-    private TableColumn<Book, String> DateCol;
+    private TextField RateTxt;
     
     @FXML
-    private TableColumn<Book, String> RegNumCol;
-
-    @FXML
-    private TableColumn<Book, Integer> MileageCol;
+    private TextField NumberTxt;
     
     @FXML
-    private TableColumn<Book, String> TimeCol;
+    private TextField StartDatetxt;
 
     @FXML
-    private TableColumn<Book, Integer> VehicleCol;
+    private TableView<Mec> MechanicTable = new TableView<Mec>();
     
     @FXML
-    private TableColumn<Book, String> NameCol;
+    private TableColumn<Mec, Integer> MechanicCol;
+    
+    @FXML
+    private TableColumn<Mec, String> NameCol;
 
-     
     @FXML
-    private ObservableList<Book> list=FXCollections.observableArrayList();
+    private TableColumn<Mec, String> StartDateCol;
+
+    @FXML
+    private TableColumn<Mec, Integer> HourlyRateCol;
     
-    public boolean add()
+    @FXML
+    private TableColumn<Mec, Integer> NumberCol;
+    
+    @FXML
+    private ObservableList<Mec> list=FXCollections.observableArrayList();
+    
+   public boolean addMechanic()
     {
-      BookingTable.getItems().clear();
+      MechanicTable.getItems().clear();
       boolean added=false;
       
-      //int INSTID = Integer.parseInt(INST_ID.getText());
-      int Mechanic = Integer.parseInt(BookingMechanic.getText());
-      String Date = (BookingDate.getText());
-      String RegNum = (BookingRegNum.getText());
-      int Mileage = Integer.parseInt(BookingMileage.getText());
-      String Time = (BookingTime.getText());
-      int Vehicle = Integer.parseInt(BookingVehicle.getText());
-      String Name = (BookingName.getText());
+      int Mechanic = Integer.parseInt(MechanicTxt.getText());
+      String Name = (NameTxt.getText());
+      int HourlyRate = Integer.parseInt(RateTxt.getText());
+      int Number = Integer.parseInt(NumberTxt.getText());
+      String Date = (StartDatetxt.getText());
+      
+      added = Database.getInstance().addMec(Mechanic, Name, HourlyRate, Number, Date);
+      refresh();
  
-      
-      added = Database.getInstance().addBook(Mechanic,Date,RegNum,Mileage,Time,Vehicle,Name);
-     refresh();
       return added;
-      
     }
-    
-    public void refresh()
+   
+   public void refresh()
     {
         try
         {            
-            URL BookUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
-            AnchorPane BookPane = FXMLLoader.load(BookUrl);
+            URL MecUrl = getClass().getResource("/diagrep/gui/MechanicID.fxml");
+            AnchorPane MecPane = FXMLLoader.load(MecUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(BookPane);
+            border.setCenter(MecPane);
         }
         catch(IOException ex)
         {
             ex.printStackTrace();
         }
     }
-     
     
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-            try{
-            ObservableList<Book> BookData = Database.getInstance().getBook();
+         try{
+            ObservableList<Mec> MecData = Database.getInstance().getMec();
             
-            BookingTable.setEditable(true);
+            MechanicTable.setEditable(true);
             
-            idCol.setCellValueFactory(new PropertyValueFactory<>("BookingID"));
+            
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("MechanicID"));
-            DateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
-            RegNumCol.setCellValueFactory(new PropertyValueFactory<>("RegNum"));
-            MileageCol.setCellValueFactory(new PropertyValueFactory<>("Mileage"));
-            TimeCol.setCellValueFactory(new PropertyValueFactory<>("Time"));
-            VehicleCol.setCellValueFactory(new PropertyValueFactory<>("Vehicle"));
             NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+            StartDateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
+            HourlyRateCol.setCellValueFactory(new PropertyValueFactory<>("HourlyRate"));
+            NumberCol.setCellValueFactory(new PropertyValueFactory<>("Number"));
+           
             
-            BookingTable.setItems(BookData);
+            MechanicTable.setItems(MecData);
                     
         } 
         catch (SQLException ex) 
@@ -162,6 +145,5 @@ public class addBook implements Initializable {
     }
     
 }
-        
-
-
+    
+    

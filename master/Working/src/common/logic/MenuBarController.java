@@ -146,6 +146,25 @@ public class MenuBarController
         }
     }
     
+    public void Mech(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL MecUrl = getClass().getResource("/diagrep/gui/MechanicID.fxml");
+            AnchorPane MecPane = FXMLLoader.load(MecUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(MecPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public void addCustomer(ActionEvent event)
     {
         try

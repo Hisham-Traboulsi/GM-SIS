@@ -25,6 +25,7 @@ import specialist.logic.Returned;
 import parts.logic.partLog;
 import specialist.logic.ReturnedVehicle;
 import diagrep.logic.Book;
+import diagrep.logic.Mec;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,6 +63,7 @@ public final class Database
     private ComboBox regCombReg;
     private ComboBox regCombCustName;
     private ObservableList<Book> BookData;
+    private ObservableList<Mec> MecData;
         
     private Database(String DBFileName)
     {
@@ -1377,6 +1379,67 @@ public final class Database
         return BookData;
     }
     
+
+
+ public ObservableList<Mec> getMec() throws SQLException
+    {   
+        
+        PreparedStatement getMec = null;
+        MecData = FXCollections.observableArrayList();
+        
+       
+        getMec = preparedStatement("SELECT * FROM MECHANIC_ID");
+        ResultSet rs = getMec.executeQuery();
+        
+        while(rs.next())
+        {
+            int Mechanic = rs.getInt("Mechanic_ID");
+            String Name = rs.getString("Mechanic_Name");
+            int HourlyRate = rs.getInt("Mechanic_Hourly_Rate");
+            int Number = rs.getInt("Mechanic_Number");
+            String Date = rs.getString("Mechanic_StartDate");
+            
+            
+            Mec mec = new Mec(Mechanic, Name, HourlyRate, Number, Date);
+            
+            MecData.add(mec);
+        }
+        return MecData;
+    }
+ 
+ public boolean addMec(int Mechanic, String Name, int HourlyRate, int Number, String Date)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO MECHANIC_ID VALUES (?, ?, ?, ?, ?)"); 
+           
+           add.setInt(1, Mechanic);
+           add.setString(2, Date);
+           add.setInt(3, HourlyRate);
+           add.setInt(4, Number);
+           add.setString(5, Name);
+           
+  
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Mechanic successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, Booking not added");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+ 
 }
+
+
+
 
 
