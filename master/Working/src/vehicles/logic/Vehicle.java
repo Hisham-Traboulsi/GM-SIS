@@ -16,6 +16,7 @@ import javafx.beans.property.StringProperty;
  */
 public class Vehicle {
     
+    private IntegerProperty id;
     private StringProperty regnum;
     private StringProperty model;
     private StringProperty make;
@@ -32,9 +33,9 @@ public class Vehicle {
             
     
    
-    public Vehicle(String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry)
+    public Vehicle(int id, String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry)
     {
-        
+        this.id = new SimpleIntegerProperty(id);
         this.regnum= new SimpleStringProperty(regnum);
         this.model=  new SimpleStringProperty(model);
         this.make = new SimpleStringProperty(make);
@@ -48,6 +49,11 @@ public class Vehicle {
         this.warrantycompany = new SimpleStringProperty(warrantycompany);
         this.warrantyaddress = new SimpleStringProperty(warrantyaddress);
         this.warrantyexpiry = new SimpleStringProperty(warrantyexpiry);
+    }
+    
+    public int getID()
+    {
+        return id.get();
     }
     
     public String getRegnum()
@@ -117,6 +123,10 @@ public class Vehicle {
     }
     
     ////
+    public IntegerProperty idProperty() {
+        return id;
+    }
+    
     public StringProperty regnumProperty()
     {
        return regnum;
@@ -183,6 +193,10 @@ public class Vehicle {
     }
 
     ////
+    
+    public void setId(int id) {
+        this.id.set(id);
+    }
     
     public void setRegNum(String regnum)
     {

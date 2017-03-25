@@ -66,8 +66,6 @@ public class VRHomepageController implements Initializable {
     @FXML
     private TableColumn mileageCol;
     @FXML
-    private TableColumn warrantyCol;
-    @FXML
     private TableColumn warrantycompanyCol;
     @FXML
     private TableColumn warrantyaddressCol;
@@ -77,6 +75,8 @@ public class VRHomepageController implements Initializable {
     private TextField searchField;
 
     final ObservableList<Vehicle> data = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn customeridCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -228,30 +228,6 @@ public class VRHomepageController implements Initializable {
             }
             );
             
-            warrantyCol.setCellValueFactory(new PropertyValueFactory<>("warranty"));
-            warrantyCol.setCellFactory(TextFieldTableCell.forTableColumn());
-            warrantyCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
-                @Override
-                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
-                    ((Vehicle) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setWarranty(t.getNewValue());
-                }
-            }
-            );
-            
-            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
-            warrantycompanyCol.setCellFactory(TextFieldTableCell.forTableColumn());
-            warrantycompanyCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
-                @Override
-                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
-                    ((Vehicle) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setWarrantyCompany(t.getNewValue());
-                }
-            }
-            );
-            
             warrantyaddressCol.setCellValueFactory(new PropertyValueFactory<>("warrantyaddress"));
             warrantyaddressCol.setCellFactory(TextFieldTableCell.forTableColumn());
             warrantyaddressCol.setOnEditCommit(
@@ -274,8 +250,10 @@ public class VRHomepageController implements Initializable {
                             t.getTablePosition().getRow())).setWarrantyExpiry(t.getNewValue());
                 }
             }
-            );
-
+            ); 
+            
+            customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            
             vehicleTable.setItems(vehicleData);
 
         } catch (SQLException ex) {

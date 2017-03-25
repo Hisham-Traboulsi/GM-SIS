@@ -813,11 +813,11 @@ public final class Database
             String warrantycompany = rs.getString("WARRANTY_COMPANY");
             String warrantyaddress = rs.getString("WARRANTY_ADDRESS");
             String warrantyexpiry = rs.getString("WARRANTY_EXPIRY");
-                    
+            int id = rs.getInt("CUSTOMER_ID");
                     
                     
 
-            Vehicle vehicle = new Vehicle(regnum,  model,  make, engine, fueltype, colour, motdate, lastservice, mileage, warranty, warrantycompany, warrantyaddress, warrantyexpiry);
+            Vehicle vehicle = new Vehicle(id, regnum,  model,  make, engine, fueltype, colour, motdate, lastservice, mileage, warranty, warrantycompany, warrantyaddress, warrantyexpiry);
 
             vehicleData.add(vehicle);
         }
