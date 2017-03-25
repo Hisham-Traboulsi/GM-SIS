@@ -164,7 +164,7 @@ public class AddCustomerController implements Initializable {
                         else if(selection == 1)
                         {
                             try {
-                                URL bookingsUrl = getClass().getResource("/diagrep/gui/BookingRepairs.fxml");
+                                URL bookingsUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
                                 AnchorPane bookingPane = FXMLLoader.load(bookingsUrl);
 
                                 BorderPane border = Main.getRoot();
@@ -333,7 +333,7 @@ public class AddCustomerController implements Initializable {
     public void displayHelp() throws IOException
     {
         Stage stage = new Stage();                                
-        Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/HelpMessage.fxml"));                                                                
+        Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/AddHelpMessage.fxml"));                                                                
         stage.setScene(new Scene(root));
         stage.setTitle("Help Message");                                
         stage.initModality(Modality.APPLICATION_MODAL);
