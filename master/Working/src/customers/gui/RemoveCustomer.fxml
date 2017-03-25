@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.RemoveCustomerController">
     <Label layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="408.0" text="REMOVE CUSTOMER" textFill="WHITE">
@@ -26,6 +28,11 @@
             <TableColumn fx:id="typeCol" prefWidth="77.0" text="Type" />
         </columns>
       </TableView>
+       <ImageView id="help-icon" fitHeight="70.0" fitWidth="54.0" layoutX="1122.0" layoutY="14.0" onMousePressed="#displayHelp" pickOnBounds="true" preserveRatio="true">
+          <image>
+             <Image url="/customers/gui/help-icon.png" />
+          </image>
+      </ImageView>
    <Button layoutX="563.0" layoutY="607.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
    <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
    <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />

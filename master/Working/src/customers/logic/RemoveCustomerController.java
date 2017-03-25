@@ -18,12 +18,16 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -154,4 +158,13 @@ public class RemoveCustomerController implements Initializable {
         }
     }
     
+    public void displayHelp() throws IOException
+    {
+        Stage stage = new Stage();                                
+        Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/RemoveHelpMessage.fxml"));                                                                
+        stage.setScene(new Scene(root));
+        stage.setTitle("Help Message");                                
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
 }

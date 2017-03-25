@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.EditCustomerController">
    <children>
@@ -27,6 +29,11 @@
             <Font size="43.0" />
          </font>
       </Label>
+       <ImageView id="help-icon" fitHeight="70.0" fitWidth="54.0" layoutX="1122.0" layoutY="14.0" onMousePressed="#displayHelp" pickOnBounds="true" preserveRatio="true">
+          <image>
+             <Image url="/customers/gui/help-icon.png" />
+          </image>
+      </ImageView>
       <Button layoutX="566.0" layoutY="624.0" mnemonicParsing="false" onAction="#edit" text="Update" />
       <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
       <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />

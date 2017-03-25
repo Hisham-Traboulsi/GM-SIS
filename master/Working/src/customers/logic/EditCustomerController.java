@@ -19,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +28,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -218,6 +222,16 @@ public class EditCustomerController implements Initializable {
         {
             ex.printStackTrace();
         }
+    }
+    
+    public void displayHelp() throws IOException
+    {
+        Stage stage = new Stage();                                
+        Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/EditHelpMessage.fxml"));                                                                
+        stage.setScene(new Scene(root));
+        stage.setTitle("Help Message");                                
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
     
 }
