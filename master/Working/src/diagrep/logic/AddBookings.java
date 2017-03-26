@@ -81,14 +81,8 @@ public class AddBookings implements Initializable {
     private TableColumn TimeCol;
     @FXML
     private TableColumn TypeCol;
-    
-    @FXML
-    private TextField searchByName;
-    
-    @FXML
-    private TextField searchByVehicle;
-    
-    protected static Bookings rowData;
+  
+  
     
 
     private ObservableList<Bookings> list=FXCollections.observableArrayList();
@@ -278,7 +272,7 @@ public class AddBookings implements Initializable {
                 }
             }
             );
-            TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TIME"));
+            TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TYPE"));
             TypeCol.setCellFactory(TextFieldTableCell.forTableColumn());
             TypeCol.setOnEditCommit(
                     new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
@@ -289,6 +283,7 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
 
             BookTable.setItems(BookingsData);
             
@@ -297,6 +292,8 @@ public class AddBookings implements Initializable {
         {
             ex.printStackTrace();
         }
+        
     }    
 
 }
+
