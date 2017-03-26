@@ -170,8 +170,10 @@ public class OutstandingController implements Initializable {
             String VEHICLEMODEL = selected2.get(0).getVEHICLEMODEL();
             String DELIVDATE = selected2.get(0).getDELIVERYDATEVEHICLE();
             String RETURNDATE = selected2.get(0).getRETURNDATEVEHICLE();
+            Double TOTAL = Double.parseDouble(vehicleBill.getText());
+            System.out.println(TOTAL);
          
-           added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE);
+           added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE, TOTAL);
 
            remove2();
            reload();

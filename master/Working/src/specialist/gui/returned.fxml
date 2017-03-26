@@ -33,8 +33,9 @@
             <TableColumn fx:id="vehicleRegCol" prefWidth="100.0" text="Registration" />
             <TableColumn fx:id="vehicleMakeCol" prefWidth="95.0" text="Make" />
             <TableColumn fx:id="vehicleModelCol" prefWidth="141.0" text="Model" />
-            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="163.0" text="Delivery Date" />
-            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="163.0" text="Return Date" />
+            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="107.0" text="Delivery Date" />
+            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="113.66668701171875" text="Return Date" />
+            <TableColumn fx:id="vehicleTotal" prefWidth="92.0" text="Total Cost" />
          </columns>
       </TableView>
       <Button layoutX="992.0" layoutY="545.0" mnemonicParsing="false" onAction="#removeVehicle" text="Remove Returned Vehicle" />

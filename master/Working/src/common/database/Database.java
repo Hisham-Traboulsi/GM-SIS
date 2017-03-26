@@ -1258,23 +1258,24 @@ public final class Database
             String make = rs.getString("make");
             String model = rs.getString("model");
             String deliveryDate = rs.getString("deliveryDate");
-            String returnDate = rs.getString("returnDate");
+            String returnDate = rs.getString("returnDate");   
+            Double vehicleTotal = rs.getDouble("total");
             
             ReturnedVehicle returnedvehicle = new ReturnedVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate);
+                    regNum, make, model, deliveryDate, returnDate, vehicleTotal);
             
             retVehicleData.add(returnedvehicle);
         }
         return retVehicleData;
     }
        
-       public boolean returnedSPCVehicle(String SPC, String REGNUM, String VEHICLEMAKE, String VEHICLEMODEL, String DELIVDATE, String RETURNDATE)
+       public boolean returnedSPCVehicle(String SPC, String REGNUM, String VEHICLEMAKE, String VEHICLEMODEL, String DELIVDATE, String RETURNDATE, Double TOTAL)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO RETURNED_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO RETURNED_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
          
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1283,6 +1284,7 @@ public final class Database
            add.setString(5, VEHICLEMODEL);
            add.setString(6, DELIVDATE);
            add.setString(7, RETURNDATE);
+           add.setDouble(8, TOTAL);
         
 
            add.execute();

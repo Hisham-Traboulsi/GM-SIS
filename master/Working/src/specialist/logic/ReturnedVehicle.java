@@ -5,7 +5,9 @@
  */
 package specialist.logic;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -22,9 +24,12 @@ public class ReturnedVehicle {
     private StringProperty vehicleModel;
     private StringProperty deliveryDate;
     private StringProperty returnDate;
+    private DoubleProperty vehicleTotal;
+
     
 
-public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel, String deliveryDate, String returnDate)
+public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel, 
+        String deliveryDate, String returnDate, Double vehicleTotal)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -34,6 +39,7 @@ public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehi
         this.vehicleModel =  new SimpleStringProperty(vehicleMake);
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
+        this.vehicleTotal =  new SimpleDoubleProperty(vehicleTotal);
 
     }
 
@@ -69,6 +75,11 @@ public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehi
         return returnDate.get();
     }
     
+    public Double getVEHICLETOTAL()
+    {
+        return vehicleTotal.get();
+    }
+    
       public StringProperty SPCNAMEProperty()
     {
         return spcName;
@@ -94,6 +105,10 @@ public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehi
     public StringProperty RETURNDATEProperty()
     {
        return returnDate;
+    }
+        public DoubleProperty VEHICLETOTALProperty()
+    {
+       return vehicleTotal;
     }
     
     
@@ -130,5 +145,10 @@ public ReturnedVehicle(int bookingID, String spcName, String regNum, String vehi
     public void setRETURNDATE(String returnDate)
     {
         this.returnDate.set(returnDate);        
+    }
+    
+    public void setVEHICLETOTAL(Double vehicleTotal)
+    {
+        this.vehicleTotal.set(vehicleTotal);        
     }
 }
