@@ -127,37 +127,21 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    public void Book(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL BookUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
-            AnchorPane BookPane = FXMLLoader.load(BookUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(BookPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
     
-    public void Mech(ActionEvent event)
+    
+    
+    public void Bookings(ActionEvent event)
     {
         try
         {
             addMenuBar();
             
-            URL MecUrl = getClass().getResource("/diagrep/gui/MechanicID.fxml");
-            AnchorPane MecPane = FXMLLoader.load(MecUrl);
+            URL BookingsUrl = getClass().getResource("/diagrep/gui/addBookings.fxml");
+            AnchorPane BookingsPane = FXMLLoader.load(BookingsUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(MecPane);
+            border.setCenter(BookingsPane);
         }
         catch(IOException ex)
         {

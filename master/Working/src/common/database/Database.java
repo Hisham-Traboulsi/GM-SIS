@@ -24,8 +24,9 @@ import specialist.logic.OutstandingVehicle;
 import specialist.logic.Returned;
 import parts.logic.partLog;
 import specialist.logic.ReturnedVehicle;
-import diagrep.logic.Book;
-import diagrep.logic.Mec;
+
+import diagrep.logic.Bookings;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,8 +64,7 @@ public final class Database
     private ComboBox regComb;
     private ComboBox regCombReg;
     private ComboBox regCombCustName;
-    private ObservableList<Book> BookData;
-    private ObservableList<Mec> MecData;
+    private ObservableList<Bookings> BookingsData;
         
     private Database(String DBFileName)
     {
@@ -913,6 +913,9 @@ public final class Database
         return spcData;
     }
     
+   
+    
+    
     public ObservableList<Outstanding> getOutstandingParts() throws SQLException
     {   
         
@@ -1047,7 +1050,7 @@ public final class Database
         
         return added;
     }
-    
+        
     public void removeSPC(int ID) throws SQLException
     {
         
@@ -1316,6 +1319,33 @@ public final class Database
         
         getAllCustomers();
     }
+       
+       public void editBookings() throws SQLException
+    {
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, FIRST_NAME=?, SECOND_NAME=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
+        int counter = 0;
+        while(counter < BookingsData.size())
+            
+        {
+
+            editBookingStmt.setString(1, BookingsData.get(counter).getBOOKING_MechID());
+            editBookingStmt.setString(2, BookingsData.get(counter).getBOOKING_FNAME());
+            editBookingStmt.setString(3, BookingsData.get(counter).getBOOKING_SNAME());
+            editBookingStmt.setString(4, BookingsData.get(counter).getBOOKING_REGNUM());
+            editBookingStmt.setString(5, BookingsData.get(counter).getBOOKING_MANUFACTURE());
+            editBookingStmt.setString(6, BookingsData.get(counter).getBOOKING_MILEAGE());
+            editBookingStmt.setString(7, BookingsData.get(counter).getBOOKING_DATE());
+            editBookingStmt.setString(8, BookingsData.get(counter).getBOOKING_TIME());
+            editBookingStmt.setString(9, BookingsData.get(counter).getBOOKING_TYPE());
+            editBookingStmt.setInt(10, BookingsData.get(counter).getIDnum());
+            
+            editBookingStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getBookings();
+    }
       
    
     public static Database getInstance()
@@ -1353,24 +1383,56 @@ public final class Database
         getVehicle();
     }
     }
-    
-    
-        public boolean addBook(int Mechanic, String Date, String RegNum, int Mileage, String Time,int Vehicle, String Name)
+     public ObservableList<Bookings> getBookings() throws SQLException
+    {   
+        
+        PreparedStatement getBookings = null;
+        BookingsData = FXCollections.observableArrayList();
+        
+       
+        getBookings = preparedStatement("SELECT * FROM DIAGNOSIS_REPAIR_BOOKINGS");
+        ResultSet rs = getBookings.executeQuery();
+        
+        while(rs.next())
+        {
+            int idNum = rs.getInt("IDnum");
+            String BookingMechanicID = rs.getString("MECHANICID");
+            String BookingFName = rs.getString("FIRST_NAME");
+            String BookingSName = rs.getString("SURNAME");
+            String BookingRegNum = rs.getString("REG_NUM");
+            String BookingManufacture = rs.getString("MANUFACTURE");
+            String BookingMileage = rs.getString("MILEAGE");
+            String BookingDate = rs.getString("BOOKING_DATE");
+            String BookingTime = rs.getString("TIME");
+            String BookingType = rs.getString("TYPE");
+            
+            Bookings bookings = new Bookings(idNum, BookingMechanicID, BookingFName, BookingSName, 
+                    BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType);
+            
+            BookingsData.add(bookings);
+        }
+        return BookingsData;
+    }
+     public boolean addBookings( String BookingMechanicID, String BookingFName, String BookingSName,
+            String BookingRegNum, String BookingManufacture, String BookingMileage, 
+            String BookingDate, String BookingTime, String BookingType)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?, ? ,?, ?)"); 
+           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?)"); 
            add.setString(1, null);
-           add.setInt(2, Mechanic);
-           add.setString(3, Date);
-           add.setString(4, RegNum);
-           add.setInt(5, Mileage);
-           add.setString(6, Time);
-           add.setInt(7, Vehicle);
-           add.setString(8, Name);
-  
+           add.setString(2, BookingMechanicID);
+           add.setString(3, BookingFName);
+           add.setString(4, BookingSName);
+           add.setString(5, BookingRegNum);
+           add.setString(6, BookingManufacture);
+           add.setString(7, BookingMileage);
+           add.setString(8, BookingDate);
+           add.setString(9, BookingTime);
+           add.setString(10, BookingType);
+
            add.execute();
            add.close();
            added = true;
@@ -1378,101 +1440,26 @@ public final class Database
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null,"Error, Booking not added");
+            JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
         
         return added;
     }
-        
-        public ObservableList<Book> getBook() throws SQLException
-    {   
-        
-        PreparedStatement getBook = null;
-        BookData = FXCollections.observableArrayList();
-        
-       
-        getBook = preparedStatement("SELECT * FROM DIAGNOSIS_REPAIR_BOOKINGS");
-        ResultSet rs = getBook.executeQuery();
-        
-        while(rs.next())
-        {
-            int id = rs.getInt("BOOKING_ID");
-            int Mechanic = rs.getInt("MECHANIC_ID");
-            String Date = rs.getString("BOOKING_DATE");
-            String RegNum = rs.getString("REG_NUM");
-            int Mileage = rs.getInt("CURRENT_MILEAGE");
-            String Time = rs.getString("BOOKING_TIME");
-            int Vehicle = rs.getInt("VEHICLE_ID");
-            String Name = rs.getString("COSTUMER_FULLNAME");
-            
-            Book book = new Book(id, Mechanic, Date, RegNum, Mileage, Time, Vehicle, Name);
-            
-            BookData.add(book);
-        }
-        return BookData;
-    }
-    
-
-
- public ObservableList<Mec> getMec() throws SQLException
-    {   
-        
-        PreparedStatement getMec = null;
-        MecData = FXCollections.observableArrayList();
-        
-       
-        getMec = preparedStatement("SELECT * FROM MECHANIC_ID");
-        ResultSet rs = getMec.executeQuery();
-        
-        while(rs.next())
-        {
-            int Mechanic = rs.getInt("Mechanic_ID");
-            String Name = rs.getString("Mechanic_Name");
-            int HourlyRate = rs.getInt("Mechanic_Hourly_Rate");
-            int Number = rs.getInt("Mechanic_Number");
-            String Date = rs.getString("Mechanic_StartDate");
-            
-            
-            Mec mec = new Mec(Mechanic, Name, HourlyRate, Number, Date);
-            
-            MecData.add(mec);
-        }
-        return MecData;
-    }
- 
- public boolean addMec(int Mechanic, String Name, int HourlyRate, int Number, String Date)
+     public void removeBookings(int ID) throws SQLException
     {
-        PreparedStatement add = null;
-        boolean added = false;
-        try
-        {
-           add = preparedStatement("INSERT INTO MECHANIC_ID VALUES (?, ?, ?, ?, ?)"); 
-           
-           add.setInt(1, Mechanic);
-           add.setString(2, Date);
-           add.setInt(3, HourlyRate);
-           add.setInt(4, Number);
-           add.setString(5, Name);
-           
-  
-           add.execute();
-           add.close();
-           added = true;
-           JOptionPane.showMessageDialog(null,"Mechanic successfully added");
-        }
-        catch(SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null,"Error, Booking not added");
-            ex.printStackTrace();
-            System.err.println("Unable to access table or table doesnt exist");
-        }
         
-        return added;
+        PreparedStatement removeBookingsStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum="+ ID);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeBookingsStmt.executeUpdate();
+        JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
- 
 }
+    
+    
+     
+       
 
 
 
