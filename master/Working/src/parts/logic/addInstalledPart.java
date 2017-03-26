@@ -38,6 +38,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -183,6 +184,7 @@ public class addInstalledPart implements Initializable {
         Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
         searchPart();
     }
+    
    /* public void regComb()//throws SQLException
     {
         
@@ -323,9 +325,9 @@ public class addInstalledPart implements Initializable {
      
        
        
-        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         //regComb = new ComboBox();
-        regComb.setItems(regComb1);
+        regComb.setItems(regComb1);*/
         
        //regComb.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) -> choosePart(newValue));
     } 

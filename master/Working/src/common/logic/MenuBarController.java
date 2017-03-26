@@ -281,6 +281,24 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
+    public void partBooking(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            
+            URL addPartUrl = getClass().getResource("/parts/gui/partBooking.fxml");
+            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
     public void vehicleHomepage(ActionEvent event)
     {

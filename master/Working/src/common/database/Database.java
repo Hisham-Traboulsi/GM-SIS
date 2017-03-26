@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
-import parts.logic.Part;
+import parts.logic.*;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
 import javafx.scene.control.Alert;
@@ -57,6 +57,7 @@ public final class Database
     private ObservableList<OutstandingVehicle> outVehicleData;
     private ObservableList<partLog> deliveredData;
     private ObservableList<partLog> withdrawnData;
+    private ObservableList<partBooking> bookingdata;
     private ObservableList<OutstandingVehicle> outVehicleSearchData;
     private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
@@ -614,7 +615,7 @@ public final class Database
          ResultSet rs = fill.executeQuery();
          while(rs.next())
             {
-              regComb1.add(rs.getString("name"));
+              regComb1.add(rs.getString("NAME"));
             }
                
         }
@@ -674,6 +675,35 @@ public final class Database
         }
         
         return deleted;
+    }
+    public ObservableList<partBooking> getpartBooking(String reg)
+    {   
+        try{
+        PreparedStatement getMec = null;
+        bookingdata = FXCollections.observableArrayList();
+        
+       
+        getMec = preparedStatement("SELECT * FROM 'DIAGNOSIS_REPAIR_BOOKINGS' WHERE REG_NUM=" +"'"+ reg +"'");
+        ResultSet rs = getMec.executeQuery();
+        
+        while(rs.next())
+        {
+            String date = rs.getString("BOOKING_DATE");
+            String name = rs.getString("FIRST_NAME");
+            String surname = rs.getString("SURNAME");
+            String type = rs.getString("TYPE");
+
+            partBooking booking = new partBooking(date,name,surname,type);
+            
+            bookingdata.add(booking);
+        }
+         
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        return bookingdata;
     }
     public void editInstalledPart() 
     {

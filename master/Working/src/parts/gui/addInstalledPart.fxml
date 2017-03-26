@@ -51,7 +51,7 @@
          </image>
       </ImageView>
       <Button layoutX="748.0" layoutY="504.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
-      <Button layoutX="919.0" layoutY="504.0" mnemonicParsing="false" onAction="#getBill" prefHeight="25.0" prefWidth="59.0" text="Bill" />
+      <Button layoutX="835.0" layoutY="504.0" mnemonicParsing="false" onAction="#getBill" prefHeight="25.0" prefWidth="59.0" text="Bill" />
       <Button layoutX="666.0" layoutY="504.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
          <image>
@@ -71,6 +71,5 @@
          </font>
       </Text>
       <StringTextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" onKeyPressed="#enterPressed" prefHeight="25.0" prefWidth="114.0" />
-      <Button layoutX="841.0" layoutY="504.0" mnemonicParsing="false" text="Bookings" />
    </children>
 </AnchorPane>
