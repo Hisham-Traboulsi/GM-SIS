@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -23,8 +24,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Shiraj Miah
  */
 public class OutstandingController implements Initializable {
+    @FXML
+    private TextField partBill; 
+    @FXML
+    private TextField vehicleBill;
 //parts table
-@FXML
+    @FXML
     private TableView<Outstanding> OutstandingPartTable = new TableView<Outstanding>();
 
    
@@ -42,6 +47,8 @@ public class OutstandingController implements Initializable {
     private TableColumn deliveryDateCol;
     @FXML
     private TableColumn returnDateCol;
+    @FXML
+    private TableColumn partCost;
     
     private ObservableList<Outstanding> list=FXCollections.observableArrayList();
     private ObservableList<Outstanding> selected = null;
@@ -69,6 +76,9 @@ public class OutstandingController implements Initializable {
     @FXML
     private TableColumn vehicleReturnCol;
     
+
+    
+    
     private ObservableList<OutstandingVehicle> list2=FXCollections.observableArrayList();
     private ObservableList<OutstandingVehicle> selected2 = null;
 
@@ -89,6 +99,7 @@ public class OutstandingController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+            partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
           
 
             OutstandingPartTable.setItems(outPartsData);

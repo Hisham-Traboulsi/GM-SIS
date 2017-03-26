@@ -5,7 +5,9 @@
  */
 package specialist.logic;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,9 +23,10 @@ public class Outstanding {
     private StringProperty partName;
     private StringProperty deliveryDate;
     private StringProperty returnDate;
+    private DoubleProperty partCost;
     
 
-public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate)
+public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partCost)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -32,6 +35,7 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
         this.partName =  new SimpleStringProperty(partName);
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
+        this.partCost =  new SimpleDoubleProperty(partCost);
 
     }
 
@@ -62,6 +66,11 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
         return returnDate.get();
     }
     
+        public Double getPARTCOST()
+    {
+        return partCost.get();
+    }
+    
       public StringProperty SPCNAMEProperty()
     {
         return spcName;
@@ -84,6 +93,11 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     public StringProperty RETURNDATEProperty()
     {
        return returnDate;
+    }
+    
+        public DoubleProperty PARTCOSTProperty()
+    {
+       return partCost;
     }
     
     
@@ -115,5 +129,10 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     public void setRETURNDATE(String returnDate)
     {
         this.returnDate.set(returnDate);        
+    }
+        
+    public void setPARTCOST(Double partCost)
+    {
+        this.partCost.set(partCost);        
     }
 }

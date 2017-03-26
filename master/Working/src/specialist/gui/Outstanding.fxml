@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,7 +15,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="OutstandingPartTable" layoutX="19.0" layoutY="166.0" prefHeight="224.0" prefWidth="822.0">
+            <TableView fx:id="OutstandingPartTable" layoutX="19.0" layoutY="166.0" prefHeight="224.0" prefWidth="954.0">
               <columns>
                   <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Booking ID" />
                 <TableColumn fx:id="spcNameCol" prefWidth="250.0" text="SPC" />
@@ -22,9 +23,10 @@
                   <TableColumn fx:id="partNameCol" prefWidth="120.0" text="Part Name" />
                   <TableColumn fx:id="deliveryDateCol" prefWidth="163.0" text="Delivery Date" />
                   <TableColumn fx:id="returnDateCol" minWidth="0.0" prefWidth="163.0" text="Return Date" />
+            <TableColumn fx:id="partCost" prefWidth="132.0" text="Part Cost (only)" />
               </columns>
             </TableView>
-            <Button fx:id="returnButton" layoutX="855.0" layoutY="265.0" mnemonicParsing="false" onAction="#returned" text="Returned" />
+            <Button fx:id="returnButton" layoutX="1060.0" layoutY="265.0" mnemonicParsing="false" onAction="#returned" text="Returned" />
             <TableView fx:id="OutstandingVehicleTable" layoutX="19.0" layoutY="444.0" prefHeight="224.0" prefWidth="955.0">
               <columns>
                 <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Booking ID" />
@@ -36,7 +38,7 @@
                   <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="163.0" text="Return Date" />
               </columns>
             </TableView>
-      <Button fx:id="vehicleReturnButton" layoutX="992.0" layoutY="545.0" mnemonicParsing="false" onAction="#returnedVehicle" text="Returned" />
+      <Button fx:id="vehicleReturnButton" layoutX="1057.0" layoutY="545.0" mnemonicParsing="false" onAction="#returnedVehicle" text="Returned" />
       <Label layoutX="18.0" layoutY="138.0" text="Parts">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -47,5 +49,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <TextField fx:id="partBill" layoutX="980.0" layoutY="264.0" prefHeight="25.0" prefWidth="57.0" promptText="SPC bill" />
+      <TextField fx:id="vehicleBill" layoutX="980.0" layoutY="546.0" prefHeight="25.0" prefWidth="57.0" promptText="SPC bill" />
          </children>
       </AnchorPane>

@@ -931,8 +931,9 @@ public final class Database
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            Double partCost = rs.getDouble("cost");
             
-            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost);
             
             outPartsData.add(outstandingpart);
         }
@@ -1058,13 +1059,13 @@ public final class Database
     }
     
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1072,6 +1073,7 @@ public final class Database
            add.setString(4, PARTNAME);
            add.setString(5, "" +DELIVDATE);
            add.setString(6, "" +RETURNDATE);
+           add.setDouble(7, PARTCOST);
         
 
            add.execute();
