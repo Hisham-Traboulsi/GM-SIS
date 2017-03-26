@@ -137,8 +137,7 @@ public class ReturnedController implements Initializable {
                         null,
                         options,
                         null); 
-                        
-                        System.out.println(selection);
+
                         if(selection == 0)
                         {
                              selected = ReturnedPartTable.getSelectionModel().getSelectedItems();   
@@ -165,7 +164,6 @@ public class ReturnedController implements Initializable {
                         options,
                         null); 
                         
-                        System.out.println(selection2);
                         if(selection2 == 0)
                         {
                         

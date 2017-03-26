@@ -13,10 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -81,6 +83,14 @@ public class OutstandingController implements Initializable {
     
     private ObservableList<OutstandingVehicle> list2=FXCollections.observableArrayList();
     private ObservableList<OutstandingVehicle> selected2 = null;
+    @FXML
+    private Button returnButton;
+    @FXML
+    private Button vehicleReturnButton;
+    @FXML
+    private Button partsCancel;
+    @FXML
+    private Button vehicleCancel;
 
     
     
@@ -157,6 +167,7 @@ public class OutstandingController implements Initializable {
         return added;
         
     }
+    @FXML
    public boolean returnedVehicle() throws SQLException
     {
       
@@ -249,4 +260,57 @@ public class OutstandingController implements Initializable {
             ex.printStackTrace();
         }
    }
+     public void cancelPart() throws SQLException
+    {
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to cancel this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
+                             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
+        
+                             int BOOKINGID = selected.get(0).getBOOKINGID();
+        
+                             Database.getInstance().removeOutstandingPart(BOOKINGID);
+                                reload();
+                        }
+                        else if(selection == 1)
+                        {
+                         
+                        }
+
+    }
+       
+    public void cancelVehicle() throws SQLException
+    {
+                Object [] options = {"Yes", "No"};
+        int selection2 = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to cancel this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        if(selection2 == 0)
+                        {
+                            selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
+                             int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
+                             Database.getInstance().removeOutstandingVehicle(BOOKINGID);
+                            reload();
+                        }
+                        else if(selection2 == 1)
+                        {
+                        }
+
+    }
 }

@@ -51,5 +51,7 @@
       </Label>
       <TextField fx:id="partBill" layoutX="980.0" layoutY="264.0" prefHeight="25.0" prefWidth="57.0" promptText="SPC bill" />
       <TextField fx:id="vehicleBill" layoutX="980.0" layoutY="546.0" prefHeight="25.0" prefWidth="57.0" promptText="SPC bill" />
+      <Button fx:id="partsCancel" layoutX="845.0" layoutY="394.0" mnemonicParsing="false" onAction="#cancelPart" text="Cancel Parts Booking" />
+      <Button fx:id="vehicleCancel" layoutX="834.0" layoutY="671.0" mnemonicParsing="false" onAction="#cancelVehicle" text="Cancel Vehicle Booking" />
          </children>
       </AnchorPane>
