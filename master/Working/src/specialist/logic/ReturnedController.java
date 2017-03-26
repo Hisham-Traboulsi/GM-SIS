@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -41,6 +42,8 @@ public class ReturnedController implements Initializable {
     private TableColumn deliveryDateCol;
     @FXML
     private TableColumn returnDateCol;
+        @FXML
+    private TableColumn partTotal;
     
     private ObservableList<Returned> list=FXCollections.observableArrayList();
         private ObservableList<Returned> selected = null;
@@ -67,6 +70,8 @@ public class ReturnedController implements Initializable {
     private TableColumn vehicleDeliveryCol;
     @FXML
     private TableColumn vehicleReturnCol;
+    @FXML
+    private TableColumn vehicleTotal;
     
     private ObservableList<ReturnedVehicle> list2=FXCollections.observableArrayList();
     private ObservableList<ReturnedVehicle> selected2 = null;
@@ -87,7 +92,7 @@ public class ReturnedController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
-          
+            partTotal.setCellValueFactory(new PropertyValueFactory<>("PARTTOTAL"));          
 
             ReturnedPartTable.setItems(retPartsData);
             
@@ -110,6 +115,7 @@ public class ReturnedController implements Initializable {
             vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
             vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
             vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+            vehicleTotal.setCellValueFactory(new PropertyValueFactory<>("VEHICLETOTAL"));
           
 
             ReturnedVehicleTable.setItems(retVehicleData);
@@ -120,24 +126,58 @@ public class ReturnedController implements Initializable {
             ex.printStackTrace();
         }
     }
-       public void remove() throws SQLException
+      public void remove() throws SQLException
     {
-        selected = ReturnedPartTable.getSelectionModel().getSelectedItems();   
-        
-        int RETURNEDID = selected.get(0).getBOOKINGID();
-        
-        Database.getInstance().removeReturnedPart(RETURNEDID);
-        reload();
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to remove this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+
+                        if(selection == 0)
+                        {
+                             selected = ReturnedPartTable.getSelectionModel().getSelectedItems();   
+                             int RETURNEDID = selected.get(0).getBOOKINGID();
+                             Database.getInstance().removeReturnedPart(RETURNEDID);
+                                reload();
+                        }
+                        else if(selection == 1)
+                        {
+                         
+                        }
+
     }
        
     public void removeVehicle() throws SQLException
     {
-        selected2 = ReturnedVehicleTable.getSelectionModel().getSelectedItems();   
+                Object [] options = {"Yes", "No"};
+        int selection2 = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to remove this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        if(selection2 == 0)
+                        {
+                        
+                              selected2 = ReturnedVehicleTable.getSelectionModel().getSelectedItems();   
         
-        int RETURNEDID = selected2.get(0).getBOOKINGIDVEHICLE();
+                              int RETURNEDID = selected2.get(0).getBOOKINGIDVEHICLE();
         
-        Database.getInstance().removeReturnedVehicle(RETURNEDID);
-        reload();
+                                Database.getInstance().removeReturnedVehicle(RETURNEDID);
+                            reload();
+                        }
+                        else if(selection2 == 1)
+                        {
+                        }
+
     }
     public void reload(){
   
@@ -152,7 +192,8 @@ public class ReturnedController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
-          
+            partTotal.setCellValueFactory(new PropertyValueFactory<>("PARTTOTAL"));          
+
 
             ReturnedPartTable.setItems(retPartsData);
             
@@ -175,7 +216,8 @@ public class ReturnedController implements Initializable {
             vehicleModelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
             vehicleDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
             vehicleReturnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
-          
+            vehicleTotal.setCellValueFactory(new PropertyValueFactory<>("VEHICLETOTAL"));
+
 
             ReturnedVehicleTable.setItems(retVehicleData);
             

@@ -934,8 +934,9 @@ public final class Database
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            Double partCost = rs.getDouble("cost");
             
-            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost);
             
             outPartsData.add(outstandingpart);
         }
@@ -991,8 +992,9 @@ public final class Database
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            Double partTotal = rs.getDouble("total");
             
-            Returned returnedpart = new Returned(returnID, spcName, partID, partName, deliveryDate, returnDate);
+            Returned returnedpart = new Returned(returnID, spcName, partID, partName, deliveryDate, returnDate, partTotal);
             
             retPartsData.add(returnedpart);
         }
@@ -1061,13 +1063,13 @@ public final class Database
     }
     
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1075,6 +1077,7 @@ public final class Database
            add.setString(4, PARTNAME);
            add.setString(5, "" +DELIVDATE);
            add.setString(6, "" +RETURNDATE);
+           add.setDouble(7, PARTCOST);
         
 
            add.execute();
@@ -1092,13 +1095,13 @@ public final class Database
         return added;
     }
 
-     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
          
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1106,7 +1109,7 @@ public final class Database
            add.setString(4, PARTNAME);
            add.setString(5, DELIVDATE);
            add.setString(6, RETURNDATE);
-        
+           add.setDouble(7, TOTAL);        
 
            add.execute();
            add.close();
@@ -1258,23 +1261,24 @@ public final class Database
             String make = rs.getString("make");
             String model = rs.getString("model");
             String deliveryDate = rs.getString("deliveryDate");
-            String returnDate = rs.getString("returnDate");
+            String returnDate = rs.getString("returnDate");   
+            Double vehicleTotal = rs.getDouble("total");
             
             ReturnedVehicle returnedvehicle = new ReturnedVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate);
+                    regNum, make, model, deliveryDate, returnDate, vehicleTotal);
             
             retVehicleData.add(returnedvehicle);
         }
         return retVehicleData;
     }
        
-       public boolean returnedSPCVehicle(String SPC, String REGNUM, String VEHICLEMAKE, String VEHICLEMODEL, String DELIVDATE, String RETURNDATE)
+       public boolean returnedSPCVehicle(String SPC, String REGNUM, String VEHICLEMAKE, String VEHICLEMODEL, String DELIVDATE, String RETURNDATE, Double TOTAL)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO RETURNED_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO RETURNED_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
          
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1283,6 +1287,7 @@ public final class Database
            add.setString(5, VEHICLEMODEL);
            add.setString(6, DELIVDATE);
            add.setString(7, RETURNDATE);
+           add.setDouble(8, TOTAL);
         
 
            add.execute();

@@ -5,7 +5,9 @@
  */
 package specialist.logic;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,9 +23,10 @@ public class Returned {
     private StringProperty partName;
     private StringProperty deliveryDate;
     private StringProperty returnDate;
+    private DoubleProperty partTotal;
     
 
-public Returned(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate)
+public Returned(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partTotal)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -32,6 +35,7 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
         this.partName =  new SimpleStringProperty(partName);
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
+        this.partTotal =  new SimpleDoubleProperty(partTotal);
 
     }
 
@@ -63,6 +67,10 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
     {
         return returnDate.get();
     }
+        public Double getPARTTOTAL()
+    {
+        return partTotal.get();
+    }
     
       public StringProperty SPCNAMEProperty()
     {
@@ -86,6 +94,11 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
     public StringProperty RETURNDATEProperty()
     {
        return returnDate;
+    }
+    
+    public DoubleProperty PARTTOTALProperty()
+    {
+       return partTotal;
     }
     
     
@@ -117,5 +130,10 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
     public void setRETURNDATE(String returnDate)
     {
         this.returnDate.set(returnDate);        
+    }    
+   
+    public void setPARTTOTAL(Double partTotal)
+    {
+        this.partTotal.set(partTotal);        
     }
 }

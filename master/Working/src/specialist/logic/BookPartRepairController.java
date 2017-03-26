@@ -55,7 +55,7 @@ public class BookPartRepairController implements Initializable {
     private TableColumn<Part, String> partDesc;
 
     @FXML
-    private TableColumn amount;
+    private TableColumn price;
 
     @FXML
     private Button bookButton;
@@ -85,10 +85,11 @@ public class BookPartRepairController implements Initializable {
             String SPC = (String) spcBox.getValue();
             int PARTID = selected.get(0).getID();
             String PARTNAME = selected.get(0).getpartName();
+            Double PARTCOST = selected.get(0).getCost();
             LocalDate DELIVDATE = delivDate;
             LocalDate RETURNDATE = returnDate;
          
-           added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+           added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, PARTCOST);
 
       
         return added;
@@ -112,7 +113,7 @@ public class BookPartRepairController implements Initializable {
             id.setCellValueFactory(new PropertyValueFactory<>("ID"));
             partName.setCellValueFactory(new PropertyValueFactory<>("partName"));
             partDesc.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
-            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            price.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
             partsTable.setItems(partsData);
             

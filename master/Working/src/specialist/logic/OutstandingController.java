@@ -13,9 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -23,8 +26,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Shiraj Miah
  */
 public class OutstandingController implements Initializable {
+    @FXML
+    private TextField partBill; 
+    @FXML
+    private TextField vehicleBill;
 //parts table
-@FXML
+    @FXML
     private TableView<Outstanding> OutstandingPartTable = new TableView<Outstanding>();
 
    
@@ -42,6 +49,8 @@ public class OutstandingController implements Initializable {
     private TableColumn deliveryDateCol;
     @FXML
     private TableColumn returnDateCol;
+    @FXML
+    private TableColumn partCost;
     
     private ObservableList<Outstanding> list=FXCollections.observableArrayList();
     private ObservableList<Outstanding> selected = null;
@@ -69,8 +78,19 @@ public class OutstandingController implements Initializable {
     @FXML
     private TableColumn vehicleReturnCol;
     
+
+    
+    
     private ObservableList<OutstandingVehicle> list2=FXCollections.observableArrayList();
     private ObservableList<OutstandingVehicle> selected2 = null;
+    @FXML
+    private Button returnButton;
+    @FXML
+    private Button vehicleReturnButton;
+    @FXML
+    private Button partsCancel;
+    @FXML
+    private Button vehicleCancel;
 
     
     
@@ -89,6 +109,7 @@ public class OutstandingController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+            partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
           
 
             OutstandingPartTable.setItems(outPartsData);
@@ -135,14 +156,18 @@ public class OutstandingController implements Initializable {
             String PARTNAME = selected.get(0).getPARTNAME();
             String DELIVDATE = selected.get(0).getDELIVERYDATE();
             String RETURNDATE = selected.get(0).getRETURNDATE();
-         
-           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+            Double partCost = selected.get(0).getPARTCOST();
+            Double bill = Double.parseDouble(partBill.getText());
+            Double TOTAL = partCost + bill;
+            
+           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, TOTAL);
 
            remove();
            reload();
         return added;
         
     }
+    @FXML
    public boolean returnedVehicle() throws SQLException
     {
       
@@ -156,8 +181,10 @@ public class OutstandingController implements Initializable {
             String VEHICLEMODEL = selected2.get(0).getVEHICLEMODEL();
             String DELIVDATE = selected2.get(0).getDELIVERYDATEVEHICLE();
             String RETURNDATE = selected2.get(0).getRETURNDATEVEHICLE();
+            Double TOTAL = Double.parseDouble(vehicleBill.getText());
+            System.out.println(TOTAL);
          
-           added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE);
+           added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE, TOTAL);
 
            remove2();
            reload();
@@ -233,4 +260,57 @@ public class OutstandingController implements Initializable {
             ex.printStackTrace();
         }
    }
+     public void cancelPart() throws SQLException
+    {
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to cancel this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
+                             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
+        
+                             int BOOKINGID = selected.get(0).getBOOKINGID();
+        
+                             Database.getInstance().removeOutstandingPart(BOOKINGID);
+                                reload();
+                        }
+                        else if(selection == 1)
+                        {
+                         
+                        }
+
+    }
+       
+    public void cancelVehicle() throws SQLException
+    {
+                Object [] options = {"Yes", "No"};
+        int selection2 = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to cancel this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        if(selection2 == 0)
+                        {
+                            selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
+                             int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
+                             Database.getInstance().removeOutstandingVehicle(BOOKINGID);
+                            reload();
+                        }
+                        else if(selection2 == 1)
+                        {
+                        }
+
+    }
 }

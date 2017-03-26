@@ -14,7 +14,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="ReturnedPartTable" layoutX="19.0" layoutY="166.0" prefHeight="224.0" prefWidth="822.0">
+      <TableView fx:id="ReturnedPartTable" layoutX="19.0" layoutY="166.0" prefHeight="224.0" prefWidth="952.0">
          <columns>
             <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Return ID" />
             <TableColumn fx:id="spcNameCol" prefWidth="250.0" text="SPC" />
@@ -22,9 +22,10 @@
             <TableColumn fx:id="partNameCol" prefWidth="120.0" text="Part Name" />
             <TableColumn fx:id="deliveryDateCol" prefWidth="163.0" text="Delivery Date" />
             <TableColumn fx:id="returnDateCol" prefWidth="163.0" text="Return Date" />
+            <TableColumn fx:id="partTotal" prefWidth="130.0" text="Total Cost" />
          </columns>
       </TableView>
-      <Button layoutX="875.0" layoutY="268.0" mnemonicParsing="false" onAction="#remove" text="Remove Returned Part" />
+      <Button layoutX="995.0" layoutY="268.0" mnemonicParsing="false" onAction="#remove" text="Remove Returned Part" />
       <TableView fx:id="ReturnedVehicleTable" layoutX="19.0" layoutY="444.0" prefHeight="224.0" prefWidth="955.0">
          <columns>
             <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Return ID" />
@@ -32,8 +33,9 @@
             <TableColumn fx:id="vehicleRegCol" prefWidth="100.0" text="Registration" />
             <TableColumn fx:id="vehicleMakeCol" prefWidth="95.0" text="Make" />
             <TableColumn fx:id="vehicleModelCol" prefWidth="141.0" text="Model" />
-            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="163.0" text="Delivery Date" />
-            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="163.0" text="Return Date" />
+            <TableColumn fx:id="vehicleDeliveryCol" prefWidth="107.0" text="Delivery Date" />
+            <TableColumn fx:id="vehicleReturnCol" minWidth="0.0" prefWidth="113.66668701171875" text="Return Date" />
+            <TableColumn fx:id="vehicleTotal" prefWidth="92.0" text="Total Cost" />
          </columns>
       </TableView>
       <Button layoutX="992.0" layoutY="545.0" mnemonicParsing="false" onAction="#removeVehicle" text="Remove Returned Vehicle" />
