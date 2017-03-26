@@ -989,8 +989,9 @@ public final class Database
             String partName = rs.getString("partName");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            Double partTotal = rs.getDouble("total");
             
-            Returned returnedpart = new Returned(returnID, spcName, partID, partName, deliveryDate, returnDate);
+            Returned returnedpart = new Returned(returnID, spcName, partID, partName, deliveryDate, returnDate, partTotal);
             
             retPartsData.add(returnedpart);
         }
@@ -1091,13 +1092,13 @@ public final class Database
         return added;
     }
 
-     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE)
+     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO RETURNED_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
          
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1105,7 +1106,7 @@ public final class Database
            add.setString(4, PARTNAME);
            add.setString(5, DELIVDATE);
            add.setString(6, RETURNDATE);
-        
+           add.setDouble(7, TOTAL);        
 
            add.execute();
            add.close();

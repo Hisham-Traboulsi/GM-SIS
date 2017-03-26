@@ -41,6 +41,8 @@ public class ReturnedController implements Initializable {
     private TableColumn deliveryDateCol;
     @FXML
     private TableColumn returnDateCol;
+        @FXML
+    private TableColumn partTotal;
     
     private ObservableList<Returned> list=FXCollections.observableArrayList();
         private ObservableList<Returned> selected = null;
@@ -87,7 +89,7 @@ public class ReturnedController implements Initializable {
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
-          
+            partTotal.setCellValueFactory(new PropertyValueFactory<>("PARTTOTAL"));          
 
             ReturnedPartTable.setItems(retPartsData);
             

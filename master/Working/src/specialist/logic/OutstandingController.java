@@ -146,8 +146,11 @@ public class OutstandingController implements Initializable {
             String PARTNAME = selected.get(0).getPARTNAME();
             String DELIVDATE = selected.get(0).getDELIVERYDATE();
             String RETURNDATE = selected.get(0).getRETURNDATE();
-         
-           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE);
+            Double partCost = selected.get(0).getPARTCOST();
+            Double bill = Double.parseDouble(partBill.getText());
+            Double TOTAL = partCost + bill;
+            
+           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, TOTAL);
 
            remove();
            reload();
