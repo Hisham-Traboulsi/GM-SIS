@@ -100,7 +100,6 @@ public class AddBookings implements Initializable {
     private TextField ManufactureTxt;
     @FXML
     private TextField MileageTxt;
-    
     @FXML
     private TextField TimeTxt;
     @FXML
@@ -145,12 +144,8 @@ public class AddBookings implements Initializable {
         private ObservableList<Bookings> selected = null;
     
    @FXML
-   public boolean addBooking() throws SQLException
+   public boolean addBooking() 
     {
-       
-       
-       
-       
        
        
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -162,7 +157,7 @@ public class AddBookings implements Initializable {
        Date nextYear = cal.getTime();
        
        
-      
+      BookTable.getItems().clear();
       boolean added=false;
       
      

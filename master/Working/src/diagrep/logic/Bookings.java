@@ -29,6 +29,7 @@ public class Bookings {
     private StringProperty BookingTime;
     private StringProperty BookingType;
     
+    
      public Bookings(int idNum, String BookingMechanicID, String BookingFName, 
              String BookingSName, String BookingRegNum, String BookingManufacture, 
              String BookingMileage, String BookingDate, String BookingTime, String BookingType)

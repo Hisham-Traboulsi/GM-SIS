@@ -1473,8 +1473,8 @@ public final class Database
         {
             int idNum = rs.getInt("IDnum");
             String BookingMechanicID = rs.getString("MECHANICID");
-            String BookingFName = rs.getString("FIRST_NAME");
-            String BookingSName = rs.getString("SURNAME");
+            String BookingFName = rs.getString("CUSTOMERID");
+            String BookingSName = rs.getString("PARTNAME");
             String BookingRegNum = rs.getString("REG_NUM");
             String BookingManufacture = rs.getString("MANUFACTURE");
             String BookingMileage = rs.getString("MILEAGE");

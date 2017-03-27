@@ -15,8 +15,8 @@
         <columns>
           <TableColumn fx:id="BookingCol" prefWidth="97.5" text="Booking ID" />
           <TableColumn fx:id="MechanicCol" prefWidth="84.0" text="Mechanic ID" />
-            <TableColumn fx:id="FNameCol" prefWidth="100.5" text="First Name" />
-            <TableColumn fx:id="SNameCol" prefWidth="95.0" text="Second Name" />
+            <TableColumn fx:id="FNameCol" prefWidth="100.5" text="Customer ID" />
+            <TableColumn fx:id="SNameCol" prefWidth="95.0" text="Part" />
             <TableColumn fx:id="RegNumCol" prefWidth="91.0" text="Reg Num" />
             <TableColumn fx:id="ManufactureCol" prefWidth="92.0" text="Manufacture" />
             <TableColumn fx:id="MileageCol" prefWidth="83.5" text="Mileage" />
@@ -43,12 +43,12 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="113.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+      <Text fill="WHITE" layoutX="98.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="128.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname">
+      <Text fill="WHITE" layoutX="98.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Needed">
          <font>
             <Font size="19.0" />
          </font>
