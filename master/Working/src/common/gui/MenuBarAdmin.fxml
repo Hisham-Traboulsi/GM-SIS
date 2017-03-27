@@ -44,8 +44,6 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#addPart" text="Inventory" />
                         <MenuItem mnemonicParsing="false" onAction="#addInstalledPart" text="Install part on vehicle" />
-            <MenuItem mnemonicParsing="false" onAction="#partLog" text="Part Log" />
-            <MenuItem mnemonicParsing="false" onAction="#partBooking" text="Bookings" />
                     </items>    
                 </Menu>
           

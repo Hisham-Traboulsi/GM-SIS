@@ -186,24 +186,7 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-     public void partLog(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL DiagnosisUrl = getClass().getResource("/parts/gui/partLog.fxml");
-            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(DiagnosisPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+     
 
     
     
@@ -265,24 +248,7 @@ public class MenuBarController
             ex.printStackTrace();
         }
     }
-    public void partBooking(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL addPartUrl = getClass().getResource("/parts/gui/partBooking.fxml");
-            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(addPartPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+    
     
     public void vehicleHomepage(ActionEvent event)
     {
