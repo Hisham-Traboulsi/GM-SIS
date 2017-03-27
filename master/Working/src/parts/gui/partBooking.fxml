@@ -30,5 +30,6 @@
          </font>
       </Text>
       <Button layoutX="195.0" layoutY="314.0" mnemonicParsing="false" onAction="#showBooking" text="View Booking" />
+      <Button layoutX="147.0" layoutY="60.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

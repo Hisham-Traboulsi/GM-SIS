@@ -5,15 +5,21 @@
  */
 package parts.logic;
 
+import common.Main;
 import common.database.Database;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 /**
  * FXML Controller class
  *
@@ -53,5 +59,23 @@ public class PartLogController implements Initializable {
         
          withdrawnTable.setItems(withdrawnData);
     }    
+    public void back(ActionEvent event)
+    {
+        try
+        {
+           // addMenuBar();
+            
+            URL DiagnosisUrl = getClass().getResource("/parts/gui/addPart.fxml");
+            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(DiagnosisPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
 }

@@ -10,22 +10,22 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1207.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vehicles.logic.VRHomepageController">
    <children>
-      <TableView fx:id="vehicleTable" layoutX="4.0" layoutY="95.0" prefHeight="468.0" prefWidth="1191.0">
+      <TableView fx:id="vehicleTable" layoutX="25.0" layoutY="122.0" prefHeight="433.0" prefWidth="1147.0">
         <columns>
-          <TableColumn fx:id="regnumCol" prefWidth="101.99993896484375" text="Reg Num" />
-          <TableColumn fx:id="modelCol" prefWidth="88.0" text="Model" />
-            <TableColumn fx:id="makeCol" minWidth="0.0" prefWidth="82.0" text="Make" />
-            <TableColumn fx:id="engineCol" prefWidth="103.0" text="Engine Size" />
+          <TableColumn fx:id="regnumCol" prefWidth="86.66666412353516" text="Reg Num" />
+          <TableColumn fx:id="modelCol" minWidth="8.0" prefWidth="80.33334350585938" text="Model" />
+            <TableColumn fx:id="makeCol" minWidth="0.0" prefWidth="77.0" text="Make" />
+            <TableColumn fx:id="engineCol" prefWidth="77.0" text="Engine Size" />
             <TableColumn minWidth="0.0" prefWidth="0.0" text="Fuel Type" />
             <TableColumn fx:id="fueltypeCol" prefWidth="77.0" text="Fuel Type" />
-            <TableColumn fx:id="colourCol" text="Colour" />
-            <TableColumn fx:id="motdateCol" prefWidth="95.0" text="Mot Date" />
-            <TableColumn fx:id="lastserviceCol" prefWidth="97.0" text="Last Service" />
-            <TableColumn fx:id="mileageCol" prefWidth="75.0" text="Mileage" />
-            <TableColumn fx:id="warrantyCol" prefWidth="73.0" text="Warranty?" />
-            <TableColumn fx:id="warrantycompanyCol" minWidth="4.0" prefWidth="123.0" text="Warranty Company" />
-            <TableColumn fx:id="warrantyaddressCol" prefWidth="108.0" text="Warranty Address" />
-            <TableColumn fx:id="warrantyexpiryCol" prefWidth="104.0" text="Warranty Expiry" />
+            <TableColumn fx:id="colourCol" prefWidth="51.0" text="Colour" />
+            <TableColumn fx:id="motdateCol" prefWidth="72.0" text="Mot Date" />
+            <TableColumn fx:id="lastserviceCol" prefWidth="91.0" text="Last Service" />
+            <TableColumn fx:id="mileageCol" prefWidth="68.0" text="Mileage" />
+            <TableColumn fx:id="warrantyexpiryCol" prefWidth="115.0" text="Warranty Expiry" />
+            <TableColumn fx:id="warrantycompanyCol" minWidth="0.0" prefWidth="118.0" text="Warranty Company" />
+            <TableColumn fx:id="warrantyaddressCol" minWidth="0.0" prefWidth="111.0" text="Warranty Address" />
+            <TableColumn fx:id="customeridCol" minWidth="0.0" prefWidth="122.6666259765625" text="Customer ID" />
         </columns>
       </TableView>
       <Button layoutX="84.0" layoutY="615.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="166.0" text="Back" />

@@ -51,9 +51,9 @@
       <Button layoutX="792.0" layoutY="513.0" mnemonicParsing="false" onAction="#updatePart" text="Update" />
       <ImageView fitHeight="72.0" fitWidth="76.0" layoutX="1013.0" layoutY="42.0" onDragOver="#help" onMouseClicked="#help" onMouseDragOver="#help" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@help-icon.png" />
+            <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" text="Parts Log" />
+      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" onAction="#partLog" text="Parts Log" />
    </children>
 </AnchorPane>

@@ -155,7 +155,24 @@ public class addInstalledPart implements Initializable {
                   add();
                 }
             }
-    
+    public void partBooking(ActionEvent event)
+    {
+        try
+        {
+            //addMenuBar();
+            
+            URL addPartUrl = getClass().getResource("/parts/gui/partBooking.fxml");
+            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     public void enterPressedSearch(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
                   searchPart();

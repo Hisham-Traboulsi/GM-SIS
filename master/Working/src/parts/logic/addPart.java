@@ -40,6 +40,8 @@ import javafx.util.converter.IntegerStringConverter;
 import javax.swing.JOptionPane;
 
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -121,6 +123,25 @@ public class addPart implements Initializable {
                   add();
                 }
             }
+     public void partLog(ActionEvent event)
+    {
+        try
+        {
+           // addMenuBar();
+            
+            URL DiagnosisUrl = getClass().getResource("/parts/gui/partLog.fxml");
+            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(DiagnosisPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
     public void clearButton()
     {
     

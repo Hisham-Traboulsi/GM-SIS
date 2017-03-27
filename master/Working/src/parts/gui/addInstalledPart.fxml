@@ -71,5 +71,6 @@
          </font>
       </Text>
       <StringTextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" onKeyPressed="#enterPressed" prefHeight="25.0" prefWidth="114.0" />
+      <Button layoutX="911.0" layoutY="504.0" mnemonicParsing="false" onAction="#partBooking" text="Bookings" />
    </children>
 </AnchorPane>
