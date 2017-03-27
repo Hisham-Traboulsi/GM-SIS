@@ -320,7 +320,7 @@ public class addInstalledPart implements Initializable {
         /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
         regComb.getItems().addAll(regComb1);*/
-        ObservableList <String> regComb1=Database.getInstance().fillNumCombo();
+        ObservableList <String> regComb1=Database.getInstance().fillNumComboBook();
         //regComb = new ComboBox();
         regCombReg.setItems(regComb1);
         

@@ -660,6 +660,24 @@ public final class Database
         }
            return regComb1;
     }
+    public ObservableList<String> fillNumComboBook()
+    {
+        
+        ObservableList<String> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT REG_NUM FROM DIAGNOSIS_REPAIR_BOOKINGS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getString("REG_NUM"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
     
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
@@ -710,8 +728,10 @@ public final class Database
             String name = rs.getString("FIRST_NAME");
             String surname = rs.getString("SURNAME");
             String type = rs.getString("TYPE");
+            int id = rs.getInt("BOOKING_ID");
+            
 
-            partBooking booking = new partBooking(date,name,surname,type);
+            partBooking booking = new partBooking(date,name,surname,type,id);
             
             bookingdata.add(booking);
         }
@@ -828,6 +848,18 @@ public final class Database
     {
         try{
         PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeInstalledPartStmt.executeUpdate();
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+    }
+      public void removeBookingPart(int id) 
+    {
+        try{
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE BOOKING_ID='"+ id+"'");
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
         }

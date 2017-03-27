@@ -23,14 +23,16 @@ public class partBooking
     private StringProperty Name;
     private StringProperty SurName;
     private StringProperty Type;
+    private IntegerProperty id;
     
     
-   public partBooking(String Date,String Name,String SurName,String Type)
+   public partBooking(String Date,String Name,String SurName,String Type,int id)
     {
         this.Date =  new SimpleStringProperty(Date);
         this.Name =  new SimpleStringProperty(Name);
         this.SurName =  new SimpleStringProperty(SurName);
         this.Type =  new SimpleStringProperty(Type);
+        this.id =  new SimpleIntegerProperty(id);
         
     }
   
@@ -53,6 +55,11 @@ public class partBooking
     public String getType()
     {
         return Type.get();
+    
+    }
+    public int getBookID()
+    {
+        return id.get();
     
     }
    
