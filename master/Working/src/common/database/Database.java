@@ -26,6 +26,7 @@ import parts.logic.partLog;
 import specialist.logic.ReturnedVehicle;
 
 import diagrep.logic.Bookings;
+import diagrep.logic.Mec;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -65,6 +66,7 @@ public final class Database
     private ComboBox regCombReg;
     private ComboBox regCombCustName;
     private ObservableList<Bookings> BookingsData;
+    private ObservableList<Mec> MechanicData;
         
     private Database(String DBFileName)
     {
@@ -1347,6 +1349,28 @@ public final class Database
         
         getBookings();
     }
+       
+       public void editMec() throws SQLException
+    {
+        PreparedStatement editMecStmt = preparedStatement("UPDATE MECHANIC SET MECHANIC_NAME=?, MECHANIC_DATE=?, MECHANIC_NUMBER=?, MECHANIC_RATE=?  WHERE IDnum=?");
+        int counter = 0;
+        while(counter < MechanicData.size())
+            
+        {
+
+            editMecStmt.setString(1, MechanicData.get(counter).getMECHANIC_NAME());
+            editMecStmt.setString(2, MechanicData.get(counter).getMECHANIC_DATE());
+            editMecStmt.setString(3, MechanicData.get(counter).getMECHANIC_NUMBER());
+            editMecStmt.setString(4, MechanicData.get(counter).getMECHANIC_RATE());
+            
+            
+            editMecStmt.executeUpdate();
+            
+            counter++;
+        }
+        
+        getMec();
+    }
       
    
     public static Database getInstance()
@@ -1414,6 +1438,33 @@ public final class Database
         }
         return BookingsData;
     }
+     
+     public ObservableList<Mec> getMec() throws SQLException
+    {   
+        
+        PreparedStatement getMec = null;
+        MechanicData = FXCollections.observableArrayList();
+        
+       
+        getMec = preparedStatement("SELECT * FROM MECHANIC");
+        ResultSet rs = getMec.executeQuery();
+        
+        while(rs.next())
+        {
+            int idNum = rs.getInt("IDnum");
+            String MechanicName = rs.getString("MECHANIC_NAME");
+            String MechanicDate = rs.getString("MECHANIC_DATE");
+            String MechanicNumber = rs.getString("MECHANIC_NUMBER");
+            String MechanicRate = rs.getString("MECHANIC_RATE");
+            
+            
+            Mec mec = new Mec(idNum, MechanicName, MechanicDate, MechanicNumber, 
+                    MechanicRate);
+            
+            MechanicData.add(mec);
+        }
+        return MechanicData;
+    }
      public boolean addBookings( String BookingMechanicID, String BookingFName, String BookingSName,
             String BookingRegNum, String BookingManufacture, String BookingMileage, 
             String BookingDate, String BookingTime, String BookingType)
@@ -1448,12 +1499,53 @@ public final class Database
         
         return added;
     }
+     
+     public boolean addMec( String MechanicName, String MechanicDate,
+            String MechanicNumber, String MechanicRate )
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO MECHANIC VALUES (?, ?, ?, ?, ?)"); 
+           add.setString(1, null);
+           add.setString(2, MechanicName);
+           add.setString(3, MechanicDate);
+           add.setString(4, MechanicNumber);
+           add.setString(5, MechanicRate);
+           
+
+           add.execute();
+           add.close();
+           added = true;
+           JOptionPane.showMessageDialog(null,"Mechanic successfully added");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+     
      public void removeBookings(int ID) throws SQLException
     {
         
         PreparedStatement removeBookingsStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum="+ ID);
       // removeInstalledPartStmt.setInt(1, id);
         removeBookingsStmt.executeUpdate();
+        JOptionPane.showMessageDialog(null,"Successfully Removed");
+    }
+
+
+public void removeMec(int ID) throws SQLException
+    {
+        
+        PreparedStatement removeMechanicStmt = preparedStatement("DELETE FROM MECHANIC WHERE IDnum="+ ID);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeMechanicStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
 }
