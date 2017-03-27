@@ -45,6 +45,41 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javax.swing.JOptionPane;
+import common.Main;
+import common.database.Database;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
+import javax.swing.JOptionPane;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javafx.event.ActionEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -65,12 +100,14 @@ public class AddBookings implements Initializable {
     private TextField ManufactureTxt;
     @FXML
     private TextField MileageTxt;
-    @FXML
-    private TextField DateTxt;
+    
     @FXML
     private TextField TimeTxt;
     @FXML
     private TextField Typetxt;
+    
+    @FXML
+    private DatePicker DateTxt;
     
     @FXML
     private Button addButton;
@@ -110,6 +147,21 @@ public class AddBookings implements Initializable {
    @FXML
    public boolean addBooking() throws SQLException
     {
+       
+       
+       
+       
+       
+       
+       DateFormat df = new SimpleDateFormat("dd/MM/yy");
+       Date dateobj = new Date();
+       
+       Calendar cal = Calendar.getInstance();
+       Date today = cal.getTime();
+       cal.add(Calendar.DATE, 364); 
+       Date nextYear = cal.getTime();
+       
+       
       
       boolean added=false;
       
@@ -120,7 +172,7 @@ public class AddBookings implements Initializable {
             String BookingRegNum=(RegNumTxt.getText());
             String BookingManufacture=(ManufactureTxt.getText());
             String BookingMileage= (MileageTxt.getText());
-            String BookingDate=(DateTxt.getText());
+            String BookingDate = (df.format(dateobj));          
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
          
@@ -156,7 +208,7 @@ public class AddBookings implements Initializable {
         RegNumTxt.clear();
         ManufactureTxt.clear();
         MileageTxt.clear();
-        DateTxt.clear();
+        
         TimeTxt.clear();
         Typetxt.clear();
         
