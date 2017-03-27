@@ -66,9 +66,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField VEHICLE_ID_BILL;
     @FXML
-    private TextField CUST_NAME;
-    @FXML
-    private TextField CUST_2NAME;
+    private TextField CUSTOMER_ID;
     @FXML
     private TextField VEHICLE_ID;
     @FXML
@@ -77,6 +75,8 @@ public class addInstalledPart implements Initializable {
     private ComboBox regCombReg;
     @FXML
     private ComboBox regCombCustName;
+    @FXML
+    private ComboBox IDcomb;
    
 
     
@@ -110,9 +110,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TableColumn<installedPart, String> EXP_DATE_view;
     @FXML
-    private TableColumn<installedPart, String> CUST_NAME_view;
-    @FXML
-    private TableColumn<installedPart, String> CUST_2NAME_view;
+    private TableColumn<installedPart, Integer> CUSTOMER_ID_view;
 
     @FXML
     private TextField searchBox;
@@ -138,13 +136,12 @@ public class addInstalledPart implements Initializable {
             String REGNUM = (String) regCombReg.getValue();
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
-            String CUSTNAME = (CUST_NAME.getText());
-            String CUST2NAME = (CUST_2NAME.getText());
+            int CUSTOMERID = (Integer)(IDcomb.getValue());
             
   
       
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
-              EXPDATE,PARTNAME, CUSTNAME,CUST2NAME);
+              EXPDATE,PARTNAME, CUSTOMERID);
       updateAmount();
       addWithdrawalDate();
       clearButton();
@@ -202,12 +199,6 @@ public class addInstalledPart implements Initializable {
         searchPart();
     }
     
-   /* public void regComb()//throws SQLException
-    {
-        
-      Database.getInstance().fillRegCombo();
-        
-    }*/
       public void updatePart() 
     {
         Database.getInstance().editInstalledPart();
@@ -225,7 +216,7 @@ public class addInstalledPart implements Initializable {
             
            
            PART_NAME_view.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
-            PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           /* PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
             PART_NAME_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -234,11 +225,11 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setPART_NAME(t.getNewValue());
                 }
             }
-            );
+            );*/
             
 
             REG_NUM_view.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
-            REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
             REG_NUM_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -247,10 +238,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
                 }
             }
-            );
+            );*/
             
             INST_DATE_view.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
-            INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             INST_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -259,10 +250,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
                 }
             }
-            );
+            );*/
            
             EXP_DATE_view.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
-            EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             EXP_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -271,29 +262,19 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
                 }
             }
-            );
-            CUST_NAME_view.setCellValueFactory(new PropertyValueFactory<>("CUST_NAME"));
-            CUST_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
-            CUST_NAME_view.setOnEditCommit(
-                    new EventHandler<CellEditEvent<installedPart,String>>() {
+            );*/
+            CUSTOMER_ID_view.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
+            /*CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            CUSTOMER_ID_view.setOnEditCommit(
+                    new EventHandler<CellEditEvent<installedPart,Integer>>() {
                 @Override
-                public void handle(CellEditEvent<installedPart, String> t) {
+                public void handle(CellEditEvent<installedPart, Integer> t) {
                     ((installedPart) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setCUST_NAME(t.getNewValue());
+                            t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
                 }
             }
-            );
-            CUST_2NAME_view.setCellValueFactory(new PropertyValueFactory<>("CUST_2NAME"));
-            CUST_2NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
-            CUST_2NAME_view.setOnEditCommit(
-                    new EventHandler<CellEditEvent<installedPart,String>>() {
-                @Override
-                public void handle(CellEditEvent<installedPart, String> t) {
-                    ((installedPart) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setCUST_2NAME(t.getNewValue());
-                }
-            }
-            );
+            );*/
+            
 
             
             installedPartsTable.setItems(searchPartsData);
@@ -306,11 +287,12 @@ public class addInstalledPart implements Initializable {
     {
     searchBox.clear();
     installedPartsTable.getItems().clear();
-    PART_NAME.clear();
-    VEHICLE_ID.clear();
-    REG_NUM.clear();
-    CUST_NAME.clear();
-    CUST_2NAME.clear();
+  
+    regComb.getItems().clear();
+    regCombReg.getItems().clear();
+    IDcomb.getItems().clear();
+    
+  
     
     }
     public void partBox()
@@ -321,6 +303,16 @@ public class addInstalledPart implements Initializable {
         ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         //regComb = new ComboBox();
         regComb.setItems(regComb1);
+        
+    }
+    public void idcombBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <Integer> regComb1=Database.getInstance().fillIDcombo();
+        //regComb = new ComboBox();
+        IDcomb.setItems(regComb1);
         
     }
     public void numBox()
@@ -339,6 +331,7 @@ public class addInstalledPart implements Initializable {
        /// partBox();
        partBox();
        numBox();
+       idcombBox();
      
        
        

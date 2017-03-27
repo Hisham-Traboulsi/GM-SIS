@@ -65,6 +65,7 @@ public final class Database
     private ComboBox regComb;
     private ComboBox regCombReg;
     private ComboBox regCombCustName;
+    private ComboBox IDComb;
     private ObservableList<Bookings> BookingsData;
     private ObservableList<Mec> MechanicData;
         
@@ -364,20 +365,19 @@ public final class Database
     }
     /*Author Sergio*/
     public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, String CUST_NAME,String CUST_2NAME)
+            String EXP_DATE,String PART_NAME, int CUSTOMER_ID)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ?,? )"); 
+           add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ? )"); 
            add.setString(1, null);
            add.setString(2, REG_NUM);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
            add.setString(5, PART_NAME);
-           add.setString(6, CUST_NAME);
-           add.setString(7, CUST_2NAME);
+           add.setInt(6, CUSTOMER_ID);
            
            
   
@@ -554,14 +554,13 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            String CUST_NAME = rs.getString("FIRST_NAME");
-            String CUST_2NAME = rs.getString("SURNAME");
+            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
             
             
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUST_NAME, CUST_2NAME);
+            EXP_DATE,PART_NAME, CUSTOMER_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -575,7 +574,7 @@ public final class Database
         searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("SELECT * FROM 'PARTS_INSTALLATION' WHERE REG_NUM LIKE '%" + searchVal +  "%' OR" + " FIRST_NAME LIKE '%" + searchVal +"%'OR" + " SURNAME LIKE '%" + searchVal +"%'" );
+        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (CUSTOMER_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,VEHICLE_RECORD where FIRST_NAME like '%" + searchVal + "%' OR SURNAME LIKE'%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%')");
         
         //searchInstalledPart.setString(1,searchVal);
         
@@ -589,11 +588,10 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            String CUST_NAME = rs.getString("FIRST_NAME");
-            String CUST_2NAME = rs.getString("SURNAME");
+            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
 
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUST_NAME,CUST_2NAME);
+            EXP_DATE,PART_NAME, CUSTOMER_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -618,6 +616,24 @@ public final class Database
          while(rs.next())
             {
               regComb1.add(rs.getString("NAME"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
+    public ObservableList<Integer> fillIDcombo()
+    {
+        
+        ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT CUSTOMER_ID FROM CUSTOMERS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getInt("CUSTOMER_ID"));
             }
                
         }
@@ -710,7 +726,7 @@ public final class Database
     public void editInstalledPart() 
     {
         try{
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,FIRST_NAME=? ,SURNAME=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -718,10 +734,9 @@ public final class Database
             editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getPART_NAME());
-            editInstalledPart.setString(5, searchPartsData.get(counter).getCUST_NAME());
-            editInstalledPart.setString(6, searchPartsData.get(counter).getCUST_2NAME());
+            editInstalledPart.setInt(5, searchPartsData.get(counter).getCUSTOMER_ID());
             
-            editInstalledPart.setInt(7, searchPartsData.get(counter).getINST_ID());
+            editInstalledPart.setInt(6, searchPartsData.get(counter).getINST_ID());
            
             
             editInstalledPart.executeUpdate();

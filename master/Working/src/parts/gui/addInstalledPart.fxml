@@ -23,12 +23,7 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <StringTextField fx:id="CUST_NAME" layoutX="275.0" layoutY="350.0" prefHeight="25.0" prefWidth="114.0" />
       <Text fill="WHITE" layoutX="77.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
-         <font>
-            <Font size="19.0" />
-         </font></Text>
-      <Text fill="WHITE" layoutX="77.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer First Name">
          <font>
             <Font size="19.0" />
          </font></Text>
@@ -39,8 +34,7 @@
             <TableColumn fx:id="INST_DATE_view" prefWidth="101.0" text="Installation Date" />
             <TableColumn fx:id="EXP_DATE_view" prefWidth="121.0" text="Warranty Expiration" />
             <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="92.0" text="Part Name" />
-            <TableColumn fx:id="CUST_NAME_view" prefWidth="102.0" text="Customer Name" />
-            <TableColumn fx:id="CUST_2NAME_view" prefWidth="120.0" text="Customer Surname" />
+            <TableColumn fx:id="CUSTOMER_ID_view" prefWidth="102.0" text="Customer ID" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
@@ -65,12 +59,12 @@
       </Text>
       <ComboBox fx:id="regComb" layoutX="273.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
       <ComboBox fx:id="regCombReg" layoutX="273.0" layoutY="200.0" prefHeight="25.0" prefWidth="112.0" />
-      <Text fill="WHITE" layoutX="77.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Surname">
+      <Button layoutX="911.0" layoutY="504.0" mnemonicParsing="false" onAction="#partBooking" text="Bookings" />
+      <Text fill="WHITE" layoutX="74.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <StringTextField fx:id="CUST_2NAME" layoutX="275.0" layoutY="417.0" onKeyPressed="#enterPressed" prefHeight="25.0" prefWidth="114.0" />
-      <Button layoutX="911.0" layoutY="504.0" mnemonicParsing="false" onAction="#partBooking" text="Bookings" />
+      <ComboBox fx:id="IDcomb" layoutX="273.0" layoutY="344.0" prefHeight="25.0" prefWidth="112.0" />
    </children>
 </AnchorPane>
