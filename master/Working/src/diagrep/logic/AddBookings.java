@@ -146,8 +146,6 @@ public class AddBookings implements Initializable {
    @FXML
    public boolean addBooking() 
     {
-       
-       
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
        
@@ -155,6 +153,10 @@ public class AddBookings implements Initializable {
        Date today = cal.getTime();
        cal.add(Calendar.DATE, 364); 
        Date nextYear = cal.getTime();
+       
+       
+       
+       
        
        
       BookTable.getItems().clear();
@@ -170,13 +172,19 @@ public class AddBookings implements Initializable {
             String BookingDate = (df.format(dateobj));          
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
-         
+            
+         if(MechTxt.getText().isEmpty() || FNameTxt.getText().isEmpty() || SNameTxt.getText().isEmpty() || RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
+        || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "All fields are required");
+        }
+         else{
      
           
       added = Database.getInstance().addBookings( BookingMechanicID,BookingFName,
              BookingSName, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
              BookingTime, BookingType);
-      
+         }
       
            
       
@@ -184,6 +192,10 @@ public class AddBookings implements Initializable {
             
       return added;
     }
+   
+   
+   
+   
    public void removeBooking() throws SQLException
     {
         selected = BookTable.getSelectionModel().getSelectedItems();   

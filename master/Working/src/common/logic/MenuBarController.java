@@ -206,24 +206,7 @@ public class MenuBarController
         }
     }
     
-    public void Diagnosis(ActionEvent event)
-    {
-        try
-        {
-            addMenuBar();
-            
-            URL DiagnosisUrl = getClass().getResource("/diagrep/gui/Diagnosis.fxml");
-            AnchorPane DiagnosisPane = FXMLLoader.load(DiagnosisUrl);
-            
-            BorderPane border = Main.getRoot();
-            
-            border.setCenter(DiagnosisPane);
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+    
      
 
     
