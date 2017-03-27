@@ -25,7 +25,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javax.swing.JOptionPane;/**
+import javax.swing.JOptionPane;
+import common.Main;
+import common.database.Database;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -89,39 +108,43 @@ public class AddBookings implements Initializable {
         private ObservableList<Bookings> selected = null;
     
    @FXML
-   public boolean add() throws SQLException
+   public boolean addBooking() throws SQLException
     {
       
       boolean added=false;
       
-      
+     
             String BookingMechanicID = (MechTxt.getText());
-            String BookingFName = (FNameTxt.getText());
-            String BookingSName = (SNameTxt.getText());
-            String BookingRegNum = (RegNumTxt.getText());
-            String BookingManufacture = (ManufactureTxt.getText());
-            String BookingMileage = (MileageTxt.getText());
-            String BookingDate = (DateTxt.getText());
-            String BookingTime = (TimeTxt.getText());
-            String BookingType = (Typetxt.getText());
- 
-            
-  
-      added = Database.getInstance().addBookings( BookingMechanicID, BookingFName,
-              BookingSName,BookingRegNum,BookingManufacture, BookingMileage,
-              BookingDate,BookingTime, BookingType);
-      reload();
+            String BookingFName=(FNameTxt.getText());
+            String BookingSName=(SNameTxt.getText());
+            String BookingRegNum=(RegNumTxt.getText());
+            String BookingManufacture=(ManufactureTxt.getText());
+            String BookingMileage= (MileageTxt.getText());
+            String BookingDate=(DateTxt.getText());
+            String BookingTime =(TimeTxt.getText());
+            String BookingType=(Typetxt.getText());
+         
+     
+          
+      added = Database.getInstance().addBookings( BookingMechanicID,BookingFName,
+             BookingSName, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
+             BookingTime, BookingType);
+      
+      
+           
+      
+      RefreshPage();
             
       return added;
     }
-   public void remove() throws SQLException
+   public void removeBooking() throws SQLException
     {
         selected = BookTable.getSelectionModel().getSelectedItems();   
         
         int ID = selected.get(0).getIDnum();
         
         Database.getInstance().removeBookings(ID);
-        reload();
+        RefreshPage();
         
     }
    
@@ -141,13 +164,13 @@ public class AddBookings implements Initializable {
    
    
    
-   public void edit() throws SQLException
+   public void editBooking() throws SQLException
     {
         Database.getInstance().editBookings();
-        reload();
+        RefreshPage();
     }
    
-   public void reload(){
+   public void RefreshPage(){
        try {
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
 
