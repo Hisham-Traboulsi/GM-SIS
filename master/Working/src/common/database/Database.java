@@ -65,6 +65,7 @@ public final class Database
     private ComboBox regComb;
     private ComboBox regCombReg;
     private ComboBox regCombCustName;
+    private ComboBox IDComb;
     private ObservableList<Bookings> BookingsData;
     private ObservableList<Mec> MechanicData;
         
@@ -615,6 +616,24 @@ public final class Database
          while(rs.next())
             {
               regComb1.add(rs.getString("NAME"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
+    public ObservableList<Integer> fillIDcombo()
+    {
+        
+        ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT CUSTOMER_ID FROM CUSTOMERS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getInt("CUSTOMER_ID"));
             }
                
         }

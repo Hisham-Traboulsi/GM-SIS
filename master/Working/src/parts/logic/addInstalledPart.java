@@ -75,6 +75,8 @@ public class addInstalledPart implements Initializable {
     private ComboBox regCombReg;
     @FXML
     private ComboBox regCombCustName;
+    @FXML
+    private ComboBox IDcomb;
    
 
     
@@ -134,7 +136,7 @@ public class addInstalledPart implements Initializable {
             String REGNUM = (String) regCombReg.getValue();
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
-            int CUSTOMERID = Integer.parseInt(CUSTOMER_ID.getText());
+            int CUSTOMERID = (Integer)(IDcomb.getValue());
             
   
       
@@ -197,12 +199,6 @@ public class addInstalledPart implements Initializable {
         searchPart();
     }
     
-   /* public void regComb()//throws SQLException
-    {
-        
-      Database.getInstance().fillRegCombo();
-        
-    }*/
       public void updatePart() 
     {
         Database.getInstance().editInstalledPart();
@@ -291,11 +287,12 @@ public class addInstalledPart implements Initializable {
     {
     searchBox.clear();
     installedPartsTable.getItems().clear();
-  //  PART_NAME.getItems().clear();
-   // VEHICLE_ID.clear();
-    //REG_NUM.clear();
-    CUSTOMER_ID.clear();
-   
+  
+    regComb.getItems().clear();
+    regCombReg.getItems().clear();
+    IDcomb.getItems().clear();
+    
+  
     
     }
     public void partBox()
@@ -306,6 +303,16 @@ public class addInstalledPart implements Initializable {
         ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         //regComb = new ComboBox();
         regComb.setItems(regComb1);
+        
+    }
+    public void idcombBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <Integer> regComb1=Database.getInstance().fillIDcombo();
+        //regComb = new ComboBox();
+        IDcomb.setItems(regComb1);
         
     }
     public void numBox()
@@ -324,6 +331,7 @@ public class addInstalledPart implements Initializable {
        /// partBox();
        partBox();
        numBox();
+       idcombBox();
      
        
        
