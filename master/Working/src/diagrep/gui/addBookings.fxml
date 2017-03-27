@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diagrep.logic.AddBookings">
    <children>
-      <TableView fx:id="BookTable" layoutX="148.0" layoutY="269.0" prefHeight="391.0" prefWidth="904.0">
+      <TableView fx:id="BookTable" layoutX="92.0" layoutY="275.0" prefHeight="391.0" prefWidth="1016.0">
         <columns>
           <TableColumn fx:id="BookingCol" prefWidth="97.5" text="Booking ID" />
           <TableColumn fx:id="MechanicCol" prefWidth="84.0" text="Mechanic ID" />
@@ -22,6 +23,7 @@
             <TableColumn fx:id="DateCol" prefWidth="74.0" text="Date" />
             <TableColumn fx:id="TimeCol" prefWidth="74.0" text="Time" />
             <TableColumn fx:id="TypeCol" prefWidth="110.0" text="Booking Type" />
+            <TableColumn fx:id="CostCol" prefWidth="110.0" text="Cost" />
         </columns>
       </TableView>
       <TextField fx:id="MechTxt" layoutX="213.0" layoutY="87.0" prefHeight="32.0" prefWidth="166.0" />
@@ -32,10 +34,10 @@
       <TextField fx:id="MileageTxt" layoutX="567.0" layoutY="167.0" prefHeight="32.0" prefWidth="166.0" />
       <TextField fx:id="DateTxt" layoutX="925.0" layoutY="86.0" prefHeight="32.0" prefWidth="166.0" />
       <TextField fx:id="TimeTxt" layoutX="925.0" layoutY="126.0" prefHeight="32.0" prefWidth="166.0" />
-      <Button fx:id="addButton" layoutX="296.0" layoutY="211.0" mnemonicParsing="false" onAction="#add" prefHeight="36.0" prefWidth="135.0" text="Add" />
-      <Button fx:id="removeButton" layoutX="768.0" layoutY="211.0" mnemonicParsing="false" onAction="#remove" prefHeight="36.0" prefWidth="135.0" text="Remove" />
+      <Button fx:id="addButton" layoutX="296.0" layoutY="211.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="36.0" prefWidth="135.0" text="Add" />
+      <Button fx:id="removeButton" layoutX="768.0" layoutY="211.0" mnemonicParsing="false" onAction="#removeBooking" prefHeight="36.0" prefWidth="135.0" text="Remove" />
       <Button fx:id="clearButton" layoutX="457.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="36.0" prefWidth="135.0" text="Clear" />
-      <Button layoutX="616.0" layoutY="211.0" mnemonicParsing="false" onAction="#edit" prefHeight="36.0" prefWidth="135.0" text="Update Edit" />
+      <Button layoutX="616.0" layoutY="211.0" mnemonicParsing="false" onAction="#editBooking" prefHeight="36.0" prefWidth="135.0" text="Update Edit" />
       <TextField fx:id="Typetxt" layoutX="925.0" layoutY="165.0" prefHeight="32.0" prefWidth="166.0" />
       <Text fill="WHITE" layoutX="103.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MechanicID">
          <font>
@@ -87,5 +89,6 @@
             <Font size="43.0" />
          </font>
       </Text>
+      <DatePicker fx:id="EXP_DATE" layoutX="209.0" layoutY="42.0" />
    </children>
 </AnchorPane>
