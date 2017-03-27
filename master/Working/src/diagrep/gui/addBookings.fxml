@@ -20,8 +20,8 @@
             <TableColumn fx:id="RegNumCol" prefWidth="91.0" text="Reg Num" />
             <TableColumn fx:id="ManufactureCol" prefWidth="92.0" text="Manufacture" />
             <TableColumn fx:id="MileageCol" prefWidth="83.5" text="Mileage" />
-            <TableColumn fx:id="DateCol" prefWidth="74.0" text="Date" />
-            <TableColumn fx:id="TimeCol" prefWidth="74.0" text="Time" />
+            <TableColumn fx:id="TimeCol" prefWidth="74.0" text="Date" />
+            <TableColumn fx:id="DateCol" prefWidth="74.0" text="Time" />
             <TableColumn fx:id="TypeCol" prefWidth="110.0" text="Booking Type" />
             <TableColumn fx:id="CostCol" prefWidth="110.0" text="Cost" />
         </columns>
@@ -32,7 +32,6 @@
       <TextField fx:id="RegNumTxt" layoutX="567.0" layoutY="86.0" prefHeight="36.0" prefWidth="166.0" />
       <TextField fx:id="ManufactureTxt" layoutX="567.0" layoutY="128.0" prefHeight="32.0" prefWidth="166.0" />
       <TextField fx:id="MileageTxt" layoutX="567.0" layoutY="167.0" prefHeight="32.0" prefWidth="166.0" />
-      <TextField fx:id="DateTxt" layoutX="925.0" layoutY="86.0" prefHeight="32.0" prefWidth="166.0" />
       <TextField fx:id="TimeTxt" layoutX="925.0" layoutY="126.0" prefHeight="32.0" prefWidth="166.0" />
       <Button fx:id="addButton" layoutX="296.0" layoutY="211.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="36.0" prefWidth="135.0" text="Add" />
       <Button fx:id="removeButton" layoutX="768.0" layoutY="211.0" mnemonicParsing="false" onAction="#removeBooking" prefHeight="36.0" prefWidth="135.0" text="Remove" />
@@ -89,6 +88,6 @@
             <Font size="43.0" />
          </font>
       </Text>
-      <DatePicker fx:id="EXP_DATE" layoutX="209.0" layoutY="42.0" />
+      <DatePicker fx:id="DateTxt" layoutX="925.0" layoutY="86.0" prefHeight="32.0" prefWidth="166.0" />
    </children>
 </AnchorPane>
