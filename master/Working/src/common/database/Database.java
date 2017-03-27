@@ -789,9 +789,9 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(String regNum) 
+    public void calculateBill(String regNum,int customerid) 
     { 
-        double cost=0.0;
+        double totalcost=0.0;
        // String custName=name;
         try
         {
@@ -801,21 +801,33 @@ public final class Database
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
         {
-            cost= cost + rs.getDouble("COST");
+            totalcost= totalcost + rs.getDouble("COST");
           //custName=rs.getString("CUSTOMER_FULLNAME)");
         }
+       // PartCost partcost = new PartCost(customerid,totalcost);
         
-        JOptionPane.showMessageDialog(null,"The bill for adds up to £ " + cost);
+        JOptionPane.showMessageDialog(null,"The bill for adds up to £ " + totalcost);
         }
-        
-    
         catch(SQLException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
         }
+         try{
+        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?) WHERE CUSTOMER_ID ='" + customerid+"'");
 
+           getBill.setInt(1, customerid);
+           getBill.setDouble(2,totalcost);
+           getBill.execute();
+           getBill.close();
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+      
     }
+
     
     public void editPart() throws SQLException
     {

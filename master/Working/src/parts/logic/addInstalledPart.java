@@ -189,7 +189,7 @@ public class addInstalledPart implements Initializable {
    public void getBill() 
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().calculateBill(selected.get(0).getREG_NUM());
+        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUSTOMER_ID());
         searchPart();
     }
     public void remove() 
