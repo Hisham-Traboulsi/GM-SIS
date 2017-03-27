@@ -21,6 +21,7 @@
           <TableColumn fx:id="name" prefWidth="166.0" text="Name" />
             <TableColumn fx:id="surname" prefWidth="181.0" text="Surname" />
             <TableColumn fx:id="type" prefWidth="150.0" text="Type" />
+            <TableColumn fx:id="id" prefWidth="75.0" text="Booking ID" />
         </columns>
       </TableView>
       <ComboBox fx:id="reg" layoutX="146.0" layoutY="242.0" prefWidth="150.0" />
@@ -31,5 +32,6 @@
       </Text>
       <Button layoutX="195.0" layoutY="314.0" mnemonicParsing="false" onAction="#showBooking" text="View Booking" />
       <Button layoutX="147.0" layoutY="60.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button layoutX="692.0" layoutY="512.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
    </children>
 </AnchorPane>

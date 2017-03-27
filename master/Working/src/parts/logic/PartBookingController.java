@@ -39,9 +39,13 @@ public class PartBookingController implements Initializable {
     private TableColumn<partBooking, String> surname;
     @FXML
     private TableColumn<partBooking, String> type;
+    @FXML
+    private TableColumn<partBooking, Integer> id;
     
     @FXML
     private ComboBox <String> reg;
+    @FXML
+    private ObservableList<partBooking> selected = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,6 +64,7 @@ public class PartBookingController implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         surname.setCellValueFactory(new PropertyValueFactory<>("SurName"));
         type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
         bookings.setItems(bookingData);
     }
     public void numBox()
@@ -67,10 +72,19 @@ public class PartBookingController implements Initializable {
         /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
         regComb.getItems().addAll(regComb1);*/
-        ObservableList <String> regComb1=Database.getInstance().fillNumCombo();
+        ObservableList <String> regComb1=Database.getInstance().fillNumComboBook();
         //regComb = new ComboBox();
         reg.setItems(regComb1);
         
+    }
+    public void remove() 
+    {
+        
+        
+        selected = bookings.getSelectionModel().getSelectedItems();   
+       Database.getInstance().removeBookingPart(selected.get(0).getBookID());
+        //searchPart();
+        showBooking();
     }
     public void back(ActionEvent event)
     {
