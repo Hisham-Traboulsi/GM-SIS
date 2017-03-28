@@ -805,9 +805,8 @@ public final class Database
             totalcost= totalcost + rs.getDouble("COST");
           //custName=rs.getString("CUSTOMER_FULLNAME)");
         }
-       // PartCost partcost = new PartCost(customerid,totalcost);
+
         
-        JOptionPane.showMessageDialog(null,"The bill for adds up to £ " + totalcost);
         }
         catch(SQLException ex)
         {
@@ -815,7 +814,7 @@ public final class Database
             ex.printStackTrace();
         }
          try{
-        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?) WHERE CUSTOMER_ID ='" + customerid+"'");
+        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?)");
 
            getBill.setInt(1, customerid);
            getBill.setDouble(2,totalcost);

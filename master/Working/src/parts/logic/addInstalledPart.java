@@ -143,6 +143,7 @@ public class addInstalledPart implements Initializable {
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
               EXPDATE,PARTNAME, CUSTOMERID);
       updateAmount();
+      Database.getInstance().calculateBill(REGNUM,CUSTOMERID);
       addWithdrawalDate();
       clearButton();
       return added;
