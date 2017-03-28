@@ -680,6 +680,25 @@ public final class Database
            return regComb1;
     }
     
+    public ObservableList<String> fillNumComboBook2()
+    {
+        
+        ObservableList<String> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT IDnum FROM MECHANIC");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getString("IDnum"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
+    
     /*Author Sergio*/
     public boolean deletePart(int ID, String partName, String partDesc, int amount, double cost)
     {
