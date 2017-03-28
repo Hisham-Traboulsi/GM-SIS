@@ -25,9 +25,11 @@ public class Outstanding {
     private StringProperty returnDate;
     private DoubleProperty partCost;
     private IntegerProperty customerID;
+    private StringProperty firstName;
+    private StringProperty surname;
 
 
-public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partCost, int customerID)
+public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partCost, int customerID, String firstName, String surname)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -37,7 +39,9 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
         this.partCost =  new SimpleDoubleProperty(partCost);
-        this.customerID =  new SimpleIntegerProperty(customerID);        
+        this.customerID =  new SimpleIntegerProperty(customerID);    
+        this.firstName =  new SimpleStringProperty(firstName);
+        this.surname =  new SimpleStringProperty(surname);
 
     }
 
@@ -78,6 +82,15 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
         return customerID.get();
     }
     
+        public String getFIRSTNAME()
+    {
+        return firstName.get();
+    }
+    public String getSURNAME()
+    {
+        return surname.get();
+    }
+    
       public StringProperty SPCNAMEProperty()
     {
         return spcName;
@@ -111,6 +124,15 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
       {
           return customerID;
       }
+        public StringProperty FIRSTNAMEProperty()
+    {
+       return firstName;
+    }     
+          
+    public StringProperty SURNAMEProperty()
+    {
+       return surname;
+    }
     
     
         public void setIDnum(int bookingID)
@@ -150,5 +172,14 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     public void setCUSTOMERID(int customerID)
     {
         this.customerID.set(customerID);        
+    }
+        public void setFIRSTNAME(String firstName)
+    {
+        this.firstName.set(firstName);        
+    }
+    
+    public void setSURNAME(String surname)
+    {
+        this.surname.set(surname);        
     }
 }

@@ -56,6 +56,26 @@ public class SearchPageController implements Initializable {
     private TableColumn firstName;
     @FXML
     private TableColumn surname;
+    @FXML
+    private TableView<Outstanding> PartSearchTable = new TableView<Outstanding>();
+    @FXML
+    private TableColumn bookingIDCol;
+    @FXML
+    private TableColumn firstNamePart;
+    @FXML
+    private TableColumn surnamePart;
+    @FXML
+    private TableColumn spcNameCol;
+    @FXML
+    private TableColumn partIDCol;
+    @FXML
+    private TableColumn partNameCol;
+    @FXML
+    private TableColumn deliveryDateCol;
+    @FXML
+    private TableColumn returnDateCol;
+    @FXML
+    private TableColumn partCost;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,9 +96,12 @@ public class SearchPageController implements Initializable {
     private void load() {      
         
             String SPCNAME = (String) spcBox.getValue();
+              SearchTable.getItems().clear();
+              PartSearchTable.getItems().clear();
             //System.out.println(SPCNAME);
                 try {
               //populate vehicle table
+
             ObservableList<OutstandingVehicle> outVehicleSearchData = Database.getInstance().getOutstandingVehiclesFromSPC(SPCNAME);
 
             SearchTable.setEditable(true);
@@ -101,6 +124,35 @@ public class SearchPageController implements Initializable {
         {
             ex.printStackTrace();
         }
+                
+        try {
+              //populate part table
+            //  PartSearchTable.getItems().clear();
+              //SearchTable.getItems().clear();
+            ObservableList<Outstanding> outPartSearchData = Database.getInstance().getOutstandingPartsFromSPC(SPCNAME);
+
+            PartSearchTable.setEditable(true);
+
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            firstNamePart.setCellValueFactory(new PropertyValueFactory<>("FIRSTNAME"));
+            surnamePart.setCellValueFactory(new PropertyValueFactory<>("SURNAME"));
+            spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
+            returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+            partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
+          
+
+            PartSearchTable.setItems(outPartSearchData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+                
+                
         
     }
     
@@ -109,8 +161,11 @@ public class SearchPageController implements Initializable {
         
             String REGIS  = regField.getText();
             String REG = REGIS.toUpperCase();
+              SearchTable.getItems().clear();
+              PartSearchTable.getItems().clear();
                 try {
               //populate vehicle table
+
             ObservableList<OutstandingVehicle> outVehicleSearchData = Database.getInstance().getOutstandingVehiclesFromReg(REG);
 
             SearchTable.setEditable(true);
@@ -133,4 +188,5 @@ public class SearchPageController implements Initializable {
         }
         
     }
+
 }

@@ -33,5 +33,18 @@
       </TableView>
       <Button fx:id="spcSearch" layoutX="302.0" layoutY="139.0" mnemonicParsing="false" onAction="#load" text="Search" />
       <Button fx:id="regSearch" layoutX="954.0" layoutY="137.0" mnemonicParsing="false" onAction="#loadregsearch" text="Search" />
+      <TableView fx:id="PartSearchTable" layoutX="5.0" layoutY="412.0" prefHeight="156.0" prefWidth="1186.0">
+         <columns>
+            <TableColumn fx:id="bookingIDCol" prefWidth="75.0" text="Booking ID" />
+            <TableColumn fx:id="firstNamePart" prefWidth="151.0" text="First Name" />
+            <TableColumn fx:id="surnamePart" prefWidth="109.0" text="Surname" />
+            <TableColumn fx:id="spcNameCol" prefWidth="198.0" text="SPC" />
+            <TableColumn fx:id="partIDCol" prefWidth="51.0" text="Part ID" />
+            <TableColumn fx:id="partNameCol" prefWidth="151.0" text="Part Name" />
+            <TableColumn fx:id="deliveryDateCol" prefWidth="144.0" text="Delivery Date" />
+            <TableColumn fx:id="returnDateCol" minWidth="0.0" prefWidth="152.0" text="Return Date" />
+            <TableColumn fx:id="partCost" prefWidth="154.0" text="Part Cost (only)" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

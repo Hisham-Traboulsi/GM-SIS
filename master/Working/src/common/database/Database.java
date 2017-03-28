@@ -61,6 +61,7 @@ public final class Database
     private ObservableList<partLog> withdrawnData;
     private ObservableList<partBooking> bookingdata;
     private ObservableList<OutstandingVehicle> outVehicleSearchData;
+    private ObservableList<Outstanding> outPartSearchData;
     private ObservableList<ReturnedVehicle> retVehicleData;    
     private ComboBox regComb;
     private ComboBox regCombReg;
@@ -1011,8 +1012,10 @@ public final class Database
             String returnDate = rs.getString("returnDate");
             Double partCost = rs.getDouble("cost");
             int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
             
-            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost, customerID);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost, customerID, firstName, surname);
             
             outPartsData.add(outstandingpart);
         }
@@ -1334,6 +1337,37 @@ public final class Database
         return outVehicleSearchData;
     }
      
+         public ObservableList<Outstanding> getOutstandingPartsFromSPC(String SPCNAME) throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingPartsFromSPC = null;
+        outPartSearchData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingPartsFromSPC = preparedStatement("SELECT * FROM OUTSTANDING_PARTS WHERE spcName ='" +SPCNAME+"';");
+        ResultSet rs = getOutstandingPartsFromSPC.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            int partID = rs.getInt("partID");
+            String partName = rs.getString("partName");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            double partCost = rs.getDouble("cost");
+            int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
+
+            Outstanding outstandingpartsearch = new Outstanding(bookingID, spcName, partID, 
+                   partName, deliveryDate, returnDate, partCost, customerID, firstName, surname);
+            
+            outPartSearchData.add(outstandingpartsearch);
+        }
+        return outPartSearchData;
+    }
+         
           public ObservableList<OutstandingVehicle> getOutstandingVehiclesFromReg(String REG) throws SQLException
     {   
         
