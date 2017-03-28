@@ -16,6 +16,7 @@ import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -53,6 +54,7 @@ public class Main extends Application
         stage.show(); 
         stage.setResizable(false);
         stage.setTitle("GMsis");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/common/gui/gmsis-icon.png")));
     }
 
     /**
