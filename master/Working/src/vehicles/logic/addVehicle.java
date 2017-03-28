@@ -85,6 +85,8 @@ public class addVehicle implements Initializable {
     private DatePicker lastservice;
     @FXML
     private ComboBox<String> chooseVehicle;
+    @FXML
+    private ComboBox IDcomb;
 
     /**
      * Initializes the controller class.
@@ -92,7 +94,11 @@ public class addVehicle implements Initializable {
     @Override
 
     public void initialize(URL url, ResourceBundle rb) {
-
+        
+        //customerID combo box
+        idcombBox();
+                
+                
         //adding items to choice box
         chooseVehicle.getItems().addAll(
                 "Ford Focus 1.2L Petrol",
@@ -287,6 +293,17 @@ public class addVehicle implements Initializable {
             expirydate_text.setVisible(false);
             expirydate.setVisible(false);
         }
+    }
+    
+    public void idcombBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <Integer> idComb1 =Database.getInstance().fillIDcombo();
+        //regComb = new ComboBox();
+        IDcomb.setItems(idComb1);
+        
     }
 
     @FXML

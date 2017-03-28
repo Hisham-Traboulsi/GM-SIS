@@ -32,6 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.util.converter.IntegerStringConverter;
+import javax.swing.JOptionPane;
 import parts.logic.Part;
 
 /**
@@ -77,6 +78,9 @@ public class VRHomepageController implements Initializable {
     final ObservableList<Vehicle> data = FXCollections.observableArrayList();
     @FXML
     private TableColumn customeridCol;
+    
+    @FXML
+    private ObservableList<Vehicle> selected = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,6 +113,36 @@ public class VRHomepageController implements Initializable {
             });
         
         
+    }
+    
+    public void addVehicle()
+    {
+        try {
+
+            URL addInstalledPartUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
+            AnchorPane addInstalledPartPane = FXMLLoader.load(addInstalledPartUrl);
+
+            BorderPane border = Main.getRoot();
+
+            border.setCenter(addInstalledPartPane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void goBack()
+    {
+        try {
+
+            URL addInstalledPartUrl = getClass().getResource("/common/gui/Welcome.fxml");
+            AnchorPane addInstalledPartPane = FXMLLoader.load(addInstalledPartUrl);
+
+            BorderPane border = Main.getRoot();
+
+            border.setCenter(addInstalledPartPane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void loadTable()
@@ -285,6 +319,25 @@ public class VRHomepageController implements Initializable {
     @FXML
     public void refresh()
     {
+        loadTable();
+    }
+    
+    @FXML
+    public void help()
+    {
+        JOptionPane.showMessageDialog(null,
+                "<html>TO ADD A VEHICLE :<br />SELECT 'ADD' BUTTON AND FILL FORM<br/><br/> "
+                    + "TO DELETE A VEHICLE :<br/> SELECT VEHICLE THEN REMOVE BUTTON <br/><br/>"
+                    + "TO SEARCH :<br/> ENTER VALUE INTO SEARCH FIELD AND PRESS SEARCH BUTTON<br/><br/><html>"
+                    + "TO EDIT VEHICLE :<br/> DOUBLE CLICK FIELD IN TABLE, EDIT AND PRESS UPDATE BUTTON <br/><br/><html>");
+        
+    }
+    
+    @FXML
+    public void remove() 
+    {
+        selected = vehicleTable.getSelectionModel().getSelectedItems();   
+        Database.getInstance().removeVehicle(selected.get(0).getID());
         loadTable();
     }
 }

@@ -881,6 +881,20 @@ public final class Database
         }
     }
       
+    /*Author Sam*/
+    public void removeVehicle(int id) 
+    {
+        try{
+        PreparedStatement removeVehicleStmt = preparedStatement("DELETE FROM VEHICLE_RECORD WHERE CUSTOMER_ID="+ id);
+        removeVehicleStmt.executeUpdate();
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+    }
+
+      
       /*Author Sam*/
     public ObservableList<Vehicle> getVehicle() throws SQLException {
 
