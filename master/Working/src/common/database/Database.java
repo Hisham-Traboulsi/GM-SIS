@@ -575,7 +575,7 @@ public final class Database
         searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (CUSTOMER_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,VEHICLE_RECORD where FIRST_NAME like '%" + searchVal + "%' OR SURNAME LIKE'%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%')");
+        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (CUSTOMER_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,DIAGNOSIS_REPAIR_BOOKINGS where CUSTOMERS.FIRST_NAME like '%" + searchVal + "%' OR CUSTOMERS.SURNAME LIKE'%" + searchVal +"%' OR DIAGNOSIS_REPAIR_BOOKINGS.REG_NUM LIKE '%" + searchVal + "%')");
         
         //searchInstalledPart.setString(1,searchVal);
         

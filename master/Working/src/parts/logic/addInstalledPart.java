@@ -182,7 +182,7 @@ public class addInstalledPart implements Initializable {
    }
    public void updateAmount() 
     {
-        String partname=PART_NAME.getText();
+        String partname=(String) regComb.getValue();
         Database.getInstance().updateStock(partname);
         Database.getInstance().partBelowZero();
         //return ID;
@@ -217,7 +217,7 @@ public class addInstalledPart implements Initializable {
             
            
            PART_NAME_view.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
-           /* PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
             PART_NAME_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -226,11 +226,11 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setPART_NAME(t.getNewValue());
                 }
             }
-            );*/
+            );
             
 
             REG_NUM_view.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
-            /*REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
             REG_NUM_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -239,10 +239,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
                 }
             }
-            );*/
+            );
             
             INST_DATE_view.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
-            /*INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             INST_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -251,10 +251,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
                 }
             }
-            );*/
+            );
            
             EXP_DATE_view.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
-            /*EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             EXP_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -263,9 +263,9 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
                 }
             }
-            );*/
+            );
             CUSTOMER_ID_view.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            /*CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             CUSTOMER_ID_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,Integer>>() {
                 @Override
@@ -274,7 +274,7 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
                 }
             }
-            );*/
+            );
             
 
             
@@ -292,7 +292,9 @@ public class addInstalledPart implements Initializable {
     regComb.getItems().clear();
     regCombReg.getItems().clear();
     IDcomb.getItems().clear();
-    
+    partBox();
+    numBox();
+    idcombBox();
   
     
     }
