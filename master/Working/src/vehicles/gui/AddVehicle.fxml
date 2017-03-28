@@ -114,6 +114,6 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <TextField fx:id="customerid" layoutX="692.0" layoutY="31.0" prefHeight="25.0" prefWidth="170.0" />
+      <ComboBox fx:id="IDcomb" layoutX="692.0" layoutY="31.0" prefHeight="25.0" prefWidth="170.0" />
    </children>
 </AnchorPane>
