@@ -1218,16 +1218,17 @@ public final class Database
         
         return added;
     }
+          
      
      
       public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
-              String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE)
+              String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE, int customerID, String customerName, String customerSurname)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1239,6 +1240,9 @@ public final class Database
            add.setString(8, COLOUR);
            add.setString(9, "" +DELIVDATE);
            add.setString(10, "" +RETURNDATE);
+           add.setInt(11, customerID);
+           add.setString(12, customerName);
+           add.setString(13, customerSurname);
         
 
            add.execute();
