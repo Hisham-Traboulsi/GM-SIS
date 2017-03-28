@@ -24,9 +24,10 @@ public class Outstanding {
     private StringProperty deliveryDate;
     private StringProperty returnDate;
     private DoubleProperty partCost;
-    
+    private IntegerProperty customerID;
 
-public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partCost)
+
+public Outstanding(int bookingID, String spcName, int partID, String partName, String deliveryDate, String returnDate, Double partCost, int customerID)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -36,6 +37,7 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
         this.partCost =  new SimpleDoubleProperty(partCost);
+        this.customerID =  new SimpleIntegerProperty(customerID);        
 
     }
 
@@ -70,6 +72,11 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     {
         return partCost.get();
     }
+        
+    public int getCUSTOMERID()
+    {
+        return customerID.get();
+    }
     
       public StringProperty SPCNAMEProperty()
     {
@@ -99,6 +106,11 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     {
        return partCost;
     }
+        
+    public IntegerProperty CUSTOMERIDProperty()
+      {
+          return customerID;
+      }
     
     
         public void setIDnum(int bookingID)
@@ -134,5 +146,9 @@ public Outstanding(int bookingID, String spcName, int partID, String partName, S
     public void setPARTCOST(Double partCost)
     {
         this.partCost.set(partCost);        
+    }
+    public void setCUSTOMERID(int customerID)
+    {
+        this.customerID.set(customerID);        
     }
 }

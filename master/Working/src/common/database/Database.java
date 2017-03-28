@@ -996,8 +996,9 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             Double partCost = rs.getDouble("cost");
+            int customerID = rs.getInt("CUSTOMER_ID");
             
-            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost, customerID);
             
             outPartsData.add(outstandingpart);
         }
@@ -1124,13 +1125,13 @@ public final class Database
     }
     
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST, int customerID, String customerName, String customerSurname)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1139,6 +1140,9 @@ public final class Database
            add.setString(5, "" +DELIVDATE);
            add.setString(6, "" +RETURNDATE);
            add.setDouble(7, PARTCOST);
+           add.setInt(8, customerID);
+           add.setString(9, customerName);
+           add.setString(10, customerSurname);
         
 
            add.execute();
@@ -1156,7 +1160,7 @@ public final class Database
         return added;
     }
 
-     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL)
+     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL, int CUSTOMERID)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1174,6 +1178,7 @@ public final class Database
 
            add.execute();
            add.close();
+
            added = true;
            JOptionPane.showMessageDialog(null,"Returned");
         }
@@ -1186,6 +1191,35 @@ public final class Database
         
         return added;
     }
+          public boolean sendPartBill(int CUSTOMERID, double TOTAL)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO BILL VALUES (?, ?)"); 
+         
+           add.setInt(1, CUSTOMERID);
+           add.setDouble(2, TOTAL);
+        
+
+           add.execute();
+           add.close();
+
+           added = true;
+           JOptionPane.showMessageDialog(null,"Bill sent");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+     
+     
       public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
               String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE)
     {

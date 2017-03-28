@@ -91,6 +91,8 @@ public class OutstandingController implements Initializable {
     private Button partsCancel;
     @FXML
     private Button vehicleCancel;
+    @FXML
+    private TableColumn<?, ?> customerID;
 
     
     
@@ -104,6 +106,7 @@ public class OutstandingController implements Initializable {
             OutstandingPartTable.setEditable(true);
 
             bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            customerID.setCellValueFactory(new PropertyValueFactory<>("CUSTOMERID"));
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
@@ -148,11 +151,13 @@ public class OutstandingController implements Initializable {
     {
       
     boolean added=false;
+    boolean added2=false;
             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
             
            // int BOOKINGID = selected.get(0).getBOOKINGID();
             String SPC = selected.get(0).getSPCNAME();
             int PARTID = selected.get(0).getPARTID();
+            int CUSTOMERID = selected.get(0).getCUSTOMERID();
             String PARTNAME = selected.get(0).getPARTNAME();
             String DELIVDATE = selected.get(0).getDELIVERYDATE();
             String RETURNDATE = selected.get(0).getRETURNDATE();
@@ -160,8 +165,8 @@ public class OutstandingController implements Initializable {
             Double bill = Double.parseDouble(partBill.getText());
             Double TOTAL = partCost + bill;
             
-           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, TOTAL);
-
+           added = Database.getInstance().returnedSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, TOTAL, CUSTOMERID);
+           added2 = Database.getInstance().sendPartBill(CUSTOMERID, TOTAL);
            remove();
            reload();
         return added;
@@ -222,6 +227,7 @@ public class OutstandingController implements Initializable {
             OutstandingPartTable.setEditable(true);
 
             bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
@@ -260,6 +266,7 @@ public class OutstandingController implements Initializable {
             ex.printStackTrace();
         }
    }
+    @FXML
      public void cancelPart() throws SQLException
     {
         Object [] options = {"Yes", "No"};
@@ -289,6 +296,7 @@ public class OutstandingController implements Initializable {
 
     }
        
+    @FXML
     public void cancelVehicle() throws SQLException
     {
                 Object [] options = {"Yes", "No"};
