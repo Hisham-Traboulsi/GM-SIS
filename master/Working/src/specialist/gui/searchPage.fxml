@@ -16,20 +16,22 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="spcBox" layoutX="95.0" layoutY="179.0" prefWidth="150.0" promptText="Search by SPC" />
-      <TextField fx:id="regField" layoutX="763.0" layoutY="179.0" promptText="Search by Reg" />
-      <TableView fx:id="SearchTable" layoutX="88.0" layoutY="250.0" prefHeight="391.0" prefWidth="1024.0">
+      <ComboBox fx:id="spcBox" layoutX="95.0" layoutY="139.0" prefWidth="150.0" promptText="Search by SPC" />
+      <TextField fx:id="regField" layoutX="763.0" layoutY="139.0" promptText="Search by Reg" />
+      <TableView fx:id="SearchTable" layoutX="6.0" layoutY="250.0" prefHeight="151.0" prefWidth="1184.0">
          <columns>
             <TableColumn fx:id="bookingCol" prefWidth="75.0" text="Booking ID" />
-            <TableColumn fx:id="spcCol" prefWidth="195.66665649414062" text="SPC" />
-            <TableColumn fx:id="regCol" prefWidth="157.33334350585938" text="Registration" />
-            <TableColumn fx:id="makeCol" prefWidth="143.0" text="Make" />
-            <TableColumn fx:id="modelCol" minWidth="7.0" prefWidth="170.6666259765625" text="Model" />
-            <TableColumn fx:id="deliveryCol" prefWidth="146.33331298828125" text="Delivery" />
-            <TableColumn fx:id="returnCol" prefWidth="139.0" text="Return" />
+            <TableColumn fx:id="firstName" prefWidth="135.0" text="First Name" />
+            <TableColumn fx:id="surname" prefWidth="129.0" text="Surname" />
+            <TableColumn fx:id="spcCol" prefWidth="158.0" text="SPC" />
+            <TableColumn fx:id="regCol" prefWidth="140.0" text="Registration" />
+            <TableColumn fx:id="makeCol" prefWidth="107.0" text="Make" />
+            <TableColumn fx:id="modelCol" minWidth="7.0" prefWidth="141.0" text="Model" />
+            <TableColumn fx:id="deliveryCol" prefWidth="129.0" text="Delivery" />
+            <TableColumn fx:id="returnCol" prefWidth="169.0" text="Return" />
          </columns>
       </TableView>
-      <Button fx:id="spcSearch" layoutX="302.0" layoutY="179.0" mnemonicParsing="false" onAction="#load" text="Search" />
-      <Button fx:id="regSearch" layoutX="954.0" layoutY="177.0" mnemonicParsing="false" onAction="#loadregsearch" text="Search" />
+      <Button fx:id="spcSearch" layoutX="302.0" layoutY="139.0" mnemonicParsing="false" onAction="#load" text="Search" />
+      <Button fx:id="regSearch" layoutX="954.0" layoutY="137.0" mnemonicParsing="false" onAction="#loadregsearch" text="Search" />
    </children>
 </AnchorPane>

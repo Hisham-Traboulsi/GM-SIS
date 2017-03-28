@@ -52,6 +52,10 @@ public class SearchPageController implements Initializable {
     private TableColumn bookingCol;
     @FXML
     private TextField regField;
+    @FXML
+    private TableColumn firstName;
+    @FXML
+    private TableColumn surname;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,7 +83,9 @@ public class SearchPageController implements Initializable {
 
             SearchTable.setEditable(true);
 
-            bookingCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));            
+            bookingCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));                       
+            firstName.setCellValueFactory(new PropertyValueFactory<>("FIRSTNAME"));           
+            surname.setCellValueFactory(new PropertyValueFactory<>("SURNAME"));
             regCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
             spcCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
             makeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));

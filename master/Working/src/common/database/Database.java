@@ -1293,10 +1293,11 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             int customerID = rs.getInt("CUSTOMER_ID");
-
+            String firstName = rs.getString("firstname");
+            String surname = rs.getString("surname");
             
             OutstandingVehicle outstandingvehicle = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate, customerID);
+                    regNum, make, model, deliveryDate, returnDate, customerID, firstName, surname);
             
             outVehicleData.add(outstandingvehicle);
         }
@@ -1322,9 +1323,11 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
 
             OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate, customerID);
+                    regNum, make, model, deliveryDate, returnDate, customerID, firstName, surname);
             
             outVehicleSearchData.add(outstandingvehiclesearch);
         }
@@ -1351,10 +1354,12 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
 
             
             OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate, customerID);
+                    regNum, make, model, deliveryDate, returnDate, customerID, firstName, surname);
             
             outVehicleSearchData.add(outstandingvehiclesearch);
         }

@@ -23,9 +23,11 @@ public class OutstandingVehicle {
     private StringProperty deliveryDate;
     private StringProperty returnDate;
     private IntegerProperty customerID;
-    
+    private StringProperty firstName;
+    private StringProperty surname;
 
-public OutstandingVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel, String deliveryDate, String returnDate, int customerID)
+public OutstandingVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel,
+        String deliveryDate, String returnDate, int customerID, String firstName, String surname)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
@@ -36,7 +38,8 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
         this.customerID =  new SimpleIntegerProperty(customerID);
-
+        this.firstName =  new SimpleStringProperty(firstName);
+        this.surname =  new SimpleStringProperty(surname);
 
     }
 
@@ -76,6 +79,15 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
         return returnDate.get();
     }
     
+    public String getFIRSTNAME()
+    {
+        return firstName.get();
+    }
+    public String getSURNAME()
+    {
+        return surname.get();
+    }
+    
       public StringProperty SPCNAMEProperty()
     {
         return spcName;
@@ -101,6 +113,15 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
     public StringProperty RETURNDATEProperty()
     {
        return returnDate;
+    }
+    public StringProperty FIRSTNAMEProperty()
+    {
+       return firstName;
+    }     
+          
+    public StringProperty SURNAMEProperty()
+    {
+       return surname;
     }
     
         public IntegerProperty CUSTOMERIDProperty()
@@ -142,6 +163,15 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
     public void setRETURNDATE(String returnDate)
     {
         this.returnDate.set(returnDate);        
+    }
+    public void setFIRSTNAME(String firstName)
+    {
+        this.firstName.set(firstName);        
+    }
+    
+    public void setSURNAME(String surname)
+    {
+        this.surname.set(surname);        
     }
     
     public void setCUSTOMERID(int customerID)
