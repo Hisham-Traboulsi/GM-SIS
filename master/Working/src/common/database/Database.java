@@ -1426,15 +1426,15 @@ public final class Database
        
        public void editBookings() throws SQLException
     {
-        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, FIRST_NAME=?, SECOND_NAME=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
         int counter = 0;
         while(counter < BookingsData.size())
             
         {
 
             editBookingStmt.setString(1, BookingsData.get(counter).getBOOKING_MechID());
-            editBookingStmt.setString(2, BookingsData.get(counter).getBOOKING_FNAME());
-            editBookingStmt.setString(3, BookingsData.get(counter).getBOOKING_SNAME());
+            editBookingStmt.setString(2, BookingsData.get(counter).getPART_NAME());
+            editBookingStmt.setInt(3, BookingsData.get(counter).getCUSTOMER_ID());
             editBookingStmt.setString(4, BookingsData.get(counter).getBOOKING_REGNUM());
             editBookingStmt.setString(5, BookingsData.get(counter).getBOOKING_MANUFACTURE());
             editBookingStmt.setString(6, BookingsData.get(counter).getBOOKING_MILEAGE());
@@ -1443,7 +1443,7 @@ public final class Database
             editBookingStmt.setString(9, BookingsData.get(counter).getBOOKING_TYPE());
             editBookingStmt.setInt(10, BookingsData.get(counter).getIDnum());
             
-            editBookingStmt.executeUpdate();
+            
             
             counter++;
         }
@@ -1523,8 +1523,8 @@ public final class Database
         {
             int idNum = rs.getInt("IDnum");
             String BookingMechanicID = rs.getString("MECHANICID");
-            String BookingFName = rs.getString("CUSTOMERID");
-            String BookingSName = rs.getString("PARTNAME");
+            String PARTNAME = rs.getString("PARTNAME");
+            int CUSTOMERID = rs.getInt("CUSTOMERID");
             String BookingRegNum = rs.getString("REG_NUM");
             String BookingManufacture = rs.getString("MANUFACTURE");
             String BookingMileage = rs.getString("MILEAGE");
@@ -1532,7 +1532,7 @@ public final class Database
             String BookingTime = rs.getString("TIME");
             String BookingType = rs.getString("TYPE");
             
-            Bookings bookings = new Bookings(idNum, BookingMechanicID, BookingFName, BookingSName, 
+            Bookings bookings = new Bookings(idNum, BookingMechanicID, PARTNAME, CUSTOMERID, 
                     BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType);
             
             BookingsData.add(bookings);
@@ -1566,7 +1566,7 @@ public final class Database
         }
         return MechanicData;
     }
-     public boolean addBookings( String BookingMechanicID, String BookingFName, String BookingSName,
+     public boolean addBookings( String BookingMechanicID, String PARTNAME, int CUSTOMERID,
             String BookingRegNum, String BookingManufacture, String BookingMileage, 
             String BookingDate, String BookingTime, String BookingType)
     {
@@ -1577,8 +1577,8 @@ public final class Database
            add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?)"); 
            add.setString(1, null);
            add.setString(2, BookingMechanicID);
-           add.setString(3, BookingFName);
-           add.setString(4, BookingSName);
+           add.setString(3, PARTNAME);
+           add.setInt(4, CUSTOMERID);
            add.setString(5, BookingRegNum);
            add.setString(6, BookingManufacture);
            add.setString(7, BookingMileage);

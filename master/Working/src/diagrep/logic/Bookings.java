@@ -20,8 +20,8 @@ public class Bookings {
     
     private IntegerProperty idNum;
     private StringProperty BookingMechanicID;
-    private StringProperty BookingFName;
-    private StringProperty BookingSName;
+    private StringProperty PART_NAME;
+    private IntegerProperty CUSTOMER_ID;
     private StringProperty BookingRegNum;
     private StringProperty BookingManufacture;
     private StringProperty BookingMileage;
@@ -30,15 +30,15 @@ public class Bookings {
     private StringProperty BookingType;
     
     
-     public Bookings(int idNum, String BookingMechanicID, String BookingFName, 
-             String BookingSName, String BookingRegNum, String BookingManufacture, 
+     public Bookings(int idNum, String BookingMechanicID, String PART_NAME, 
+             int CUSTOMER_ID, String BookingRegNum, String BookingManufacture, 
              String BookingMileage, String BookingDate, String BookingTime, String BookingType)
            
     {
         this.idNum =  new SimpleIntegerProperty(idNum);
         this.BookingMechanicID =  new SimpleStringProperty(BookingMechanicID);
-        this.BookingFName =  new SimpleStringProperty(BookingFName);
-        this.BookingSName =  new SimpleStringProperty(BookingSName);
+        this.PART_NAME =  new SimpleStringProperty(PART_NAME);
+        this.CUSTOMER_ID = new SimpleIntegerProperty(CUSTOMER_ID);
         this.BookingRegNum =  new SimpleStringProperty(BookingRegNum);
         this.BookingManufacture =  new SimpleStringProperty(BookingManufacture);
         this.BookingMileage =  new SimpleStringProperty(BookingMileage);
@@ -58,13 +58,13 @@ public class Bookings {
         return this.BookingMechanicID.get();
     }
     
-    public String getBOOKING_FNAME()
+    public String getPART_NAME()
     {
-        return BookingFName.get();
+        return PART_NAME.get();
     }
-    public String getBOOKING_SNAME()
+    public int getCUSTOMER_ID()
     {
-        return BookingSName.get();
+        return CUSTOMER_ID.get();
     }
     public String getBOOKING_REGNUM()
     {
@@ -99,14 +99,12 @@ public class Bookings {
         return BookingMechanicID;
     }
     
-    public StringProperty BOOKING_FNAMEProperty()
+    
+    public IntegerProperty CUSTOMER_ID()
     {
-       return BookingFName;
+       return CUSTOMER_ID;
     }
-    public StringProperty BOOKING_SNAMEProperty()
-    {
-       return BookingSName;
-    }     
+     
           
     public StringProperty BOOKING_REGNUMProperty()
     {
@@ -148,14 +146,15 @@ public class Bookings {
     {
         this.BookingMechanicID.set(BookingMechanicID);        
     }
-    public void setBOOKING_FNAME(String BookingFName)
+    public void setPART_NAME(String PART_NAME)
     {
-        this.BookingFName.set(BookingFName);        
-    }
+        this.PART_NAME.set(PART_NAME);        
+    }       
     
-    public void setBOOKING_SNAME(String BookingSName)
+    
+    public void setCUSTOMER_ID(int CUSTOMER_ID)
     {
-        this.BookingSName.set(BookingSName);        
+        this.CUSTOMER_ID.set(CUSTOMER_ID);
     }
     
     public void setBOOKING_REGNUM(String BookingRegNum)
