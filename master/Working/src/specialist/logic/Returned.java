@@ -20,6 +20,7 @@ public class Returned {
     private IntegerProperty bookingID;
     private StringProperty spcName;
     private IntegerProperty partID;
+    private IntegerProperty customerID;
     private StringProperty partName;
     private StringProperty deliveryDate;
     private StringProperty returnDate;
@@ -31,7 +32,8 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
         this.spcName =  new SimpleStringProperty(spcName);
-        this.partID =  new SimpleIntegerProperty(partID);        
+        this.partID =  new SimpleIntegerProperty(partID);
+   //     this.customerID =  new SimpleIntegerProperty(customerID);        
         this.partName =  new SimpleStringProperty(partName);
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
@@ -43,7 +45,10 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
     {
         return bookingID.get();
     }
-       
+       public int getCUSTOMERID()
+    {
+        return customerID.get();
+    }       
        
        
     public String getSPCNAME()
@@ -81,6 +86,10 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
       {
           return partID;
       }
+      public IntegerProperty CUSTOMERIDProperty()
+      {
+          return customerID;
+      }
     
     public StringProperty PARTNAMEProperty()
     {
@@ -105,6 +114,11 @@ public Returned(int bookingID, String spcName, int partID, String partName, Stri
         public void setIDnum(int bookingID)
     {
         this.bookingID.set(bookingID);        
+    }
+            
+        public void setCUSTOMER(int customerID)
+    {
+        this.customerID.set(customerID);        
     }
         
     public void setSPCNAME(String spcName)
