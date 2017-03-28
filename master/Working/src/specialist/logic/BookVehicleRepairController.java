@@ -113,7 +113,14 @@ public class BookVehicleRepairController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          try {
+            ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
             
+            customerID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            customerName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            customerSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            
+            customerTable.setItems(customerData);
+             
         ObservableList<String> spcData = Database.getInstance().getSPCName();
             spcBox.setItems(spcData);            
             

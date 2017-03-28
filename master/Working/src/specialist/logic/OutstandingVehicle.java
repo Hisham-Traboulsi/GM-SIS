@@ -22,24 +22,31 @@ public class OutstandingVehicle {
     private StringProperty vehicleModel;
     private StringProperty deliveryDate;
     private StringProperty returnDate;
+    private IntegerProperty customerID;
     
 
-public OutstandingVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel, String deliveryDate, String returnDate)
+public OutstandingVehicle(int bookingID, String spcName, String regNum, String vehicleMake, String vehicleModel, String deliveryDate, String returnDate, int customerID)
            
     {
         this.bookingID =  new SimpleIntegerProperty(bookingID);
         this.spcName =  new SimpleStringProperty(spcName);
         this.regNum =  new SimpleStringProperty(regNum);
         this.vehicleMake =  new SimpleStringProperty(vehicleMake);        
-        this.vehicleModel =  new SimpleStringProperty(vehicleMake);
+        this.vehicleModel =  new SimpleStringProperty(vehicleModel);
         this.deliveryDate =  new SimpleStringProperty(deliveryDate);
         this.returnDate =  new SimpleStringProperty(returnDate);
+        this.customerID =  new SimpleIntegerProperty(customerID);
+
 
     }
 
        public int getBOOKINGIDVEHICLE()
     {
         return bookingID.get();
+    }
+       public int getCUSTOMERID()
+    {
+        return customerID.get();
     }
        
     public String getSPCNAMEVEHICLE()
@@ -96,6 +103,11 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
        return returnDate;
     }
     
+        public IntegerProperty CUSTOMERIDProperty()
+    {
+       return customerID;
+    }
+    
     
         public void setIDnum(int bookingID)
     {
@@ -130,5 +142,10 @@ public OutstandingVehicle(int bookingID, String spcName, String regNum, String v
     public void setRETURNDATE(String returnDate)
     {
         this.returnDate.set(returnDate);        
+    }
+    
+    public void setCUSTOMERID(int customerID)
+    {
+        this.customerID.set(customerID);        
     }
 }

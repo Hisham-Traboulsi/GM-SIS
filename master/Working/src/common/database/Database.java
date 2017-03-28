@@ -1278,9 +1278,11 @@ public final class Database
             String model = rs.getString("model");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            int customerID = rs.getInt("CUSTOMER_ID");
+
             
             OutstandingVehicle outstandingvehicle = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate);
+                    regNum, make, model, deliveryDate, returnDate, customerID);
             
             outVehicleData.add(outstandingvehicle);
         }
@@ -1305,9 +1307,10 @@ public final class Database
             String model = rs.getString("model");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
-            
+            int customerID = rs.getInt("CUSTOMER_ID");
+
             OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate);
+                    regNum, make, model, deliveryDate, returnDate, customerID);
             
             outVehicleSearchData.add(outstandingvehiclesearch);
         }
@@ -1333,9 +1336,11 @@ public final class Database
             String model = rs.getString("model");
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
+            int customerID = rs.getInt("CUSTOMER_ID");
+
             
             OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
-                    regNum, make, model, deliveryDate, returnDate);
+                    regNum, make, model, deliveryDate, returnDate, customerID);
             
             outVehicleSearchData.add(outstandingvehiclesearch);
         }

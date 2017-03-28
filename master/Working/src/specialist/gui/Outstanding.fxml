@@ -31,6 +31,7 @@
             <TableView fx:id="OutstandingVehicleTable" layoutX="19.0" layoutY="444.0" prefHeight="224.0" prefWidth="955.0">
               <columns>
                 <TableColumn fx:id="bookingIDvehicleCol" prefWidth="75.0" text="Booking ID" />
+            <TableColumn fx:id="customerIDvehicle" prefWidth="75.0" text="Customer ID" />
                   <TableColumn fx:id="spcNameVehicleCol" prefWidth="230.0" text="SPC" />
                 <TableColumn fx:id="vehicleRegCol" prefWidth="100.0" text="Registration" />
                   <TableColumn fx:id="vehicleMakeCol" prefWidth="95.0" text="Make" />

@@ -92,7 +92,9 @@ public class OutstandingController implements Initializable {
     @FXML
     private Button vehicleCancel;
     @FXML
-    private TableColumn<?, ?> customerID;
+    private TableColumn customerID;
+    @FXML
+    private TableColumn customerIDvehicle;
 
     
     
@@ -130,6 +132,7 @@ public class OutstandingController implements Initializable {
             OutstandingVehicleTable.setEditable(true);
 
             bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            customerIDvehicle.setCellValueFactory(new PropertyValueFactory<>("CUSTOMERID"));
             spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
             vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
             vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
@@ -177,10 +180,12 @@ public class OutstandingController implements Initializable {
     {
       
     boolean added=false;
+    boolean added2=false;
             selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
             
             //int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
             String SPC = selected2.get(0).getSPCNAMEVEHICLE();
+            int CUSTOMERID = selected2.get(0).getCUSTOMERID();
             String REGNUM = selected2.get(0).getREGNUM();
             String VEHICLEMAKE = selected2.get(0).getVEHICLEMAKE();
             String VEHICLEMODEL = selected2.get(0).getVEHICLEMODEL();
@@ -190,6 +195,7 @@ public class OutstandingController implements Initializable {
             System.out.println(TOTAL);
          
            added = Database.getInstance().returnedSPCVehicle(SPC, REGNUM, VEHICLEMAKE, VEHICLEMODEL, DELIVDATE, RETURNDATE, TOTAL);
+           added2 = Database.getInstance().sendPartBill(CUSTOMERID, TOTAL);
 
            remove2();
            reload();
@@ -250,6 +256,7 @@ public class OutstandingController implements Initializable {
             OutstandingVehicleTable.setEditable(true);
 
             bookingIDvehicleCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));
+            customerIDvehicle.setCellValueFactory(new PropertyValueFactory<>("CUSTOMERID"));
             spcNameVehicleCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
             vehicleRegCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
             vehicleMakeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
