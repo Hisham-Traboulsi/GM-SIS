@@ -91,9 +91,9 @@ public class AddBookings implements Initializable {
     @FXML
     private TextField MechTxt;
     @FXML
-    private TextField FNameTxt;
+    private TextField PART_NAME;
     @FXML
-    private TextField SNameTxt;
+    private TextField CUSTOMER_ID;
     @FXML
     private TextField RegNumTxt;
     @FXML
@@ -104,9 +104,12 @@ public class AddBookings implements Initializable {
     private TextField TimeTxt;
     @FXML
     private TextField Typetxt;
-    
     @FXML
     private DatePicker DateTxt;
+    @FXML
+    private ComboBox regComb;
+    @FXML
+    private ComboBox IDcomb;
     
     @FXML
     private Button addButton;
@@ -117,25 +120,25 @@ public class AddBookings implements Initializable {
     private TableView<Bookings> BookTable = new TableView<Bookings>();
     
     @FXML
-    private TableColumn BookingCol; 
+    private TableColumn<Bookings, String> BookingCol; 
     @FXML
     private TableColumn<Bookings, String> MechanicCol;
     @FXML
-    private TableColumn FNameCol;
+    private TableColumn<Bookings, String> PartCol;
     @FXML
-    private TableColumn SNameCol;
+    private TableColumn<Bookings, Integer> CustomerCol;
     @FXML
-    private TableColumn RegNumCol;
+    private TableColumn<Bookings, String> RegNumCol;
     @FXML
-    private TableColumn ManufactureCol;
+    private TableColumn<Bookings, String> ManufactureCol;
     @FXML
-    private TableColumn MileageCol;
+    private TableColumn<Bookings, String> MileageCol;
     @FXML
-    private TableColumn DateCol;
+    private TableColumn <Bookings, String>DateCol;
     @FXML
-    private TableColumn TimeCol;
+    private TableColumn <Bookings, String>TimeCol;
     @FXML
-    private TableColumn TypeCol;
+    private TableColumn <Bookings, String>TypeCol;
   
   
     
@@ -164,8 +167,8 @@ public class AddBookings implements Initializable {
       
      
             String BookingMechanicID = (MechTxt.getText());
-            String BookingFName=(FNameTxt.getText());
-            String BookingSName=(SNameTxt.getText());
+            String PARTNAME = (String) regComb.getValue();
+            int CUSTOMERID = (Integer)(IDcomb.getValue());
             String BookingRegNum=(RegNumTxt.getText());
             String BookingManufacture=(ManufactureTxt.getText());
             String BookingMileage= (MileageTxt.getText());
@@ -173,7 +176,7 @@ public class AddBookings implements Initializable {
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
             
-         if(MechTxt.getText().isEmpty() || FNameTxt.getText().isEmpty() || SNameTxt.getText().isEmpty() || RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
+         if(MechTxt.getText().isEmpty() || RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
         || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "All fields are required");
@@ -181,8 +184,8 @@ public class AddBookings implements Initializable {
          else{
      
           
-      added = Database.getInstance().addBookings( BookingMechanicID,BookingFName,
-             BookingSName, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
+      added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,
+             CUSTOMERID, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
              BookingTime, BookingType);
          }
       
@@ -191,6 +194,38 @@ public class AddBookings implements Initializable {
       RefreshPage();
             
       return added;
+    }
+   public void enterPressed(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  addBooking();
+                }
+            }
+   
+   public void partBooking(ActionEvent event)
+    {
+        try
+        {
+            //addMenuBar();
+            
+            URL addPartUrl = getClass().getResource("/parts/gui/partBooking.fxml");
+            AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
+            
+            BorderPane border = Main.getRoot();
+            
+            border.setCenter(addPartPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+  
+   public void updateAmount() 
+    {
+        String partname=PART_NAME.getText();
+        Database.getInstance().updateStock(partname);
+        Database.getInstance().partBelowZero();
+        //return ID;
     }
    
    
@@ -210,8 +245,7 @@ public class AddBookings implements Initializable {
    public void clearFields()
     {
         MechTxt.clear();
-        FNameTxt.clear();
-        SNameTxt.clear();
+        
         RegNumTxt.clear();
         ManufactureTxt.clear();
         MileageTxt.clear();
@@ -229,6 +263,27 @@ public class AddBookings implements Initializable {
         RefreshPage();
     }
    
+   public void partBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        //regComb = new ComboBox();
+        regComb.setItems(regComb1);
+        
+    }
+    public void idcombBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <Integer> regComb1=Database.getInstance().fillIDcombo();
+        //regComb = new ComboBox();
+        IDcomb.setItems(regComb1);
+        
+    }
+   
    public void RefreshPage(){
        try {
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
@@ -237,8 +292,8 @@ public class AddBookings implements Initializable {
 
             BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
-            FNameCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_FNAME"));
-            SNameCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_SNAME"));
+            PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
+            CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
             ManufactureCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MANUFACTURE"));
             MileageCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MILEAGE"));
@@ -260,6 +315,8 @@ public class AddBookings implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       partBox();
+       idcombBox();
         try {
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
 
@@ -277,9 +334,9 @@ public class AddBookings implements Initializable {
                 }
             } 
             );
-            FNameCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_FNAME"));
-            FNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-            FNameCol.setOnEditCommit(
+            PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
+            /*PartCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            PartCol.setOnEditCommit(
                     new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
@@ -287,9 +344,9 @@ public class AddBookings implements Initializable {
                             t.getTablePosition().getRow())).setBOOKING_FNAME(t.getNewValue());
                 }
             }
-            );
-            SNameCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_SNAME"));
-            SNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            );*/
+            CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
+            /*SNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
             SNameCol.setOnEditCommit(
                     new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
                 @Override
@@ -298,7 +355,7 @@ public class AddBookings implements Initializable {
                             t.getTablePosition().getRow())).setBOOKING_SNAME(t.getNewValue());
                 }
             }
-            );
+            );*/
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
             RegNumCol.setCellFactory(TextFieldTableCell.forTableColumn());
             RegNumCol.setOnEditCommit(
