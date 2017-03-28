@@ -6,6 +6,7 @@
 package specialist.logic;
 
 import common.database.Database;
+import customers.logic.Customers;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -63,12 +64,21 @@ public class BookVehicleRepairController implements Initializable {
     
     private ObservableList<Vehicle> list=FXCollections.observableArrayList();
     private ObservableList<Vehicle> selected = null;
+    private ObservableList<Customers> selected2 = null;
     @FXML
     private Label label;
     @FXML
     private DatePicker deliveryDatePicker;
     @FXML
     private DatePicker returnDatePicker;
+     @FXML
+    private TableView<Customers> customerTable = new TableView<Customers>();
+    @FXML
+    private TableColumn customerID;
+    @FXML
+    private TableColumn customerName;
+    @FXML
+    private TableColumn customerSurname;
 
     
     @FXML
@@ -87,9 +97,12 @@ public class BookVehicleRepairController implements Initializable {
             String COLOUR = selected.get(0).getColour();
             LocalDate DELIVDATE = delivDate;
             LocalDate RETURNDATE = returnDate;
+            int customerID = selected2.get(0).getID();
+            String customerName = selected2.get(0).getFirstName();
+            String customerSurname = selected2.get(0).getSurname();
 
          
-           added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE);
+           added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE,  customerID, customerName, customerSurname);
 
       
         return added;

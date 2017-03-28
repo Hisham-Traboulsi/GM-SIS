@@ -6,6 +6,7 @@
 package specialist.logic;
 
 import common.database.Database;
+import customers.logic.Customers;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -64,7 +65,7 @@ public class BookPartRepairController implements Initializable {
     @FXML
         ComboBox spcBox;
 
-    
+    private ObservableList<Customers> selected2 = null;
     private ObservableList<Part> selected = null;
     @FXML
     private Label label;
@@ -72,6 +73,14 @@ public class BookPartRepairController implements Initializable {
     private DatePicker deliveryDatePicker;
     @FXML
     private DatePicker returnDatePicker;
+     @FXML
+    private TableView<Customers> customerTable = new TableView<Customers>();
+    @FXML
+    private TableColumn customerID;
+    @FXML
+    private TableColumn customerSurname;
+    @FXML
+    private TableColumn customerName;
 
     
     @FXML
@@ -80,7 +89,7 @@ public class BookPartRepairController implements Initializable {
       
     boolean added=false;
             selected = partsTable.getSelectionModel().getSelectedItems();   
-
+            selected2 = customerTable.getSelectionModel().getSelectedItems(); 
             //int INSTID = Integer.parseInt(INST_ID.getText());
             String SPC = (String) spcBox.getValue();
             int PARTID = selected.get(0).getID();
@@ -88,8 +97,11 @@ public class BookPartRepairController implements Initializable {
             Double PARTCOST = selected.get(0).getCost();
             LocalDate DELIVDATE = delivDate;
             LocalDate RETURNDATE = returnDate;
+            int customerID = selected2.get(0).getID();
+            String customerName = selected2.get(0).getFirstName();
+            String customerSurname = selected2.get(0).getSurname();
          
-           added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, PARTCOST);
+           added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, PARTCOST, customerID, customerName, customerSurname);
 
       
         return added;
@@ -100,6 +112,14 @@ public class BookPartRepairController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
+             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
+            
+            customerID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            customerName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            customerSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+            
+            customerTable.setItems(customerData);
+            
             
         ObservableList<String> spcData = Database.getInstance().getSPCName();
 

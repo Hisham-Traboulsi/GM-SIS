@@ -1010,8 +1010,9 @@ public final class Database
             String deliveryDate = rs.getString("deliveryDate");
             String returnDate = rs.getString("returnDate");
             Double partCost = rs.getDouble("cost");
+            int customerID = rs.getInt("CUSTOMER_ID");
             
-            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost);
+            Outstanding outstandingpart = new Outstanding(bookingID, spcName, partID, partName, deliveryDate, returnDate, partCost, customerID);
             
             outPartsData.add(outstandingpart);
         }
@@ -1138,13 +1139,13 @@ public final class Database
     }
     
      /*Author Shiraj*/
-    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST)
+    public boolean bookSPCPart( String SPC, int PARTID, String PARTNAME, LocalDate DELIVDATE, LocalDate RETURNDATE, Double PARTCOST, int customerID, String customerName, String customerSurname)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO OUTSTANDING_PARTS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1153,6 +1154,9 @@ public final class Database
            add.setString(5, "" +DELIVDATE);
            add.setString(6, "" +RETURNDATE);
            add.setDouble(7, PARTCOST);
+           add.setInt(8, customerID);
+           add.setString(9, customerName);
+           add.setString(10, customerSurname);
         
 
            add.execute();
@@ -1170,7 +1174,7 @@ public final class Database
         return added;
     }
 
-     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL)
+     public boolean returnedSPCPart(String SPC, int PARTID, String PARTNAME, String DELIVDATE, String RETURNDATE, Double TOTAL, int CUSTOMERID)
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1188,6 +1192,7 @@ public final class Database
 
            add.execute();
            add.close();
+
            added = true;
            JOptionPane.showMessageDialog(null,"Returned");
         }
@@ -1200,14 +1205,44 @@ public final class Database
         
         return added;
     }
-      public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
-              String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE)
+          public boolean sendPartBill(int CUSTOMERID, double TOTAL)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO OUTSTANDING_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+           add = preparedStatement("INSERT INTO BILL VALUES (?, ?)"); 
+         
+           add.setInt(1, CUSTOMERID);
+           add.setDouble(2, TOTAL);
+        
+
+           add.execute();
+           add.close();
+
+           added = true;
+           JOptionPane.showMessageDialog(null,"Bill sent");
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        
+        return added;
+    }
+          
+     
+     
+      public boolean bookSPCVehicle( String SPC, String REGNUM, String MAKE, String MODEL, String ENGINE,
+              String FUEL, String COLOUR, LocalDate DELIVDATE, LocalDate RETURNDATE, int customerID, String customerName, String customerSurname)
+    {
+        PreparedStatement add = null;
+        boolean added = false;
+        try
+        {
+           add = preparedStatement("INSERT INTO OUTSTANDING_VEHICLES VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
            
            add.setString(1, null);
            add.setString(2, SPC);
@@ -1219,6 +1254,9 @@ public final class Database
            add.setString(8, COLOUR);
            add.setString(9, "" +DELIVDATE);
            add.setString(10, "" +RETURNDATE);
+           add.setInt(11, customerID);
+           add.setString(12, customerName);
+           add.setString(13, customerSurname);
         
 
            add.execute();
@@ -1402,15 +1440,15 @@ public final class Database
        
        public void editBookings() throws SQLException
     {
-        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, FIRST_NAME=?, SECOND_NAME=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
         int counter = 0;
         while(counter < BookingsData.size())
             
         {
 
             editBookingStmt.setString(1, BookingsData.get(counter).getBOOKING_MechID());
-            editBookingStmt.setString(2, BookingsData.get(counter).getBOOKING_FNAME());
-            editBookingStmt.setString(3, BookingsData.get(counter).getBOOKING_SNAME());
+            editBookingStmt.setString(2, BookingsData.get(counter).getPART_NAME());
+            editBookingStmt.setInt(3, BookingsData.get(counter).getCUSTOMER_ID());
             editBookingStmt.setString(4, BookingsData.get(counter).getBOOKING_REGNUM());
             editBookingStmt.setString(5, BookingsData.get(counter).getBOOKING_MANUFACTURE());
             editBookingStmt.setString(6, BookingsData.get(counter).getBOOKING_MILEAGE());
@@ -1419,7 +1457,7 @@ public final class Database
             editBookingStmt.setString(9, BookingsData.get(counter).getBOOKING_TYPE());
             editBookingStmt.setInt(10, BookingsData.get(counter).getIDnum());
             
-            editBookingStmt.executeUpdate();
+            
             
             counter++;
         }
@@ -1499,8 +1537,8 @@ public final class Database
         {
             int idNum = rs.getInt("IDnum");
             String BookingMechanicID = rs.getString("MECHANICID");
-            String BookingFName = rs.getString("CUSTOMERID");
-            String BookingSName = rs.getString("PARTNAME");
+            String PARTNAME = rs.getString("PARTNAME");
+            int CUSTOMERID = rs.getInt("CUSTOMERID");
             String BookingRegNum = rs.getString("REG_NUM");
             String BookingManufacture = rs.getString("MANUFACTURE");
             String BookingMileage = rs.getString("MILEAGE");
@@ -1508,7 +1546,7 @@ public final class Database
             String BookingTime = rs.getString("TIME");
             String BookingType = rs.getString("TYPE");
             
-            Bookings bookings = new Bookings(idNum, BookingMechanicID, BookingFName, BookingSName, 
+            Bookings bookings = new Bookings(idNum, BookingMechanicID, PARTNAME, CUSTOMERID, 
                     BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType);
             
             BookingsData.add(bookings);
@@ -1542,7 +1580,7 @@ public final class Database
         }
         return MechanicData;
     }
-     public boolean addBookings( String BookingMechanicID, String BookingFName, String BookingSName,
+     public boolean addBookings( String BookingMechanicID, String PARTNAME, int CUSTOMERID,
             String BookingRegNum, String BookingManufacture, String BookingMileage, 
             String BookingDate, String BookingTime, String BookingType)
     {
@@ -1553,8 +1591,8 @@ public final class Database
            add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?)"); 
            add.setString(1, null);
            add.setString(2, BookingMechanicID);
-           add.setString(3, BookingFName);
-           add.setString(4, BookingSName);
+           add.setString(3, PARTNAME);
+           add.setInt(4, CUSTOMERID);
            add.setString(5, BookingRegNum);
            add.setString(6, BookingManufacture);
            add.setString(7, BookingMileage);
