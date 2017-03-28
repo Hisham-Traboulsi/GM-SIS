@@ -152,12 +152,6 @@ public class AddBookings implements Initializable {
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
        
-       Calendar cal = Calendar.getInstance();
-       Date today = cal.getTime();
-       cal.add(Calendar.DATE, 364); 
-       Date nextYear = cal.getTime();
-       
-       
        
        
        
