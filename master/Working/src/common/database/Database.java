@@ -788,7 +788,10 @@ public final class Database
         }
         catch(SQLException ex)
         {
-            
+            JOptionPane.showMessageDialog(null,"Please to edit:<br/><br/>" + "- Double click a cell<br/><br/>" +
+                    "- Enter new value<br/><br/>" +
+                    "- Press enter<br/><br/>" +
+                    "- Press update button<br/><br/>");
         }
     }
     public void updateStock(String partname) 

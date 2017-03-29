@@ -94,9 +94,11 @@ public class addPart implements Initializable {
    
     
    public boolean add()
-    {
+    {   boolean added=false;
+        if(empty())
+      {
       partsTable.getItems().clear();
-      boolean added=false;
+      
       
       //int id = Integer.parseInt(partID.getText());
       String name = (partName.getText());
@@ -108,8 +110,8 @@ public class addPart implements Initializable {
       added = Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
       addDeliveryDate();
-
       clearButton();
+      }
       
       return added;
     }
@@ -151,6 +153,30 @@ public class addPart implements Initializable {
     partCost.clear();
     refresh();
     }
+    public boolean empty()
+    { boolean check=true;
+    
+        if ( partName.getText().isEmpty()||partName.getText().equals("")) {
+          JOptionPane.showMessageDialog(null,"Please enter a part name");
+          check=false;
+     } else if ( partCost.getText().isEmpty()||partCost.getText().equals("")) {
+          JOptionPane.showMessageDialog(null,"Please enter a part cost");
+          check=false;
+     } else if ( partAmount.getText().isEmpty()||partAmount.getText().equals("")) {
+         JOptionPane.showMessageDialog(null,"Please enter a quantity");
+         check=false;
+     }
+        else if (partDesc.getText().isEmpty()||partDesc.getText().equals("")) {
+         JOptionPane.showMessageDialog(null,"Please enter a part description");
+         check=false;
+         
+     }
+        
+        return check;
+    }
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -226,9 +252,10 @@ public class addPart implements Initializable {
     public void help()
     {
         JOptionPane.showMessageDialog(null,
-                "<html>To add a part:<br />Fill in all the textfields and click on submit button<br/><br/> "
-                    + "To update stock of a part:<br/>Double click on the Stock cell, input new value, press enter and press update button<br/><br/>"
-                    + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
+                "<html>To add a part:<br />Fill in all the textfields and click on submit button or press enter<br/><br/> "
+                    + "To update a part:<br/>Double click on the a cell, input new value, press enter and press update button<br/><br/>"
+                    + "To clear the boxes:<br/>Press clear button<br/><br/>"
+                    +" To view parts delivered and withdrawn:<br />Press part log button<html>");
     }
     public void refresh()
     {try {

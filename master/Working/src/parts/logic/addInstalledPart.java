@@ -128,8 +128,10 @@ public class addInstalledPart implements Initializable {
        Date today = cal.getTime();
        cal.add(Calendar.DATE, 364); 
        Date nextYear = cal.getTime();
+       boolean added=false;
+      if(empty())
+      {
       
-      boolean added=false;
       
 
             String PARTNAME = (String) regComb.getValue();
@@ -147,6 +149,7 @@ public class addInstalledPart implements Initializable {
       addWithdrawalDate();
       clearRest();
       searchPart();
+      }
       return added;
     }
     public void enterPressed(KeyEvent event) {
@@ -204,6 +207,7 @@ public class addInstalledPart implements Initializable {
       public void updatePart() 
     {
         Database.getInstance().editInstalledPart();
+        searchPart();
     }
     
        public void searchPart() 
@@ -298,6 +302,30 @@ public class addInstalledPart implements Initializable {
     idcombBox();
 
     }
+    public boolean empty(){
+           boolean check=true;
+        
+            boolean part = regComb.getSelectionModel().isEmpty();
+            boolean reg = regCombReg.getSelectionModel().isEmpty();
+            boolean id = IDcomb.getSelectionModel().isEmpty();
+        
+            if (part)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part name");
+            check=false;
+        }
+        else if(reg)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a vehicle registration");
+            check=false;
+        }
+        else if(id)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a customer ID");
+            check=false;
+        }
+        return check;
+    }
     public void clearRest(){
         
     searchBox.clear();
@@ -358,11 +386,12 @@ public class addInstalledPart implements Initializable {
     public void help()
     {
         JOptionPane.showMessageDialog(null,
-                "<html>To add a part to a vehicle :<br />Fill in all the textfields and click on submit button<br/><br/> "
-                    + "To update  a part:<br/>Double click on a cell, input new value, press enter and press update button<br/><br/>"
+                "<html>To add a part to a vehicle :<br />Select values from drop down boxes and click on submit button<br/><br/> "
+                    + "To view bookings :<br /> Press booking button<br/><br/>"
+                    + "To remove a part :<br /> Select a part from the table and press remove button<br/><br/>"
                     + "To search:<br/>Enter search parameter and press search button<br/><br/><html>"
                     + "To clear the boxes:<br/>Press clear button<br/><br/><html>");
-        
+        ///To update  a part:<br/>Double click on a cell, input new value, press enter and press update button
     }
      
     
