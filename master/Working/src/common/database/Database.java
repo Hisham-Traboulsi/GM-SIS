@@ -757,9 +757,9 @@ public final class Database
         }
          
         }
-        catch(SQLException ex)
+        catch(SQLException ex)    
         {
-            
+            JOptionPane.showMessageDialog(null,"Please select a booking from the table");
         }
         return bookingdata;
     }

@@ -41,6 +41,7 @@ import java.util.Calendar;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javax.swing.JFrame;
 
 
 /**
@@ -199,9 +200,24 @@ public class addInstalledPart implements Initializable {
     }
     public void remove() 
     {
+        JFrame frame = new JFrame();
+           Object[] options = {"Yes","No"};
+           int n = JOptionPane.showOptionDialog(frame,
+            "Are you sure you want to remove that part",
+            "Remove part",
+             JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.WARNING_MESSAGE,
+             null,
+             options,
+             options[1]);
+              if (n == JOptionPane.YES_OPTION) {
+      
+                 {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
         Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
         searchPart();
+                 }
+         }
     }
     
       public void updatePart() 

@@ -21,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -77,14 +79,52 @@ public class PartBookingController implements Initializable {
         reg.setItems(regComb1);
         
     }
+    public boolean empty(){
+        
+        selected = bookings.getSelectionModel().getSelectedItems();
+           boolean check=true;
+        
+            boolean part = reg.getSelectionModel().isEmpty();
+           if (part)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a vehicle registration ");
+            check=false;
+        }
+           
+      
+        return check;
+    }
     public void remove() 
-    {
+    {  selected = bookings.getSelectionModel().getSelectedItems();
+        if(empty())
         
-        
-        selected = bookings.getSelectionModel().getSelectedItems();   
-       Database.getInstance().removeBookingPart(selected.get(0).getBookID());
+        {     //selected = bookings.getSelectionModel().getSelectedItems();
+              String name =(selected.get(0).getName());
+              String surname =(selected.get(0).getSurName());
+    
+              JFrame frame = new JFrame();
+              Object[] options = {"Yes","No"};
+              int n = JOptionPane.showOptionDialog(frame,
+              "Are you sure you want to delete the booking for " + name + " " + surname,
+              "Delete booking",
+              JOptionPane.YES_NO_CANCEL_OPTION,
+              JOptionPane.WARNING_MESSAGE,
+              null,
+              options,
+              options[1]);
+              if (n == JOptionPane.YES_OPTION) 
+              {
+      
+                    {
+                      //  selected = bookings.getSelectionModel().getSelectedItems();   
+                        Database.getInstance().removeBookingPart(selected.get(0).getBookID());
         //searchPart();
-        showBooking();
+                         showBooking();
+                    }
+              }
+        }
+        
+        
     }
     public void back(ActionEvent event)
     {

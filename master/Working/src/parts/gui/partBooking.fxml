@@ -24,7 +24,7 @@
             <TableColumn fx:id="id" prefWidth="75.0" text="Booking ID" />
         </columns>
       </TableView>
-      <ComboBox fx:id="reg" layoutX="146.0" layoutY="242.0" prefWidth="150.0" />
+      <ComboBox fx:id="reg" layoutX="146.0" layoutY="242.0" onMouseClicked="#showBooking" onMousePressed="#showBooking" prefWidth="150.0" />
       <Text fill="WHITE" layoutX="147.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a vehicle">
          <font>
             <Font size="20.0" />
