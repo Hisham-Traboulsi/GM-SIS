@@ -201,11 +201,7 @@ public class addInstalledPart implements Initializable {
         
         //return ID;
     }
-   public void partisZero() throws SQLException
    
-   {  
-       Database.getInstance().partBelowZero();
-   }
    public void getBill() 
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
@@ -413,12 +409,7 @@ public class addInstalledPart implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            /// partBox();
-            partisZero();
-        } catch (SQLException ex) {
-            Logger.getLogger(addInstalledPart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
        partBox();
        numBox();
        idcombBox();
