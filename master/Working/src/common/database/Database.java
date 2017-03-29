@@ -402,14 +402,14 @@ public final class Database
     */
     public void partBelowZero() 
     {
-          try{
+         /* try{
         PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
         partBelowZero.executeUpdate();  
           }
           catch(SQLException ex)
           {
               
-          }
+          }*/
     }
     /*
     Author Sergio Arrieta
@@ -896,14 +896,12 @@ public final class Database
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.NAME=PARTS_INSTALLATION.PART_NAME AND REG_NUM=" + "'" + regNum + "'");
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.NAME=PARTS_INSTALLATION.PART_NAME ");
 
         ResultSet rs = getBill.executeQuery();
-        while(rs.next())
-        {
-            totalcost= totalcost + rs.getDouble("COST");
-          //custName=rs.getString("CUSTOMER_FULLNAME)");
-        }
+       
+         totalcost= totalcost + rs.getDouble("COST");
+       
 
         
         }
@@ -914,9 +912,9 @@ public final class Database
         }
          try{
              
-        PreparedStatement getBill= preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET cost='" + totalcost +"' where IDnum='" + bookingid + "'");
+        PreparedStatement getBill= preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET COST=COST + " + totalcost +" where IDnum='" + bookingid + "'");
 
-           getBill.setInt(1, bookingid);
+         //  getBill.setInt(1, bookingid);
            getBill.execute();
            getBill.close();
            JOptionPane.showMessageDialog(null,"Part added to the bill");
