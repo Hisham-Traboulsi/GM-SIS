@@ -5,8 +5,10 @@
  */
 package customers.logic;
 
+import common.database.Database;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -46,9 +48,6 @@ public class DisplayInfoController implements Initializable {
     @FXML
     private ComboBox vehicleReg;
     
-    @FXML
-    private Label bill;
-    
     private Customers rowData = AddCustomerController.rowData;
     
     @Override
@@ -66,5 +65,16 @@ public class DisplayInfoController implements Initializable {
         postCode.setText(rowData.getPostCode());
         phone.setText(rowData.getPhone());
         type.setText(rowData.getType());
+        
+        ObservableList<String> cv = Database.getInstance().getCustomerVehicles(rowData.getID());
+        if(cv.size() == 0)
+        {
+            cv.add("No vehicles");
+            vehicleReg.setItems(cv);
+        }
+        else
+        {
+            vehicleReg.setItems(cv);
+        }
     }
 }
