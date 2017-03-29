@@ -661,6 +661,24 @@ public final class Database
         }
            return regComb1;
     }
+    public ObservableList<Integer> fillBookingIDcombo()
+    {
+        
+        ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT CUSTOMERID FROM DIAGNOSIS_REPAIR_BOOKINGS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getInt("CUSTOMERID"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
     /*
     Author Sergio Arrieta
     */
