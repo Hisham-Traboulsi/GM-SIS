@@ -126,6 +126,9 @@ public class AddBookings implements Initializable {
     private Button addButton;
     @FXML
     private Button removeButton;
+     @FXML
+    private TextField searchByName;
+    
     
     @FXML
     private TableView<Bookings> BookTable = new TableView<Bookings>();
@@ -201,7 +204,7 @@ public class AddBookings implements Initializable {
          }
       
            
-      
+
       RefreshPage();
             
       return added;
@@ -299,12 +302,21 @@ public class AddBookings implements Initializable {
     }
    
    public void clearFields()
-    {   Fill();
+    {   regComb.getItems().clear();
+        regCombReg.getItems().clear();
+        IDcomb.getItems().clear();
+        MechCombReg.getItems().clear();
         MechTxt.clear();
         ManufactureTxt.clear();
         MileageTxt.clear();
         TimeTxt.clear();
         Typetxt.clear();
+        CostTxt.clear();
+        
+        partBox();
+        numBox();
+        idcombBox();
+        RegBox();
         
     }
    
@@ -396,7 +408,9 @@ public class AddBookings implements Initializable {
        idcombBox();
        numBox();
        RegBox();
+      
         try {
+            
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
 
             BookTable.setEditable(true);
@@ -501,6 +515,19 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("MECHANIC_RATE"));
+            CostCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+            CostCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Bookings,Double>>() {
+                @Override
+                public void handle(CellEditEvent<Bookings, Double> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_TOTAL(t.getNewValue());
+                }
+            }
+            );
+            
+            
             
 
             BookTable.setItems(BookingsData);
