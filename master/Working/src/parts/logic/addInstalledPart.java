@@ -69,7 +69,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField VEHICLE_ID_BILL;
     @FXML
-    private TextField CUSTOMER_ID;
+    private TextField BOOKING_ID;
     @FXML
     private TextField VEHICLE_ID;
     @FXML
@@ -113,7 +113,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TableColumn<installedPart, String> EXP_DATE_view;
     @FXML
-    private TableColumn<installedPart, Integer> CUSTOMER_ID_view;
+    private TableColumn<installedPart, Integer> BOOKING_ID_view;
 
     @FXML
     private TextField searchBox;
@@ -142,14 +142,14 @@ public class addInstalledPart implements Initializable {
                    REGNUM = (String) regCombReg.getValue();
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
-            int CUSTOMERID = (Integer)(IDcomb.getValue());
+            int BOOKINGID = (Integer)(IDcomb.getValue());
             
   
       
       added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
-              EXPDATE,PARTNAME, CUSTOMERID);
+              EXPDATE,PARTNAME, BOOKINGID);
       updateAmount();
-      Database.getInstance().calculateBill(REGNUM,CUSTOMERID);
+      Database.getInstance().calculateBill(REGNUM,BOOKINGID);
       addWithdrawalDate();
       clearRest();
       searchPart();
@@ -209,7 +209,7 @@ public class addInstalledPart implements Initializable {
    public void getBill() 
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUSTOMER_ID());
+        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getBOOKING_ID());
         searchPart();
     }
     public void remove() throws SQLException
@@ -313,7 +313,7 @@ public class addInstalledPart implements Initializable {
                 }
             }
             );*/
-            CUSTOMER_ID_view.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
+            BOOKING_ID_view.setCellValueFactory(new PropertyValueFactory<>("BOOKING_ID"));
             /*CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             CUSTOMER_ID_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,Integer>>() {
@@ -365,7 +365,7 @@ public class addInstalledPart implements Initializable {
         }
         else if(id)
         {
-            JOptionPane.showMessageDialog(null,"Please select a customer ID");
+            JOptionPane.showMessageDialog(null,"Please select a booking ID");
             check=false;
         }
         return check;

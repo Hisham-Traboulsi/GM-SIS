@@ -23,13 +23,13 @@ public class installedPart
     private StringProperty INST_DATE;
     private StringProperty EXP_DATE;
     private StringProperty PART_NAME;
-    private IntegerProperty CUSTOMER_ID;
+    private IntegerProperty BOOKING_ID;
    
     
     
     
    public installedPart(int INST_ID, String REG_NUM, String INST_DATE, String EXP_DATE,String PART_NAME, 
-           int CUSTOMER_ID)
+           int BOOKING_ID)
            
     {
         this.INST_ID =  new SimpleIntegerProperty(INST_ID);
@@ -39,7 +39,7 @@ public class installedPart
         this.REG_NUM = new SimpleStringProperty(REG_NUM);
         this.INST_DATE = new SimpleStringProperty(INST_DATE);
         this.EXP_DATE= new SimpleStringProperty(EXP_DATE);
-        this.CUSTOMER_ID = new SimpleIntegerProperty(CUSTOMER_ID);
+        this.BOOKING_ID = new SimpleIntegerProperty(BOOKING_ID);
         
     }
     
@@ -71,9 +71,9 @@ public class installedPart
     {
         return EXP_DATE.get();
     }
-      public int getCUSTOMER_ID()
+      public int getBOOKING_ID()
     {
-        return CUSTOMER_ID.get();
+        return BOOKING_ID.get();
     }
        
        
@@ -99,9 +99,9 @@ public class installedPart
     {
        return EXP_DATE;
     }
-    public IntegerProperty CUSTOMER_ID()
+    public IntegerProperty BOOKING_ID()
     {
-       return CUSTOMER_ID;
+       return BOOKING_ID;
     }
      
     
@@ -130,9 +130,9 @@ public class installedPart
         this.INST_DATE.set(INST_DATE);
     }
     
-      public void setCUSTOMER_ID(int CUSTOMER_ID)
+      public void setBOOKING_ID(int BOOKING_ID)
     {
-        this.CUSTOMER_ID.set(CUSTOMER_ID);
+        this.BOOKING_ID.set(BOOKING_ID);
     }
        
     

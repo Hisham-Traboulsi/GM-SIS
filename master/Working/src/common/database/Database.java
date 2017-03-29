@@ -570,13 +570,13 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
+            int BOOKING_ID = rs.getInt("BOOKING_ID");
             
             
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUSTOMER_ID);
+            EXP_DATE,PART_NAME, BOOKING_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -590,7 +590,7 @@ public final class Database
         searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (CUSTOMER_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,DIAGNOSIS_REPAIR_BOOKINGS where CUSTOMERS.FIRST_NAME like '%" + searchVal + "%' OR CUSTOMERS.SURNAME LIKE'%" + searchVal +"%' OR DIAGNOSIS_REPAIR_BOOKINGS.REG_NUM LIKE '%" + searchVal + "%')");
+        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (BOOKING_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,DIAGNOSIS_REPAIR_BOOKINGS where CUSTOMERS.FIRST_NAME like '%" + searchVal + "%' OR CUSTOMERS.SURNAME LIKE'%" + searchVal +"%' OR DIAGNOSIS_REPAIR_BOOKINGS.REG_NUM LIKE '%" + searchVal + "%')");
         
         //searchInstalledPart.setString(1,searchVal);
         
@@ -604,10 +604,10 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
+            int BOOKING_ID = rs.getInt("BOOKING_ID");
 
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUSTOMER_ID);
+            EXP_DATE,PART_NAME, BOOKING_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -666,11 +666,11 @@ public final class Database
         
         ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
         try{
-         PreparedStatement fill = preparedStatement("SELECT CUSTOMERID FROM DIAGNOSIS_REPAIR_BOOKINGS");
+         PreparedStatement fill = preparedStatement("SELECT IDnum FROM DIAGNOSIS_REPAIR_BOOKINGS");
          ResultSet rs = fill.executeQuery();
          while(rs.next())
             {
-              regComb1.add(rs.getInt("CUSTOMERID"));
+              regComb1.add(rs.getInt("IDnum"));
             }
                
         }
@@ -815,7 +815,7 @@ public final class Database
     public void editInstalledPart() throws SQLException
     {
         try{
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_ID=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,BOOKING_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -823,7 +823,7 @@ public final class Database
             editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getPART_NAME());
-            editInstalledPart.setInt(5, searchPartsData.get(counter).getCUSTOMER_ID());
+            editInstalledPart.setInt(5, searchPartsData.get(counter).getBOOKING_ID());
             
             editInstalledPart.setInt(6, searchPartsData.get(counter).getINST_ID());
            
@@ -889,7 +889,7 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
-    public void calculateBill(String regNum,int customerid) 
+    public void calculateBill(String regNum,int bookingid) 
     { 
         double totalcost=0.0;
        // String custName=name;
@@ -914,11 +914,9 @@ public final class Database
         }
          try{
              
-        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?,?)");
+        PreparedStatement getBill= preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET cost='" + totalcost +"' where IDnum='" + bookingid + "'");
 
-           getBill.setInt(1, customerid);
-           getBill.setDouble(2,totalcost);
-           getBill.setBoolean(3,false);
+           getBill.setInt(1, bookingid);
            getBill.execute();
            getBill.close();
            JOptionPane.showMessageDialog(null,"Part added to the bill");

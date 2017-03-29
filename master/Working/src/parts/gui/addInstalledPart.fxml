@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import parts.textfield.*?>
+
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addInstalledPart">
    <children>
       <Text fill="WHITE" layoutX="77.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Number">
@@ -34,7 +35,7 @@
             <TableColumn fx:id="INST_DATE_view" prefWidth="126.0" text="Installation Date" />
             <TableColumn fx:id="EXP_DATE_view" prefWidth="134.0" text="Warranty Expiration" />
             <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="98.0" text="Part Name" />
-            <TableColumn fx:id="CUSTOMER_ID_view" prefWidth="144.0" text="Customer ID" />
+            <TableColumn fx:id="BOOKING_ID_view" prefWidth="144.0" text="Customer ID" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
@@ -58,7 +59,7 @@
       <ComboBox fx:id="regComb" layoutX="273.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
       <ComboBox fx:id="regCombReg" layoutX="273.0" layoutY="200.0" prefHeight="25.0" prefWidth="112.0" />
       <Button layoutX="852.0" layoutY="504.0" mnemonicParsing="false" onAction="#partBooking" text="View Bookings" />
-      <Text fill="WHITE" layoutX="74.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
+      <Text fill="WHITE" layoutX="74.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking ID">
          <font>
             <Font size="19.0" />
          </font>
