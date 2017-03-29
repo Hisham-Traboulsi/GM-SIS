@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 import parts.logic.*;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
 import specialist.logic.OutstandingVehicle;
@@ -30,7 +28,8 @@ import diagrep.logic.Mec;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import parts.logic.PartsController;
 
 /**
@@ -49,6 +48,7 @@ public final class Database
     
     private ObservableList<SystemUser> usersData;
     private ObservableList<Customers> customerData;
+    private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<installedPart> installedPartsData;
@@ -334,6 +334,30 @@ public final class Database
         }
         
         getAllCustomers();
+    }
+    
+    public ObservableList<String> getCustomerVehicles(int customerID)
+    {
+        try 
+        {
+            PreparedStatement getCustomerVehilceStmt = preparedStatement("SELECT * FROM VEHICLE_RECORD WHERE CUSTOMER_ID = ?");
+            
+            getCustomerVehilceStmt.setInt(1, customerID);
+            
+            customerVehicles = FXCollections.observableArrayList();
+            ResultSet rs = getCustomerVehilceStmt.executeQuery();
+            while(rs.next())
+            {
+                String vehicleReg = rs.getString("REG_NUM");
+                customerVehicles.add(vehicleReg);
+            }
+            return customerVehicles;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return customerVehicles;
+        }
     }
     
     /*Author Sergio*/

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="289.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="customers.logic.EditHelpMessageController">
+<AnchorPane id="AnchorPane" prefHeight="289.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="customers.logic.CustomerInfoHelpController">
     <stylesheets>
         <URL value="@customer_style.css" />
     </stylesheets>
