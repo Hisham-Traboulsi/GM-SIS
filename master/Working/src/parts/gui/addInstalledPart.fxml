@@ -39,7 +39,7 @@
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
       <NonSpecialCharTextField fx:id="searchBox" layoutX="700.0" layoutY="144.0" onKeyPressed="#enterPressedSearch" prefHeight="25.0" prefWidth="130.0" />
-      <ImageView fitHeight="85.0" fitWidth="91.0" layoutX="1030.0" layoutY="64.0" onMouseClicked="#help" onMouseDragged="#help" onMousePressed="#help" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="85.0" fitWidth="91.0" layoutX="1030.0" layoutY="64.0" onMouseClicked="#help" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/help-icon.png" />
          </image>
