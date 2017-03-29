@@ -176,8 +176,8 @@
                      <columns>
                         <TableColumn fx:id="BookingCol" prefWidth="97.5" text="Booking ID" />
                         <TableColumn fx:id="MechanicCol" prefWidth="84.0" text="Mechanic ID" />
-                        <TableColumn fx:id="CustomerCol" prefWidth="100.5" text="Part" />
-                        <TableColumn fx:id="PartCol" prefWidth="95.0" text="Customer ID" />
+                        <TableColumn fx:id="CustomerCol" prefWidth="100.5" text="Customer ID" />
+                        <TableColumn fx:id="PartCol" prefWidth="95.0" text="Part" />
                         <TableColumn fx:id="RegNumCol" prefWidth="91.0" text="Reg Num" />
                         <TableColumn fx:id="ManufactureCol" prefWidth="92.0" text="Manufacture" />
                         <TableColumn fx:id="MileageCol" prefWidth="83.5" text="Mileage" />
@@ -250,6 +250,7 @@
                   <ComboBox fx:id="regComb" layoutX="213.0" layoutY="164.0" prefHeight="32.0" prefWidth="166.0" />
                   <ComboBox fx:id="MechCombReg" layoutX="213.0" layoutY="85.0" prefHeight="32.0" prefWidth="166.0" />
                   <ComboBox fx:id="regCombReg" layoutX="567.0" layoutY="89.0" prefHeight="32.0" prefWidth="166.0" />
+                  <TextField fx:id="CostTxt" layoutX="925.0" layoutY="213.0" prefHeight="32.0" prefWidth="166.0" />
                </children>
             </AnchorPane>
          </children>

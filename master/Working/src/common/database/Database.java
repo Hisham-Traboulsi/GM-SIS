@@ -1586,7 +1586,7 @@ public final class Database
        
        public void editBookings() throws SQLException
     {
-        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?,COST=?  WHERE IDnum=?");
         int counter = 0;
         while(counter < BookingsData.size())
             
@@ -1602,6 +1602,7 @@ public final class Database
             editBookingStmt.setString(8, BookingsData.get(counter).getBOOKING_TIME());
             editBookingStmt.setString(9, BookingsData.get(counter).getBOOKING_TYPE());
             editBookingStmt.setInt(10, BookingsData.get(counter).getIDnum());
+            editBookingStmt.setDouble(11, BookingsData.get(counter).getBOOKING_TOTAL());
             
             
             
@@ -1622,7 +1623,7 @@ public final class Database
             editMecStmt.setString(1, MechanicData.get(counter).getMECHANIC_NAME());
             editMecStmt.setString(2, MechanicData.get(counter).getMECHANIC_DATE());
             editMecStmt.setString(3, MechanicData.get(counter).getMECHANIC_NUMBER());
-            editMecStmt.setString(4, MechanicData.get(counter).getMECHANIC_RATE());
+            editMecStmt.setDouble(4, MechanicData.get(counter).getMECHANIC_RATE());
             
             
             editMecStmt.executeUpdate();
@@ -1691,9 +1692,10 @@ public final class Database
             String BookingDate = rs.getString("BOOKING_DATE");
             String BookingTime = rs.getString("TIME");
             String BookingType = rs.getString("TYPE");
+            double BookingTotal = rs.getDouble("COST");
             
             Bookings bookings = new Bookings(idNum, BookingMechanicID, PARTNAME, CUSTOMERID, 
-                    BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType);
+                    BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType, BookingTotal);
             
             BookingsData.add(bookings);
         }
@@ -1716,7 +1718,7 @@ public final class Database
             String MechanicName = rs.getString("MECHANIC_NAME");
             String MechanicDate = rs.getString("MECHANIC_DATE");
             String MechanicNumber = rs.getString("MECHANIC_NUMBER");
-            String MechanicRate = rs.getString("MECHANIC_RATE");
+            Double MechanicRate = rs.getDouble("MECHANIC_RATE");
             
             
             Mec mec = new Mec(idNum, MechanicName, MechanicDate, MechanicNumber, 
@@ -1728,13 +1730,13 @@ public final class Database
     }
      public boolean addBookings( String BookingMechanicID, String PARTNAME, int CUSTOMERID,
             String BookingRegNum, String BookingManufacture, String BookingMileage, 
-            String BookingDate, String BookingTime, String BookingType)
+            String BookingDate, String BookingTime, String BookingType, double BookingTotal)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?)"); 
+           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?)"); 
            add.setString(1, null);
            add.setString(2, BookingMechanicID);
            add.setString(3, PARTNAME);
@@ -1745,6 +1747,7 @@ public final class Database
            add.setString(8, BookingDate);
            add.setString(9, BookingTime);
            add.setString(10, BookingType);
+           add.setDouble(11, BookingTotal);
 
            add.execute();
            add.close();
@@ -1762,7 +1765,7 @@ public final class Database
     }
      
      public boolean addMec( String MechanicName, String MechanicDate,
-            String MechanicNumber, String MechanicRate )
+            String MechanicNumber, double MechanicRate )
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1773,7 +1776,7 @@ public final class Database
            add.setString(2, MechanicName);
            add.setString(3, MechanicDate);
            add.setString(4, MechanicNumber);
-           add.setString(5, MechanicRate);
+           add.setDouble(5, MechanicRate);
            
 
            add.execute();

@@ -87,7 +87,10 @@ import javafx.scene.input.KeyEvent;
  * @author ernes
  */
 public class AddBookings implements Initializable {
-
+    @FXML
+    private TableView<Mec> MechTable = new TableView<Mec>();
+    @FXML
+    private TableColumn<Mec, Double> MechanicRate;
     @FXML
     private TextField MechTxt;
     @FXML
@@ -108,6 +111,8 @@ public class AddBookings implements Initializable {
     private TextField Typetxt;
     @FXML
     private DatePicker DateTxt;
+    @FXML
+    private TextField CostTxt;
     @FXML
     private ComboBox regComb;
     @FXML
@@ -145,6 +150,8 @@ public class AddBookings implements Initializable {
     private TableColumn <Bookings, String>TimeCol;
     @FXML
     private TableColumn <Bookings, String>TypeCol;
+    @FXML
+    private TableColumn <Bookings, Double> CostCol;
   
   
     
@@ -176,6 +183,7 @@ public class AddBookings implements Initializable {
             String BookingDate = (df.format(dateobj));          
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
+            Double BookingTotal= Double.parseDouble(CostTxt.getText());
             
          if(  ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
         || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())  
@@ -188,7 +196,7 @@ public class AddBookings implements Initializable {
           
       added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,
              CUSTOMERID, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
-             BookingTime, BookingType);
+             BookingTime, BookingType,BookingTotal);
      
          }
       
@@ -368,6 +376,7 @@ public class AddBookings implements Initializable {
             DateCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_DATE"));
             TimeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TIME"));
             TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TYPE"));
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TOTAL"));
           
             
 
