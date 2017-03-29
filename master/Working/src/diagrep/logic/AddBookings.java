@@ -110,6 +110,8 @@ public class AddBookings implements Initializable {
     private ComboBox regComb;
     @FXML
     private ComboBox IDcomb;
+    @FXML
+    private ComboBox MechCombReg;
     
     @FXML
     private Button addButton;
@@ -160,7 +162,8 @@ public class AddBookings implements Initializable {
       boolean added=false;
       
      
-            String BookingMechanicID = (MechTxt.getText());
+            
+            String BookingMechanicID = (String) MechCombReg.getValue();
             String PARTNAME = (String) regComb.getValue();
             int CUSTOMERID = (Integer)(IDcomb.getValue());
             String BookingRegNum=(RegNumTxt.getText());
@@ -170,7 +173,7 @@ public class AddBookings implements Initializable {
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
             
-         if(MechTxt.getText().isEmpty() || RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
+         if( RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
         || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "All fields are required");
@@ -201,7 +204,7 @@ public class AddBookings implements Initializable {
         {
             //addMenuBar();
             
-            URL addPartUrl = getClass().getResource("/parts/gui/partBooking.fxml");
+            URL addPartUrl = getClass().getResource("/diagrep/gui/AddBookings.fxml");
             AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
             
             BorderPane border = Main.getRoot();
@@ -227,12 +230,29 @@ public class AddBookings implements Initializable {
    
    public void removeBooking() throws SQLException
     {
-        selected = BookTable.getSelectionModel().getSelectedItems();   
         
-        int ID = selected.get(0).getIDnum();
         
-        Database.getInstance().removeBookings(ID);
-        RefreshPage();
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to remove this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+
+                        if(selection == 0)
+                        {
+                             selected = BookTable.getSelectionModel().getSelectedItems();   
+                             int ID = selected.get(0).getIDnum();
+                             Database.getInstance().removeBookings(ID);
+                              RefreshPage();
+                        }
+                        else if(selection == 1)
+                        {
+                         
+                        }
         
     }
    
@@ -277,6 +297,17 @@ public class AddBookings implements Initializable {
         IDcomb.setItems(regComb1);
         
     }
+    
+    public void numBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <String> regComb1=Database.getInstance().fillNumComboBook2();
+        //regComb = new ComboBox();
+        MechCombReg.setItems(regComb1);
+        
+    }
    
    public void RefreshPage(){
        try {
@@ -311,6 +342,7 @@ public class AddBookings implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        partBox();
        idcombBox();
+       numBox();
         try {
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
 
@@ -318,7 +350,7 @@ public class AddBookings implements Initializable {
 
             BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
-            MechanicCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*MechanicCol.setCellFactory(TextFieldTableCell.forTableColumn());
             MechanicCol.setOnEditCommit(
                     new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
                 @Override
@@ -327,7 +359,7 @@ public class AddBookings implements Initializable {
                             t.getTablePosition().getRow())).setBOOKING_MechID(t.getNewValue());
                 }
             } 
-            );
+            );*/
             PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
             /*PartCol.setCellFactory(TextFieldTableCell.forTableColumn());
             PartCol.setOnEditCommit(

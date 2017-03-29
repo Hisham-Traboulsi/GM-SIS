@@ -21,7 +21,8 @@
          </items></Menu>
           
         <Menu mnemonicParsing="false" text=" Diagnosis and Repair Bookings ">
-              
+              <MenuItem mnemonicParsing="false" onAction="#Bookings" text="Add Bookings" />
+              <MenuItem mnemonicParsing="false" onAction="#Mec" text="Add Mechanic" />
         </Menu>
           
         <Menu mnemonicParsing="false" text=" Parts ">

@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -163,7 +164,8 @@ public class RemoveCustomerController implements Initializable {
         Stage stage = new Stage();                                
         Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/RemoveHelpMessage.fxml"));                                                                
         stage.setScene(new Scene(root));
-        stage.setTitle("Help Message");                                
+        stage.setTitle("Help Message");   
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/customers/gui/help-icon.png")));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
