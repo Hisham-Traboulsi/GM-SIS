@@ -145,7 +145,8 @@ public class addInstalledPart implements Initializable {
       updateAmount();
       Database.getInstance().calculateBill(REGNUM,CUSTOMERID);
       addWithdrawalDate();
-      clearButton();
+      clearRest();
+      searchPart();
       return added;
     }
     public void enterPressed(KeyEvent event) {
@@ -295,8 +296,17 @@ public class addInstalledPart implements Initializable {
     partBox();
     numBox();
     idcombBox();
-  
-    
+
+    }
+    public void clearRest(){
+        
+    searchBox.clear();
+    regComb.getItems().clear();
+    regCombReg.getItems().clear();
+    IDcomb.getItems().clear();
+    partBox();
+    numBox();
+    idcombBox();
     }
     public void partBox()
     {
@@ -335,7 +345,7 @@ public class addInstalledPart implements Initializable {
        partBox();
        numBox();
        idcombBox();
-     
+       searchPart();
        
        
         /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
