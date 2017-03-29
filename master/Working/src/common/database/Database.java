@@ -861,6 +861,31 @@ public final class Database
             ex.printStackTrace();
         }
     }
+    public boolean maxParts(String regNum) 
+    {  boolean check=true;
+       int count=0;
+        try
+        {
+            
+        PreparedStatement getBill= preparedStatement("SELECT REG_NUM FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "'");
+
+        ResultSet rs = getBill.executeQuery();
+        while(rs.next())
+        {
+            count=count+1;
+            if(count==10)
+            {
+                check=false;
+                JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 parts<br/>" 
+                 + "- Please delete at least one part to install more <html>");
+            }
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        return check;
+    }
     /*
     Author Sergio Arrieta
     */
