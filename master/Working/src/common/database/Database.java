@@ -397,6 +397,9 @@ public final class Database
         
         return added;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void partBelowZero() 
     {
           try{
@@ -408,6 +411,9 @@ public final class Database
               
           }
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void addDelivery(String name)
     {
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -431,6 +437,9 @@ public final class Database
         }
 
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void addWithdrawal(String name)
     {
         PreparedStatement add = null;
@@ -458,6 +467,9 @@ public final class Database
         }
 
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partLog> getDeliveryLog() 
     {
         PreparedStatement getPart = null;
@@ -484,6 +496,9 @@ public final class Database
        }
         return deliveredData;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partLog> getWithdrawalLog()
     {
         try{
@@ -625,6 +640,9 @@ public final class Database
         }
            return regComb1;
     }
+   /*     
+    author sergio
+    */ 
     public ObservableList<Integer> fillIDcombo()
     {
         
@@ -643,6 +661,9 @@ public final class Database
         }
            return regComb1;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<String> fillNumCombo()
     {
         
@@ -661,6 +682,9 @@ public final class Database
         }
            return regComb1;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<String> fillNumComboBook()
     {
         
@@ -732,6 +756,9 @@ public final class Database
         
         return deleted;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partBooking> getpartBooking(String reg)
     {   
         try{
@@ -763,7 +790,11 @@ public final class Database
         }
         return bookingdata;
     }
-    public void editInstalledPart() 
+    
+    /*
+    Author Sergio Arrieta
+    */
+    public void editInstalledPart() throws SQLException
     {
         try{
         PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_ID=? WHERE INSTALLATION_ID=?");
@@ -783,17 +814,17 @@ public final class Database
             
             counter++;
         }
-        
+         
         getinstalledPart();
         }
-        catch(SQLException ex)
+        catch( NullPointerException e)
         {
-            JOptionPane.showMessageDialog(null,"Please to edit:<br/><br/>" + "- Double click a cell<br/><br/>" +
-                    "- Enter new value<br/><br/>" +
-                    "- Press enter<br/><br/>" +
-                    "- Press update button<br/><br/>");
+            
         }
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void updateStock(String partname) 
     {
         try
@@ -812,6 +843,9 @@ public final class Database
             ex.printStackTrace();
         }
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void calculateBill(String regNum,int customerid) 
     { 
         double totalcost=0.0;
@@ -845,12 +879,14 @@ public final class Database
         }
         catch(SQLException ex)
         {
-            
+            JOptionPane.showMessageDialog(null,"Part added to the bill");
         }
       
     }
 
-    
+    /*
+    Author Sergio Arrieta
+    */
     public void editPart() throws SQLException
     {
        try{ PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET NAME=?,DESCRIPTION=?,AMOUNT=?,COST=? WHERE RELEVANT_ID_NUM=?");
@@ -871,25 +907,28 @@ public final class Database
         
         getPart();
        }
-       catch(SQLException ex)
+       catch(NullPointerException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             
         }
     }
-      public void removeInstalledPart(int id) 
+    /*
+    Author Sergio Arrieta
+    */
+      public void removeInstalledPart(int id) throws SQLException
     {
-        try{
+        
         PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
-        }
-        catch(SQLException ex)
-        {
-            
-        }
+        
+        
     }
+      /*
+    Author Sergio Arrieta
+    */
       public void removeBookingPart(int id) 
     {
         try{
@@ -899,7 +938,7 @@ public final class Database
         }
         catch(SQLException ex)
         {
-            
+            JOptionPane.showMessageDialog(null,"Please select a booking");
         }
     }
       

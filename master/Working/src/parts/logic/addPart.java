@@ -105,6 +105,7 @@ public class addPart implements Initializable {
       String desc = (partDesc.getText());
       int amount = Integer.parseInt(partAmount.getText());
       double cost = Double.parseDouble(partCost.getText());
+      
   
       
       added = Database.getInstance().addPart(name,desc,amount,cost);
@@ -243,11 +244,18 @@ public class addPart implements Initializable {
         }
     } 
    public void updatePart() throws SQLException
-    {   //int id=Integer.parseInt(partID.getText());
-        //int amount=Integer.parseInt(partAmount.getText());
-    
+    { 
+    try{
         Database.getInstance().editPart();
         refresh();
+    }
+    catch( NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null,"Please to edit:<br/><br/>" + "- Double click a cell<br/><br/>" +
+                    "- Enter new value<br/><br/>" +
+                    "- Press enter<br/><br/>" +
+                    "- Press update button<br/><br/>");
+        }
     }
     public void help()
     {

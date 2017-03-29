@@ -198,32 +198,46 @@ public class addInstalledPart implements Initializable {
         Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUSTOMER_ID());
         searchPart();
     }
-    public void remove() 
+    public void remove() throws SQLException
     {
-        JFrame frame = new JFrame();
-           Object[] options = {"Yes","No"};
-           int n = JOptionPane.showOptionDialog(frame,
-            "Are you sure you want to remove that part",
-            "Remove part",
+        try{
+             selected = installedPartsTable.getSelectionModel().getSelectedItems(); 
+             int id =selected.get(0).getINST_ID();
+             
+             JFrame frame = new JFrame();
+             Object[] options = {"Yes","No"};
+             int n = JOptionPane.showOptionDialog(frame,
+             "Are you sure you want to remove that part",
+             "Remove part",
              JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.WARNING_MESSAGE,
+             JOptionPane.WARNING_MESSAGE,
              null,
              options,
              options[1]);
-              if (n == JOptionPane.YES_OPTION) {
-      
-                 {
-        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
-        searchPart();
+              if (n == JOptionPane.YES_OPTION) 
+                {     
+                   {
+                      Database.getInstance().removeInstalledPart(id);
+                        searchPart();
+                   }        
                  }
-         }
-    }
+           }
+           catch(NullPointerException e)
+           { 
+              JOptionPane.showMessageDialog(null,"Select a part to remove");
+           }
+     }
     
-      public void updatePart() 
-    {
+    
+      public void updatePart() throws SQLException
+    {  try{
         Database.getInstance().editInstalledPart();
         searchPart();
+    }
+    catch(NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null,"Select a part");
+        }
     }
     
        public void searchPart() 
