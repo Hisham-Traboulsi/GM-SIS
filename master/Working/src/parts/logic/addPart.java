@@ -157,17 +157,17 @@ public class addPart implements Initializable {
     public boolean empty()
     { boolean check=true;
     
-        if ( partName.getText().isEmpty()||partName.getText().equals("")) {
+        if ( partName.getText().isEmpty()||partName.getText().equals("")||partName.getText().equals(" ")) {
           JOptionPane.showMessageDialog(null,"Please enter a part name");
           check=false;
-     } else if ( partCost.getText().isEmpty()||partCost.getText().equals("")) {
+     } else if ( partCost.getText().isEmpty()||partCost.getText().equals("")||partCost.getText().equals(" ")) {
           JOptionPane.showMessageDialog(null,"Please enter a part cost");
           check=false;
-     } else if ( partAmount.getText().isEmpty()||partAmount.getText().equals("")) {
+     } else if ( partAmount.getText().isEmpty()||partAmount.getText().equals("")||partAmount.getText().equals(" ")) {
          JOptionPane.showMessageDialog(null,"Please enter a quantity");
          check=false;
      }
-        else if (partDesc.getText().isEmpty()||partDesc.getText().equals("")) {
+        else if (partDesc.getText().isEmpty()||partDesc.getText().equals("")||partDesc.getText().equals(" ")) {
          JOptionPane.showMessageDialog(null,"Please enter a part description");
          check=false;
          
