@@ -133,12 +133,13 @@ public class addInstalledPart implements Initializable {
        Date nextYear = cal.getTime();
        boolean added=false;
       if(empty())
-      {
-      
+      { String REGNUM = (String) regCombReg.getValue();
+       if(partLimit(REGNUM))
+       {
       
 
             String PARTNAME = (String) regComb.getValue();
-            String REGNUM = (String) regCombReg.getValue();
+                   REGNUM = (String) regCombReg.getValue();
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
             int CUSTOMERID = (Integer)(IDcomb.getValue());
@@ -152,9 +153,15 @@ public class addInstalledPart implements Initializable {
       addWithdrawalDate();
       clearRest();
       searchPart();
+       }
       }
       return added;
     }
+   public boolean partLimit(String REGNUM){
+      // boolean check=true;
+       return Database.getInstance().maxParts(REGNUM);
+       
+   }
     public void enterPressed(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();
@@ -388,7 +395,7 @@ public class addInstalledPart implements Initializable {
         /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
         regComb.getItems().addAll(regComb1);*/
-        ObservableList <Integer> regComb1=Database.getInstance().fillIDcombo();
+        ObservableList <Integer> regComb1=Database.getInstance().fillBookingIDcombo();
         //regComb = new ComboBox();
         IDcomb.setItems(regComb1);
         

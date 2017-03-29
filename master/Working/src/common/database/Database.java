@@ -661,6 +661,24 @@ public final class Database
         }
            return regComb1;
     }
+    public ObservableList<Integer> fillBookingIDcombo()
+    {
+        
+        ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT CUSTOMERID FROM DIAGNOSIS_REPAIR_BOOKINGS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getInt("CUSTOMERID"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
     /*
     Author Sergio Arrieta
     */
@@ -842,6 +860,31 @@ public final class Database
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
         }
+    }
+    public boolean maxParts(String regNum) 
+    {  boolean check=true;
+       int count=0;
+        try
+        {
+            
+        PreparedStatement getBill= preparedStatement("SELECT REG_NUM FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "'");
+
+        ResultSet rs = getBill.executeQuery();
+        while(rs.next())
+        {
+            count=count+1;
+            if(count==10)
+            {
+                check=false;
+                JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 parts<br/>" 
+                 + "- Please delete at least one part to install more <html>");
+            }
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        return check;
     }
     /*
     Author Sergio Arrieta
