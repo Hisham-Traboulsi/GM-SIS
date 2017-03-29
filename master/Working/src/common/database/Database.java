@@ -870,16 +870,19 @@ public final class Database
             ex.printStackTrace();
         }
          try{
-        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?)");
+             
+        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?,?)");
 
            getBill.setInt(1, customerid);
            getBill.setDouble(2,totalcost);
+           getBill.setBoolean(3,false);
            getBill.execute();
            getBill.close();
+           JOptionPane.showMessageDialog(null,"Part added to the bill");
         }
         catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null,"Part added to the bill");
+            JOptionPane.showMessageDialog(null,"Part NOT added to the bill");
         }
       
     }
