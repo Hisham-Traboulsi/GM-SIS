@@ -38,6 +38,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -189,9 +191,14 @@ public class addInstalledPart implements Initializable {
     {
         String partname=(String) regComb.getValue();
         Database.getInstance().updateStock(partname);
-        Database.getInstance().partBelowZero();
+        
         //return ID;
     }
+   public void partisZero() throws SQLException
+   
+   {  
+       Database.getInstance().partBelowZero();
+   }
    public void getBill() 
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
@@ -252,7 +259,7 @@ public class addInstalledPart implements Initializable {
             
            
            PART_NAME_view.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
-           PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           /*PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
             PART_NAME_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -261,11 +268,11 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setPART_NAME(t.getNewValue());
                 }
             }
-            );
+            );*/
             
 
             REG_NUM_view.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
-            REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
             REG_NUM_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -274,10 +281,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
                 }
             }
-            );
+            );*/
             
             INST_DATE_view.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
-            INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             INST_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -286,10 +293,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
                 }
             }
-            );
+            );*/
            
             EXP_DATE_view.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
-            EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           /* EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             EXP_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -298,9 +305,9 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
                 }
             }
-            );
+            );*/
             CUSTOMER_ID_view.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            /*CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             CUSTOMER_ID_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,Integer>>() {
                 @Override
@@ -309,7 +316,7 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
                 }
             }
-            );
+            );*/
             
 
             
@@ -399,7 +406,12 @@ public class addInstalledPart implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       /// partBox();
+        try {
+            /// partBox();
+            partisZero();
+        } catch (SQLException ex) {
+            Logger.getLogger(addInstalledPart.class.getName()).log(Level.SEVERE, null, ex);
+        }
        partBox();
        numBox();
        idcombBox();

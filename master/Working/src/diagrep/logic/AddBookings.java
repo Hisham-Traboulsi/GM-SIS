@@ -220,9 +220,7 @@ public class AddBookings implements Initializable {
    public void updateAmount() 
     {
         String partname=PART_NAME.getText();
-        Database.getInstance().updateStock(partname);
-        Database.getInstance().partBelowZero();
-        //return ID;
+       
     }
    
    
