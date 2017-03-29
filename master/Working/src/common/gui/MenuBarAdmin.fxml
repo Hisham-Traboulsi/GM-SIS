@@ -19,6 +19,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
                         <MenuItem mnemonicParsing="false" onAction="#editCustomer" text="Edit Customers" /> 
                         <MenuItem mnemonicParsing="false" onAction="#removeCustomer" text="Remove Customers" /> 
+                        <MenuItem mnemonicParsing="false" onAction="#customerInfo" text ="Customer Information"/>
                     </items>   
                 </Menu>
           

@@ -138,7 +138,7 @@ public class AddCustomerController implements Initializable {
                     
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                         rowData = row.getItem();
-                        Object [] options = {"Add Vehicle", "Book Appointment", "Display Info"};
+                        Object [] options = {"Add Vehicle", "Book Appointment"};
                         int selection = JOptionPane.showOptionDialog(null,
                         "Would you like to",
                         "Customers Options",
@@ -174,19 +174,6 @@ public class AddCustomerController implements Initializable {
                             } catch (IOException ex) {
                                 Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
                             }        
-                        }
-                        else if(selection == 2)
-                        {                   
-                            try {                                
-                                Stage stage = new Stage();                                
-                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));                                                                
-                                stage.setScene(new Scene(root));
-                                stage.setTitle("Customer Info");                                
-                                stage.initModality(Modality.APPLICATION_MODAL);
-                                stage.showAndWait();
-                            } catch (IOException ex) {
-                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                            }                           
                         }
                     }
                 });
