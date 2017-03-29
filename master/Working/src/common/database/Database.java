@@ -400,17 +400,7 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
-    public void partBelowZero() 
-    {
-         /* try{
-        PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
-        partBelowZero.executeUpdate();  
-          }
-          catch(SQLException ex)
-          {
-              
-          }*/
-    }
+    
     /*
     Author Sergio Arrieta
     */
