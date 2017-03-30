@@ -88,31 +88,166 @@ public class VRHomepageController implements Initializable {
         loadTable();
                 
         searchField.setPromptText("Search...");
-        searchField.setFont(Font.font("SanSerif", 15));
+        
+        
+        
+    }
+    
+    public void searchVehicle() 
+    {
+        
+       String searchVal = searchField.getText();
+       ObservableList  <Vehicle> searchVehicleData = Database.getInstance().searchVehicle(searchVal);
+       
+       vehicleTable.setEditable(true);
 
-        // Search Bar
-        FilteredList<Vehicle> filteredData = new FilteredList<>(data, e -> true);
-        searchField.setOnKeyReleased((KeyEvent e) -> {
-            searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-                filteredData.setPredicate((Predicate<? super Vehicle>) vehicle -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-                    
-                    if (vehicle.getRegnum().contains(newValue)) {
-                        return true;
-                    } else if (vehicle.getMake().contains(newValue)) {
-                        return true;
-                    }
-                    return false;
-                });
-            });
-            SortedList<Vehicle> sortedData = new SortedList<>(filteredData);
-            sortedData.comparatorProperty().bind(vehicleTable.comparatorProperty());
-            vehicleTable.setItems(sortedData);
-            });
-        
-        
+            regnumCol.setCellValueFactory(new PropertyValueFactory<>("regnum"));
+            regnumCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            regnumCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setRegNum(t.getNewValue());
+                }
+            }
+            );
+            
+            modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
+            modelCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            modelCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setModel(t.getNewValue());
+                }
+            }
+            );
+            
+            makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
+            makeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            makeCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setMake(t.getNewValue());
+                }
+            }
+            );
+            
+            engineCol.setCellValueFactory(new PropertyValueFactory<>("engine"));
+            engineCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            engineCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setEngine(t.getNewValue());
+                }
+            }
+            );
+            
+            fueltypeCol.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
+            fueltypeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            fueltypeCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setFuelType(t.getNewValue());
+                }
+            }
+            );
+            
+            colourCol.setCellValueFactory(new PropertyValueFactory<>("colour"));
+            colourCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            colourCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setColour(t.getNewValue());
+                }
+            }
+            );
+            
+            motdateCol.setCellValueFactory(new PropertyValueFactory<>("motdate"));
+            motdateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            motdateCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setMotDate(t.getNewValue());
+                }
+            }
+            );
+            
+            lastserviceCol.setCellValueFactory(new PropertyValueFactory<>("lastservice"));
+            lastserviceCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            lastserviceCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setLastService(t.getNewValue());
+                }
+            }
+            );
+            
+            mileageCol.setCellValueFactory(new PropertyValueFactory<>("mileage"));
+            mileageCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            mileageCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setMileage(t.getNewValue());
+                }
+            }
+            );
+            
+            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
+            warrantycompanyCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            warrantycompanyCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setWarrantyCompany(t.getNewValue());
+                }
+            }
+            );
+            
+            warrantyaddressCol.setCellValueFactory(new PropertyValueFactory<>("warrantyaddress"));
+            warrantyaddressCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            warrantyaddressCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setWarrantyAddress(t.getNewValue());
+                }
+            }
+            );
+            
+            warrantyexpiryCol.setCellValueFactory(new PropertyValueFactory<>("warrantyexpiry"));
+            warrantyexpiryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            warrantyexpiryCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setWarrantyExpiry(t.getNewValue());
+                }
+            }
+            ); 
+            
+            customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            
+            vehicleTable.setItems(searchVehicleData);
     }
     
     public void addVehicle()
@@ -258,6 +393,18 @@ public class VRHomepageController implements Initializable {
                 public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
                     ((Vehicle) t.getTableView().getItems().get(
                             t.getTablePosition().getRow())).setMileage(t.getNewValue());
+                }
+            }
+            );
+            
+            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
+            warrantycompanyCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            warrantycompanyCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setWarrantyCompany(t.getNewValue());
                 }
             }
             );

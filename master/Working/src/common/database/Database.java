@@ -51,6 +51,7 @@ public final class Database
     private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
     private ObservableList<Vehicle> vehicleData;
+    private ObservableList<Vehicle> searchVehicleData;
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
@@ -361,48 +362,97 @@ public final class Database
     }
     
     /*Author Sergio*/
-   public boolean addPart(String name, String description, int amount, double cost)
+   public void addPart(String name, String description, int amount, double cost) 
+    {   if(checkPartName(name))
     {
-        PreparedStatement add = null;
-        boolean added = false;
-        try
-        {
-           add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
-           add.setString(1, null);
-           add.setString(2, name);
-           add.setString(3, description);
-           add.setInt(4, amount);
-           add.setDouble(5, cost);
-  
-           add.execute();
-           add.close();
-           added = true;
-           JOptionPane.showMessageDialog(null,"Part successfully added");
+                      PreparedStatement add = null;
+                     // boolean added = false;
+                      try
+                      {
+                         add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
+                         add.setString(1, null);
+                         add.setString(2, name);
+                         add.setString(3, description);
+                         add.setInt(4, amount);
+                         add.setDouble(5, cost);
+
+                         add.execute();
+                         add.close();
+                        // added = true;
+                         JOptionPane.showMessageDialog(null,"Part successfully added");
+                      }
+                        catch(SQLException ex)
+                     {
+                         JOptionPane.showMessageDialog(null,"Error, try again");
+                         ex.printStackTrace();
+                         System.err.println("Unable to access table or table doesnt exist");
+                     }
+    }
+            
+    }
+   public boolean checkPartName(String partname){
+       boolean check=true;
+       try{
+            
+           
+            PreparedStatement checkP = null;
+            checkP = preparedStatement("SELECT NAME FROM PARTS_TRACKING");      
+            ResultSet rs = checkP.executeQuery();
+            
+             while(rs.next())
+                 {
+                    String pn=rs.getString("NAME"); 
+                
+                      if(partname.equalsIgnoreCase(pn))
+                        {
+                            check=false;
+                            JOptionPane.showMessageDialog(null," A part with that name already exists, enter a different name");
+                            break;
+                        } 
+                }
+        
+           }
+       catch(SQLException ex)
+       {
+                
+        }
+       
+       return check;
+   }
+    /*Author Sergio*/
+    public void addInstalledPart( String REG_NUM, String INST_DATE, 
+            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
+    {
+        String newReg="";
+        int BOOKINGID=BOOKING_ID;
+        String partname=PART_NAME;
+        try{
+        PreparedStatement reg = null;
+        reg = preparedStatement(" SELECT REG_NUM FROM 'DIAGNOSIS_REPAIR_BOOKINGS' WHERE IDnum =" + BOOKING_ID +" ");
+
+        ResultSet rs = reg.executeQuery();
+
+         newReg=rs.getString("REG_NUM");
+        // System.out.println(newReg);
+        
         }
         catch(SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null,"Error, try again");
-            ex.printStackTrace();
-            System.err.println("Unable to access table or table doesnt exist");
-        }
-        
-        return added;
-    }
-    /*Author Sergio*/
-    public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int CUSTOMER_ID)
-    {
+                {
+                    JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
+                }
+       if(maxParts(newReg,BOOKINGID,partname))
+       {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
            add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ? )"); 
            add.setString(1, null);
-           add.setString(2, REG_NUM);
+           add.setString(2, newReg);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
            add.setString(5, PART_NAME);
-           add.setInt(6, CUSTOMER_ID);
+           add.setInt(6, BOOKING_ID);
            
            
   
@@ -410,20 +460,19 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"Part successfully installed");
+           calculateBill(REG_NUM,BOOKING_ID);
            
         }
+       
         catch(SQLException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
-        
-        return added;
     }
-    /*
-    Author Sergio Arrieta
-    */
+ }
+   
     
     /*
     Author Sergio Arrieta
@@ -875,25 +924,30 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public boolean maxParts(String regNum) 
+    public boolean maxParts(String regNum,int bookingid,String partname) 
     {  boolean check=true;
        int count=0;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT REG_NUM FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "'");
+        PreparedStatement getBill= preparedStatement("SELECT PART_NAME FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "' AND BOOKING_ID='" + bookingid +"'" );
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
-        {
-            count=count+1;
-            if(count==10)
+         { 
+            String pn=rs.getString("PART_NAME");
+        
+            if(pn.equals(partname))
             {
-                check=false;
-                JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 parts<br/>" 
-                 + "- Please delete at least one part to install more <html>");
+               count=count+1;
+                   if(count==10)
+                   {
+                      check=false;
+                      JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 distinct parts<br/>" 
+                      + "- Please delete at least one part to install more <html>");
+                   }  
             }
-        }
+         }
         }
         catch(SQLException ex){
             
@@ -1047,11 +1101,11 @@ public final class Database
     }
     
     /*Author Sam*/
-    public boolean addVehicle(String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry) {
+    public boolean addVehicle(int ID, String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry) {
         PreparedStatement add = null;
         boolean added = false;
         try {
-            add = preparedStatement("INSERT INTO VEHICLE_RECORD VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            add = preparedStatement("INSERT INTO VEHICLE_RECORD VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             add.setString(1, regnum);
             add.setString(2, model);
             add.setString(3, make);
@@ -1065,6 +1119,7 @@ public final class Database
             add.setString(11, warrantycompany);
             add.setString(12, warrantyaddress);
             add.setString(13, warrantyexpiry);
+            add.setInt(14, ID);
 
             add.execute();
             add.close();
@@ -1330,10 +1385,11 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO BILL VALUES (?, ?)"); 
+           add = preparedStatement("INSERT INTO BILL VALUES (?, ?, ?)"); 
          
            add.setInt(1, CUSTOMERID);
            add.setDouble(2, TOTAL);
+           add.setBoolean(3, false);
         
 
            add.execute();
@@ -1683,6 +1739,53 @@ public final class Database
         
         getVehicle();
     }
+    }
+    
+    /*Author Sam*/
+    public ObservableList<Vehicle> searchVehicle (String searchVal) 
+    {   
+        try{
+        PreparedStatement searchVehicle = null;
+        searchVehicleData = FXCollections.observableArrayList();
+        
+      
+        searchVehicle = preparedStatement("select * from VEHICLE_RECORD where MODEL LIKE '%" + searchVal + "%' OR MAKE LIKE '%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%'");
+        
+        //searchInstalledPart.setString(1,searchVal);
+        
+        
+        ResultSet rs = searchVehicle.executeQuery();
+        
+        while(rs.next())
+        {
+            String regnum = rs.getString("REG_NUM");
+            String model = rs.getString("MODEL");
+            String make = rs.getString("MAKE");
+            String engine = rs.getString("ENGINE_SIZE");
+            String fueltype = rs.getString("FUEL_TYPE");
+            String colour = rs.getString("COLOUR");
+            String motdate = rs.getString("MOT_RENEWAL_DATE");
+            String lastservice = rs.getString("PREVIOUS_SERVICE_DATE");
+            String mileage = rs.getString("CURRENT_MILEAGE");
+            String warranty = rs.getString("WARRANTY");
+            String warrantycompany = rs.getString("WARRANTY_COMPANY");
+            String warrantyaddress = rs.getString("WARRANTY_ADDRESS");
+            String warrantyexpiry = rs.getString("WARRANTY_EXPIRY");
+            int id = rs.getInt("CUSTOMER_ID");
+
+            Vehicle searchedVehicle = new Vehicle(id, regnum,  model,  make, engine, fueltype, colour, motdate, lastservice, mileage, warranty, warrantycompany, warrantyaddress, warrantyexpiry);
+            
+            searchVehicleData.add(searchedVehicle);
+        }
+        
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        return searchVehicleData;
     }
      public ObservableList<Bookings> getBookings() throws SQLException
     {   
