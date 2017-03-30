@@ -840,7 +840,7 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
-    public ObservableList<partBooking> getpartBooking(String reg)
+    public ObservableList<partBooking> getpartBooking(String reg) throws NullPointerException
     {   
         try{
         PreparedStatement getMec = null;
@@ -852,14 +852,12 @@ public final class Database
         
         while(rs.next())
         {
+            int ID = rs.getInt("IDnum");
+            int custID=rs.getInt("CUSTOMERID");
             String date = rs.getString("BOOKING_DATE");
-            String name = rs.getString("FIRST_NAME");
-            String surname = rs.getString("SURNAME");
             String type = rs.getString("TYPE");
-            int id = rs.getInt("BOOKING_ID");
-            
-
-            partBooking booking = new partBooking(date,name,surname,type,id);
+ 
+            partBooking booking = new partBooking(date,custID,type,ID);
             
             bookingdata.add(booking);
         }
@@ -867,7 +865,7 @@ public final class Database
         }
         catch(SQLException ex)    
         {
-            JOptionPane.showMessageDialog(null,"Please select a booking from the table");
+            JOptionPane.showMessageDialog(null,"Error, try again");
         }
         return bookingdata;
     }
