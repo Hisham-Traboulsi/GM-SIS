@@ -90,6 +90,8 @@ public class addPart implements Initializable {
     private TableColumn costCol;
     @FXML
     private ObservableList<Part> list=FXCollections.observableArrayList();
+    @FXML
+    private ObservableList<Part> selected = null;
     
    
     
@@ -139,6 +141,21 @@ public class addPart implements Initializable {
    public void addDeliveryDate()
    {    String name= (partName.getText());
         Database.getInstance().addDelivery(name);
+   }
+   public void remove() 
+   {
+        selected= partsTable.getSelectionModel().getSelectedItems();   
+        int id=selected.get(0).getID();
+        // ObservableList  <Part> DetailPartsData;
+        try{
+         Database.getInstance().removePart(id);
+         refresh();
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part from the table to remove");
+        }
+       
    }
    
     public void enterPressed(KeyEvent event) throws SQLException {

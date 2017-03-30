@@ -1060,6 +1060,21 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
+      public void removePart(int id) 
+    {
+        try{
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_TRACKING WHERE RELEVANT_ID_NUM="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeInstalledPartStmt.executeUpdate();
+        }catch(SQLException ex)
+        {
+            
+        }
+        
+        
+    }
+   /* Author Sergio Arrieta
+    */
       public void removeInstalledPart(int id) throws SQLException
     {
         
