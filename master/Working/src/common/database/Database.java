@@ -50,6 +50,7 @@ public final class Database
     private ObservableList<Customers> customerData;
     private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
+    private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<Vehicle> searchVehicleData;
     private ObservableList<installedPart> installedPartsData;
@@ -589,6 +590,40 @@ public final class Database
         
         return withdrawnData;
         
+    }
+     /*Author Sergio*/
+    public ObservableList<Part> getPartDetails(String partname) throws NullPointerException
+    {   
+        try{
+        PreparedStatement getPart = null;
+        partUsedData = FXCollections.observableArrayList();
+        
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_TRACKING WHERE NAME='" + partname +"'");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("RELEVANT_ID_NUM");
+            System.out.println(id);
+            String partName = rs.getString("NAME");
+            System.out.println(partName);
+            String partDesc = rs.getString("DESCRIPTION");
+            System.out.println(partDesc);
+            int partAmount = rs.getInt("AMOUNT");
+            System.out.println(partAmount);
+            double partCost = rs.getDouble("COST");
+            System.out.println(partCost);
+            
+            Part part = new Part(id, partName, partDesc, partAmount, partCost);
+            
+            partUsedData.add(part);
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        return partUsedData;
     }
     /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException

@@ -119,7 +119,47 @@ public class addInstalledPart implements Initializable {
     private TextField searchBox;
     @FXML
     private ObservableList<installedPart> selected = null;
-
+    @FXML
+    private ObservableList<Part> selected2 = null;
+//////////
+    @FXML
+    private TableView <Part> partUsed= new TableView<Part>();
+      @FXML
+    private TableColumn <Part, Integer>id_view;
+     @FXML
+    private TableColumn <Part, String>name_view;  
+     @FXML
+    private TableColumn <Part, Double>cost_view;
+     @FXML
+    private TableColumn <Part, Integer>stock_view;
+     @FXML
+    private TableColumn <Part, String>desc_view;
+        
+    //////
+     public void showPartDetails()
+     {
+       
+  
+       
+        try{
+             selected= installedPartsTable.getSelectionModel().getSelectedItems();   
+        String partDetail=selected.get(0).getPART_NAME();
+        ObservableList  <Part> DetailPartsData;
+         DetailPartsData =Database.getInstance().getPartDetails(partDetail);
+         id_view.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        name_view.setCellValueFactory(new PropertyValueFactory<>("partName"));
+        cost_view.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        stock_view.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        desc_view.setCellValueFactory(new PropertyValueFactory<>("partDesc"));
+        
+        partUsed.setItems(DetailPartsData);
+        }
+        catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null,"Please select a part from the table on the right");
+        }
+        ;
+         
+     }
          
     @FXML
    public void add() 

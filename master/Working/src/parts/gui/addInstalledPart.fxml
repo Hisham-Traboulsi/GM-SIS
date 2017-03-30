@@ -12,18 +12,18 @@
 <?import parts.textfield.*?>
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addInstalledPart">
    <children>
-      <Button fx:id="add" layoutX="221.0" layoutY="453.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
-      <Button fx:id="clearButton" layoutX="321.0" layoutY="453.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="52.0" text="Clear" />
+      <Button fx:id="add" layoutX="166.0" layoutY="338.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Button fx:id="clearButton" layoutX="266.0" layoutY="338.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="52.0" text="Clear" />
       <Text fill="#f8f4f4" layoutX="129.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Install part on vehicle">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="77.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
+      <Text fill="WHITE" layoutX="87.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="366.0" prefWidth="733.0">
+      <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="431.0" prefWidth="733.0">
         <columns>
           <TableColumn fx:id="INST_ID_view" prefWidth="99.0" text="Installation ID" />
           <TableColumn fx:id="REG_NUM_view" prefWidth="146.0" text="Vehicle Registration" />
@@ -40,7 +40,7 @@
             <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="645.0" layoutY="599.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+      <Button layoutX="660.0" layoutY="648.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
          <image>
             <Image url="@../img/magnify-128.png" />
@@ -51,13 +51,28 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <ComboBox fx:id="regComb" layoutX="273.0" layoutY="267.0" prefHeight="25.0" prefWidth="112.0" />
-      <Button layoutX="840.0" layoutY="599.0" mnemonicParsing="false" onAction="#partBooking" text="View Bookings" />
-      <Text fill="WHITE" layoutX="74.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking ID">
+      <ComboBox fx:id="regComb" layoutX="283.0" layoutY="206.0" prefHeight="25.0" prefWidth="112.0" />
+      <Button layoutX="855.0" layoutY="648.0" mnemonicParsing="false" onAction="#partBooking" text="View Bookings" />
+      <Text fill="WHITE" layoutX="84.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking ID">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <ComboBox fx:id="IDcomb" layoutX="273.0" layoutY="344.0" prefHeight="25.0" prefWidth="112.0" />
+      <ComboBox fx:id="IDcomb" layoutX="283.0" layoutY="283.0" prefHeight="25.0" prefWidth="112.0" />
+      <Text fill="WHITE" layoutX="129.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details of part used">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <TableView fx:id="partUsed" layoutX="6.0" layoutY="448.0" prefHeight="200.0" prefWidth="404.0">
+        <columns>
+          <TableColumn fx:id="id_view" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="name_view" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="stock_view" prefWidth="75.0" text="Stock" />
+            <TableColumn fx:id="cost_view" prefWidth="75.0" text="Cost" />
+            <TableColumn fx:id="desc_view" prefWidth="103.0" text="Description" />
+        </columns>
+      </TableView>
+      <Button layoutX="192.0" layoutY="661.0" mnemonicParsing="false" onAction="#showPartDetails" text="View part details" />
    </children>
 </AnchorPane>
