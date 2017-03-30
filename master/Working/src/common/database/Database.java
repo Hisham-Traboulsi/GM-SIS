@@ -422,7 +422,7 @@ public final class Database
    }
     /*Author Sergio*/
     public void addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
+            String EXP_DATE,String PART_NAME, int BOOKING_ID)
     {
         String newReg="";
         int BOOKINGID=BOOKING_ID;
@@ -437,7 +437,8 @@ public final class Database
         // System.out.println(newReg);
         
         }
-        catch(SQLException ex)
+        catch(SQLException ex){}
+        catch(NullPointerException ex)
                 {
                     JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
                 }

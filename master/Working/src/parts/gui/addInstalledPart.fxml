@@ -30,11 +30,11 @@
             <TableColumn fx:id="INST_DATE_view" prefWidth="126.0" text="Installation Date" />
             <TableColumn fx:id="EXP_DATE_view" prefWidth="134.0" text="Warranty Expiration" />
             <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="98.0" text="Part Name" />
-            <TableColumn fx:id="BOOKING_ID_view" prefWidth="144.0" text="Customer ID" />
+            <TableColumn fx:id="BOOKING_ID_view" prefWidth="144.0" text="Booking ID" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
-      <NonSpecialCharTextField fx:id="searchBox" layoutX="700.0" layoutY="144.0" onKeyPressed="#enterPressedSearch" prefHeight="25.0" prefWidth="130.0" />
+      <NonSpecialCharTextField fx:id="searchBox" layoutX="700.0" layoutY="144.0" onKeyPressed="#enterPressedSearch" prefHeight="25.0" prefWidth="250.0" />
       <ImageView fitHeight="85.0" fitWidth="91.0" layoutX="1030.0" layoutY="64.0" onMouseClicked="#help" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/help-icon.png" />
