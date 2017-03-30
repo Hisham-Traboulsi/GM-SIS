@@ -288,12 +288,36 @@ public class SearchPageController implements Initializable {
     @FXML
        public void removePart() throws SQLException
     {
+        try{
+            Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to cancel this booking?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
         selected = PartSearchTable.getSelectionModel().getSelectedItems();   
         
         int BOOKINGID = selected.get(0).getBOOKINGID();
         
         Database.getInstance().removeOutstandingPart(BOOKINGID);
         JOptionPane.showMessageDialog(null,"Successfully Removed");
+        }
+        
+        else if(selection == 1)
+                        {
+                         
+                        }
+        }
+        catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null,"Please select a part booking!");
+        }
         
     }
 
