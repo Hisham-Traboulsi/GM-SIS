@@ -1040,7 +1040,7 @@ public final class Database
       public void removeBookingPart(int id) 
     {
         try{
-        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE BOOKING_ID='"+ id+"'");
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum='"+ id+"'");
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
         }
