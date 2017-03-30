@@ -1569,7 +1569,71 @@ public final class Database
         }
         return outVehicleSearchData;
     }
-         
+       public ObservableList<OutstandingVehicle> getOutstandingVehiclesFromNAME(String FIRSTNAME) throws SQLException
+    {   
+   
+        PreparedStatement getOutstandingVehiclesFromNAME = null;
+        outVehicleSearchData = FXCollections.observableArrayList();
+        
+        System.out.println(FIRSTNAME);
+        getOutstandingVehiclesFromNAME = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE firstName LIKE '%" +FIRSTNAME+"%' OR surname LIKE '%" +FIRSTNAME+"%'");
+
+    
+        ResultSet rs = getOutstandingVehiclesFromNAME.executeQuery();
+        
+        while(rs.next())
+        {
+            System.out.println("1");
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
+
+            
+            OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate, customerID, firstName, surname);
+            
+            outVehicleSearchData.add(outstandingvehiclesearch);
+        }
+        return outVehicleSearchData;
+    }
+     
+       public ObservableList<Outstanding> getOutstandingPartsFromNAME(String FIRSTNAME) throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingPartsFromNAME = null;
+        outPartSearchData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingPartsFromNAME = preparedStatement("SELECT * FROM OUTSTANDING_PARTS WHERE firstName LIKE '%" +FIRSTNAME+"%' OR surname LIKE '%" +FIRSTNAME+"%'");
+        ResultSet rs = getOutstandingPartsFromNAME.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            int partID = rs.getInt("partID");
+            String partName = rs.getString("partName");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            double partCost = rs.getDouble("cost");
+            int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
+
+            Outstanding outstandingpartsearch = new Outstanding(bookingID, spcName, partID, 
+                   partName, deliveryDate, returnDate, partCost, customerID, firstName, surname);
+            
+            outPartSearchData.add(outstandingpartsearch);
+        }
+        return outPartSearchData;
+    }
      public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException
     {   
         
