@@ -1715,7 +1715,7 @@ public final class Database
             counter++;
         }
         
-        getAllCustomers();
+       
     }
        
        public void editBookings() throws SQLException
@@ -1993,6 +1993,7 @@ public void removeMec(int ID) throws SQLException
         removeMechanicStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
+
 }
     
     
