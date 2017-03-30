@@ -30,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
+import javax.swing.JOptionPane;
 import parts.logic.Part;
 
 
@@ -88,6 +89,7 @@ public class BookPartRepairController implements Initializable {
     {
       
     boolean added=false;
+    try{
             selected = partsTable.getSelectionModel().getSelectedItems();   
             selected2 = customerTable.getSelectionModel().getSelectedItems(); 
             //int INSTID = Integer.parseInt(INST_ID.getText());
@@ -102,7 +104,12 @@ public class BookPartRepairController implements Initializable {
             String customerSurname = selected2.get(0).getSurname();
          
            added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, PARTCOST, customerID, customerName, customerSurname);
-
+    }
+    catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Complete all fields!");
+        }
+        
       
         return added;
     }
