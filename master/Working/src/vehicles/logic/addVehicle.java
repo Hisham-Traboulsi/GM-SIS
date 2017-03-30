@@ -308,7 +308,8 @@ public class addVehicle implements Initializable {
 
     @FXML
     public void add() {
-
+        
+        int vID = (int) IDcomb.getValue();
         String vregnum = (regnum.getText());
         String vmodel = (model.getText());
         String vmake = (make.getText());
@@ -320,17 +321,21 @@ public class addVehicle implements Initializable {
         String vmileage = (mileage.getText());
 
         String vwarranty = "";
+        String vwarrantycompany = "N/A";
+        String vwarrantyaddress = "N/A";
+        String vwarrantyexpiry = "N/A";
+        
         if (yes.isSelected()) {
             vwarranty = yes.getId();
+            vwarrantycompany = (companyname.getText());
+            vwarrantyaddress = (companyaddress.getText());
+            vwarrantyexpiry = expirydate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } else if (no.isSelected()) {
             vwarranty = no.getId();
         }
+        
 
-        String vwarrantycompany = (companyname.getText());
-        String vwarrantyaddress = (companyaddress.getText());
-        String vwarrantyexpiry = expirydate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-        Database.getInstance().addVehicle(vregnum, vmodel, vmake, vengine, vfueltype, vcolour, vmotdate, vlastservice, vmileage, vwarranty, vwarrantycompany, vwarrantyaddress, vwarrantyexpiry);
+        Database.getInstance().addVehicle(vID ,vregnum, vmodel, vmake, vengine, vfueltype, vcolour, vmotdate, vlastservice, vmileage, vwarranty, vwarrantycompany, vwarrantyaddress, vwarrantyexpiry);
 
         try {
 

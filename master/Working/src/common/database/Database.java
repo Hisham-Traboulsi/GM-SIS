@@ -1070,11 +1070,11 @@ public final class Database
     }
     
     /*Author Sam*/
-    public boolean addVehicle(String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry) {
+    public boolean addVehicle(int ID, String regnum, String model , String make, String engine, String fueltype, String colour, String motdate, String lastservice, String mileage, String warranty, String warrantycompany, String warrantyaddress, String warrantyexpiry) {
         PreparedStatement add = null;
         boolean added = false;
         try {
-            add = preparedStatement("INSERT INTO VEHICLE_RECORD VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            add = preparedStatement("INSERT INTO VEHICLE_RECORD VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             add.setString(1, regnum);
             add.setString(2, model);
             add.setString(3, make);
@@ -1088,6 +1088,7 @@ public final class Database
             add.setString(11, warrantycompany);
             add.setString(12, warrantyaddress);
             add.setString(13, warrantyexpiry);
+            add.setInt(14, ID);
 
             add.execute();
             add.close();

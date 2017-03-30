@@ -262,6 +262,18 @@ public class VRHomepageController implements Initializable {
             }
             );
             
+            warrantycompanyCol.setCellValueFactory(new PropertyValueFactory<>("warrantycompany"));
+            warrantycompanyCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            warrantycompanyCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Vehicle, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Vehicle, String> t) {
+                    ((Vehicle) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setWarrantyCompany(t.getNewValue());
+                }
+            }
+            );
+            
             warrantyaddressCol.setCellValueFactory(new PropertyValueFactory<>("warrantyaddress"));
             warrantyaddressCol.setCellFactory(TextFieldTableCell.forTableColumn());
             warrantyaddressCol.setOnEditCommit(
