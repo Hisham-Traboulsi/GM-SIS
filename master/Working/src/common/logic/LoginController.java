@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
         if (isValidCredentials())
         {
             //invalid_label.setText("");
-            JOptionPane.showMessageDialog(null,"Logged in succesfully");   
+            //JOptionPane.showMessageDialog(null,"Logged in succesfully");   
          
             URL welcomeUrl = getClass().getResource("/common/gui/Welcome.fxml");
             AnchorPane welcomePane = FXMLLoader.load(welcomeUrl);
