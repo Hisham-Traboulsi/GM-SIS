@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="335.0" prefWidth="600.0" stylesheets="@customer_style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="customers.logic.DisplayAllBookingsController">
+<AnchorPane id="AnchorPane" prefHeight="425.0" prefWidth="701.0" stylesheets="@customer_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.DisplayAllBookingsController">
    <children>
-      <Label layoutX="197.0" layoutY="28.0" text="Past &amp; Future Bookings" textFill="WHITE">
+      <Label layoutX="247.0" layoutY="26.0" text="Past &amp; Future Bookings" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView layoutX="23.0" layoutY="100.0" prefHeight="200.0" prefWidth="554.0">
+      <TableView layoutX="14.0" layoutY="68.0" prefHeight="307.0" prefWidth="674.0">
         <columns>
+            <TableColumn prefWidth="120.0" text="Customer ID" />
           <TableColumn prefWidth="118.0" text="Booking ID" />
           <TableColumn prefWidth="210.0" text="Booking Date" />
             <TableColumn prefWidth="95.0" text="Cost" />
