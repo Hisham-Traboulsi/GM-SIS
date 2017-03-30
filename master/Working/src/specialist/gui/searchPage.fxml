@@ -46,5 +46,7 @@
             <TableColumn fx:id="partCost" prefWidth="154.0" text="Part Cost (only)" />
          </columns>
       </TableView>
+      <TextField fx:id="firstNameField" layoutX="425.0" layoutY="139.0" prefHeight="25.0" prefWidth="215.0" promptText="Customer First Name OR Surname" />
+      <Button fx:id="nameSearch" layoutX="656.0" layoutY="137.0" mnemonicParsing="false" onAction="#nameSearchButton" text="Search" />
    </children>
 </AnchorPane>

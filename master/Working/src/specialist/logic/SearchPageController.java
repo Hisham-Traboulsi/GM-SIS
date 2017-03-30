@@ -76,6 +76,12 @@ public class SearchPageController implements Initializable {
     private TableColumn returnDateCol;
     @FXML
     private TableColumn partCost;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField surnameField;
+    @FXML
+    private Button nameSearch;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -186,6 +192,72 @@ public class SearchPageController implements Initializable {
         {
             ex.printStackTrace();
         }
+        
+    }
+
+    @FXML
+    public void nameSearchButton(){
+        
+             String FIRSTNAMESEARCH  = firstNameField.getText();
+             String FIRSTNAME = FIRSTNAMESEARCH.toUpperCase();
+
+              SearchTable.getItems().clear();
+              PartSearchTable.getItems().clear();
+            //System.out.println(SPCNAME);
+                try {
+              //populate vehicle table
+
+            ObservableList<OutstandingVehicle> outVehicleSearchData = Database.getInstance().getOutstandingVehiclesFromNAME(FIRSTNAME);
+    
+            SearchTable.setEditable(true);
+
+            bookingCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGIDVEHICLE"));                       
+            firstName.setCellValueFactory(new PropertyValueFactory<>("FIRSTNAME"));           
+            surname.setCellValueFactory(new PropertyValueFactory<>("SURNAME"));
+            regCol.setCellValueFactory(new PropertyValueFactory<>("REGNUM"));
+            spcCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAMEVEHICLE"));
+            makeCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMAKE"));
+            modelCol.setCellValueFactory(new PropertyValueFactory<>("VEHICLEMODEL"));
+            deliveryCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATEVEHICLE"));
+            returnCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATEVEHICLE"));
+          
+
+            SearchTable.setItems(outVehicleSearchData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+                
+        try {
+              //populate part table
+            //  PartSearchTable.getItems().clear();
+              //SearchTable.getItems().clear();
+            ObservableList<Outstanding> outPartSearchData = Database.getInstance().getOutstandingPartsFromNAME(FIRSTNAME);
+
+            PartSearchTable.setEditable(true);
+
+            bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("BOOKINGID"));
+            firstNamePart.setCellValueFactory(new PropertyValueFactory<>("FIRSTNAME"));
+            surnamePart.setCellValueFactory(new PropertyValueFactory<>("SURNAME"));
+            spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
+            partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
+            returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
+            partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
+          
+
+            PartSearchTable.setItems(outPartSearchData);
+            
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+                
+                
         
     }
 
