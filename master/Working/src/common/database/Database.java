@@ -25,6 +25,7 @@ import specialist.logic.ReturnedVehicle;
 
 import diagrep.logic.Bookings;
 import diagrep.logic.Mec;
+import java.io.IOException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -1069,6 +1070,14 @@ public final class Database
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
         }catch(SQLException ex)
+        {
+            
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part");
+        }
+        catch(Exception ex)
         {
             
         }
