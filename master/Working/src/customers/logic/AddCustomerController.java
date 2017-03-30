@@ -210,6 +210,64 @@ public class AddCustomerController implements Initializable {
     {
         boolean added = false;
         
+        //checks on first name
+        if(firstNameBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "First Name is required");
+            return;
+        }
+        else if((firstNameBox.getText().chars().allMatch(Character::isLetter)) == false)
+        {
+            JOptionPane.showMessageDialog(null, "First Name must only consist of letters (no numbers and no spaces)");
+            return;
+        }
+        
+        //checks on surname
+        if(surnameBox.getText().isEmpty())
+        {
+             JOptionPane.showMessageDialog(null, "Surname is required");
+            return;
+        }
+        else if((surnameBox.getText().chars().allMatch(Character::isLetter)) == false)
+        {
+            JOptionPane.showMessageDialog(null, "First Name must only consist of letters (no numbers and no spaces)");
+            return;
+        }
+        
+        //checks on address
+        if(addressBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Address is required");
+            return;
+        }
+        
+        //checks on postcode
+        if(postCodeBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Post Code is required");
+            return;
+        }
+        
+        //checks on the phone number
+        if(phoneBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Phone is required");
+            return;
+        }
+        else if(!checkIsInteger(phoneBox.getText()))
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
+            return;
+        }
+        
+        //checks on the email
+        if(emailBox.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Email is required");
+            return;
+        }
+        
+        //checks on radio buttons
         String type = "";
         
         if(privateRadio.isSelected())
@@ -226,26 +284,8 @@ public class AddCustomerController implements Initializable {
             return;
         }
        
-        if(firstNameBox.getText().isEmpty() ||surnameBox.getText().isEmpty() || addressBox.getText().isEmpty() || postCodeBox.getText().isEmpty() || phoneBox.getText().isEmpty() || emailBox.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields are required: \n Full Name\n Address\n Post Code\n Phone\n Email");
-            return;
-        }
-        else if((firstNameBox.getText().chars().allMatch(Character::isLetter)) == false || surnameBox.getText().chars().allMatch(Character::isLetter) == false)
-        {
-            JOptionPane.showMessageDialog(null, "First Name and Surname must only consist of letters");
-            return;
-        }
-        else if(!checkIsInteger(phoneBox.getText()))
-        {
-            JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
-            return;
-        }
-        else
-        {
-            added = Database.getInstance().addCustomer(firstNameBox.getText(), surnameBox.getText(),addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
-        }
-        
+        added = Database.getInstance().addCustomer(firstNameBox.getText(), surnameBox.getText(),addressBox.getText(), postCodeBox.getText(), phoneBox.getText(), type, emailBox.getText());
+         
         if(added)
         {
             JOptionPane.showMessageDialog(null, "Customer was added");
@@ -306,16 +346,6 @@ public class AddCustomerController implements Initializable {
            }
        }
        return true;
-    }
-    
-    public boolean isValiEmail(String email)
-    {
-        if(!email.contains("@"))
-        {
-            JOptionPane.showMessageDialog(null, "This is not a valid email");
-            return false;
-        }
-        return true;
     }
     
     public void displayHelp() throws IOException
