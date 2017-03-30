@@ -31,6 +31,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.converter.IntegerStringConverter;
@@ -305,6 +307,12 @@ public class addVehicle implements Initializable {
         IDcomb.setItems(idComb1);
         
     }
+    
+    public void enterPressed(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                  add();
+                }
+            }
 
     @FXML
     public void add() {

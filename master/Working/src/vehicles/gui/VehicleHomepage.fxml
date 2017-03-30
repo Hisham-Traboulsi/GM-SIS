@@ -41,7 +41,7 @@
       <Button layoutX="983.0" layoutY="581.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="78.0" text="Refresh" />
       <Button layoutX="1084.0" layoutY="581.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="78.0" text="Update" />
       <Button layoutX="254.0" layoutY="581.0" mnemonicParsing="false" onAction="#remove" prefHeight="25.0" prefWidth="78.0" text="Remove" />
-      <Button layoutX="748.0" layoutY="71.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Search" />
+      <Button layoutX="748.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchVehicle" prefHeight="25.0" prefWidth="78.0" text="Search" />
       <ImageView fitHeight="71.0" fitWidth="85.0" layoutX="1081.0" layoutY="24.0" onMouseClicked="#help">
          <image>
             <Image url="@help-icon.png" />
