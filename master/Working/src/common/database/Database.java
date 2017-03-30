@@ -25,6 +25,7 @@ import specialist.logic.ReturnedVehicle;
 
 import diagrep.logic.Bookings;
 import diagrep.logic.Mec;
+import java.io.IOException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,8 +51,10 @@ public final class Database
     private ObservableList<Customers> customerData;
     private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
+    private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<Vehicle> searchVehicleData;
+    
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
@@ -70,7 +73,7 @@ public final class Database
     private ComboBox IDComb;
     private ObservableList<Bookings> BookingsData;
     private ObservableList<Mec> MechanicData;
-        
+    private ObservableList<Bookings> searchBookingData;
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
@@ -362,7 +365,7 @@ public final class Database
     }
     
     /*Author Sergio*/
-   public void addPart(String name, String description, int amount, double cost) 
+   public void addPart(String name, String description, int amount, double cost) throws NumberFormatException
     {   if(checkPartName(name))
     {
                       PreparedStatement add = null;
@@ -371,8 +374,8 @@ public final class Database
                       {
                          add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
                          add.setString(1, null);
-                         add.setString(2, name);
-                         add.setString(3, description);
+                         add.setString(2, name.trim());
+                         add.setString(3, description.trim());
                          add.setInt(4, amount);
                          add.setDouble(5, cost);
 
@@ -421,7 +424,7 @@ public final class Database
    }
     /*Author Sergio*/
     public void addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
+            String EXP_DATE,String PART_NAME, int BOOKING_ID)
     {
         String newReg="";
         int BOOKINGID=BOOKING_ID;
@@ -436,7 +439,8 @@ public final class Database
         // System.out.println(newReg);
         
         }
-        catch(SQLException ex)
+        catch(SQLException ex){}
+        catch(NullPointerException ex)
                 {
                     JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
                 }
@@ -589,6 +593,40 @@ public final class Database
         
         return withdrawnData;
         
+    }
+     /*Author Sergio*/
+    public ObservableList<Part> getPartDetails(String partname) throws NullPointerException
+    {   
+        try{
+        PreparedStatement getPart = null;
+        partUsedData = FXCollections.observableArrayList();
+        
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_TRACKING WHERE NAME='" + partname +"'");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("RELEVANT_ID_NUM");
+            System.out.println(id);
+            String partName = rs.getString("NAME");
+            System.out.println(partName);
+            String partDesc = rs.getString("DESCRIPTION");
+            System.out.println(partDesc);
+            int partAmount = rs.getInt("AMOUNT");
+            System.out.println(partAmount);
+            double partCost = rs.getDouble("COST");
+            System.out.println(partCost);
+            
+            Part part = new Part(id, partName, partDesc, partAmount, partCost);
+            
+            partUsedData.add(part);
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        return partUsedData;
     }
     /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException
@@ -840,7 +878,7 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
-    public ObservableList<partBooking> getpartBooking(String reg)
+    public ObservableList<partBooking> getpartBooking(String reg) throws NullPointerException
     {   
         try{
         PreparedStatement getMec = null;
@@ -852,14 +890,12 @@ public final class Database
         
         while(rs.next())
         {
+            int ID = rs.getInt("IDnum");
+            int custID=rs.getInt("CUSTOMERID");
             String date = rs.getString("BOOKING_DATE");
-            String name = rs.getString("FIRST_NAME");
-            String surname = rs.getString("SURNAME");
             String type = rs.getString("TYPE");
-            int id = rs.getInt("BOOKING_ID");
-            
-
-            partBooking booking = new partBooking(date,name,surname,type,id);
+ 
+            partBooking booking = new partBooking(date,custID,type,ID);
             
             bookingdata.add(booking);
         }
@@ -867,7 +903,7 @@ public final class Database
         }
         catch(SQLException ex)    
         {
-            JOptionPane.showMessageDialog(null,"Please select a booking from the table");
+            JOptionPane.showMessageDialog(null,"Error, try again");
         }
         return bookingdata;
     }
@@ -1027,6 +1063,29 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
+      public void removePart(int id) 
+    {
+        try{
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_TRACKING WHERE RELEVANT_ID_NUM="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeInstalledPartStmt.executeUpdate();
+        }catch(SQLException ex)
+        {
+            
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part");
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        
+        
+    }
+   /* Author Sergio Arrieta
+    */
       public void removeInstalledPart(int id) throws SQLException
     {
         
@@ -1042,7 +1101,7 @@ public final class Database
       public void removeBookingPart(int id) 
     {
         try{
-        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE BOOKING_ID='"+ id+"'");
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum='"+ id+"'");
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
         }
@@ -1571,7 +1630,71 @@ public final class Database
         }
         return outVehicleSearchData;
     }
-         
+       public ObservableList<OutstandingVehicle> getOutstandingVehiclesFromNAME(String FIRSTNAME) throws SQLException
+    {   
+   
+        PreparedStatement getOutstandingVehiclesFromNAME = null;
+        outVehicleSearchData = FXCollections.observableArrayList();
+        
+        System.out.println(FIRSTNAME);
+        getOutstandingVehiclesFromNAME = preparedStatement("SELECT * FROM OUTSTANDING_VEHICLES WHERE firstName LIKE '%" +FIRSTNAME+"%' OR surname LIKE '%" +FIRSTNAME+"%'");
+
+    
+        ResultSet rs = getOutstandingVehiclesFromNAME.executeQuery();
+        
+        while(rs.next())
+        {
+            System.out.println("1");
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            String regNum = rs.getString("regNum");
+            String make = rs.getString("make");
+            String model = rs.getString("model");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
+
+            
+            OutstandingVehicle outstandingvehiclesearch = new OutstandingVehicle(bookingID, spcName,
+                    regNum, make, model, deliveryDate, returnDate, customerID, firstName, surname);
+            
+            outVehicleSearchData.add(outstandingvehiclesearch);
+        }
+        return outVehicleSearchData;
+    }
+     
+       public ObservableList<Outstanding> getOutstandingPartsFromNAME(String FIRSTNAME) throws SQLException
+    {   
+        
+        PreparedStatement getOutstandingPartsFromNAME = null;
+        outPartSearchData = FXCollections.observableArrayList();
+        
+       
+        getOutstandingPartsFromNAME = preparedStatement("SELECT * FROM OUTSTANDING_PARTS WHERE firstName LIKE '%" +FIRSTNAME+"%' OR surname LIKE '%" +FIRSTNAME+"%'");
+        ResultSet rs = getOutstandingPartsFromNAME.executeQuery();
+        
+        while(rs.next())
+        {
+            int bookingID = rs.getInt("bookingID");
+            String spcName = rs.getString("spcName");
+            int partID = rs.getInt("partID");
+            String partName = rs.getString("partName");
+            String deliveryDate = rs.getString("deliveryDate");
+            String returnDate = rs.getString("returnDate");
+            double partCost = rs.getDouble("cost");
+            int customerID = rs.getInt("CUSTOMER_ID");
+            String firstName = rs.getString("firstName");
+            String surname = rs.getString("surname");
+
+            Outstanding outstandingpartsearch = new Outstanding(bookingID, spcName, partID, 
+                   partName, deliveryDate, returnDate, partCost, customerID, firstName, surname);
+            
+            outPartSearchData.add(outstandingpartsearch);
+        }
+        return outPartSearchData;
+    }
      public ObservableList<ReturnedVehicle> getReturnedVehicles() throws SQLException
     {   
         
@@ -1651,7 +1774,7 @@ public final class Database
             counter++;
         }
         
-        getAllCustomers();
+       
     }
        
        public void editBookings() throws SQLException
@@ -1741,6 +1864,7 @@ public final class Database
     }
     }
     
+    
     /*Author Sam*/
     public ObservableList<Vehicle> searchVehicle (String searchVal) 
     {   
@@ -1786,6 +1910,50 @@ public final class Database
             System.err.println("Unable to access table or table doesnt exist");
         }
         return searchVehicleData;
+    }
+    public ObservableList<Bookings> searchBooking (String searchVal) 
+    {   
+        try{
+        PreparedStatement searchBooking = null;
+        searchBookingData = FXCollections.observableArrayList();
+        
+      
+        searchBooking = preparedStatement("select * from DIAGNOSIS_REPAIR_BOOKINGS where IDnum LIKE '%" + searchVal + "%' OR MANUFACTURE LIKE '%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%'");
+        
+       
+        
+        
+        ResultSet rs = searchBooking.executeQuery();
+        
+        while(rs.next())
+        {
+            int idNum = rs.getInt("IDnum");
+            String BookingMechanicID = rs.getString("MECHANICID");
+            String PARTNAME = rs.getString("PARTNAME");
+            int CUSTOMERID = rs.getInt("CUSTOMERID");
+            String BookingRegNum = rs.getString("REG_NUM");
+            String BookingManufacture = rs.getString("MANUFACTURE");
+            String BookingMileage = rs.getString("MILEAGE");
+            String BookingDate = rs.getString("BOOKING_DATE");
+            String BookingTime = rs.getString("TIME");
+            String BookingType = rs.getString("TYPE");
+            double BookingTotal = rs.getDouble("COST");
+
+            Bookings searchedBooking = new Bookings(idNum, BookingMechanicID,  PARTNAME, 
+                    CUSTOMERID, BookingRegNum, BookingManufacture, BookingMileage, BookingDate,
+                    BookingTime, BookingType, BookingTotal);
+            
+            BookingsData.add(searchedBooking);
+        }
+        
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        return BookingsData;
     }
      public ObservableList<Bookings> getBookings() throws SQLException
     {   
@@ -1929,6 +2097,7 @@ public void removeMec(int ID) throws SQLException
         removeMechanicStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
+
 }
     
     

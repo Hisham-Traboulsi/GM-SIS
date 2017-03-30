@@ -19,15 +19,15 @@ import javafx.beans.property.StringProperty;
  */
 public class Part
 {
-    private IntegerProperty id;
+    private IntegerProperty ID;
     private StringProperty partName;
     private StringProperty partDesc;
     private IntegerProperty amount;
     private DoubleProperty cost;
     
-   public Part(int id, String partName, String partDesc, int amount, double cost)
+   public Part(int ID, String partName, String partDesc, int amount, double cost)
     {
-        this.id =  new SimpleIntegerProperty(id);
+        this.ID =  new SimpleIntegerProperty(ID);
         this.partName = new SimpleStringProperty(partName);
         this.partDesc= new SimpleStringProperty(partDesc);
         this.amount=  new SimpleIntegerProperty(amount);
@@ -36,7 +36,7 @@ public class Part
     
     public int getID()
     {
-        return id.get();
+        return ID.get();
     }
     
     public String getpartName()
@@ -70,9 +70,9 @@ public class Part
        return partDesc;
     }
     //
-    public void setID(int id)
+    public void setID(int ID)
     {
-        this.id.set(id);        
+        this.ID.set(ID);        
     }
     
     public void setpartName(String partName)

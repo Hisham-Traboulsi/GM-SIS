@@ -73,31 +73,51 @@ public class ChooseCentreController implements Initializable {
       
       boolean added=false;
       
-      
+      try{
             String SPCNAME = (SPC_NAME.getText());
             String SPCADDRESS = (SPC_ADDRESS.getText());
             String SPCPHONE = (SPC_PHONE.getText());
             String SPCEMAIL = (SPC_EMAIL.getText());
  
             if (!validNumber(SPCPHONE))  {
-                            //JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
-            }        
+            }    
+            else if(SPC_NAME.getText().isEmpty() ||SPC_ADDRESS.getText().isEmpty() || SPC_PHONE.getText().isEmpty() || SPC_EMAIL.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Complete all fields!");
+            
+        }
+            else if((SPC_NAME.getText().chars().allMatch(Character::isLetter)) == false )
+        {
+            JOptionPane.showMessageDialog(null, "Enter SPC with only letters!");
+            
+        }
             else{
   
       added = Database.getInstance().addSPC( SPCNAME, SPCADDRESS,
               SPCPHONE,SPCEMAIL);
       reload();
             }
+      }
+            catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null,"Complete all fields!");
+        
+            }
       return added;
     }
    public void remove() throws SQLException
     {
+        try{
         selected = SPCtable.getSelectionModel().getSelectedItems();   
         
         int ID = selected.get(0).getIDnum();
         
         Database.getInstance().removeSPC(ID);
         reload();
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select SPC to remove!");
+        }
         
     }
    

@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 public class NonSpecialCharTextField extends TextField {
     
     public NonSpecialCharTextField(){
-        this.setPromptText("Enter only numbers or letters");
+        this.setPromptText("Enter: First Name,Surname or Registration ");
         
     }
     @Override

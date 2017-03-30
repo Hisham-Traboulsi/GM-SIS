@@ -90,12 +90,15 @@ public class addPart implements Initializable {
     private TableColumn costCol;
     @FXML
     private ObservableList<Part> list=FXCollections.observableArrayList();
+    @FXML
+    private ObservableList<Part> selected = null;
     
    
     
    public void add() throws SQLException
     {  // boolean added=false;
-        if(empty())
+        try{
+        if(empty() || !partName.getText().trim().isEmpty() || !partDesc.getText().trim().isEmpty())
       {
       partsTable.getItems().clear();
       
@@ -106,19 +109,53 @@ public class addPart implements Initializable {
       int amount = Integer.parseInt(partAmount.getText());
       double cost = Double.parseDouble(partCost.getText());
       
-  
+      if (!name.matches(".*\\w.*"))
+      {
+          //System.out.println("You're not allowed my g");
+          JOptionPane.showMessageDialog(null,"Please enter a valid part name");
+          refresh();
+          return;
+      }
+      if (!desc.matches(".*\\w.*"))
+      {
+          //System.out.println("You're not allowed my g");
+          JOptionPane.showMessageDialog(null,"Please enter a valid part description");
+          refresh();
+          return;
+      }
       
       Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
       addDeliveryDate();
       clearButton();
       }
+        }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null,"Please enter a valid quantity/cost");
+            refresh();
+            
+        }
       
       //return added;
     }
    public void addDeliveryDate()
    {    String name= (partName.getText());
         Database.getInstance().addDelivery(name);
+   }
+   public void remove() throws SQLException
+   {     try{
+        selected= partsTable.getSelectionModel().getSelectedItems();   
+        int id=selected.get(0).getID();
+        // ObservableList  <Part> DetailPartsData;
+       
+         Database.getInstance().removePart(id);
+         refresh();
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part from the table to remove");
+        }
+       
    }
    
     public void enterPressed(KeyEvent event) throws SQLException {

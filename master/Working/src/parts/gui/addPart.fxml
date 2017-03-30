@@ -54,6 +54,7 @@
             <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="889.0" layoutY="513.0" mnemonicParsing="false" onAction="#partLog" text="Parts Log" />
+      <Button layoutX="947.0" layoutY="513.0" mnemonicParsing="false" onAction="#partLog" text="Parts Log" />
+      <Button layoutX="868.0" layoutY="513.0" mnemonicParsing="false" onAction="#remove" text="Delete" />
    </children>
 </AnchorPane>

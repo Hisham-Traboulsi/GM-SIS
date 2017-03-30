@@ -128,6 +128,7 @@ public class ReturnedController implements Initializable {
     }
       public void remove() throws SQLException
     {
+        try{
         Object [] options = {"Yes", "No"};
         int selection = JOptionPane.showOptionDialog(null,
                         "Are you sure you want to remove this booking?",
@@ -149,11 +150,17 @@ public class ReturnedController implements Initializable {
                         {
                          
                         }
+        }
+                catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking to delete!");
+        }
 
     }
        
     public void removeVehicle() throws SQLException
     {
+        try{
                 Object [] options = {"Yes", "No"};
         int selection2 = JOptionPane.showOptionDialog(null,
                         "Are you sure you want to remove this booking?",
@@ -177,6 +184,11 @@ public class ReturnedController implements Initializable {
                         else if(selection2 == 1)
                         {
                         }
+        }
+                catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking to delete!");
+        }
 
     }
     public void reload(){
