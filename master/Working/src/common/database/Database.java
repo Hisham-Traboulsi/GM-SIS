@@ -389,20 +389,38 @@ public final class Database
         return added;
     }
     /*Author Sergio*/
-    public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int CUSTOMER_ID)
+    public void addInstalledPart( String REG_NUM, String INST_DATE, 
+            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
     {
+        String newReg="";
+        
+        try{
+        PreparedStatement reg = null;
+        reg = preparedStatement(" SELECT REG_NUM FROM 'DIAGNOSIS_REPAIR_BOOKINGS' WHERE IDnum =" + BOOKING_ID +" ");
+
+        ResultSet rs = reg.executeQuery();
+
+         newReg=rs.getString("REG_NUM");
+        // System.out.println(newReg);
+        
+        }
+        catch(SQLException ex)
+                {
+                    JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
+                }
+       if(maxParts(newReg))
+       {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
            add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ? )"); 
            add.setString(1, null);
-           add.setString(2, REG_NUM);
+           add.setString(2, newReg);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
            add.setString(5, PART_NAME);
-           add.setInt(6, CUSTOMER_ID);
+           add.setInt(6, BOOKING_ID);
            
            
   
@@ -410,20 +428,19 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"Part successfully installed");
+           calculateBill(REG_NUM,BOOKING_ID);
            
         }
+       
         catch(SQLException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
-        
-        return added;
     }
-    /*
-    Author Sergio Arrieta
-    */
+ }
+   
     
     /*
     Author Sergio Arrieta

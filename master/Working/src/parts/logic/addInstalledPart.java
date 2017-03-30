@@ -122,7 +122,7 @@ public class addInstalledPart implements Initializable {
 
          
     @FXML
-   public boolean add() 
+   public void add() 
     { 
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
@@ -133,29 +133,27 @@ public class addInstalledPart implements Initializable {
        Date nextYear = cal.getTime();
        boolean added=false;
       if(empty())
-      { String REGNUM = (String) regCombReg.getValue();
-       if(partLimit(REGNUM))
-       {
+      { 
       
 
             String PARTNAME = (String) regComb.getValue();
-                   REGNUM = (String) regCombReg.getValue();
+            String REGNUM = "";
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
             int BOOKINGID = (Integer)(IDcomb.getValue());
             
   
       
-      added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
+       Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
               EXPDATE,PARTNAME, BOOKINGID);
       updateAmount();
-      Database.getInstance().calculateBill(REGNUM,BOOKINGID);
+    //  Database.getInstance().calculateBill(REGNUM,BOOKINGID);
       addWithdrawalDate();
       clearRest();
       searchPart();
-       }
+       
       }
-      return added;
+     // return added;
     }
    public boolean partLimit(String REGNUM){
       // boolean check=true;
@@ -335,10 +333,10 @@ public class addInstalledPart implements Initializable {
     installedPartsTable.getItems().clear();
   
     regComb.getItems().clear();
-    regCombReg.getItems().clear();
+   // regCombReg.getItems().clear();
     IDcomb.getItems().clear();
     partBox();
-    numBox();
+   // numBox();
     idcombBox();
 
     }
@@ -346,7 +344,7 @@ public class addInstalledPart implements Initializable {
            boolean check=true;
         
             boolean part = regComb.getSelectionModel().isEmpty();
-            boolean reg = regCombReg.getSelectionModel().isEmpty();
+        //    boolean reg = regCombReg.getSelectionModel().isEmpty();
             boolean id = IDcomb.getSelectionModel().isEmpty();
         
             if (part)
@@ -354,11 +352,11 @@ public class addInstalledPart implements Initializable {
             JOptionPane.showMessageDialog(null,"Please select a part name");
             check=false;
         }
-        else if(reg)
+        /*else if(reg)
         {
             JOptionPane.showMessageDialog(null,"Please select a vehicle registration");
             check=false;
-        }
+        }*/
         else if(id)
         {
             JOptionPane.showMessageDialog(null,"Please select a booking ID");
@@ -370,10 +368,10 @@ public class addInstalledPart implements Initializable {
         
     searchBox.clear();
     regComb.getItems().clear();
-    regCombReg.getItems().clear();
+    //regCombReg.getItems().clear();
     IDcomb.getItems().clear();
     partBox();
-    numBox();
+    //numBox();
     idcombBox();
     }
     public void partBox()
@@ -396,22 +394,22 @@ public class addInstalledPart implements Initializable {
         IDcomb.setItems(regComb1);
         
     }
-    public void numBox()
+   /* public void numBox()
     {
-        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
-        regComb.getItems().addAll(regComb1);*/
+        regComb.getItems().addAll(regComb1);
         ObservableList <String> regComb1=Database.getInstance().fillNumComboBook();
         //regComb = new ComboBox();
         regCombReg.setItems(regComb1);
         
-    }
+    }*/
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
        partBox();
-       numBox();
+      // numBox();
        idcombBox();
        searchPart();
        
