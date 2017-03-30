@@ -95,7 +95,7 @@ public class addPart implements Initializable {
     
    public void add() throws SQLException
     {  // boolean added=false;
-        if(empty())
+        if(empty() || !partName.getText().trim().isEmpty() || !partDesc.getText().trim().isEmpty())
       {
       partsTable.getItems().clear();
       
@@ -106,7 +106,20 @@ public class addPart implements Initializable {
       int amount = Integer.parseInt(partAmount.getText());
       double cost = Double.parseDouble(partCost.getText());
       
-  
+      if (!name.matches(".*\\w.*"))
+      {
+          //System.out.println("You're not allowed my g");
+          JOptionPane.showMessageDialog(null,"Please enter a valid part name");
+          refresh();
+          return;
+      }
+      if (!desc.matches(".*\\w.*"))
+      {
+          //System.out.println("You're not allowed my g");
+          JOptionPane.showMessageDialog(null,"Please enter a valid part description");
+          refresh();
+          return;
+      }
       
       Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
