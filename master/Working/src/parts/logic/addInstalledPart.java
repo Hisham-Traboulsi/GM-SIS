@@ -155,11 +155,11 @@ public class addInstalledPart implements Initializable {
       }
      // return added;
     }
-   public boolean partLimit(String REGNUM){
+   /*public boolean partLimit(String REGNUM){
       // boolean check=true;
        return Database.getInstance().maxParts(REGNUM);
        
-   }
+   }*/
     public void enterPressed(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();

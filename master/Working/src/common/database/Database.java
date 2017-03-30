@@ -393,7 +393,8 @@ public final class Database
             String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
     {
         String newReg="";
-        
+        int BOOKINGID=BOOKING_ID;
+        String partname=PART_NAME;
         try{
         PreparedStatement reg = null;
         reg = preparedStatement(" SELECT REG_NUM FROM 'DIAGNOSIS_REPAIR_BOOKINGS' WHERE IDnum =" + BOOKING_ID +" ");
@@ -408,7 +409,7 @@ public final class Database
                 {
                     JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
                 }
-       if(maxParts(newReg))
+       if(maxParts(newReg,BOOKINGID,partname))
        {
         PreparedStatement add = null;
         boolean added = false;
@@ -892,25 +893,30 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public boolean maxParts(String regNum) 
+    public boolean maxParts(String regNum,int bookingid,String partname) 
     {  boolean check=true;
        int count=0;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT REG_NUM FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "'");
+        PreparedStatement getBill= preparedStatement("SELECT PART_NAME FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "' AND BOOKING_ID='" + bookingid +"'" );
 
         ResultSet rs = getBill.executeQuery();
         while(rs.next())
-        {
-            count=count+1;
-            if(count==10)
+         { 
+            String pn=rs.getString("PART_NAME");
+        
+            if(pn.equals(partname))
             {
-                check=false;
-                JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 parts<br/>" 
-                 + "- Please delete at least one part to install more <html>");
+               count=count+1;
+                   if(count==10)
+                   {
+                      check=false;
+                      JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 distinct parts<br/>" 
+                      + "- Please delete at least one part to install more <html>");
+                   }  
             }
-        }
+         }
         }
         catch(SQLException ex){
             
