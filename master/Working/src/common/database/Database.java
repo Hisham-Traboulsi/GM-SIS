@@ -362,7 +362,7 @@ public final class Database
     }
     
     /*Author Sergio*/
-   public void addPart(String name, String description, int amount, double cost) 
+   public void addPart(String name, String description, int amount, double cost) throws NumberFormatException
     {   if(checkPartName(name))
     {
                       PreparedStatement add = null;

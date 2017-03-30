@@ -95,6 +95,7 @@ public class addPart implements Initializable {
     
    public void add() throws SQLException
     {  // boolean added=false;
+        try{
         if(empty() || !partName.getText().trim().isEmpty() || !partDesc.getText().trim().isEmpty())
       {
       partsTable.getItems().clear();
@@ -126,6 +127,12 @@ public class addPart implements Initializable {
       addDeliveryDate();
       clearButton();
       }
+        }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null,"Please enter a valid quantity/cost");
+            refresh();
+            
+        }
       
       //return added;
     }
