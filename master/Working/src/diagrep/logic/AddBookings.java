@@ -213,12 +213,14 @@ public class AddBookings implements Initializable {
     {
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
         Date dateobj = new Date();
+       
         
        
         BookTable.getItems().clear();
         boolean added=false;
       if(Fill())
       { 
+    
     String BookingMechanicID = (String) MechCombReg.getValue();
     String PARTNAME = (String) regComb.getValue();
     int CUSTOMERID = (Integer)(IDcomb.getValue());
@@ -229,6 +231,10 @@ public class AddBookings implements Initializable {
     String BookingTime = (String) comboTime.getValue();
     String BookingType = (String) comboType.getValue();
     Double BookingTotal= Double.parseDouble(CostTxt.getText());
+    
+    double yes = 30;
+    double total = yes + Double.parseDouble(CostTxt.getText());
+    total = BookingTotal;
     
             
     
