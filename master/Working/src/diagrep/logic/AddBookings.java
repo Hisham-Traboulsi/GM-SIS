@@ -4,11 +4,68 @@
  * and open the template in the editor.
  */
 package diagrep.logic;
-
+import common.Main;
+import common.database.Database;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.util.converter.IntegerStringConverter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-
+import common.Main;
+import common.database.Database;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.util.converter.IntegerStringConverter;
+import javax.swing.JOptionPane;
+import parts.logic.Part;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
 import common.database.Database;
@@ -114,9 +171,13 @@ public class AddBookings implements Initializable {
     @FXML
     private ComboBox comboManufacture;
     @FXML
+    private DatePicker DayDatePicker;
+    @FXML
     private Button addButton;
     @FXML
     private Button removeButton;
+    @FXML
+    private TextField searchField;
     
     @FXML
     private TableView<Bookings> BookTable = new TableView<Bookings>();
@@ -152,25 +213,29 @@ public class AddBookings implements Initializable {
     {
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
         Date dateobj = new Date();
-        Calendar cal = Calendar.getInstance();
-        Date today = cal.getTime();
-        cal.add(Calendar.DATE, 364); 
-        Date nextYear = cal.getTime();
+       
+        
        
         BookTable.getItems().clear();
         boolean added=false;
       if(Fill())
       { 
+    
     String BookingMechanicID = (String) MechCombReg.getValue();
     String PARTNAME = (String) regComb.getValue();
     int CUSTOMERID = (Integer)(IDcomb.getValue());
     String BookingRegNum = (String) regCombReg.getValue();
     String BookingManufacture = (String) comboManufacture.getValue();
     String BookingMileage= (MileageTxt.getText());
-    String BookingDate = (df.format(dateobj));          
+    String BookingDate = DayDatePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));         
     String BookingTime = (String) comboTime.getValue();
     String BookingType = (String) comboType.getValue();
     Double BookingTotal= Double.parseDouble(CostTxt.getText());
+    
+    double yes = 30;
+    double total = yes + Double.parseDouble(CostTxt.getText());
+    total = BookingTotal;
+    
             
     
     added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,CUSTOMERID, 
@@ -299,7 +364,8 @@ public class AddBookings implements Initializable {
                         }
                         else if(selection == 1)
                         {
-                         
+                         JOptionPane.showMessageDialog(null,"Please select from table to remove");
+          
                         }
         
     }
@@ -332,6 +398,8 @@ public class AddBookings implements Initializable {
         Database.getInstance().editBookings();
         RefreshPage();
     }
+   
+   
    
    public void partBox()
     {
@@ -410,7 +478,7 @@ public class AddBookings implements Initializable {
 
             BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
-            PartCol.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
+            PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
             CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
             ManufactureCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MANUFACTURE"));
@@ -430,10 +498,11 @@ public class AddBookings implements Initializable {
             ex.printStackTrace();
         }
    }
-   
+
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       loadTable();
        partBox();
        idcombBox();
        numBox();
@@ -441,51 +510,56 @@ public class AddBookings implements Initializable {
        Manufature();
        Type();
        Time();
-      
-        try {
-            
-            ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
-           
-            BookTable.setEditable(true); 
+      searchField.setPromptText("Search...Reg Number/Manufacture");
+    }
+    public void searchBookings() 
+    {
+    
+        String searchVal = searchField.getText();
+       ObservableList  <Bookings> searchBookingData = Database.getInstance().searchBooking(searchVal);
+       
+       BookTable.setEditable(true);
 
-            BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
-            /*MechanicCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            MechanicCol.setCellFactory(TextFieldTableCell.forTableColumn());
             MechanicCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
                             t.getTablePosition().getRow())).setBOOKING_MechID(t.getNewValue());
                 }
-            } 
-            );*/
+            }
+            );
+            
             PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
-            /*PartCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            PartCol.setCellFactory(TextFieldTableCell.forTableColumn());
             PartCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setBOOKING_FNAME(t.getNewValue());
+                            t.getTablePosition().getRow())). setPART_NAME(t.getNewValue());
                 }
             }
-            );*/
+            );
+            
             CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            /*SNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-            SNameCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+            CustomerCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            CustomerCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Bookings,Integer>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                public void handle(CellEditEvent<Bookings, Integer> t) {
                     ((Bookings) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setBOOKING_SNAME(t.getNewValue());
-                }
+                            t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
+                    }
             }
-            );*/
+            );
+            
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
             RegNumCol.setCellFactory(TextFieldTableCell.forTableColumn());
             RegNumCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -493,10 +567,11 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
             ManufactureCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MANUFACTURE"));
             ManufactureCol.setCellFactory(TextFieldTableCell.forTableColumn());
             ManufactureCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -504,10 +579,11 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
             MileageCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MILEAGE"));
             MileageCol.setCellFactory(TextFieldTableCell.forTableColumn());
             MileageCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -515,10 +591,11 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
             DateCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_DATE"));
             DateCol.setCellFactory(TextFieldTableCell.forTableColumn());
             DateCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -526,10 +603,11 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
             TimeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TIME"));
             TimeCol.setCellFactory(TextFieldTableCell.forTableColumn());
             TimeCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -537,10 +615,11 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            
             TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TYPE"));
             TypeCol.setCellFactory(TextFieldTableCell.forTableColumn());
             TypeCol.setOnEditCommit(
-                    new EventHandler<TableColumn.CellEditEvent<Bookings,String>>() {
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
                     ((Bookings) t.getTableView().getItems().get(
@@ -548,7 +627,8 @@ public class AddBookings implements Initializable {
                 }
             }
             );
-            CostCol.setCellValueFactory(new PropertyValueFactory<>("MECHANIC_RATE"));
+            
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TOTAL"));
             CostCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
             CostCol.setOnEditCommit(
                     new EventHandler<CellEditEvent<Bookings,Double>>() {
@@ -561,17 +641,152 @@ public class AddBookings implements Initializable {
             );
             
             
+            BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             
+            BookTable.setItems(searchBookingData);
+    
+    
+    }
+    public void loadTable()
+    {
+        // Table
+        try {
+    
+                ObservableList<Bookings> BookingData = Database.getInstance().getBookings();
+       
+       BookTable.setEditable(true);
 
-            BookTable.setItems(BookingsData);
+            MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
+            MechanicCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            MechanicCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_MechID(t.getNewValue());
+                }
+            }
+            );
             
-        } 
-        catch (SQLException ex) 
-        {
+            PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
+            PartCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            PartCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())). setPART_NAME(t.getNewValue());
+                }
+            }
+            );
+            
+            CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
+            CustomerCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            CustomerCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Bookings,Integer>>() {
+                @Override
+                public void handle(CellEditEvent<Bookings, Integer> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
+                    }
+            }
+            );
+            
+            RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
+            RegNumCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            RegNumCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_REGNUM(t.getNewValue());
+                }
+            }
+            );
+            
+            ManufactureCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MANUFACTURE"));
+            ManufactureCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            ManufactureCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_MANUFACTURE(t.getNewValue());
+                }
+            }
+            );
+            
+            MileageCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MILEAGE"));
+            MileageCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            MileageCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_MILEAGE(t.getNewValue());
+                }
+            }
+            );
+            
+            DateCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_DATE"));
+            DateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            DateCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_DATE(t.getNewValue());
+                }
+            }
+            );
+            
+            TimeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TIME"));
+            TimeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            TimeCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_TIME(t.getNewValue());
+                }
+            }
+            );
+            
+            TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TYPE"));
+            TypeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            TypeCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Bookings, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bookings, String> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_TYPE(t.getNewValue());
+                }
+            }
+            );
+            
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TOTAL"));
+            CostCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+            CostCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Bookings,Double>>() {
+                @Override
+                public void handle(CellEditEvent<Bookings, Double> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_TOTAL(t.getNewValue());
+                }
+            }
+            );
+            
+            
+            BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
+            
+            BookTable.setItems(BookingData);
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
-    }    
-
+    }
+    
 }
+    
+    
 

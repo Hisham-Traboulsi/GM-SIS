@@ -142,12 +142,12 @@ public class addPart implements Initializable {
    {    String name= (partName.getText());
         Database.getInstance().addDelivery(name);
    }
-   public void remove() 
-   {
+   public void remove() throws SQLException
+   {     try{
         selected= partsTable.getSelectionModel().getSelectedItems();   
         int id=selected.get(0).getID();
         // ObservableList  <Part> DetailPartsData;
-        try{
+       
          Database.getInstance().removePart(id);
          refresh();
         }

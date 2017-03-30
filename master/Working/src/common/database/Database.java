@@ -25,6 +25,7 @@ import specialist.logic.ReturnedVehicle;
 
 import diagrep.logic.Bookings;
 import diagrep.logic.Mec;
+import java.io.IOException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,6 +54,7 @@ public final class Database
     private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<Vehicle> searchVehicleData;
+    
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
@@ -71,7 +73,7 @@ public final class Database
     private ComboBox IDComb;
     private ObservableList<Bookings> BookingsData;
     private ObservableList<Mec> MechanicData;
-        
+    private ObservableList<Bookings> searchBookingData;
     private Database(String DBFileName)
     {
         System.out.println("Trying to connect to the database");
@@ -1071,6 +1073,14 @@ public final class Database
         {
             
         }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a part");
+        }
+        catch(Exception ex)
+        {
+            
+        }
         
         
     }
@@ -1854,6 +1864,7 @@ public final class Database
     }
     }
     
+    
     /*Author Sam*/
     public ObservableList<Vehicle> searchVehicle (String searchVal) 
     {   
@@ -1899,6 +1910,50 @@ public final class Database
             System.err.println("Unable to access table or table doesnt exist");
         }
         return searchVehicleData;
+    }
+    public ObservableList<Bookings> searchBooking (String searchVal) 
+    {   
+        try{
+        PreparedStatement searchBooking = null;
+        searchBookingData = FXCollections.observableArrayList();
+        
+      
+        searchBooking = preparedStatement("select * from DIAGNOSIS_REPAIR_BOOKINGS where IDnum LIKE '%" + searchVal + "%' OR MANUFACTURE LIKE '%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%'");
+        
+       
+        
+        
+        ResultSet rs = searchBooking.executeQuery();
+        
+        while(rs.next())
+        {
+            int idNum = rs.getInt("IDnum");
+            String BookingMechanicID = rs.getString("MECHANICID");
+            String PARTNAME = rs.getString("PARTNAME");
+            int CUSTOMERID = rs.getInt("CUSTOMERID");
+            String BookingRegNum = rs.getString("REG_NUM");
+            String BookingManufacture = rs.getString("MANUFACTURE");
+            String BookingMileage = rs.getString("MILEAGE");
+            String BookingDate = rs.getString("BOOKING_DATE");
+            String BookingTime = rs.getString("TIME");
+            String BookingType = rs.getString("TYPE");
+            double BookingTotal = rs.getDouble("COST");
+
+            Bookings searchedBooking = new Bookings(idNum, BookingMechanicID,  PARTNAME, 
+                    CUSTOMERID, BookingRegNum, BookingManufacture, BookingMileage, BookingDate,
+                    BookingTime, BookingType, BookingTotal);
+            
+            BookingsData.add(searchedBooking);
+        }
+        
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        return BookingsData;
     }
      public ObservableList<Bookings> getBookings() throws SQLException
     {   
