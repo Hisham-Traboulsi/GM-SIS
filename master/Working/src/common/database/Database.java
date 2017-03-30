@@ -50,6 +50,7 @@ public final class Database
     private ObservableList<Customers> customerData;
     private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
+    private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<Vehicle> searchVehicleData;
     
@@ -363,7 +364,7 @@ public final class Database
     }
     
     /*Author Sergio*/
-   public void addPart(String name, String description, int amount, double cost) 
+   public void addPart(String name, String description, int amount, double cost) throws NumberFormatException
     {   if(checkPartName(name))
     {
                       PreparedStatement add = null;
@@ -422,7 +423,7 @@ public final class Database
    }
     /*Author Sergio*/
     public void addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
+            String EXP_DATE,String PART_NAME, int BOOKING_ID)
     {
         String newReg="";
         int BOOKINGID=BOOKING_ID;
@@ -437,7 +438,8 @@ public final class Database
         // System.out.println(newReg);
         
         }
-        catch(SQLException ex)
+        catch(SQLException ex){}
+        catch(NullPointerException ex)
                 {
                     JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
                 }
@@ -590,6 +592,40 @@ public final class Database
         
         return withdrawnData;
         
+    }
+     /*Author Sergio*/
+    public ObservableList<Part> getPartDetails(String partname) throws NullPointerException
+    {   
+        try{
+        PreparedStatement getPart = null;
+        partUsedData = FXCollections.observableArrayList();
+        
+       
+        getPart = preparedStatement("SELECT * FROM PARTS_TRACKING WHERE NAME='" + partname +"'");
+        ResultSet rs = getPart.executeQuery();
+        
+        while(rs.next())
+        {
+            int id = rs.getInt("RELEVANT_ID_NUM");
+            System.out.println(id);
+            String partName = rs.getString("NAME");
+            System.out.println(partName);
+            String partDesc = rs.getString("DESCRIPTION");
+            System.out.println(partDesc);
+            int partAmount = rs.getInt("AMOUNT");
+            System.out.println(partAmount);
+            double partCost = rs.getDouble("COST");
+            System.out.println(partCost);
+            
+            Part part = new Part(id, partName, partDesc, partAmount, partCost);
+            
+            partUsedData.add(part);
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        return partUsedData;
     }
     /*Author Sergio*/
     public ObservableList<Part> getPart() throws SQLException
@@ -841,7 +877,7 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
-    public ObservableList<partBooking> getpartBooking(String reg)
+    public ObservableList<partBooking> getpartBooking(String reg) throws NullPointerException
     {   
         try{
         PreparedStatement getMec = null;
@@ -853,14 +889,12 @@ public final class Database
         
         while(rs.next())
         {
+            int ID = rs.getInt("IDnum");
+            int custID=rs.getInt("CUSTOMERID");
             String date = rs.getString("BOOKING_DATE");
-            String name = rs.getString("FIRST_NAME");
-            String surname = rs.getString("SURNAME");
             String type = rs.getString("TYPE");
-            int id = rs.getInt("BOOKING_ID");
-            
-
-            partBooking booking = new partBooking(date,name,surname,type,id);
+ 
+            partBooking booking = new partBooking(date,custID,type,ID);
             
             bookingdata.add(booking);
         }
@@ -868,7 +902,7 @@ public final class Database
         }
         catch(SQLException ex)    
         {
-            JOptionPane.showMessageDialog(null,"Please select a booking from the table");
+            JOptionPane.showMessageDialog(null,"Error, try again");
         }
         return bookingdata;
     }
@@ -1028,6 +1062,21 @@ public final class Database
     /*
     Author Sergio Arrieta
     */
+      public void removePart(int id) 
+    {
+        try{
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_TRACKING WHERE RELEVANT_ID_NUM="+ id);
+      // removeInstalledPartStmt.setInt(1, id);
+        removeInstalledPartStmt.executeUpdate();
+        }catch(SQLException ex)
+        {
+            
+        }
+        
+        
+    }
+   /* Author Sergio Arrieta
+    */
       public void removeInstalledPart(int id) throws SQLException
     {
         
@@ -1043,7 +1092,7 @@ public final class Database
       public void removeBookingPart(int id) 
     {
         try{
-        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE BOOKING_ID='"+ id+"'");
+        PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum='"+ id+"'");
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
         }
@@ -1716,7 +1765,7 @@ public final class Database
             counter++;
         }
         
-        getAllCustomers();
+       
     }
        
        public void editBookings() throws SQLException
@@ -2039,6 +2088,7 @@ public void removeMec(int ID) throws SQLException
         removeMechanicStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
     }
+
 }
     
     

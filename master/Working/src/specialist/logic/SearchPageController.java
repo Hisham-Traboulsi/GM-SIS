@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -79,9 +82,9 @@ public class SearchPageController implements Initializable {
     @FXML
     private TextField firstNameField;
     @FXML
-    private TextField surnameField;
-    @FXML
     private Button nameSearch;
+    
+    private ObservableList<Outstanding> selected = null;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -145,6 +148,17 @@ public class SearchPageController implements Initializable {
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
             partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            partNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            partNameCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Outstanding,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Outstanding, String> t) {
+                    ((Outstanding) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setPARTNAME(t.getNewValue());
+                }
+            }
+            );
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
             partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
@@ -243,7 +257,17 @@ public class SearchPageController implements Initializable {
             surnamePart.setCellValueFactory(new PropertyValueFactory<>("SURNAME"));
             spcNameCol.setCellValueFactory(new PropertyValueFactory<>("SPCNAME"));
             partIDCol.setCellValueFactory(new PropertyValueFactory<>("PARTID"));
-            partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+         partNameCol.setCellValueFactory(new PropertyValueFactory<>("PARTNAME"));
+            partNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            partNameCol.setOnEditCommit(
+                    new EventHandler<TableColumn.CellEditEvent<Outstanding,String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Outstanding, String> t) {
+                    ((Outstanding) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setPARTNAME(t.getNewValue());
+                }
+            }
+            );
             deliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("DELIVERYDATE"));
             returnDateCol.setCellValueFactory(new PropertyValueFactory<>("RETURNDATE"));
             partCost.setCellValueFactory(new PropertyValueFactory<>("PARTCOST"));
@@ -258,6 +282,18 @@ public class SearchPageController implements Initializable {
         }
                 
                 
+        
+    }
+    
+    @FXML
+       public void removePart() throws SQLException
+    {
+        selected = PartSearchTable.getSelectionModel().getSelectedItems();   
+        
+        int BOOKINGID = selected.get(0).getBOOKINGID();
+        
+        Database.getInstance().removeOutstandingPart(BOOKINGID);
+        JOptionPane.showMessageDialog(null,"Successfully Removed");
         
     }
 

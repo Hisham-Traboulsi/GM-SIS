@@ -48,5 +48,6 @@
       </TableView>
       <TextField fx:id="firstNameField" layoutX="425.0" layoutY="139.0" prefHeight="25.0" prefWidth="215.0" promptText="Customer First Name OR Surname" />
       <Button fx:id="nameSearch" layoutX="656.0" layoutY="137.0" mnemonicParsing="false" onAction="#nameSearchButton" text="Search" />
+      <Button layoutX="556.0" layoutY="577.0" mnemonicParsing="false" onAction="#removePart" text="Remove Part" />
    </children>
 </AnchorPane>

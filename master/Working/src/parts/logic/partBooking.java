@@ -20,19 +20,18 @@ import javafx.beans.property.StringProperty;
 public class partBooking
 {
     private StringProperty Date;
-    private StringProperty Name;
-    private StringProperty SurName;
+    private IntegerProperty customerID;
     private StringProperty Type;
-    private IntegerProperty id;
+    private IntegerProperty ID;
     
     
-   public partBooking(String Date,String Name,String SurName,String Type,int id)
+   public partBooking(String Date,int customerID,String Type,int ID)
     {
         this.Date =  new SimpleStringProperty(Date);
-        this.Name =  new SimpleStringProperty(Name);
-        this.SurName =  new SimpleStringProperty(SurName);
+        this.customerID=  new SimpleIntegerProperty(customerID);
+        
         this.Type =  new SimpleStringProperty(Type);
-        this.id =  new SimpleIntegerProperty(id);
+        this.ID=  new SimpleIntegerProperty(ID);
         
     }
   
@@ -42,16 +41,12 @@ public class partBooking
         return Date.get();
     }
     
-    public String getName()
+    public int getcustomerID()
     {
-        return Name.get();
+        return customerID.get();
     
     }
-    public String getSurName()
-    {
-        return SurName.get();
     
-    }
     public String getType()
     {
         return Type.get();
@@ -59,7 +54,7 @@ public class partBooking
     }
     public int getBookID()
     {
-        return id.get();
+        return ID.get();
     
     }
    
@@ -69,9 +64,9 @@ public class partBooking
         return Date;
     }
     
-    public StringProperty NameDescProperty()
+    public IntegerProperty customerIDProperty()
     {
-       return Name;
+       return customerID;
     }
     public StringProperty TypeProperty()
     {
@@ -83,9 +78,9 @@ public class partBooking
         this.Date.set(Date);
     }
     
-    public void setName(String Name)
+    public void setcustomerID(int customerID)
     {
-        this.Name.set(Name);
+        this.customerID.set(customerID);
     }
     
     public void setType(String Type)

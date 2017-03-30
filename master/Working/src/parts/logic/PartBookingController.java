@@ -37,9 +37,7 @@ public class PartBookingController implements Initializable {
      @FXML
     private TableColumn<partBooking, String> date;
     @FXML
-    private TableColumn<partBooking, String> name;
-    @FXML
-    private TableColumn<partBooking, String> surname;
+    private TableColumn<partBooking, Integer> customerID;
     @FXML
     private TableColumn<partBooking, String> type;
     @FXML
@@ -65,13 +63,15 @@ public class PartBookingController implements Initializable {
     {  if(empty()) {
         try{
         String regC=(String) reg.getValue();
+        //JOptionPane.showMessageDialog(null,regC);
+        
         ObservableList <partBooking> bookingData = Database.getInstance().getpartBooking(regC);
         date.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        name.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        surname.setCellValueFactory(new PropertyValueFactory<>("SurName"));
+        customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         type.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id.setCellValueFactory(new PropertyValueFactory<>("BookID"));
         bookings.setItems(bookingData);
+       // JOptionPane.showMessageDialog(null,id);
          }
       catch(NullPointerException e)
       {
@@ -107,13 +107,13 @@ public class PartBookingController implements Initializable {
         if(empty())
         
         {     try{//selected = bookings.getSelectionModel().getSelectedItems();
-              String name =(selected.get(0).getName());
-              String surname =(selected.get(0).getSurName());
+             // String name =(selected.get(0).getcustomerID());
+              
     
               JFrame frame = new JFrame();
               Object[] options = {"Yes","No"};
               int n = JOptionPane.showOptionDialog(frame,
-              "Are you sure you want to delete the booking for " + name + " " + surname,
+              "Are you sure you want to delete the booking",
               "Delete booking",
               JOptionPane.YES_NO_CANCEL_OPTION,
               JOptionPane.WARNING_MESSAGE,

@@ -107,9 +107,11 @@ public class LoginController implements Initializable {
        JOptionPane.showMessageDialog(null,"If you forgot your password, please contact your system administrator");
     }
     
-    public boolean isValidCredentials() throws SQLException
+    public boolean isValidCredentials() throws SQLException,NullPointerException
     {
         boolean allow_access=false;
+        try{
+        
 
         if(id_box.getText().isEmpty() || password_box.getText().isEmpty())
         {
@@ -121,6 +123,10 @@ public class LoginController implements Initializable {
               allow_access = Database.getInstance().authentication(id, password_box.getText());
               admin = Database.getInstance().isAdmin(id);
               System.out.println(admin);
+        }
+        }
+        catch(NumberFormatException ex){
+           // JOptionPane.showMessageDialog(null,"Invalid credentials");
         }
         return allow_access;
     }
