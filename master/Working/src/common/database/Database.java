@@ -361,33 +361,63 @@ public final class Database
     }
     
     /*Author Sergio*/
-   public boolean addPart(String name, String description, int amount, double cost)
+   public void addPart(String name, String description, int amount, double cost) 
+    {   if(checkPartName(name))
     {
-        PreparedStatement add = null;
-        boolean added = false;
-        try
-        {
-           add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
-           add.setString(1, null);
-           add.setString(2, name);
-           add.setString(3, description);
-           add.setInt(4, amount);
-           add.setDouble(5, cost);
-  
-           add.execute();
-           add.close();
-           added = true;
-           JOptionPane.showMessageDialog(null,"Part successfully added");
-        }
-        catch(SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null,"Error, try again");
-            ex.printStackTrace();
-            System.err.println("Unable to access table or table doesnt exist");
-        }
-        
-        return added;
+                      PreparedStatement add = null;
+                     // boolean added = false;
+                      try
+                      {
+                         add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
+                         add.setString(1, null);
+                         add.setString(2, name);
+                         add.setString(3, description);
+                         add.setInt(4, amount);
+                         add.setDouble(5, cost);
+
+                         add.execute();
+                         add.close();
+                        // added = true;
+                         JOptionPane.showMessageDialog(null,"Part successfully added");
+                      }
+                        catch(SQLException ex)
+                     {
+                         JOptionPane.showMessageDialog(null,"Error, try again");
+                         ex.printStackTrace();
+                         System.err.println("Unable to access table or table doesnt exist");
+                     }
     }
+            
+    }
+   public boolean checkPartName(String partname){
+       boolean check=true;
+       try{
+            
+           
+            PreparedStatement checkP = null;
+            checkP = preparedStatement("SELECT NAME FROM PARTS_TRACKING");      
+            ResultSet rs = checkP.executeQuery();
+            
+             while(rs.next())
+                 {
+                    String pn=rs.getString("NAME"); 
+                
+                      if(partname.equalsIgnoreCase(pn))
+                        {
+                            check=false;
+                            JOptionPane.showMessageDialog(null," A part with that name already exists, enter a different name");
+                            break;
+                        } 
+                }
+        
+           }
+       catch(SQLException ex)
+       {
+                
+        }
+       
+       return check;
+   }
     /*Author Sergio*/
     public void addInstalledPart( String REG_NUM, String INST_DATE, 
             String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException

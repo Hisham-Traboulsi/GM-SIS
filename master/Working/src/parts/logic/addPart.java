@@ -93,8 +93,8 @@ public class addPart implements Initializable {
     
    
     
-   public boolean add()
-    {   boolean added=false;
+   public void add() throws SQLException
+    {  // boolean added=false;
         if(empty())
       {
       partsTable.getItems().clear();
@@ -108,20 +108,20 @@ public class addPart implements Initializable {
       
   
       
-      added = Database.getInstance().addPart(name,desc,amount,cost);
+      Database.getInstance().addPart(name,desc,amount,cost);
       refresh();
       addDeliveryDate();
       clearButton();
       }
       
-      return added;
+      //return added;
     }
    public void addDeliveryDate()
    {    String name= (partName.getText());
         Database.getInstance().addDelivery(name);
    }
    
-    public void enterPressed(KeyEvent event) {
+    public void enterPressed(KeyEvent event) throws SQLException {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();
                 }
