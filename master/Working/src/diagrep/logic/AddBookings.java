@@ -108,8 +108,6 @@ public class AddBookings implements Initializable {
     @FXML
     private TextField TimeTxt;
     @FXML
-    private TextField Typetxt;
-    @FXML
     private DatePicker DateTxt;
     @FXML
     private TextField CostTxt;
@@ -121,6 +119,12 @@ public class AddBookings implements Initializable {
     private ComboBox MechCombReg;
     @FXML
     private ComboBox regCombReg;
+    @FXML
+    private ComboBox comboType;
+    @FXML
+    private ComboBox comboTime;
+    @FXML
+    private ComboBox comboManufacture;
     
     @FXML
     private Button addButton;
@@ -168,10 +172,6 @@ public class AddBookings implements Initializable {
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
        
-       
-       
-       
-       
       BookTable.getItems().clear();
       boolean added=false;
       
@@ -181,27 +181,19 @@ public class AddBookings implements Initializable {
             String PARTNAME = (String) regComb.getValue();
             int CUSTOMERID = (Integer)(IDcomb.getValue());
             String BookingRegNum = (String) regCombReg.getValue();
-            String BookingManufacture=(ManufactureTxt.getText());
+            String BookingManufacture = (String) comboManufacture.getValue();
             String BookingMileage= (MileageTxt.getText());
             String BookingDate = (df.format(dateobj));          
-            String BookingTime =(TimeTxt.getText());
-            String BookingType=(Typetxt.getText());
+            String BookingTime = (String) comboTime.getValue();
+            String BookingType = (String) comboType.getValue();
             Double BookingTotal= Double.parseDouble(CostTxt.getText());
             
-         if(  ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
-        || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())  
-        {
-            JOptionPane.showMessageDialog(null, "All fields are required");
-            
-        }
-         else{
-     
-          
-      added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,
+    
+             added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,
              CUSTOMERID, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
              BookingTime, BookingType,BookingTotal);
      
-         }
+         
       
            
 
@@ -221,7 +213,11 @@ public class AddBookings implements Initializable {
             boolean PARTNAME = regComb.getSelectionModel().isEmpty();
             boolean CUSTOMERID = IDcomb.getSelectionModel().isEmpty();
             boolean BookingRegNum = regCombReg.getSelectionModel().isEmpty();
-        
+            boolean BookingType = comboType.getSelectionModel().isEmpty();
+            boolean BookingManufacture = comboManufacture.getSelectionModel().isEmpty();
+            boolean BookingTime = comboTime.getSelectionModel().isEmpty();
+            boolean BookingMileage=  MileageTxt.getText().isEmpty();
+            
             if (BookingMechanicID)
         {
             JOptionPane.showMessageDialog(null,"Please select a Mechanic");
@@ -240,6 +236,26 @@ public class AddBookings implements Initializable {
         else if(BookingRegNum)
         {
             JOptionPane.showMessageDialog(null,"Please select Registration Number");
+            check=false;
+        }
+            else if(BookingType)
+        {
+            JOptionPane.showMessageDialog(null,"Please select Booking Type");
+            check=false;
+        }
+             else if(BookingManufacture)
+        {
+            JOptionPane.showMessageDialog(null,"Please select Car Manufature");
+            check=false;
+        }
+             else if(BookingTime)
+        {
+            JOptionPane.showMessageDialog(null,"Please select Booking Time");
+            check=false;
+        }
+            else if(BookingMileage)
+        {
+            JOptionPane.showMessageDialog(null,"Enter Mileage(Number ONLY e.g. 20000)");
             check=false;
         }
         return check;
@@ -306,17 +322,20 @@ public class AddBookings implements Initializable {
         regCombReg.getItems().clear();
         IDcomb.getItems().clear();
         MechCombReg.getItems().clear();
+        comboTime.getItems().clear();
+        comboManufacture.getItems().clear();
         MechTxt.clear();
         ManufactureTxt.clear();
         MileageTxt.clear();
-        TimeTxt.clear();
-        Typetxt.clear();
         CostTxt.clear();
+       
         
         partBox();
         numBox();
         idcombBox();
         RegBox();
+        Type();
+        Time();
         
     }
    
@@ -371,6 +390,31 @@ public class AddBookings implements Initializable {
         regCombReg.setItems(regComb1);
         
     }
+    public void Type()
+    {
+        comboType.getItems().removeAll(comboType.getItems());
+        comboType.getItems().addAll("Diagnosis & Repair", "Scheduled Maintenance");
+        
+    }
+    public void Time()
+    {
+        comboTime.getItems().removeAll(comboTime.getItems());
+        comboTime.getItems().addAll("9:00", "9:15","9:30","9:45","10:00","10:15","10:30","10:45",
+                "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45"
+                ,"14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30",
+                "16:45","17:00","17:15","17:30");
+        
+    }
+    public void Manufature()
+    {
+        comboManufacture.getItems().removeAll(comboManufacture.getItems());
+        comboManufacture.getItems().addAll("Acura", "Alfa Romeo","Aston Martin","Audi","Bentley","BMW","Bugatti","Buick",
+                "Cadillac","Chevrolet","Chrysler","Citroen","Dodge","Ferrari","Fait","Ford","Geely","General Motors","GMC","Honda","Hyundai"
+                ,"Infiniti","Jaguar","Jeep","Kia","Koenigsegg","Lamborghini","Land Rover","Lexus","Maserati","Mazda",
+                "McLaren","Mercedes Benz","Mini","Mitsubishi","Nissan","Pagani","Porsche","Ram","Renault","Rolls Royce","Sabb","Subaru",
+                "Suzuki","Tata","Tesla","Toyota","Volkswagen","Volvo");
+        
+    }
    
    public void RefreshPage(){
        try {
@@ -408,12 +452,15 @@ public class AddBookings implements Initializable {
        idcombBox();
        numBox();
        RegBox();
+       Manufature();
+       Type();
+       Time();
       
         try {
             
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
-
-            BookTable.setEditable(true);
+           
+            BookTable.setEditable(true); 
 
             BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));

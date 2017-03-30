@@ -174,27 +174,24 @@
                <children>
                   <TableView fx:id="BookTable" layoutX="92.0" layoutY="266.0" prefHeight="400.0" prefWidth="1016.0">
                      <columns>
-                        <TableColumn fx:id="BookingCol" prefWidth="97.5" text="Booking ID" />
-                        <TableColumn fx:id="MechanicCol" prefWidth="84.0" text="Mechanic ID" />
-                        <TableColumn fx:id="CustomerCol" prefWidth="100.5" text="Customer ID" />
-                        <TableColumn fx:id="PartCol" prefWidth="95.0" text="Part" />
-                        <TableColumn fx:id="RegNumCol" prefWidth="91.0" text="Reg Num" />
+                        <TableColumn fx:id="BookingCol" prefWidth="85.00001525878906" text="Booking ID" />
+                        <TableColumn fx:id="MechanicCol" prefWidth="90.0" text="Mechanic ID" />
+                        <TableColumn fx:id="CustomerCol" prefWidth="84.5" text="Customer ID" />
+                        <TableColumn fx:id="PartCol" prefWidth="134.0" text="Part" />
+                        <TableColumn fx:id="RegNumCol" prefWidth="76.5" text="Reg Num" />
                         <TableColumn fx:id="ManufactureCol" prefWidth="92.0" text="Manufacture" />
                         <TableColumn fx:id="MileageCol" prefWidth="83.5" text="Mileage" />
                         <TableColumn fx:id="TimeCol" prefWidth="74.0" text="Date" />
                         <TableColumn fx:id="DateCol" prefWidth="74.0" text="Time" />
-                        <TableColumn fx:id="TypeCol" prefWidth="110.0" text="Booking Type" />
-                        <TableColumn fx:id="CostCol" prefWidth="110.0" text="Cost" />
+                        <TableColumn fx:id="TypeCol" prefWidth="145.5" text="Booking Type" />
+                        <TableColumn fx:id="CostCol" prefWidth="74.5" text="Cost" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="ManufactureTxt" layoutX="567.0" layoutY="128.0" prefHeight="32.0" prefWidth="166.0" />
                   <TextField fx:id="MileageTxt" layoutX="567.0" layoutY="167.0" prefHeight="32.0" prefWidth="166.0" />
-                  <TextField fx:id="TimeTxt" layoutX="925.0" layoutY="126.0" prefHeight="32.0" prefWidth="166.0" />
                   <Button fx:id="addButton" layoutX="126.0" layoutY="211.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="36.0" prefWidth="135.0" text="Add" />
                   <Button fx:id="removeButton" layoutX="598.0" layoutY="211.0" mnemonicParsing="false" onAction="#removeBooking" prefHeight="36.0" prefWidth="135.0" text="Remove" />
                   <Button fx:id="clearButton" layoutX="287.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="36.0" prefWidth="135.0" text="Clear" />
                   <Button layoutX="446.0" layoutY="211.0" mnemonicParsing="false" onAction="#editBooking" prefHeight="36.0" prefWidth="135.0" text="Update Edit" />
-                  <TextField fx:id="Typetxt" layoutX="925.0" layoutY="165.0" prefHeight="32.0" prefWidth="166.0" />
                   <Text fill="WHITE" layoutX="103.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MechanicID">
                      <font>
                         <Font size="19.0" />
@@ -256,6 +253,9 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
+                  <ComboBox fx:id="comboType" layoutX="925.0" layoutY="164.0" prefHeight="32.0" prefWidth="166.0" />
+                  <ComboBox fx:id="comboTime" layoutX="925.0" layoutY="125.0" prefHeight="32.0" prefWidth="166.0" />
+                  <ComboBox fx:id="comboManufacture" layoutX="567.0" layoutY="127.0" prefHeight="32.0" prefWidth="166.0" />
                </children>
             </AnchorPane>
          </children>
