@@ -51,6 +51,7 @@ public final class Database
     private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
     private ObservableList<Vehicle> vehicleData;
+    private ObservableList<Vehicle> searchVehicleData;
     private ObservableList<installedPart> installedPartsData;
     private ObservableList<installedPart> searchPartsData;
     private ObservableList<SPC> spcData;
@@ -1384,10 +1385,11 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO BILL VALUES (?, ?)"); 
+           add = preparedStatement("INSERT INTO BILL VALUES (?, ?, ?)"); 
          
            add.setInt(1, CUSTOMERID);
            add.setDouble(2, TOTAL);
+           add.setBoolean(3, false);
         
 
            add.execute();
@@ -1737,6 +1739,53 @@ public final class Database
         
         getVehicle();
     }
+    }
+    
+    /*Author Sam*/
+    public ObservableList<Vehicle> searchVehicle (String searchVal) 
+    {   
+        try{
+        PreparedStatement searchVehicle = null;
+        searchVehicleData = FXCollections.observableArrayList();
+        
+      
+        searchVehicle = preparedStatement("select * from VEHICLE_RECORD where MODEL LIKE '%" + searchVal + "%' OR MAKE LIKE '%" + searchVal +"%' OR REG_NUM LIKE '%" + searchVal + "%'");
+        
+        //searchInstalledPart.setString(1,searchVal);
+        
+        
+        ResultSet rs = searchVehicle.executeQuery();
+        
+        while(rs.next())
+        {
+            String regnum = rs.getString("REG_NUM");
+            String model = rs.getString("MODEL");
+            String make = rs.getString("MAKE");
+            String engine = rs.getString("ENGINE_SIZE");
+            String fueltype = rs.getString("FUEL_TYPE");
+            String colour = rs.getString("COLOUR");
+            String motdate = rs.getString("MOT_RENEWAL_DATE");
+            String lastservice = rs.getString("PREVIOUS_SERVICE_DATE");
+            String mileage = rs.getString("CURRENT_MILEAGE");
+            String warranty = rs.getString("WARRANTY");
+            String warrantycompany = rs.getString("WARRANTY_COMPANY");
+            String warrantyaddress = rs.getString("WARRANTY_ADDRESS");
+            String warrantyexpiry = rs.getString("WARRANTY_EXPIRY");
+            int id = rs.getInt("CUSTOMER_ID");
+
+            Vehicle searchedVehicle = new Vehicle(id, regnum,  model,  make, engine, fueltype, colour, motdate, lastservice, mileage, warranty, warrantycompany, warrantyaddress, warrantyexpiry);
+            
+            searchVehicleData.add(searchedVehicle);
+        }
+        
+        }
+        catch(SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Error, try again");
+            ex.printStackTrace();
+            System.err.println("Unable to access table or table doesnt exist");
+        }
+        return searchVehicleData;
     }
      public ObservableList<Bookings> getBookings() throws SQLException
     {   
