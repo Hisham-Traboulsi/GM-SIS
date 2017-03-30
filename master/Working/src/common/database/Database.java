@@ -371,8 +371,8 @@ public final class Database
                       {
                          add = preparedStatement("INSERT INTO PARTS_TRACKING VALUES (?, ?, ?, ?, ?)"); 
                          add.setString(1, null);
-                         add.setString(2, name);
-                         add.setString(3, description);
+                         add.setString(2, name.trim());
+                         add.setString(3, description.trim());
                          add.setInt(4, amount);
                          add.setDouble(5, cost);
 
