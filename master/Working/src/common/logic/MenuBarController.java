@@ -206,10 +206,22 @@ public class MenuBarController
         }
     }
     
-    
-     
-
-    
+    public void customerInfo(ActionEvent event)
+    {
+        try
+        {
+            addMenuBar();
+            URL customerInfoUrl = getClass().getResource("/customers/gui/CustomerInfo.fxml");
+            AnchorPane customerInfoPane = FXMLLoader.load(customerInfoUrl);
+            
+            BorderPane border = Main.getRoot();
+            border.setCenter(customerInfoPane);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     
     public void removeCustomer(ActionEvent event)
     {
@@ -218,11 +230,11 @@ public class MenuBarController
             addMenuBar();
             
             URL removeCustomerUrl = getClass().getResource("/customers/gui/RemoveCustomer.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(removeCustomerUrl);
+            AnchorPane removeCustomerPane = FXMLLoader.load(removeCustomerUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(addCustomerPane);
+            border.setCenter(removeCustomerPane);
         }
         catch(IOException ex)
         {
@@ -237,11 +249,11 @@ public class MenuBarController
             addMenuBar();
             
             URL editCustomerUrl = getClass().getResource("/customers/gui/EditCustomer.fxml");
-            AnchorPane addCustomerPane = FXMLLoader.load(editCustomerUrl);
+            AnchorPane editCustomerPane = FXMLLoader.load(editCustomerUrl);
             
             BorderPane border = Main.getRoot();
             
-            border.setCenter(addCustomerPane);
+            border.setCenter(editCustomerPane);
         }
         catch(IOException ex)
         {

@@ -38,9 +38,12 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javax.swing.JFrame;
 
 
 /**
@@ -66,7 +69,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TextField VEHICLE_ID_BILL;
     @FXML
-    private TextField CUSTOMER_ID;
+    private TextField BOOKING_ID;
     @FXML
     private TextField VEHICLE_ID;
     @FXML
@@ -110,7 +113,7 @@ public class addInstalledPart implements Initializable {
     @FXML
     private TableColumn<installedPart, String> EXP_DATE_view;
     @FXML
-    private TableColumn<installedPart, Integer> CUSTOMER_ID_view;
+    private TableColumn<installedPart, Integer> BOOKING_ID_view;
 
     @FXML
     private TextField searchBox;
@@ -119,7 +122,7 @@ public class addInstalledPart implements Initializable {
 
          
     @FXML
-   public boolean add() 
+   public void add() 
     { 
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
@@ -130,28 +133,33 @@ public class addInstalledPart implements Initializable {
        Date nextYear = cal.getTime();
        boolean added=false;
       if(empty())
-      {
-      
+      { 
       
 
             String PARTNAME = (String) regComb.getValue();
-            String REGNUM = (String) regCombReg.getValue();
+            String REGNUM = "";
             String INSTDATE = (df.format(dateobj));
             String EXPDATE = (df.format(nextYear));
-            int CUSTOMERID = (Integer)(IDcomb.getValue());
+            int BOOKINGID = (Integer)(IDcomb.getValue());
             
   
       
-      added = Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
-              EXPDATE,PARTNAME, CUSTOMERID);
+       Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
+              EXPDATE,PARTNAME, BOOKINGID);
       updateAmount();
-      Database.getInstance().calculateBill(REGNUM,CUSTOMERID);
+    //  Database.getInstance().calculateBill(REGNUM,BOOKINGID);
       addWithdrawalDate();
       clearRest();
       searchPart();
+       
       }
-      return added;
+     // return added;
     }
+   /*public boolean partLimit(String REGNUM){
+      // boolean check=true;
+       return Database.getInstance().maxParts(REGNUM);
+       
+   }*/
     public void enterPressed(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();
@@ -188,26 +196,56 @@ public class addInstalledPart implements Initializable {
     {
         String partname=(String) regComb.getValue();
         Database.getInstance().updateStock(partname);
-        Database.getInstance().partBelowZero();
+        
         //return ID;
     }
+   
    public void getBill() 
     {
         selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getCUSTOMER_ID());
+        Database.getInstance().calculateBill(selected.get(0).getREG_NUM(),selected.get(0).getBOOKING_ID());
         searchPart();
     }
-    public void remove() 
+    public void remove() throws SQLException
     {
-        selected = installedPartsTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().removeInstalledPart(selected.get(0).getINST_ID());
-        searchPart();
-    }
+        try{
+             selected = installedPartsTable.getSelectionModel().getSelectedItems(); 
+             int id =selected.get(0).getINST_ID();
+             
+             JFrame frame = new JFrame();
+             Object[] options = {"Yes","No"};
+             int n = JOptionPane.showOptionDialog(frame,
+             "Are you sure you want to remove that part",
+             "Remove part",
+             JOptionPane.YES_NO_CANCEL_OPTION,
+             JOptionPane.WARNING_MESSAGE,
+             null,
+             options,
+             options[1]);
+              if (n == JOptionPane.YES_OPTION) 
+                {     
+                   {
+                      Database.getInstance().removeInstalledPart(id);
+                        searchPart();
+                   }        
+                 }
+           }
+           catch(NullPointerException e)
+           { 
+              JOptionPane.showMessageDialog(null,"Select a part to remove");
+           }
+     }
     
-      public void updatePart() 
-    {
+    
+      public void updatePart() throws SQLException
+    {  try{
         Database.getInstance().editInstalledPart();
         searchPart();
+    }
+    catch(NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null,"Select a part");
+        }
     }
     
        public void searchPart() 
@@ -222,7 +260,7 @@ public class addInstalledPart implements Initializable {
             
            
            PART_NAME_view.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
-           PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           /*PART_NAME_view.setCellFactory(TextFieldTableCell.forTableColumn());
             PART_NAME_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -231,11 +269,11 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setPART_NAME(t.getNewValue());
                 }
             }
-            );
+            );*/
             
 
             REG_NUM_view.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
-            REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*REG_NUM_view.setCellFactory(TextFieldTableCell.forTableColumn());
             REG_NUM_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -244,10 +282,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setREG_NUM(t.getNewValue());
                 }
             }
-            );
+            );*/
             
             INST_DATE_view.setCellValueFactory(new PropertyValueFactory<>("INST_DATE"));
-            INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+            /*INST_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             INST_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -256,10 +294,10 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setINST_DATE(t.getNewValue());
                 }
             }
-            );
+            );*/
            
             EXP_DATE_view.setCellValueFactory(new PropertyValueFactory<>("EXP_DATE"));
-            EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
+           /* EXP_DATE_view.setCellFactory(TextFieldTableCell.forTableColumn());
             EXP_DATE_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,String>>() {
                 @Override
@@ -268,9 +306,9 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setEXP_DATE(t.getNewValue());
                 }
             }
-            );
-            CUSTOMER_ID_view.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
-            CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+            );*/
+            BOOKING_ID_view.setCellValueFactory(new PropertyValueFactory<>("BOOKING_ID"));
+            /*CUSTOMER_ID_view.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
             CUSTOMER_ID_view.setOnEditCommit(
                     new EventHandler<CellEditEvent<installedPart,Integer>>() {
                 @Override
@@ -279,7 +317,7 @@ public class addInstalledPart implements Initializable {
                             t.getTablePosition().getRow())).setCUSTOMER_ID(t.getNewValue());
                 }
             }
-            );
+            );*/
             
 
             
@@ -295,10 +333,10 @@ public class addInstalledPart implements Initializable {
     installedPartsTable.getItems().clear();
   
     regComb.getItems().clear();
-    regCombReg.getItems().clear();
+   // regCombReg.getItems().clear();
     IDcomb.getItems().clear();
     partBox();
-    numBox();
+   // numBox();
     idcombBox();
 
     }
@@ -306,7 +344,7 @@ public class addInstalledPart implements Initializable {
            boolean check=true;
         
             boolean part = regComb.getSelectionModel().isEmpty();
-            boolean reg = regCombReg.getSelectionModel().isEmpty();
+        //    boolean reg = regCombReg.getSelectionModel().isEmpty();
             boolean id = IDcomb.getSelectionModel().isEmpty();
         
             if (part)
@@ -314,14 +352,14 @@ public class addInstalledPart implements Initializable {
             JOptionPane.showMessageDialog(null,"Please select a part name");
             check=false;
         }
-        else if(reg)
+        /*else if(reg)
         {
             JOptionPane.showMessageDialog(null,"Please select a vehicle registration");
             check=false;
-        }
+        }*/
         else if(id)
         {
-            JOptionPane.showMessageDialog(null,"Please select a customer ID");
+            JOptionPane.showMessageDialog(null,"Please select a booking ID");
             check=false;
         }
         return check;
@@ -330,10 +368,10 @@ public class addInstalledPart implements Initializable {
         
     searchBox.clear();
     regComb.getItems().clear();
-    regCombReg.getItems().clear();
+    //regCombReg.getItems().clear();
     IDcomb.getItems().clear();
     partBox();
-    numBox();
+    //numBox();
     idcombBox();
     }
     public void partBox()
@@ -351,27 +389,27 @@ public class addInstalledPart implements Initializable {
         /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
         regComb.getItems().addAll(regComb1);*/
-        ObservableList <Integer> regComb1=Database.getInstance().fillIDcombo();
+        ObservableList <Integer> regComb1=Database.getInstance().fillBookingIDcombo();
         //regComb = new ComboBox();
         IDcomb.setItems(regComb1);
         
     }
-    public void numBox()
+   /* public void numBox()
     {
-        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
         regComb = new ComboBox();
-        regComb.getItems().addAll(regComb1);*/
+        regComb.getItems().addAll(regComb1);
         ObservableList <String> regComb1=Database.getInstance().fillNumComboBook();
         //regComb = new ComboBox();
         regCombReg.setItems(regComb1);
         
-    }
+    }*/
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       /// partBox();
+        
        partBox();
-       numBox();
+      // numBox();
        idcombBox();
        searchPart();
        

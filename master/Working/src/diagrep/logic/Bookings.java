@@ -28,11 +28,12 @@ public class Bookings {
     private StringProperty BookingDate;
     private StringProperty BookingTime;
     private StringProperty BookingType;
+    private DoubleProperty BookingTotal;
     
     
      public Bookings(int idNum, String BookingMechanicID, String PART_NAME, 
              int CUSTOMER_ID, String BookingRegNum, String BookingManufacture, 
-             String BookingMileage, String BookingDate, String BookingTime, String BookingType)
+             String BookingMileage, String BookingDate, String BookingTime, String BookingType, double BookingTotal)
            
     {
         this.idNum =  new SimpleIntegerProperty(idNum);
@@ -45,6 +46,8 @@ public class Bookings {
         this.BookingDate =  new SimpleStringProperty(BookingDate);
         this.BookingTime =  new SimpleStringProperty(BookingTime);
         this.BookingType =  new SimpleStringProperty(BookingType);
+        this.BookingTotal =  new SimpleDoubleProperty(BookingTotal);
+
 
     }
      
@@ -90,6 +93,10 @@ public class Bookings {
     {
         return BookingType.get();
     }
+    public double getBOOKING_TOTAL()
+    {
+        return BookingTotal.get();
+    }
     
     
     
@@ -134,6 +141,10 @@ public class Bookings {
     {
        return BookingType;
     }     
+    public DoubleProperty BOOKING_TOTALProperty()
+    {
+       return BookingTotal;
+    }
     
     
     
@@ -184,6 +195,10 @@ public class Bookings {
     public void setBOOKING_TYPE (String BookingType)
     {
         this.BookingType.set(BookingType);        
+    }
+    public void setBOOKING_TOTAL(double BookingTotal)
+    {
+        this.BookingTotal.set(BookingTotal);        
     }
     
     

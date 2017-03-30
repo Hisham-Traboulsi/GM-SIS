@@ -21,17 +21,17 @@ public class Mec {
     private StringProperty MechanicName;
     private StringProperty MechanicDate;
     private StringProperty MechanicNumber;
-    private StringProperty MechanicRate;
+    private DoubleProperty MechanicRate;
     
     public Mec(int idNum, String MechanicName, String MechanicDate, 
-             String MechanicNumber, String MechanicRate)
+             String MechanicNumber, double MechanicRate)
            
     {
         this.idNum =  new SimpleIntegerProperty(idNum);
         this.MechanicName =  new SimpleStringProperty(MechanicName);
         this.MechanicDate =  new SimpleStringProperty(MechanicDate);
         this.MechanicNumber =  new SimpleStringProperty(MechanicNumber);
-        this.MechanicRate =  new SimpleStringProperty(MechanicRate);
+        this.MechanicRate =  new SimpleDoubleProperty(MechanicRate);
         
 
     }
@@ -54,7 +54,7 @@ public class Mec {
     {
         return MechanicNumber.get();
     }
-    public String getMECHANIC_RATE()
+    public double getMECHANIC_RATE()
     {
         return MechanicRate.get();
     }
@@ -73,10 +73,7 @@ public class Mec {
        return MechanicNumber;
     }     
           
-    public StringProperty MECHANIC_RATEProperty()
-    {
-       return MechanicRate;
-    }        
+          
     
     public void setIDnum(int idNum)
     {
@@ -97,7 +94,7 @@ public class Mec {
         this.MechanicNumber.set(MechanicNumber);        
     }
     
-    public void setMECHANIC_RATE(String MechanicRate)
+    public void setMECHANIC_RATE(double MechanicRate)
     {
         this.MechanicRate.set(MechanicRate);        
     }

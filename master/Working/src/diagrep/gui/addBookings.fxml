@@ -172,12 +172,12 @@
             <DatePicker fx:id="DateTxt1" layoutX="925.0" layoutY="86.0" prefHeight="32.0" prefWidth="166.0" />
             <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../common/gui/common_style.css">
                <children>
-                  <TableView fx:id="BookTable" layoutX="92.0" layoutY="275.0" prefHeight="391.0" prefWidth="1016.0">
+                  <TableView fx:id="BookTable" layoutX="92.0" layoutY="266.0" prefHeight="400.0" prefWidth="1016.0">
                      <columns>
                         <TableColumn fx:id="BookingCol" prefWidth="97.5" text="Booking ID" />
                         <TableColumn fx:id="MechanicCol" prefWidth="84.0" text="Mechanic ID" />
-                        <TableColumn fx:id="CustomerCol" prefWidth="100.5" text="Part" />
-                        <TableColumn fx:id="PartCol" prefWidth="95.0" text="Customer ID" />
+                        <TableColumn fx:id="CustomerCol" prefWidth="100.5" text="Customer ID" />
+                        <TableColumn fx:id="PartCol" prefWidth="95.0" text="Part" />
                         <TableColumn fx:id="RegNumCol" prefWidth="91.0" text="Reg Num" />
                         <TableColumn fx:id="ManufactureCol" prefWidth="92.0" text="Manufacture" />
                         <TableColumn fx:id="MileageCol" prefWidth="83.5" text="Mileage" />
@@ -187,14 +187,13 @@
                         <TableColumn fx:id="CostCol" prefWidth="110.0" text="Cost" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="RegNumTxt" layoutX="567.0" layoutY="86.0" prefHeight="36.0" prefWidth="166.0" />
                   <TextField fx:id="ManufactureTxt" layoutX="567.0" layoutY="128.0" prefHeight="32.0" prefWidth="166.0" />
                   <TextField fx:id="MileageTxt" layoutX="567.0" layoutY="167.0" prefHeight="32.0" prefWidth="166.0" />
                   <TextField fx:id="TimeTxt" layoutX="925.0" layoutY="126.0" prefHeight="32.0" prefWidth="166.0" />
-                  <Button fx:id="addButton" layoutX="296.0" layoutY="211.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="36.0" prefWidth="135.0" text="Add" />
-                  <Button fx:id="removeButton" layoutX="768.0" layoutY="211.0" mnemonicParsing="false" onAction="#removeBooking" prefHeight="36.0" prefWidth="135.0" text="Remove" />
-                  <Button fx:id="clearButton" layoutX="457.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="36.0" prefWidth="135.0" text="Clear" />
-                  <Button layoutX="616.0" layoutY="211.0" mnemonicParsing="false" onAction="#editBooking" prefHeight="36.0" prefWidth="135.0" text="Update Edit" />
+                  <Button fx:id="addButton" layoutX="126.0" layoutY="211.0" mnemonicParsing="false" onAction="#addBooking" prefHeight="36.0" prefWidth="135.0" text="Add" />
+                  <Button fx:id="removeButton" layoutX="598.0" layoutY="211.0" mnemonicParsing="false" onAction="#removeBooking" prefHeight="36.0" prefWidth="135.0" text="Remove" />
+                  <Button fx:id="clearButton" layoutX="287.0" layoutY="211.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="36.0" prefWidth="135.0" text="Clear" />
+                  <Button layoutX="446.0" layoutY="211.0" mnemonicParsing="false" onAction="#editBooking" prefHeight="36.0" prefWidth="135.0" text="Update Edit" />
                   <TextField fx:id="Typetxt" layoutX="925.0" layoutY="165.0" prefHeight="32.0" prefWidth="166.0" />
                   <Text fill="WHITE" layoutX="103.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MechanicID">
                      <font>
@@ -250,6 +249,13 @@
                   <ComboBox fx:id="IDcomb" layoutX="213.0" layoutY="125.0" prefHeight="32.0" prefWidth="166.0" />
                   <ComboBox fx:id="regComb" layoutX="213.0" layoutY="164.0" prefHeight="32.0" prefWidth="166.0" />
                   <ComboBox fx:id="MechCombReg" layoutX="213.0" layoutY="85.0" prefHeight="32.0" prefWidth="166.0" />
+                  <ComboBox fx:id="regCombReg" layoutX="567.0" layoutY="89.0" prefHeight="32.0" prefWidth="166.0" />
+                  <TextField fx:id="CostTxt" layoutX="925.0" layoutY="204.0" prefHeight="32.0" prefWidth="166.0" />
+                  <Text fill="WHITE" layoutX="766.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking Duration">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
          </children>

@@ -9,6 +9,7 @@ import common.Main;
 import common.database.Database;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -58,7 +61,10 @@ public class PartBookingController implements Initializable {
     }    
     public void showBooking()
             
-    {   String regC=(String) reg.getValue();
+           
+    {  if(empty()) {
+        try{
+        String regC=(String) reg.getValue();
         ObservableList <partBooking> bookingData = Database.getInstance().getpartBooking(regC);
         date.setCellValueFactory(new PropertyValueFactory<>("Date"));
         name.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -66,25 +72,71 @@ public class PartBookingController implements Initializable {
         type.setCellValueFactory(new PropertyValueFactory<>("Type"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         bookings.setItems(bookingData);
+         }
+      catch(NullPointerException e)
+      {
+         
+      }
+    }
     }
     public void numBox()
     {
-        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
-        regComb = new ComboBox();
-        regComb.getItems().addAll(regComb1);*/
+       
         ObservableList <String> regComb1=Database.getInstance().fillNumComboBook();
         //regComb = new ComboBox();
         reg.setItems(regComb1);
         
     }
-    public void remove() 
-    {
+    public boolean empty(){
+        
+        selected = bookings.getSelectionModel().getSelectedItems();
+           boolean check=true;
+        
+            boolean part = reg.getSelectionModel().isEmpty();
+           if (part)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a vehicle registration ");
+            check=false;
+        }
+           
+      
+        return check;
+    }
+    public void remove() throws SQLException
+    {  selected = bookings.getSelectionModel().getSelectedItems();
+        if(empty())
+        
+        {     try{//selected = bookings.getSelectionModel().getSelectedItems();
+              String name =(selected.get(0).getName());
+              String surname =(selected.get(0).getSurName());
+    
+              JFrame frame = new JFrame();
+              Object[] options = {"Yes","No"};
+              int n = JOptionPane.showOptionDialog(frame,
+              "Are you sure you want to delete the booking for " + name + " " + surname,
+              "Delete booking",
+              JOptionPane.YES_NO_CANCEL_OPTION,
+              JOptionPane.WARNING_MESSAGE,
+              null,
+              options,
+              options[1]);
+              if (n == JOptionPane.YES_OPTION) 
+              {
+                  
+                      //  selected = bookings.getSelectionModel().getSelectedItems();   
+                        Database.getInstance().removeBookingPart(selected.get(0).getBookID());
+                         showBooking();
+                    
+                  
+              }
+              }
+        catch(NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking to remove");
+        }
+        }
         
         
-        selected = bookings.getSelectionModel().getSelectedItems();   
-       Database.getInstance().removeBookingPart(selected.get(0).getBookID());
-        //searchPart();
-        showBooking();
     }
     public void back(ActionEvent event)
     {

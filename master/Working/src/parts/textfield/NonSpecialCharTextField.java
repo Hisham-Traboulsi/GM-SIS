@@ -20,7 +20,7 @@ public class NonSpecialCharTextField extends TextField {
     @Override
     public void replaceText(int i, int i1, String string)
     {
-        if (string.matches("[0-9]") ||(string.matches("[a-zA-Z]")|| string.isEmpty()))
+        if (string.matches("[0-9]") ||(string.matches("[a-zA-Z]")|| string.isEmpty() || string.matches(" ")))
         {
             super.replaceText(i ,i1, string);
         }

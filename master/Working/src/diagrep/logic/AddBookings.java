@@ -87,9 +87,14 @@ import javafx.scene.input.KeyEvent;
  * @author ernes
  */
 public class AddBookings implements Initializable {
-
+    @FXML
+    private TableView<Mec> MechTable = new TableView<Mec>();
+    @FXML
+    private TableColumn<Mec, Double> MechanicRate;
     @FXML
     private TextField MechTxt;
+    @FXML
+    private TextField REG_NUM;
     @FXML
     private TextField PART_NAME;
     @FXML
@@ -107,16 +112,23 @@ public class AddBookings implements Initializable {
     @FXML
     private DatePicker DateTxt;
     @FXML
+    private TextField CostTxt;
+    @FXML
     private ComboBox regComb;
     @FXML
     private ComboBox IDcomb;
     @FXML
     private ComboBox MechCombReg;
+    @FXML
+    private ComboBox regCombReg;
     
     @FXML
     private Button addButton;
     @FXML
     private Button removeButton;
+     @FXML
+    private TextField searchByName;
+    
     
     @FXML
     private TableView<Bookings> BookTable = new TableView<Bookings>();
@@ -141,6 +153,8 @@ public class AddBookings implements Initializable {
     private TableColumn <Bookings, String>TimeCol;
     @FXML
     private TableColumn <Bookings, String>TypeCol;
+    @FXML
+    private TableColumn <Bookings, Double> CostCol;
   
   
     
@@ -166,28 +180,31 @@ public class AddBookings implements Initializable {
             String BookingMechanicID = (String) MechCombReg.getValue();
             String PARTNAME = (String) regComb.getValue();
             int CUSTOMERID = (Integer)(IDcomb.getValue());
-            String BookingRegNum=(RegNumTxt.getText());
+            String BookingRegNum = (String) regCombReg.getValue();
             String BookingManufacture=(ManufactureTxt.getText());
             String BookingMileage= (MileageTxt.getText());
             String BookingDate = (df.format(dateobj));          
             String BookingTime =(TimeTxt.getText());
             String BookingType=(Typetxt.getText());
+            Double BookingTotal= Double.parseDouble(CostTxt.getText());
             
-         if( RegNumTxt.getText().isEmpty()|| ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
-        || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())
+         if(  ManufactureTxt.getText().isEmpty() || ManufactureTxt.getText().isEmpty() || MileageTxt.getText().isEmpty()
+        || TimeTxt.getText().isEmpty() || Typetxt.getText().isEmpty())  
         {
             JOptionPane.showMessageDialog(null, "All fields are required");
+            
         }
          else{
      
           
       added = Database.getInstance().addBookings( BookingMechanicID,PARTNAME,
              CUSTOMERID, BookingRegNum, BookingManufacture,BookingMileage ,BookingDate,
-             BookingTime, BookingType);
+             BookingTime, BookingType,BookingTotal);
+     
          }
       
            
-      
+
       RefreshPage();
             
       return added;
@@ -197,6 +214,36 @@ public class AddBookings implements Initializable {
                   addBooking();
                 }
             }
+   public boolean Fill(){
+           boolean check=true;
+        
+            boolean BookingMechanicID = MechCombReg.getSelectionModel().isEmpty();
+            boolean PARTNAME = regComb.getSelectionModel().isEmpty();
+            boolean CUSTOMERID = IDcomb.getSelectionModel().isEmpty();
+            boolean BookingRegNum = regCombReg.getSelectionModel().isEmpty();
+        
+            if (BookingMechanicID)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a Mechanic");
+            check=false;
+        }
+        else if(PARTNAME)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a Part Name");
+            check=false;
+        }
+        else if(CUSTOMERID)
+        {
+            JOptionPane.showMessageDialog(null,"Please select a customer ID");
+            check=false;
+        }
+        else if(BookingRegNum)
+        {
+            JOptionPane.showMessageDialog(null,"Please select Registration Number");
+            check=false;
+        }
+        return check;
+    }
    
    public void partBooking(ActionEvent event)
     {
@@ -220,9 +267,7 @@ public class AddBookings implements Initializable {
    public void updateAmount() 
     {
         String partname=PART_NAME.getText();
-        Database.getInstance().updateStock(partname);
-        Database.getInstance().partBelowZero();
-        //return ID;
+       
     }
    
    
@@ -257,15 +302,21 @@ public class AddBookings implements Initializable {
     }
    
    public void clearFields()
-    {
+    {   regComb.getItems().clear();
+        regCombReg.getItems().clear();
+        IDcomb.getItems().clear();
+        MechCombReg.getItems().clear();
         MechTxt.clear();
-        
-        RegNumTxt.clear();
         ManufactureTxt.clear();
         MileageTxt.clear();
-        
         TimeTxt.clear();
         Typetxt.clear();
+        CostTxt.clear();
+        
+        partBox();
+        numBox();
+        idcombBox();
+        RegBox();
         
     }
    
@@ -307,6 +358,18 @@ public class AddBookings implements Initializable {
         //regComb = new ComboBox();
         MechCombReg.setItems(regComb1);
         
+        
+        
+    }
+     public void RegBox()
+    {
+        /*ObservableList <String> regComb1=Database.getInstance().fillRegCombo();
+        regComb = new ComboBox();
+        regComb.getItems().addAll(regComb1);*/
+        ObservableList <String> regComb1=Database.getInstance().fillNumCombo();
+        //regComb = new ComboBox();
+        regCombReg.setItems(regComb1);
+        
     }
    
    public void RefreshPage(){
@@ -317,7 +380,7 @@ public class AddBookings implements Initializable {
 
             BookingCol.setCellValueFactory(new PropertyValueFactory<>("IDnum"));
             MechanicCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MechID"));
-            PartCol.setCellValueFactory(new PropertyValueFactory<>("PART_NAME"));
+            PartCol.setCellValueFactory(new PropertyValueFactory<>("REG_NUM"));
             CustomerCol.setCellValueFactory(new PropertyValueFactory<>("CUSTOMER_ID"));
             RegNumCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_REGNUM"));
             ManufactureCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_MANUFACTURE"));
@@ -325,6 +388,7 @@ public class AddBookings implements Initializable {
             DateCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_DATE"));
             TimeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TIME"));
             TypeCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TYPE"));
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("BOOKING_TOTAL"));
           
             
 
@@ -343,7 +407,10 @@ public class AddBookings implements Initializable {
        partBox();
        idcombBox();
        numBox();
+       RegBox();
+      
         try {
+            
             ObservableList<Bookings> BookingsData = Database.getInstance().getBookings();
 
             BookTable.setEditable(true);
@@ -448,6 +515,19 @@ public class AddBookings implements Initializable {
                 }
             }
             );
+            CostCol.setCellValueFactory(new PropertyValueFactory<>("MECHANIC_RATE"));
+            CostCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+            CostCol.setOnEditCommit(
+                    new EventHandler<CellEditEvent<Bookings,Double>>() {
+                @Override
+                public void handle(CellEditEvent<Bookings, Double> t) {
+                    ((Bookings) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setBOOKING_TOTAL(t.getNewValue());
+                }
+            }
+            );
+            
+            
             
 
             BookTable.setItems(BookingsData);

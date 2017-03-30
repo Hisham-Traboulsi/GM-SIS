@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 import parts.logic.*;
 import parts.logic.installedPart;
 import specialist.logic.SPC;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import specialist.logic.Outstanding;
 import specialist.logic.OutstandingVehicle;
@@ -30,7 +28,8 @@ import diagrep.logic.Mec;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import parts.logic.PartsController;
 
 /**
@@ -49,6 +48,7 @@ public final class Database
     
     private ObservableList<SystemUser> usersData;
     private ObservableList<Customers> customerData;
+    private ObservableList<String> customerVehicles;
     private ObservableList<Part> partsData;
     private ObservableList<Vehicle> vehicleData;
     private ObservableList<installedPart> installedPartsData;
@@ -336,6 +336,30 @@ public final class Database
         getAllCustomers();
     }
     
+    public ObservableList<String> getCustomerVehicles(int customerID)
+    {
+        try 
+        {
+            PreparedStatement getCustomerVehilceStmt = preparedStatement("SELECT * FROM VEHICLE_RECORD WHERE CUSTOMER_ID = ?");
+            
+            getCustomerVehilceStmt.setInt(1, customerID);
+            
+            customerVehicles = FXCollections.observableArrayList();
+            ResultSet rs = getCustomerVehilceStmt.executeQuery();
+            while(rs.next())
+            {
+                String vehicleReg = rs.getString("REG_NUM");
+                customerVehicles.add(vehicleReg);
+            }
+            return customerVehicles;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return customerVehicles;
+        }
+    }
+    
     /*Author Sergio*/
    public boolean addPart(String name, String description, int amount, double cost)
     {
@@ -365,20 +389,39 @@ public final class Database
         return added;
     }
     /*Author Sergio*/
-    public boolean addInstalledPart( String REG_NUM, String INST_DATE, 
-            String EXP_DATE,String PART_NAME, int CUSTOMER_ID)
+    public void addInstalledPart( String REG_NUM, String INST_DATE, 
+            String EXP_DATE,String PART_NAME, int BOOKING_ID) throws NullPointerException
     {
+        String newReg="";
+        int BOOKINGID=BOOKING_ID;
+        String partname=PART_NAME;
+        try{
+        PreparedStatement reg = null;
+        reg = preparedStatement(" SELECT REG_NUM FROM 'DIAGNOSIS_REPAIR_BOOKINGS' WHERE IDnum =" + BOOKING_ID +" ");
+
+        ResultSet rs = reg.executeQuery();
+
+         newReg=rs.getString("REG_NUM");
+        // System.out.println(newReg);
+        
+        }
+        catch(SQLException ex)
+                {
+                    JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
+                }
+       if(maxParts(newReg,BOOKINGID,partname))
+       {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
            add = preparedStatement("INSERT INTO PARTS_INSTALLATION VALUES (?, ?, ?, ?, ?, ? )"); 
            add.setString(1, null);
-           add.setString(2, REG_NUM);
+           add.setString(2, newReg);
            add.setString(3, INST_DATE);
            add.setString(4, EXP_DATE);
            add.setString(5, PART_NAME);
-           add.setInt(6, CUSTOMER_ID);
+           add.setInt(6, BOOKING_ID);
            
            
   
@@ -386,28 +429,23 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"Part successfully installed");
+           calculateBill(REG_NUM,BOOKING_ID);
            
         }
+       
         catch(SQLException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
-        
-        return added;
     }
-    public void partBelowZero() 
-    {
-          try{
-        PreparedStatement partBelowZero = preparedStatement("DELETE FROM 'PARTS_TRACKING' WHERE AMOUNT=0 OR AMOUNT<0");
-        partBelowZero.executeUpdate();  
-          }
-          catch(SQLException ex)
-          {
-              
-          }
-    }
+ }
+   
+    
+    /*
+    Author Sergio Arrieta
+    */
     public void addDelivery(String name)
     {
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -431,6 +469,9 @@ public final class Database
         }
 
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void addWithdrawal(String name)
     {
         PreparedStatement add = null;
@@ -458,6 +499,9 @@ public final class Database
         }
 
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partLog> getDeliveryLog() 
     {
         PreparedStatement getPart = null;
@@ -484,6 +528,9 @@ public final class Database
        }
         return deliveredData;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partLog> getWithdrawalLog()
     {
         try{
@@ -555,13 +602,13 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
+            int BOOKING_ID = rs.getInt("BOOKING_ID");
             
             
             
             
             installedPart installedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUSTOMER_ID);
+            EXP_DATE,PART_NAME, BOOKING_ID);
             
             installedPartsData.add(installedPart);
         }
@@ -575,7 +622,7 @@ public final class Database
         searchPartsData = FXCollections.observableArrayList();
         
       
-        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (CUSTOMER_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,DIAGNOSIS_REPAIR_BOOKINGS where CUSTOMERS.FIRST_NAME like '%" + searchVal + "%' OR CUSTOMERS.SURNAME LIKE'%" + searchVal +"%' OR DIAGNOSIS_REPAIR_BOOKINGS.REG_NUM LIKE '%" + searchVal + "%')");
+        searchInstalledPart = preparedStatement("select * from PARTS_INSTALLATION where (BOOKING_ID,REG_NUM) in (select CUSTOMER_ID,REG_NUM from CUSTOMERS,DIAGNOSIS_REPAIR_BOOKINGS where CUSTOMERS.FIRST_NAME like '%" + searchVal + "%' OR CUSTOMERS.SURNAME LIKE'%" + searchVal +"%' OR DIAGNOSIS_REPAIR_BOOKINGS.REG_NUM LIKE '%" + searchVal + "%')");
         
         //searchInstalledPart.setString(1,searchVal);
         
@@ -589,10 +636,10 @@ public final class Database
             String INST_DATE = rs.getString("INSTALLATION_DATE");
             String EXP_DATE= rs.getString("EXP_DATE");
             String PART_NAME = rs.getString("PART_NAME");
-            int CUSTOMER_ID = rs.getInt("CUSTOMER_ID");
+            int BOOKING_ID = rs.getInt("BOOKING_ID");
 
             installedPart searchedPart = new installedPart(INST_ID, REG_NUM, INST_DATE, 
-            EXP_DATE,PART_NAME, CUSTOMER_ID);
+            EXP_DATE,PART_NAME, BOOKING_ID);
             
             searchPartsData.add(searchedPart);
         }
@@ -625,6 +672,9 @@ public final class Database
         }
            return regComb1;
     }
+   /*     
+    author sergio
+    */ 
     public ObservableList<Integer> fillIDcombo()
     {
         
@@ -643,6 +693,27 @@ public final class Database
         }
            return regComb1;
     }
+    public ObservableList<Integer> fillBookingIDcombo()
+    {
+        
+        ObservableList<Integer> regComb1 = FXCollections.observableArrayList();
+        try{
+         PreparedStatement fill = preparedStatement("SELECT IDnum FROM DIAGNOSIS_REPAIR_BOOKINGS");
+         ResultSet rs = fill.executeQuery();
+         while(rs.next())
+            {
+              regComb1.add(rs.getInt("IDnum"));
+            }
+               
+        }
+        catch(SQLException ex)
+        {
+        }
+           return regComb1;
+    }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<String> fillNumCombo()
     {
         
@@ -661,6 +732,9 @@ public final class Database
         }
            return regComb1;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<String> fillNumComboBook()
     {
         
@@ -732,6 +806,9 @@ public final class Database
         
         return deleted;
     }
+    /*
+    Author Sergio Arrieta
+    */
     public ObservableList<partBooking> getpartBooking(String reg)
     {   
         try{
@@ -757,16 +834,20 @@ public final class Database
         }
          
         }
-        catch(SQLException ex)
+        catch(SQLException ex)    
         {
-            
+            JOptionPane.showMessageDialog(null,"Please select a booking from the table");
         }
         return bookingdata;
     }
-    public void editInstalledPart() 
+    
+    /*
+    Author Sergio Arrieta
+    */
+    public void editInstalledPart() throws SQLException
     {
         try{
-        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,CUSTOMER_ID=? WHERE INSTALLATION_ID=?");
+        PreparedStatement editInstalledPart = preparedStatement("UPDATE PARTS_INSTALLATION SET REG_NUM=?, INSTALLATION_DATE=?, EXP_DATE=?, PART_NAME= ?,BOOKING_ID=? WHERE INSTALLATION_ID=?");
         int counter = 0;
         while(counter < searchPartsData.size())
         {
@@ -774,7 +855,7 @@ public final class Database
             editInstalledPart.setString(2, searchPartsData.get(counter).getINST_DATE());
             editInstalledPart.setString(3, searchPartsData.get(counter).getEXP_DATE());
             editInstalledPart.setString(4, searchPartsData.get(counter).getPART_NAME());
-            editInstalledPart.setInt(5, searchPartsData.get(counter).getCUSTOMER_ID());
+            editInstalledPart.setInt(5, searchPartsData.get(counter).getBOOKING_ID());
             
             editInstalledPart.setInt(6, searchPartsData.get(counter).getINST_ID());
            
@@ -783,17 +864,17 @@ public final class Database
             
             counter++;
         }
-        
+         
         getinstalledPart();
         }
-        catch(SQLException ex)
+        catch( NullPointerException e)
         {
-            JOptionPane.showMessageDialog(null,"Please to edit:<br/><br/>" + "- Double click a cell<br/><br/>" +
-                    "- Enter new value<br/><br/>" +
-                    "- Press enter<br/><br/>" +
-                    "- Press update button<br/><br/>");
+            
         }
     }
+    /*
+    Author Sergio Arrieta
+    */
     public void updateStock(String partname) 
     {
         try
@@ -812,21 +893,52 @@ public final class Database
             ex.printStackTrace();
         }
     }
-    public void calculateBill(String regNum,int customerid) 
+    public boolean maxParts(String regNum,int bookingid,String partname) 
+    {  boolean check=true;
+       int count=0;
+        try
+        {
+            
+        PreparedStatement getBill= preparedStatement("SELECT PART_NAME FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "' AND BOOKING_ID='" + bookingid +"'" );
+
+        ResultSet rs = getBill.executeQuery();
+        while(rs.next())
+         { 
+            String pn=rs.getString("PART_NAME");
+        
+            if(pn.equals(partname))
+            {
+               count=count+1;
+                   if(count==10)
+                   {
+                      check=false;
+                      JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 distinct parts<br/>" 
+                      + "- Please delete at least one part to install more <html>");
+                   }  
+            }
+         }
+        }
+        catch(SQLException ex){
+            
+        }
+        return check;
+    }
+    /*
+    Author Sergio Arrieta
+    */
+    public void calculateBill(String regNum,int bookingid) 
     { 
         double totalcost=0.0;
        // String custName=name;
         try
         {
             
-        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.NAME=PARTS_INSTALLATION.PART_NAME AND REG_NUM=" + "'" + regNum + "'");
+        PreparedStatement getBill= preparedStatement("SELECT COST FROM PARTS_TRACKING,PARTS_INSTALLATION WHERE PARTS_TRACKING.NAME=PARTS_INSTALLATION.PART_NAME ");
 
         ResultSet rs = getBill.executeQuery();
-        while(rs.next())
-        {
-            totalcost= totalcost + rs.getDouble("COST");
-          //custName=rs.getString("CUSTOMER_FULLNAME)");
-        }
+       
+         totalcost= totalcost + rs.getDouble("COST");
+       
 
         
         }
@@ -836,21 +948,24 @@ public final class Database
             ex.printStackTrace();
         }
          try{
-        PreparedStatement getBill= preparedStatement("INSERT INTO 'BILL' VALUES (?,?)");
+             
+        PreparedStatement getBill= preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET COST=COST + " + totalcost +" where IDnum='" + bookingid + "'");
 
-           getBill.setInt(1, customerid);
-           getBill.setDouble(2,totalcost);
+         //  getBill.setInt(1, bookingid);
            getBill.execute();
            getBill.close();
+           JOptionPane.showMessageDialog(null,"Part added to the bill");
         }
         catch(SQLException ex)
         {
-            
+            JOptionPane.showMessageDialog(null,"Part NOT added to the bill");
         }
       
     }
 
-    
+    /*
+    Author Sergio Arrieta
+    */
     public void editPart() throws SQLException
     {
        try{ PreparedStatement editPart = preparedStatement("UPDATE PARTS_TRACKING SET NAME=?,DESCRIPTION=?,AMOUNT=?,COST=? WHERE RELEVANT_ID_NUM=?");
@@ -871,25 +986,28 @@ public final class Database
         
         getPart();
        }
-       catch(SQLException ex)
+       catch(NullPointerException ex)
         {
             JOptionPane.showMessageDialog(null,"Error, try again");
             ex.printStackTrace();
             
         }
     }
-      public void removeInstalledPart(int id) 
+    /*
+    Author Sergio Arrieta
+    */
+      public void removeInstalledPart(int id) throws SQLException
     {
-        try{
+        
         PreparedStatement removeInstalledPartStmt = preparedStatement("DELETE FROM PARTS_INSTALLATION WHERE INSTALLATION_ID="+ id);
       // removeInstalledPartStmt.setInt(1, id);
         removeInstalledPartStmt.executeUpdate();
-        }
-        catch(SQLException ex)
-        {
-            
-        }
+        
+        
     }
+      /*
+    Author Sergio Arrieta
+    */
       public void removeBookingPart(int id) 
     {
         try{
@@ -899,7 +1017,7 @@ public final class Database
         }
         catch(SQLException ex)
         {
-            
+            JOptionPane.showMessageDialog(null,"Please select a booking");
         }
     }
       
@@ -1505,7 +1623,7 @@ public final class Database
        
        public void editBookings() throws SQLException
     {
-        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?  WHERE IDnum=?");
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?,COST=?  WHERE IDnum=?");
         int counter = 0;
         while(counter < BookingsData.size())
             
@@ -1521,6 +1639,7 @@ public final class Database
             editBookingStmt.setString(8, BookingsData.get(counter).getBOOKING_TIME());
             editBookingStmt.setString(9, BookingsData.get(counter).getBOOKING_TYPE());
             editBookingStmt.setInt(10, BookingsData.get(counter).getIDnum());
+            editBookingStmt.setDouble(11, BookingsData.get(counter).getBOOKING_TOTAL());
             
             
             
@@ -1541,7 +1660,7 @@ public final class Database
             editMecStmt.setString(1, MechanicData.get(counter).getMECHANIC_NAME());
             editMecStmt.setString(2, MechanicData.get(counter).getMECHANIC_DATE());
             editMecStmt.setString(3, MechanicData.get(counter).getMECHANIC_NUMBER());
-            editMecStmt.setString(4, MechanicData.get(counter).getMECHANIC_RATE());
+            editMecStmt.setDouble(4, MechanicData.get(counter).getMECHANIC_RATE());
             
             
             editMecStmt.executeUpdate();
@@ -1610,9 +1729,10 @@ public final class Database
             String BookingDate = rs.getString("BOOKING_DATE");
             String BookingTime = rs.getString("TIME");
             String BookingType = rs.getString("TYPE");
+            double BookingTotal = rs.getDouble("COST");
             
             Bookings bookings = new Bookings(idNum, BookingMechanicID, PARTNAME, CUSTOMERID, 
-                    BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType);
+                    BookingRegNum,BookingManufacture ,BookingMileage , BookingDate,BookingTime, BookingType, BookingTotal);
             
             BookingsData.add(bookings);
         }
@@ -1635,7 +1755,7 @@ public final class Database
             String MechanicName = rs.getString("MECHANIC_NAME");
             String MechanicDate = rs.getString("MECHANIC_DATE");
             String MechanicNumber = rs.getString("MECHANIC_NUMBER");
-            String MechanicRate = rs.getString("MECHANIC_RATE");
+            Double MechanicRate = rs.getDouble("MECHANIC_RATE");
             
             
             Mec mec = new Mec(idNum, MechanicName, MechanicDate, MechanicNumber, 
@@ -1647,13 +1767,13 @@ public final class Database
     }
      public boolean addBookings( String BookingMechanicID, String PARTNAME, int CUSTOMERID,
             String BookingRegNum, String BookingManufacture, String BookingMileage, 
-            String BookingDate, String BookingTime, String BookingType)
+            String BookingDate, String BookingTime, String BookingType, double BookingTotal)
     {
         PreparedStatement add = null;
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?)"); 
+           add = preparedStatement("INSERT INTO DIAGNOSIS_REPAIR_BOOKINGS VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?)"); 
            add.setString(1, null);
            add.setString(2, BookingMechanicID);
            add.setString(3, PARTNAME);
@@ -1664,6 +1784,7 @@ public final class Database
            add.setString(8, BookingDate);
            add.setString(9, BookingTime);
            add.setString(10, BookingType);
+           add.setDouble(11, BookingTotal);
 
            add.execute();
            add.close();
@@ -1681,7 +1802,7 @@ public final class Database
     }
      
      public boolean addMec( String MechanicName, String MechanicDate,
-            String MechanicNumber, String MechanicRate )
+            String MechanicNumber, double MechanicRate )
     {
         PreparedStatement add = null;
         boolean added = false;
@@ -1692,7 +1813,7 @@ public final class Database
            add.setString(2, MechanicName);
            add.setString(3, MechanicDate);
            add.setString(4, MechanicNumber);
-           add.setString(5, MechanicRate);
+           add.setDouble(5, MechanicRate);
            
 
            add.execute();

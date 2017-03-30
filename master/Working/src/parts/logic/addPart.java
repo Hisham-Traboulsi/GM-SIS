@@ -105,6 +105,7 @@ public class addPart implements Initializable {
       String desc = (partDesc.getText());
       int amount = Integer.parseInt(partAmount.getText());
       double cost = Double.parseDouble(partCost.getText());
+      
   
       
       added = Database.getInstance().addPart(name,desc,amount,cost);
@@ -156,17 +157,17 @@ public class addPart implements Initializable {
     public boolean empty()
     { boolean check=true;
     
-        if ( partName.getText().isEmpty()||partName.getText().equals("")) {
+        if ( partName.getText().isEmpty()||partName.getText().equals("")||partName.getText().equals(" ")) {
           JOptionPane.showMessageDialog(null,"Please enter a part name");
           check=false;
-     } else if ( partCost.getText().isEmpty()||partCost.getText().equals("")) {
+     } else if ( partCost.getText().isEmpty()||partCost.getText().equals("")||partCost.getText().equals(" ")) {
           JOptionPane.showMessageDialog(null,"Please enter a part cost");
           check=false;
-     } else if ( partAmount.getText().isEmpty()||partAmount.getText().equals("")) {
+     } else if ( partAmount.getText().isEmpty()||partAmount.getText().equals("")||partAmount.getText().equals(" ")) {
          JOptionPane.showMessageDialog(null,"Please enter a quantity");
          check=false;
      }
-        else if (partDesc.getText().isEmpty()||partDesc.getText().equals("")) {
+        else if (partDesc.getText().isEmpty()||partDesc.getText().equals("")||partDesc.getText().equals(" ")) {
          JOptionPane.showMessageDialog(null,"Please enter a part description");
          check=false;
          
@@ -243,11 +244,18 @@ public class addPart implements Initializable {
         }
     } 
    public void updatePart() throws SQLException
-    {   //int id=Integer.parseInt(partID.getText());
-        //int amount=Integer.parseInt(partAmount.getText());
-    
+    { 
+    try{
         Database.getInstance().editPart();
         refresh();
+    }
+    catch( NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null,"Please to edit:<br/><br/>" + "- Double click a cell<br/><br/>" +
+                    "- Enter new value<br/><br/>" +
+                    "- Press enter<br/><br/>" +
+                    "- Press update button<br/><br/>");
+        }
     }
     public void help()
     {
