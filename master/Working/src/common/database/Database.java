@@ -1384,10 +1384,11 @@ public final class Database
         boolean added = false;
         try
         {
-           add = preparedStatement("INSERT INTO BILL VALUES (?, ?)"); 
+           add = preparedStatement("INSERT INTO BILL VALUES (?, ?, ?)"); 
          
            add.setInt(1, CUSTOMERID);
            add.setDouble(2, TOTAL);
+           add.setBoolean(3, false);
         
 
            add.execute();
