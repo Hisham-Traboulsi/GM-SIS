@@ -239,5 +239,10 @@ public class ReturnedController implements Initializable {
             ex.printStackTrace();
         }   
 }
+      public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To remove a retuned item:\n Select the booking, and then click the appropriate remove button");
+    }
     }    
     
