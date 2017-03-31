@@ -267,11 +267,12 @@ public class VRHomepageController implements Initializable {
             vehicleTable.setRowFactory( tv -> {
                 TableRow<Vehicle> row = new TableRow<>();
                 viewInfo.setOnMouseClicked(MouseEvent -> {
+                        System.out.println("worked");
                         rowData = row.getItem();
-                        Object [] options = {"Display Info", "Past & Future Bookings"};
+                        Object [] options = {"Parts Used", "Past & Future Bookings"};
                         int selection = JOptionPane.showOptionDialog(null,
-                        "Would you like to",
-                        "Customers Options",
+                        "Would you like to view",
+                        "Vehicle Options",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.DEFAULT_OPTION,
                         null,
