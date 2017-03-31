@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -67,6 +68,9 @@ public class DisplayAllBookingsController implements Initializable {
     @FXML
     private TableColumn<Accounts, String> statusCol;
     
+    @FXML
+    private ComboBox partsBoxCombo;
+    
     private Customers dataRow = CustomerInfoController.rowData;
     
     protected static Accounts rowData;
@@ -107,6 +111,18 @@ public class DisplayAllBookingsController implements Initializable {
                     }
                     refresh();
                 }
+                if(event.getClickCount() == 1 && (!row.isEmpty()))
+                {
+                    try 
+                    {
+                        rowData = row.getItem();   
+                        getListOfParts(rowData.getBookingID());
+                    } 
+                    catch (SQLException ex) 
+                    {
+                        Logger.getLogger(DisplayAllBookingsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             });
             return row;
         });
@@ -145,8 +161,17 @@ public class DisplayAllBookingsController implements Initializable {
         return mergeData;
     }  
     
-    public void getListOfParts(int booking_ID)
+    public void getListOfParts(int booking_ID) throws SQLException
     {
-        
+        ObservableList<String> listOfParts = Database.getInstance().getListOfParts(booking_ID);
+        if(listOfParts.size() == 0)
+        {
+            listOfParts.add("No parts used");
+             partsBoxCombo.setItems(listOfParts);
+        }
+        else
+        {
+            partsBoxCombo.setItems(listOfParts);
+        }
     }
 }
