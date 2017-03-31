@@ -86,11 +86,7 @@ public class ChooseCentreController implements Initializable {
             JOptionPane.showMessageDialog(null, "Complete all fields!");
             
         }
-            else if((SPC_NAME.getText().chars().allMatch(Character::isLetter)) == false )
-        {
-            JOptionPane.showMessageDialog(null, "Enter SPC with only letters!");
-            
-        }
+
             else{
   
       added = Database.getInstance().addSPC( SPCNAME, SPCADDRESS,
