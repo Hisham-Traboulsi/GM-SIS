@@ -45,7 +45,6 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import javax.swing.JOptionPane;
 import parts.logic.Part;
-
 /**
  * FXML Controller class
  *
@@ -261,17 +260,15 @@ public class VRHomepageController implements Initializable {
             ); 
             
             customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-     
-            vehicleTable.setItems(searchVehicleData);
             
             vehicleTable.setRowFactory( tv -> {
                 TableRow<Vehicle> row = new TableRow<>();
-                viewInfo.setOnMouseClicked(MouseEvent -> {
-                        System.out.println("worked");
-                        rowData = row.getItem();
-                        Object [] options = {"Parts Used", "Past & Future Bookings"};
+                viewInfo.setOnMouseClicked(event -> {
+                    
+                        rowData =(Vehicle) row.getItem();
+                        Object [] options = {"View Parts Used", "Past & Future Bookings with Bills"};
                         int selection = JOptionPane.showOptionDialog(null,
-                        "Would you like to view",
+                        "Would you like to",
                         "Vehicle Options",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.DEFAULT_OPTION,
@@ -282,7 +279,7 @@ public class VRHomepageController implements Initializable {
                         System.out.println(selection);
                         if(selection == 0)
                         {
-                            try {                                
+                            try {                
                                 Stage stage = new Stage();                                
                                 Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));                                                                
                                 stage.setScene(new Scene(root));
@@ -299,7 +296,7 @@ public class VRHomepageController implements Initializable {
                                 Stage stage = new Stage();                                
                                 Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayAllBookings.fxml"));                                                                
                                 stage.setScene(new Scene(root));
-                                stage.setTitle("Past & Future Bookings");                                
+                                stage.setTitle("Past & Future Bookings with Bills");                                
                                 stage.initModality(Modality.APPLICATION_MODAL);
                                 stage.showAndWait();
                             } catch (IOException ex) {
@@ -307,10 +304,11 @@ public class VRHomepageController implements Initializable {
                             }         
                         }
                 });
-                
-                        return row ;
-                     
+                return row ;
             });
+            
+            vehicleTable.setItems(searchVehicleData);
+            
     }
     
     @FXML
@@ -499,6 +497,55 @@ public class VRHomepageController implements Initializable {
             ); 
             
             customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            
+            vehicleTable.setRowFactory( tv -> {
+                TableRow<Vehicle> row = new TableRow<>();
+                viewInfo.setOnMouseClicked(event -> {
+                        System.out.println("working");
+                        rowData =(Vehicle) row.getItem();
+                        Object [] options = {"View Parts Used" , "Past & Future Bookings with Bills"};
+                        int selection = JOptionPane.showOptionDialog(null,
+                        "Would you like to",
+                        "Vehicle Options",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        String regnum = rowData.getRegnum();
+                       //Database.getInstance
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
+                            try {                
+                                Stage stage = new Stage();                                
+                                Parent root = FXMLLoader.load(getClass().getResource("/vehicles/gui/DisplayVehicleParts.fxml"));                                                                
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Customer Info"); 
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                        }
+                        else if(selection == 1)
+                        {
+                            try {                                
+                                Stage stage = new Stage();                                
+                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayAllBookings.fxml"));                                                                
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Past & Future Bookings with Bills");                                
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }         
+                        }
+                    
+                });
+                return row ;
+            });
             
             vehicleTable.setItems(vehicleData);
 

@@ -129,13 +129,14 @@ public class AddCustomerController implements Initializable {
             phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
             emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            
             customerTable.setRowFactory( tv -> {
                 TableRow<Customers> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                         rowData = row.getItem();
-                        Object [] options = {"Veiw Vehicles", "Book Appointment"};
+                        Object [] options = {"View Vehicles", "Book Appointment"};
                         int selection = JOptionPane.showOptionDialog(null,
                                 "Would you like to",
                                 "Customers Options",

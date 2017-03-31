@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../customers/gui/customer_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vehicles.gui.DisplayVehiclePartsController">
+   <children>
+      <TableView fx:id="installedPartsTable" layoutX="11.0" layoutY="62.0" prefHeight="328.0" prefWidth="577.0">
+        <columns>
+          <TableColumn fx:id="INST_ID_view" prefWidth="81.0" text="InstallationID" />
+          <TableColumn fx:id="REG_NUM_view" prefWidth="123.0" text="Vehicle Registration" />
+            <TableColumn fx:id="INST_DATE_view" prefWidth="104.0" text="Installation Date" />
+            <TableColumn fx:id="EXP_DATE_view" minWidth="1.0" prefWidth="113.0" text="Warranty Expiration" />
+            <TableColumn fx:id="PART_NAME_view" prefWidth="71.0" text="Part Name" />
+            <TableColumn fx:id="BOOKING_ID_view" prefWidth="77.0" text="Booking ID" />
+        </columns>
+      </TableView>
+      <Text fill="WHITE" layoutX="13.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts Used For Vehicle">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

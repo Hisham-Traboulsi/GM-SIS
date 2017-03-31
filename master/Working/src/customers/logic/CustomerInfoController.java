@@ -74,7 +74,7 @@ public class CustomerInfoController implements Initializable {
     
     protected static Customers rowData;
     
-     private ObservableList<Customers> selected = null;
+    private ObservableList<Customers> selected = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
