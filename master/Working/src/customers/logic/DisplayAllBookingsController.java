@@ -67,24 +67,19 @@ public class DisplayAllBookingsController implements Initializable {
     @FXML
     private TableColumn<Accounts, String> statusCol;
     
-    @FXML
-    private RadioButton paid;
-    
-    @FXML
-    private RadioButton unpaid;
-    
     private Customers dataRow = CustomerInfoController.rowData;
-    
-    final ToggleGroup group = new ToggleGroup();
     
     protected static Accounts rowData;
     
+    protected static Stage stage; 
     @Override
     public void initialize(URL url, ResourceBundle rb) 
+    {   
+        displayData();
+    }    
+    
+    public void displayData()
     {
-        paid.setToggleGroup(group);
-        unpaid.setToggleGroup(group);
-        
         ObservableList<Accounts> data = mergeData();
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         bookingIDCol.setCellValueFactory(new PropertyValueFactory<>("bookingID"));
@@ -100,7 +95,7 @@ public class DisplayAllBookingsController implements Initializable {
                     try {
                         rowData = row.getItem();
                         
-                        Stage stage = new Stage();
+                        stage = new Stage();
                         Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/StatusChanger.fxml"));
                         stage.setScene(new Scene(root));
                         stage.setTitle("Change status");
@@ -110,13 +105,18 @@ public class DisplayAllBookingsController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(DisplayAllBookingsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    refresh();
                 }
             });
             return row;
         });
-        accountsTable.setItems(data); 
-       
-    }    
+        accountsTable.setItems(data);
+    }
+    
+    public void refresh()
+    {
+        displayData();
+    }
     
     private ObservableList<Accounts> mergeData()
     {
