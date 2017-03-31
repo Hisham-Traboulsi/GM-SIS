@@ -1933,7 +1933,7 @@ public final class Database
        
        public void editBookings() throws SQLException
     {
-        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REGNUM=?, MANUFACTURE=?, MILEAGE=?, DATE=?, TIME=?,TYPE=?,COST=?  WHERE IDnum=?");
+        PreparedStatement editBookingStmt = preparedStatement("UPDATE DIAGNOSIS_REPAIR_BOOKINGS SET MECHANICID=?, PARTNAME=?, CUSTOMERID=?, REG_NUM=?, MANUFACTURE=?, MILEAGE=?, BOOKING_DATE=?, TIME=?,TYPE=?,COST=?  WHERE IDnum=?");
         int counter = 0;
         while(counter < BookingsData.size())
             
