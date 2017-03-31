@@ -123,21 +123,28 @@ public class RemoveCustomerController implements Initializable {
     
     public void remove() throws SQLException
     {
-        Object [] options = {"Yes", "No"};
-                        int selection = JOptionPane.showOptionDialog(null,
-                        "Are you sure you want to remove the selected customer",
-                        "",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.DEFAULT_OPTION,
-                        null,
-                        options,
-                        null); 
-        if(selection == 0)
+        selected = customerTable.getSelectionModel().getSelectedItems();  
+        if(selected.size() == 0)
         {
-            selected = customerTable.getSelectionModel().getSelectedItems();   
-            System.out.println(selected.get(0).getID());
-            Database.getInstance().removeCustomer(selected.get(0).getID());
-            refresh();
+            JOptionPane.showMessageDialog(null, "Please select a customer that you want to remove");
+        }
+        else
+        {
+            Object [] options = {"Yes", "No"};
+                            int selection = JOptionPane.showOptionDialog(null,
+                            "Are you sure you want to remove the selected customer",
+                            "",
+                            JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.DEFAULT_OPTION,
+                            null,
+                            options,
+                            null); 
+            if(selection == 0)
+            {    
+                System.out.println(selected.get(0).getID());
+                Database.getInstance().removeCustomer(selected.get(0).getID());
+                refresh();
+            }
         }
     }
     

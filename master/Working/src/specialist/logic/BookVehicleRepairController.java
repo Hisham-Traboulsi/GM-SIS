@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 import vehicles.logic.Vehicle;
 
 /**
@@ -86,6 +87,7 @@ public class BookVehicleRepairController implements Initializable {
     {
       
     boolean added=false;
+    try{
             selected = vehicleTable.getSelectionModel().getSelectedItems();   
 
             String SPC = (String) spcBox.getValue();
@@ -103,7 +105,12 @@ public class BookVehicleRepairController implements Initializable {
 
          
            added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE,  customerID, customerName, customerSurname);
-
+    }
+    catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Complete all fields!");
+        }
+        
       
         return added;
     }
