@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
@@ -260,11 +261,12 @@ public class VRHomepageController implements Initializable {
             ); 
             
             customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+     
+            vehicleTable.setItems(searchVehicleData);
             
             vehicleTable.setRowFactory( tv -> {
                 TableRow<Vehicle> row = new TableRow<>();
-                viewInfo.setOnMouseClicked(event -> {
-                    
+                viewInfo.setOnMouseClicked(MouseEvent -> {
                         rowData = row.getItem();
                         Object [] options = {"Display Info", "Past & Future Bookings"};
                         int selection = JOptionPane.showOptionDialog(null,
@@ -304,10 +306,10 @@ public class VRHomepageController implements Initializable {
                             }         
                         }
                 });
-                return row ;
+                
+                        return row ;
+                     
             });
-            
-            vehicleTable.setItems(searchVehicleData);
     }
     
     @FXML
