@@ -6,6 +6,7 @@
 package common.database;
 
 import common.logic.SystemUser;
+import customers.logic.Accounts;
 import customers.logic.Customers;
 import vehicles.logic.Vehicle;
 import java.sql.*;
@@ -50,6 +51,8 @@ public final class Database
     private ObservableList<SystemUser> usersData;
     private ObservableList<Customers> customerData;
     private ObservableList<String> customerVehicles;
+    private ObservableList<Accounts> customerAccounts;
+    private ObservableList<String> customerStatus;
     private ObservableList<Part> partsData;
     private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
@@ -363,6 +366,124 @@ public final class Database
             return customerVehicles;
         }
     }
+    
+   public ObservableList<Accounts> getCustomerAccountsData(int customerID)
+   {
+       try
+       {
+           PreparedStatement getCustomerAccountsDataStmt = preparedStatement("SELECT * FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE CUSTOMERID =?");
+           getCustomerAccountsDataStmt.setInt(1, customerID);
+           
+           customerAccounts = FXCollections.observableArrayList();
+           ResultSet rs = getCustomerAccountsDataStmt.executeQuery();
+           
+           while(rs.next())
+           {
+               int bookingID = rs.getInt("IDnum");
+               String vehicleReg = rs.getString("REG_NUM");
+               String bookingDate = rs.getString("BOOKING_DATE");
+               double cost = rs.getDouble("COST");
+               
+               Accounts acc = new Accounts(customerID, bookingID, vehicleReg, bookingDate, cost);
+               
+               customerAccounts.add(acc);
+               return customerAccounts;
+           }
+       }
+       catch(SQLException ex)
+       {
+           Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+           return customerAccounts;
+
+       }
+        return customerAccounts;
+   }
+   
+   public void addStatus(int customerID, int bookingID) 
+   {
+        try 
+        {
+            String newBookingStatus = "UNPAID";
+            PreparedStatement addStatusStmt = preparedStatement("INSERT INTO ACCOUNTS VALUES (?,?,?)");
+            
+            addStatusStmt.setInt(1, customerID);
+            addStatusStmt.setInt(1, bookingID);
+            addStatusStmt.setString(1, newBookingStatus);
+            
+            addStatusStmt.execute();
+            addStatusStmt.close();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
+   
+   public ObservableList<String> getStatus(int customerID)
+   {
+       try
+       {
+           PreparedStatement getStatusStmt = preparedStatement("SELECT STATUS FROM ACCOUNTS WHERE CUSTOMER_ID=?");
+           getStatusStmt.setInt(1, customerID);
+           
+           customerStatus = FXCollections.observableArrayList();
+           ResultSet rs = getStatusStmt.executeQuery();
+           
+           while(rs.next())
+           {
+               String status = rs.getString("STATUS");
+               
+               customerStatus.add(status);
+           }
+           
+       }
+       catch(SQLException ex)
+       {
+           Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       return customerStatus;
+   }
+   
+   private int getMaxBookingID()
+   {
+       int maxID = 0;
+        try 
+        {   
+            PreparedStatement id = preparedStatement("SELECT IDnum FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum=(SELECT MAX(IDnum) FROM DIAGNOSIS_REPAIR_BOOKINGS)");
+            ResultSet rs = id.executeQuery();
+            
+            while(rs.next());
+            {
+                maxID = rs.getInt("IDnum");
+            }
+            
+            return maxID;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return maxID;
+        }
+   }
+   
+   public void editBookingStatus(int customerID, int bookingID, String status)
+   {
+        try 
+        {
+            PreparedStatement editBookingStatusStmt = preparedStatement("UPDATE ACCOUNTS SET STATUS=? WHERE BOOKING_ID=?");
+            editBookingStatusStmt.setString(1, status);
+            editBookingStatusStmt.setInt(2, bookingID);
+            
+            editBookingStatusStmt.executeUpdate();
+            
+            getStatus(customerID);
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
     
     /*Author Sergio*/
    public void addPart(String name, String description, int amount, double cost) throws NumberFormatException
@@ -2038,6 +2159,7 @@ public final class Database
            add.close();
            added = true;
            JOptionPane.showMessageDialog(null,"Booking successfully added");
+           addStatus(CUSTOMERID, getMaxBookingID());
         }
         catch(SQLException ex)
         {
