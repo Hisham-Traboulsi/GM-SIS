@@ -19,13 +19,13 @@
                         <MenuItem mnemonicParsing="false" onAction="#addCustomer" text="Add Customers" /> 
                         <MenuItem mnemonicParsing="false" onAction="#editCustomer" text="Edit Customers" /> 
                         <MenuItem mnemonicParsing="false" onAction="#removeCustomer" text="Remove Customers" /> 
-                        <MenuItem mnemonicParsing="false" onAction="#customerInfo" text ="Customer Information"/>
+                        <MenuItem mnemonicParsing="false" onAction="#customerInfo" text="Customer Information" />
                     </items>   
                 </Menu>
           
                 <Menu mnemonicParsing="false" text="Vehicle Records">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="Homepage" />
+                        <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="Vehicle Records" />
                         <MenuItem mnemonicParsing="false" onAction="#addVehicle" text="Add Vehicle" />
                     </items>
                 </Menu>
