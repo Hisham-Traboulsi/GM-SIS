@@ -1244,7 +1244,7 @@ public final class Database
         catch(SQLException ex)
         {
             
-        }
+        } 
     }
 
       
