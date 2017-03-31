@@ -17,7 +17,7 @@
           
         <Menu mnemonicParsing="false" text=" Vehicle Records ">
          <items>
-            <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="Vehicle Records" />
+            <MenuItem mnemonicParsing="false" onAction="#vehicleHomepage" text="View Records" />
             <MenuItem mnemonicParsing="false" onAction="#addVehicle" text="Add Vehicle" />
          </items></Menu>
           
