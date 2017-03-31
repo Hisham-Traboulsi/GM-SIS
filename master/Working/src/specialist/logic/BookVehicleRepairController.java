@@ -103,8 +103,13 @@ public class BookVehicleRepairController implements Initializable {
             String CUSTOMERNAME = selected2.get(0).getFirstName();
             String CUSTOMERSURNAME = selected2.get(0).getSurname();
 
-         
+       if(RETURNDATE.isAfter(DELIVDATE)){
            added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE,  CUSTOMERID, CUSTOMERNAME, CUSTOMERSURNAME);
+       }
+       else {
+           
+           JOptionPane.showMessageDialog(null,"Return date must be after delivery date");
+       }
     }
     catch(NullPointerException ex)
         {
