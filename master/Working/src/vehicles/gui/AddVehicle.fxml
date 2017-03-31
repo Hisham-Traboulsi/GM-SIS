@@ -52,7 +52,7 @@
          </font></Text>
       <StringTextField fx:id="model" layoutX="692.0" layoutY="75.0" prefHeight="25.0" prefWidth="170.0" />
       <StringTextField fx:id="make" layoutX="693.0" layoutY="126.0" prefHeight="25.0" prefWidth="170.0" />
-      <NonSpecialCharTextField fx:id="regnum" layoutX="693.0" layoutY="175.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="regnum" layoutX="693.0" layoutY="175.0" prefHeight="25.0" prefWidth="170.0" />
       <StringTextField fx:id="engine" layoutX="693.0" layoutY="226.0" prefHeight="25.0" prefWidth="170.0" />
       <StringTextField fx:id="fueltype" layoutX="694.0" layoutY="274.0" prefHeight="25.0" prefWidth="170.0" />
       <StringTextField fx:id="colour" layoutX="694.0" layoutY="326.0" prefHeight="25.0" prefWidth="170.0" />
