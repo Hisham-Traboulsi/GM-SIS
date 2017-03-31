@@ -544,7 +544,7 @@ public class VRHomepageController implements Initializable {
         
     }
     
-    /* Author Sam */
+    /* Author Sam Nwangwu */
     @FXML
     public void remove() 
     {
