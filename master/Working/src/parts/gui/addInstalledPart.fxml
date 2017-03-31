@@ -9,28 +9,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import parts.textfield.*?>
+
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="543.0" stylesheets="@../../common/gui/common_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parts.logic.addInstalledPart">
    <children>
-      <Button fx:id="add" layoutX="166.0" layoutY="338.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
-      <Button fx:id="clearButton" layoutX="266.0" layoutY="338.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="52.0" text="Clear" />
-      <Text fill="#f8f4f4" layoutX="129.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Install part on vehicle">
+      <Button fx:id="add" layoutX="210.0" layoutY="343.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Button fx:id="clearButton" layoutX="310.0" layoutY="343.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="25.0" prefWidth="52.0" text="Clear" />
+      <Text fill="#f8f4f4" layoutX="173.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Install part on vehicle">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="87.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
+      <Text fill="WHITE" layoutX="131.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name">
          <font>
             <Font size="19.0" />
          </font></Text>
-      <TableView fx:id="installedPartsTable" layoutX="438.0" layoutY="199.0" prefHeight="431.0" prefWidth="733.0">
+      <TableView fx:id="installedPartsTable" layoutX="567.0" layoutY="197.0" prefHeight="431.0" prefWidth="592.0">
         <columns>
-          <TableColumn fx:id="INST_ID_view" prefWidth="99.0" text="Installation ID" />
-          <TableColumn fx:id="REG_NUM_view" prefWidth="146.0" text="Vehicle Registration" />
-            <TableColumn fx:id="INST_DATE_view" prefWidth="126.0" text="Installation Date" />
-            <TableColumn fx:id="EXP_DATE_view" prefWidth="134.0" text="Warranty Expiration" />
-            <TableColumn fx:id="PART_NAME_view" minWidth="0.0" prefWidth="98.0" text="Part Name" />
-            <TableColumn fx:id="BOOKING_ID_view" prefWidth="144.0" text="Booking ID" />
+          <TableColumn fx:id="INST_ID_view" prefWidth="90.0" text="Installation ID" />
+          <TableColumn fx:id="REG_NUM_view" prefWidth="121.0" text="Vehicle Registration" />
+            <TableColumn fx:id="INST_DATE_view" prefWidth="107.0" text="Installation Date" />
+            <TableColumn fx:id="EXP_DATE_view" prefWidth="120.0" text="Warranty Expiration" />
+            <TableColumn fx:id="PART_NAME_view" minWidth="0.0" text="Part Name" />
+            <TableColumn fx:id="BOOKING_ID_view" prefWidth="75.0" text="Booking ID" />
         </columns>
       </TableView>
       <Button layoutX="560.0" layoutY="144.0" mnemonicParsing="false" onAction="#searchPart" text="Search" />
@@ -40,31 +40,31 @@
             <Image url="@../img/help-icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="660.0" layoutY="648.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
+      <Button layoutX="723.0" layoutY="649.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
       <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="624.0" layoutY="139.0">
          <image>
             <Image url="@../img/magnify-128.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="634.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for installed parts">
+      <Text fill="WHITE" layoutX="634.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for installed parts">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <ComboBox fx:id="regComb" layoutX="283.0" layoutY="206.0" prefHeight="25.0" prefWidth="112.0" />
-      <Button layoutX="855.0" layoutY="648.0" mnemonicParsing="false" onAction="#partBooking" text="View Bookings" />
-      <Text fill="WHITE" layoutX="84.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking ID">
+      <ComboBox fx:id="regComb" layoutX="327.0" layoutY="211.0" prefHeight="25.0" prefWidth="112.0" />
+      <Button layoutX="918.0" layoutY="649.0" mnemonicParsing="false" onAction="#partBooking" text="View Bookings" />
+      <Text fill="WHITE" layoutX="128.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking ID">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <ComboBox fx:id="IDcomb" layoutX="283.0" layoutY="283.0" prefHeight="25.0" prefWidth="112.0" />
+      <ComboBox fx:id="IDcomb" layoutX="327.0" layoutY="288.0" prefHeight="25.0" prefWidth="112.0" />
       <Text fill="WHITE" layoutX="129.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details of part used">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <TableView fx:id="partUsed" layoutX="6.0" layoutY="448.0" prefHeight="200.0" prefWidth="404.0">
+      <TableView fx:id="partUsed" layoutX="74.0" layoutY="443.0" prefHeight="200.0" prefWidth="404.0">
         <columns>
           <TableColumn fx:id="id_view" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="name_view" prefWidth="75.0" text="Name" />
@@ -73,6 +73,6 @@
             <TableColumn fx:id="desc_view" prefWidth="103.0" text="Description" />
         </columns>
       </TableView>
-      <Button layoutX="192.0" layoutY="661.0" mnemonicParsing="false" onAction="#showPartDetails" text="View part details" />
+      <Button layoutX="231.0" layoutY="662.0" mnemonicParsing="false" onAction="#showPartDetails" text="View part details" />
    </children>
 </AnchorPane>
