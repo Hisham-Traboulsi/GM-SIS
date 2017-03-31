@@ -35,7 +35,14 @@
         </Menu>
           
         <Menu mnemonicParsing="false" text=" Specialist Repairs ">
-              
+                                   <items>
+                        <MenuItem mnemonicParsing="false" onAction="#spcSearchPage" text="Search Page" />
+                        <MenuItem mnemonicParsing="false" onAction="#bookPartRepair" text="Book Part Repair" />
+                        <MenuItem mnemonicParsing="false" onAction="#bookVehicleRepair" text="Book Vehicle Repair" />
+                        <MenuItem mnemonicParsing="false" onAction="#Outstanding" text="Outstanding" />
+                        <MenuItem mnemonicParsing="false" onAction="#Returned" text="Returned" />
+
+                     </items>  
         </Menu>
         <Menu mnemonicParsing="false" onAction="#logOut" text=" Logout ">
             <items>
