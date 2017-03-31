@@ -155,6 +155,8 @@ public class OutstandingController implements Initializable {
       
     boolean added=false;
     boolean added2=false;
+    try{
+        
             selected = OutstandingPartTable.getSelectionModel().getSelectedItems();   
             
            // int BOOKINGID = selected.get(0).getBOOKINGID();
@@ -172,6 +174,12 @@ public class OutstandingController implements Initializable {
            added2 = Database.getInstance().sendPartBill(CUSTOMERID, TOTAL);
            remove();
            reload();
+    }
+    catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking and enter a bill!");
+        }
+        
         return added;
         
     }
@@ -181,6 +189,7 @@ public class OutstandingController implements Initializable {
       
     boolean added=false;
     boolean added2=false;
+    try{
             selected2 = OutstandingVehicleTable.getSelectionModel().getSelectedItems();   
             
             //int BOOKINGID = selected2.get(0).getBOOKINGIDVEHICLE();
@@ -199,6 +208,12 @@ public class OutstandingController implements Initializable {
 
            remove2();
            reload();
+    }
+    catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking and enter a bill!");
+        }
+        
       
         return added;
         
@@ -276,6 +291,7 @@ public class OutstandingController implements Initializable {
     @FXML
      public void cancelPart() throws SQLException
     {
+        try{
         Object [] options = {"Yes", "No"};
         int selection = JOptionPane.showOptionDialog(null,
                         "Are you sure you want to cancel this booking?",
@@ -300,12 +316,19 @@ public class OutstandingController implements Initializable {
                         {
                          
                         }
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking to delete!");
+        }
+        
 
     }
        
     @FXML
     public void cancelVehicle() throws SQLException
     {
+        try{
                 Object [] options = {"Yes", "No"};
         int selection2 = JOptionPane.showOptionDialog(null,
                         "Are you sure you want to cancel this booking?",
@@ -326,6 +349,13 @@ public class OutstandingController implements Initializable {
                         else if(selection2 == 1)
                         {
                         }
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(null,"Select a booking to delete!");
+        }
+        
 
     }
+    
 }

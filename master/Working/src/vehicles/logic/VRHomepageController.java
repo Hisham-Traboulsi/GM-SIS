@@ -8,11 +8,15 @@ package vehicles.logic;
 
 import common.Main;
 import common.database.Database;
+import customers.logic.AddCustomerController;
+import customers.logic.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,7 +26,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,6 +39,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import javax.swing.JOptionPane;
 import parts.logic.Part;
@@ -79,9 +89,12 @@ public class VRHomepageController implements Initializable {
     @FXML
     private TableColumn customeridCol;
     
-    @FXML
     private ObservableList<Vehicle> selected = null;
 
+    protected static Vehicle rowData;
+    @FXML
+    private Button viewInfo;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -93,6 +106,7 @@ public class VRHomepageController implements Initializable {
         
     }
     
+    @FXML
     public void searchVehicle() 
     {
         
@@ -247,9 +261,56 @@ public class VRHomepageController implements Initializable {
             
             customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
             
+            vehicleTable.setRowFactory( tv -> {
+                TableRow<Vehicle> row = new TableRow<>();
+                viewInfo.setOnMouseClicked(event -> {
+                    
+                        rowData = row.getItem();
+                        Object [] options = {"Display Info", "Past & Future Bookings"};
+                        int selection = JOptionPane.showOptionDialog(null,
+                        "Would you like to",
+                        "Customers Options",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+                        
+                        System.out.println(selection);
+                        if(selection == 0)
+                        {
+                            try {                                
+                                Stage stage = new Stage();                                
+                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));                                                                
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Customer Info");                                
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }   
+                        }
+                        else if(selection == 1)
+                        {
+                            try {                                
+                                Stage stage = new Stage();                                
+                                Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayAllBookings.fxml"));                                                                
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Past & Future Bookings");                                
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.showAndWait();
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                            }         
+                        }
+                });
+                return row ;
+            });
+            
             vehicleTable.setItems(searchVehicleData);
     }
     
+    @FXML
     public void addVehicle()
     {
         try {
@@ -265,6 +326,7 @@ public class VRHomepageController implements Initializable {
         }
     }
     
+    @FXML
     public void goBack()
     {
         try {
