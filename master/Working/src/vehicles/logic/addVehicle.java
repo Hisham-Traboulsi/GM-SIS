@@ -352,7 +352,7 @@ public class addVehicle implements Initializable {
             JOptionPane.showMessageDialog(null,"Error try again");
         }
         
-        try {
+       /*try {
 
             URL addPartUrl = getClass().getResource("/vehicles/gui/VehicleHomepage.fxml");
             AnchorPane addPartPane = FXMLLoader.load(addPartUrl);
@@ -362,7 +362,7 @@ public class addVehicle implements Initializable {
             border.setCenter(addPartPane);
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
     }
 
