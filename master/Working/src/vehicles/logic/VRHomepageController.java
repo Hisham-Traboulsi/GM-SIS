@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
@@ -260,11 +261,12 @@ public class VRHomepageController implements Initializable {
             ); 
             
             customeridCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+     
+            vehicleTable.setItems(searchVehicleData);
             
             vehicleTable.setRowFactory( tv -> {
                 TableRow<Vehicle> row = new TableRow<>();
-                viewInfo.setOnMouseClicked(event -> {
-                    
+                viewInfo.setOnMouseClicked(MouseEvent -> {
                         rowData = row.getItem();
                         Object [] options = {"Display Info", "Past & Future Bookings"};
                         int selection = JOptionPane.showOptionDialog(null,
@@ -304,10 +306,10 @@ public class VRHomepageController implements Initializable {
                             }         
                         }
                 });
-                return row ;
+                
+                        return row ;
+                     
             });
-            
-            vehicleTable.setItems(searchVehicleData);
     }
     
     @FXML
@@ -542,11 +544,29 @@ public class VRHomepageController implements Initializable {
         
     }
     
+    /* Author Sam */
     @FXML
     public void remove() 
     {
-        selected = vehicleTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().removeVehicle(selected.get(0).getID());
-        loadTable();
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to remove this vehicle?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+
+                        if(selection == 0)
+                        {
+                              selected = vehicleTable.getSelectionModel().getSelectedItems();   
+                              String regnum = selected.get(0).getRegnum();
+                              Database.getInstance().removeVehicle(regnum);
+                              loadTable();
+                        }
+                        else if(selection == 1)
+                        {
+                        }
     }
 }
