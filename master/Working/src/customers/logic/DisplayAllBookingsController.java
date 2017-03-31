@@ -174,4 +174,19 @@ public class DisplayAllBookingsController implements Initializable {
             partsBoxCombo.setItems(listOfParts);
         }
     }
+    
+    public void displayHelp()
+    {
+        try {
+            Stage s = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayBookingsHelpMessage.fxml"));
+            s.setScene(new Scene(root));
+            s.setTitle("Help Message");
+            s.getIcons().add(new Image(getClass().getResourceAsStream("/customers/gui/help-icon.png")));
+            s.initModality(Modality.APPLICATION_MODAL);
+            s.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(DisplayAllBookingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

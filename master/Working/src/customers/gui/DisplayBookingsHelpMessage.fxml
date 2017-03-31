@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="278.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.DisplayBookingsHelpMessageController">
+    <stylesheets>
+        <URL value="@customer_style.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="274.0" layoutY="27.0" text="Help" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="helpBox" layoutX="14.0" layoutY="70.0" prefHeight="183.0" prefWidth="573.0" text="">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
+

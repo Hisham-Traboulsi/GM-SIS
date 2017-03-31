@@ -102,9 +102,6 @@ public class AddCustomerController implements Initializable {
     @FXML
     private TextField searchByName;
     
-    @FXML
-    private TextField searchByVehicle;
-    
     final ToggleGroup group = new ToggleGroup();
     
     private static BorderPane root = new BorderPane();
@@ -116,9 +113,8 @@ public class AddCustomerController implements Initializable {
     {   
         privateRadio.setToggleGroup(group);
         businessRadio.setToggleGroup(group);
-        searchByName.setPromptText("Search By Name");
-        searchByVehicle.setPromptText("Search By Vehicle");
-        
+        searchByName.setPromptText("Search By Name or Vehicle");
+       
         try 
         {
             // TODO
@@ -139,7 +135,7 @@ public class AddCustomerController implements Initializable {
                     
                     if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                         rowData = row.getItem();
-                        Object [] options = {"Add Vehicle", "Book Appointment"};
+                        Object [] options = {"Veiw Vehicles", "Book Appointment"};
                         int selection = JOptionPane.showOptionDialog(null,
                                 "Would you like to",
                                 "Customers Options",
@@ -153,7 +149,7 @@ public class AddCustomerController implements Initializable {
                         if(selection == 0)
                         {
                             try {
-                                URL addVehiclesUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
+                                URL addVehiclesUrl = getClass().getResource("/vehicles/gui/VehicleHomepage.fxml");
                                 AnchorPane addVehiclesPane = FXMLLoader.load(addVehiclesUrl);
                                 
                                 BorderPane border = Main.getRoot();
@@ -166,7 +162,7 @@ public class AddCustomerController implements Initializable {
                         else if(selection == 1)
                         {
                             try {
-                                URL bookingsUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
+                                URL bookingsUrl = getClass().getResource("/diagrep/gui/addBookings.fxml");
                                 AnchorPane bookingPane = FXMLLoader.load(bookingsUrl);
                                 
                                 BorderPane border = Main.getRoot();

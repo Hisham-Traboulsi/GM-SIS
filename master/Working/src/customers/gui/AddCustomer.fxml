@@ -83,7 +83,6 @@
              <Image url="/customers/gui/help-icon.png" />
           </image>
       </ImageView>
-      <TextField fx:id="searchByName" layoutX="507.0" layoutY="65.0" />
-      <TextField fx:id="searchByVehicle" layoutX="741.0" layoutY="65.0" />
+      <TextField fx:id="searchByName" layoutX="478.0" layoutY="65.0" prefHeight="31.0" prefWidth="265.0" />
    </children>
 </AnchorPane>

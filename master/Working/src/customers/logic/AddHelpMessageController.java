@@ -35,7 +35,9 @@ public class AddHelpMessageController implements Initializable {
                 + "fields and press the Submit button otherwise \n    "
                 + "press the Clear button to clear data from the fields. \n"
                 + " \n 2. To view the customers options *DOUBLE CLICK* on the \n"
-                + " selected row (customer).");
+                + " selected row (customer). \n"
+                + "\n 3. To search by vehicle you must enter the full vehicle \n"
+                + "registration number to view its related data");
         
         helpBox.wrapTextProperty();
     }    

@@ -36,7 +36,9 @@ public class EditHelpMessageController implements Initializable {
                 + "row has been found double click on a cell that you want to \n"
                 + "edit. \n"
                 + "\n 2. Once you make the edit press the return key on the \n"
-                + "on the key board ('Enter key') and click on the update button.");
+                + "on the key board ('Enter key') and click on the update button.\n"
+                + "\n 3. To search by vehicle you must enter the full vehicle \n "
+                + "registration number to view its related data");
     }    
     
 }

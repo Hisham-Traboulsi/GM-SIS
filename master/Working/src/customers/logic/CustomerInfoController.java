@@ -72,17 +72,13 @@ public class CustomerInfoController implements Initializable {
     @FXML
     private TextField searchByName;
     
-    @FXML
-    private TextField searchByVehicle;
-    
     protected static Customers rowData;
     
      private ObservableList<Customers> selected = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        searchByName.setPromptText("Search By Name");
-        searchByVehicle.setPromptText("Search By Vehicle");
+        searchByName.setPromptText("Search By Name or Vehicle");
         
         try
         {
@@ -116,7 +112,8 @@ public class CustomerInfoController implements Initializable {
                         System.out.println(selection);
                         if(selection == 0)
                         {
-                            try {                                
+                            try {                
+                                System.out.println(rowData.getAddress());
                                 Stage stage = new Stage();                                
                                 Parent root = FXMLLoader.load(getClass().getResource("/customers/gui/DisplayInfo.fxml"));                                                                
                                 stage.setScene(new Scene(root));
@@ -147,19 +144,24 @@ public class CustomerInfoController implements Initializable {
             
             FilteredList<Customers> filteredData=new FilteredList<>(customerData,e->true);
             searchByName.textProperty().addListener((observableValue,oldValue,newValue)->{
-		filteredData.setPredicate((Predicate<? super Customers>)customer->{
-			if(newValue==null||newValue.isEmpty()){
-				return true;
-                        }
-			String lowerCaseFilter=newValue.toLowerCase();
-			if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
-				return true;
-			}
-			else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
-				return true;
-			}
-			return false;
-		});
+                filteredData.setPredicate((Predicate<? super Customers>)customer->{
+                    int customerID = Database.getInstance().getCustomerVehicles(searchByName.getText());
+                    if(newValue==null||newValue.isEmpty()){
+                        return true;
+                    }
+                    String lowerCaseFilter=newValue.toLowerCase();
+                    if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    }
+                    else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    }
+                    else if(customer.getID() == customerID)
+                    {
+                        return true;
+                    }
+                    return false;
+                });
             });
             SortedList<Customers> sortedData=new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(customerTable.comparatorProperty());

@@ -48,7 +48,7 @@ public class DisplayInfoController implements Initializable {
     @FXML
     private ComboBox vehicleReg;
     
-    private Customers rowData = AddCustomerController.rowData;
+    private Customers rowData = CustomerInfoController.rowData;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,7 +67,7 @@ public class DisplayInfoController implements Initializable {
         type.setText(rowData.getType());
         
         ObservableList<String> cv = Database.getInstance().getCustomerVehicles(rowData.getID());
-        if(cv.size() == 0)
+        if(cv.isEmpty())
         {
             cv.add("No vehicles");
             vehicleReg.setItems(cv);

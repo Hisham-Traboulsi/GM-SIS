@@ -32,7 +32,9 @@ public class CustomerInfoHelpController implements Initializable {
         helpBox.setText("1. To use a customer functions search for a customer \n"
                 + "either by name or by vehicle. \n"
                 + "\n 2. Double click on a selected row to display options \n"
-                + "then select your option");
+                + "then select your option.\n"
+                + "\n 3. To search by vehicle you must enter the full vehicle \n"
+                + "registration number to view its related data");
     }    
     
 }

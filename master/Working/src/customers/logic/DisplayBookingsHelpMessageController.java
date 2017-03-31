@@ -16,25 +16,26 @@ import javafx.scene.control.TextArea;
  *
  * @author hisha
  */
-public class RemoveHelpMessageController implements Initializable {
+public class DisplayBookingsHelpMessageController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
     @FXML
     private TextArea helpBox;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         helpBox.setEditable(false);
         
-        helpBox.setText("1. To remove a customer first search for the customer \n"
-                + "either throught by scrolling or using the search bars. \n"
-                + "\n 2. Select the customer row in order to hightlight the \n"
-                + "customer  you want to remove. \n"
-                + "\n 3. Click the remove button to remove the customer. \n"
-                + "\n 4. To search by vehicle you must enter the full vehicle \n"
-                + "registration number to view its related data");
+        helpBox.setText("1. Click once on a selected row to view list of parts \n"
+                + "used in a single booking. Tese can be viewed in the combo \n"
+                + "box after clicking once on a row. \n"
+                + "To change the status of a bookings cost, double click on a \n"
+                + "selected row.");
+        
+        helpBox.wrapTextProperty();
     }    
     
 }
