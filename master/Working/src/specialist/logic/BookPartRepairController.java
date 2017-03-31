@@ -165,6 +165,13 @@ public class BookPartRepairController implements Initializable {
     private void getReturnDate(ActionEvent event) {
         returnDate = returnDatePicker.getValue();
     }
-    }    
+     public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To book a part:\n Select a customer from the table provided \n Select an SPC"
+                        + "\n Select a part\n"
+                        + " choose a delivery and return date \n click book");
+    }
+}    
     
 

@@ -320,5 +320,15 @@ public class SearchPageController implements Initializable {
         }
         
     }
+       
+       public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "Search by:\n Selecting an SPC\n Or \n Entering ONE name"
+                        + " (partially or fully)\n Or \n Entering registration ( partially or fully)\n"
+                        + " then click the approriate search button. \n \n"
+                        + "To remove a part: \n"
+                        + " Select a part, then click the remove button.");
+    }
 
 }
