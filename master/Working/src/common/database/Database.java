@@ -1236,8 +1236,10 @@ public final class Database
     public void removeVehicle(String regnum) 
     {
         try{
-        PreparedStatement removeVehicleStmt = preparedStatement("DELETE FROM VEHICLE_RECORD WHERE REG_NUM=" + regnum);
+        PreparedStatement removeVehicleStmt = preparedStatement("DELETE FROM VEHICLE_RECORD WHERE REG_NUM=?");
+        removeVehicleStmt.setString(1, regnum);
         removeVehicleStmt.executeUpdate();
+        
         }
         catch(SQLException ex)
         {
