@@ -237,5 +237,14 @@ public class ChooseCentreController implements Initializable {
             ex.printStackTrace();
         }
     }    
+    
+         public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To add a SPC:\n Complete all fields and click add \n"
+                        + "\nTo remove an SPC:\n Select an SPC then click remove\n"
+                        + "\nTo edit an SPC:\n Double click on the field(s) you want to change\n tap enter on your keyboard\n"
+                        + " then click update edit");
+    }
 
 }
