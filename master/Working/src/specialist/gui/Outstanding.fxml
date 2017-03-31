@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import parts.textfield.*?>
@@ -25,7 +26,7 @@
                   <TableColumn fx:id="partNameCol" prefWidth="121.0" text="Part Name" />
                   <TableColumn fx:id="deliveryDateCol" prefWidth="142.0" text="Delivery Date" />
                   <TableColumn fx:id="returnDateCol" minWidth="0.0" prefWidth="106.0" text="Return Date" />
-            <TableColumn fx:id="partCost" prefWidth="248.0" text="Part Cost (only)" />
+            <TableColumn fx:id="partCost" prefWidth="173.0" text="Part Cost (only)" />
               </columns>
             </TableView>
             <Button fx:id="returnButton" layoutX="1060.0" layoutY="244.0" mnemonicParsing="false" onAction="#returned" text="Returned" />
@@ -56,5 +57,10 @@
       <NumberTextField fx:id="vehicleBill" layoutX="980.0" layoutY="525.0" prefHeight="25.0" prefWidth="57.0" promptText="SPC bill" />
       <Button fx:id="partsCancel" layoutX="845.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancelPart" text="Cancel Parts Booking" />
       <Button fx:id="vehicleCancel" layoutX="834.0" layoutY="650.0" mnemonicParsing="false" onAction="#cancelVehicle" text="Cancel Vehicle Booking" />
+      <ImageView fitHeight="70.0" fitWidth="54.0" layoutX="1132.0" layoutY="24.0" onMouseClicked="#helpIcon" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@help-icon.png" />
+         </image>
+      </ImageView>
          </children>
       </AnchorPane>

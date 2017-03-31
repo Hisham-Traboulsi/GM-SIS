@@ -166,4 +166,11 @@ public class BookVehicleRepairController implements Initializable {
         returnDate = returnDatePicker.getValue();
     }
     
+    public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To book a vehicle:\n Select a customer from the table provided \n Select an SPC"
+                        + "\n Select a vehicle\n"
+                        + " choose a delivery and return date \n click book");
+    }
 }
