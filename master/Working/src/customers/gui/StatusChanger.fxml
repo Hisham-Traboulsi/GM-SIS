@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="99.0" prefWidth="384.0" stylesheets="@customer_style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customers.logic.StatusChangerController">
+    <children>
+    <RadioButton fx:id="unpaid" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Set as Unpaid" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="paid" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Set as Paid" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="294.0" layoutY="34.0" mnemonicParsing="false" text="Submit" onAction="#editStatus" />
+      </children>
+</AnchorPane>

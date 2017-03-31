@@ -31,6 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -204,6 +205,85 @@ public class EditCustomerController implements Initializable {
     
     public void edit() throws SQLException
     {
+        boolean dataCheck;
+        for(int i = 0; i<customerData.size(); i++)
+        {
+            //checks on first name
+            if(customerData.get(i).getFirstName().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "First Name is required");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+            else if((customerData.get(i).getFirstName().chars().allMatch(Character::isLetter)) == false)
+            {
+                JOptionPane.showMessageDialog(null, "First Name must only consist of letters (no numbers and no spaces)");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+
+            //checks on surname
+            if(customerData.get(i).getSurname().isEmpty())
+            {
+                 JOptionPane.showMessageDialog(null, "Surname is required");
+                 JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+            else if((customerData.get(i).getSurname().chars().allMatch(Character::isLetter)) == false)
+            {
+                JOptionPane.showMessageDialog(null, "First Name must only consist of letters (no numbers and no spaces)");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+
+            //checks on address
+            if(customerData.get(i).getAddress().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Address is required");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+
+            //checks on postcode
+            if(customerData.get(i).getPostCode().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Post Code is required");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+
+            //checks on the phone number
+            if(customerData.get(i).getPhone().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Phone is required");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+            else if(!checkIsInteger(customerData.get(i).getPhone()))
+            {
+                JOptionPane.showMessageDialog(null, "Please enter a correct phone number");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+
+            //checks on the email
+            if(customerData.get(i).getEmail().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Email is required");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+            if(customerData.get(i).getType().equals("P") || customerData.get(i).getType().equals("B"))
+            {
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Please enter either a P (for Private) or B (for Business) for the type");
+                JOptionPane.showMessageDialog(null, "Customer wasn't edited");
+                return;
+            }
+        }
         Database.getInstance().editCustomer();
         refresh();
     }
@@ -223,6 +303,26 @@ public class EditCustomerController implements Initializable {
         {
             ex.printStackTrace();
         }
+    }
+    
+    public boolean checkIsInteger(String number)
+    {
+       int length = number.length();
+       if(length == 0 || length < 11)
+       {
+           JOptionPane.showMessageDialog(null, "The number's length you entered was less than 11 digits or you entered no digits at all");
+           return false;
+       }
+       
+       for(int i = 0; i<length; i++)
+       {
+           if(number.charAt(i) < '0' || number.charAt(i) > '9')
+           {
+               JOptionPane.showMessageDialog(null, "Please enter a number WITHOUT any letters");
+               return false;
+           }
+       }
+       return true;
     }
     
     public void displayHelp() throws IOException
