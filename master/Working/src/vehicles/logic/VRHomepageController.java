@@ -544,11 +544,29 @@ public class VRHomepageController implements Initializable {
         
     }
     
+    /* Author Sam */
     @FXML
     public void remove() 
     {
-        selected = vehicleTable.getSelectionModel().getSelectedItems();   
-        Database.getInstance().removeVehicle(selected.get(0).getID());
-        loadTable();
+        Object [] options = {"Yes", "No"};
+        int selection = JOptionPane.showOptionDialog(null,
+                        "Are you sure you want to remove this vehicle?",
+                        "CONFIRM",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.DEFAULT_OPTION,
+                        null,
+                        options,
+                        null); 
+
+                        if(selection == 0)
+                        {
+                              selected = vehicleTable.getSelectionModel().getSelectedItems();   
+                              String regnum = selected.get(0).getRegnum();
+                              Database.getInstance().removeVehicle(regnum);
+                              loadTable();
+                        }
+                        else if(selection == 1)
+                        {
+                        }
     }
 }
