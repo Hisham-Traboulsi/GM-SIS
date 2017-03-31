@@ -386,8 +386,9 @@ public final class Database
                Accounts acc = new Accounts(customerID, bookingID, vehicleReg, bookingDate, cost);
                
                customerAccounts.add(acc);
-               return customerAccounts;
+               
            }
+            return customerAccounts;
        }
        catch(SQLException ex)
        {
@@ -395,7 +396,6 @@ public final class Database
            return customerAccounts;
 
        }
-        return customerAccounts;
    }
    
    public void addStatus(int customerID, int bookingID) 

@@ -123,7 +123,7 @@ public class DisplayAllBookingsController implements Initializable {
         ObservableList<Accounts> mergeData = FXCollections.observableArrayList();
         ObservableList<Accounts> customerAccount = Database.getInstance().getCustomerAccountsData(dataRow.getID());
         ObservableList<String> bookingStatus = Database.getInstance().getStatus(dataRow.getID());
-        System.out.println(bookingStatus.size());
+        System.out.println(customerAccount.size());
         for(int i = 0; i<customerAccount.size(); i++)
         {
             int customerID = customerAccount.get(i).getCustomerID();
@@ -137,6 +137,11 @@ public class DisplayAllBookingsController implements Initializable {
             mergeData.add(acc);
         }
         
+        if(mergeData.size() == 0)
+        {
+            ObservableList<Accounts> mergeDataEmpty = FXCollections.observableArrayList();
+            return mergeDataEmpty;
+        }
         return mergeData;
     }   
 }
