@@ -75,6 +75,8 @@ public class CustomerInfoController implements Initializable {
     @FXML
     private TextField searchByVehicle;
     
+    protected static Customers rowData;
+    
      private ObservableList<Customers> selected = null;
     
     @Override
