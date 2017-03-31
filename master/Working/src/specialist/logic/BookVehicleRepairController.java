@@ -89,7 +89,7 @@ public class BookVehicleRepairController implements Initializable {
     boolean added=false;
     try{
             selected = vehicleTable.getSelectionModel().getSelectedItems();   
-
+            selected2 = customerTable.getSelectionModel().getSelectedItems();  
             String SPC = (String) spcBox.getValue();
             String REGNUM  = selected.get(0).getRegnum();
             String MAKE = selected.get(0).getMake();
@@ -99,12 +99,17 @@ public class BookVehicleRepairController implements Initializable {
             String COLOUR = selected.get(0).getColour();
             LocalDate DELIVDATE = delivDate;
             LocalDate RETURNDATE = returnDate;
-            int customerID = selected2.get(0).getID();
-            String customerName = selected2.get(0).getFirstName();
-            String customerSurname = selected2.get(0).getSurname();
+            int CUSTOMERID = selected2.get(0).getID();
+            String CUSTOMERNAME = selected2.get(0).getFirstName();
+            String CUSTOMERSURNAME = selected2.get(0).getSurname();
 
-         
-           added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE,  customerID, customerName, customerSurname);
+       if(RETURNDATE.isAfter(DELIVDATE)){
+           added = Database.getInstance().bookSPCVehicle(SPC, REGNUM, MAKE, MODEL, ENGINE, FUEL, COLOUR, DELIVDATE, RETURNDATE,  CUSTOMERID, CUSTOMERNAME, CUSTOMERSURNAME);
+       }
+       else {
+           
+           JOptionPane.showMessageDialog(null,"Return date must be after delivery date");
+       }
     }
     catch(NullPointerException ex)
         {
@@ -166,4 +171,11 @@ public class BookVehicleRepairController implements Initializable {
         returnDate = returnDatePicker.getValue();
     }
     
+    public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To book a vehicle:\n Select a customer from the table provided \n Select an SPC"
+                        + "\n Select a vehicle\n"
+                        + " choose a delivery and return date \n click book");
+    }
 }

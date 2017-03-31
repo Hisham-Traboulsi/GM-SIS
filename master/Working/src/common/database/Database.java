@@ -1233,16 +1233,18 @@ public final class Database
     }
       
     /*Author Sam*/
-    public void removeVehicle(int id) 
+    public void removeVehicle(String regnum) 
     {
         try{
-        PreparedStatement removeVehicleStmt = preparedStatement("DELETE FROM VEHICLE_RECORD WHERE CUSTOMER_ID="+ id);
+        PreparedStatement removeVehicleStmt = preparedStatement("DELETE FROM VEHICLE_RECORD WHERE REG_NUM=?");
+        removeVehicleStmt.setString(1, regnum);
         removeVehicleStmt.executeUpdate();
+        
         }
         catch(SQLException ex)
         {
             
-        }
+        } 
     }
 
       

@@ -102,8 +102,15 @@ public class BookPartRepairController implements Initializable {
             int customerID = selected2.get(0).getID();
             String customerName = selected2.get(0).getFirstName();
             String customerSurname = selected2.get(0).getSurname();
+            
+            if(RETURNDATE.isAfter(DELIVDATE)){
          
            added = Database.getInstance().bookSPCPart(SPC, PARTID, PARTNAME, DELIVDATE, RETURNDATE, PARTCOST, customerID, customerName, customerSurname);
+                                  }
+            else{
+                JOptionPane.showMessageDialog(null,"Return date must be after delivery date");
+            }
+            
     }
     catch(NullPointerException ex)
         {
@@ -165,6 +172,13 @@ public class BookPartRepairController implements Initializable {
     private void getReturnDate(ActionEvent event) {
         returnDate = returnDatePicker.getValue();
     }
-    }    
+     public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "To book a part:\n Select a customer from the table provided \n Select an SPC"
+                        + "\n Select a part\n"
+                        + " choose a delivery and return date \n click book");
+    }
+}    
     
 
