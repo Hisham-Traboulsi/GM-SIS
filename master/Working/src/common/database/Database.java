@@ -595,6 +595,9 @@ public final class Database
             ex.printStackTrace();
             System.err.println("Unable to access table or table doesnt exist");
         }
+        catch(NullPointerException ex){
+                      JOptionPane.showMessageDialog(null,"We could not find a registration number assigned to that booking");
+              }
     }
  }
    
@@ -1086,7 +1089,19 @@ public final class Database
        int count=0;
         try
         {
+        PreparedStatement getPART= preparedStatement("SELECT AMOUNT FROM 'PARTS_TRACKING' WHERE NAME='"+partname+"'" );
+     
+        ResultSet rs2 = getPART.executeQuery();
+        
+        int stock=rs2.getInt("AMOUNT");
+        if(stock==0 || stock<0)
+        {
             
+            JOptionPane.showMessageDialog(null,"Sorry we run out of stock for that part,select another one");
+            return check=false;
+        }
+        else{
+           
         PreparedStatement getBill= preparedStatement("SELECT PART_NAME FROM 'PARTS_INSTALLATION' WHERE REG_NUM ='" + regNum+ "' AND BOOKING_ID='" + bookingid +"'" );
 
         ResultSet rs = getBill.executeQuery();
@@ -1096,16 +1111,23 @@ public final class Database
         
             if(pn.equals(partname))
             {
-               count=count+1;
+                JOptionPane.showMessageDialog(null," You have already installed that part select another one");
+                  check=false;
+            }
+            else{
+                   count=count+1;
                    if(count==10)
                    {
+                      
+                      JOptionPane.showMessageDialog(null,"<html> You have already installed 10 parts<br><br/>"
+                      + "-Remove at least one to add anymore<html>");
                       check=false;
-                      JOptionPane.showMessageDialog(null,"<html>- You have already installed 10 distinct parts<br/>" 
-                      + "- Please delete at least one part to install more <html>");
-                   }  
-            }
+                   } 
+                }
          }
         }
+        }
+        
         catch(SQLException ex){
             
         }

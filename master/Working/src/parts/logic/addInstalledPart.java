@@ -164,6 +164,7 @@ public class addInstalledPart implements Initializable {
     @FXML
    public void add() 
     { 
+        
        DateFormat df = new SimpleDateFormat("dd/MM/yy");
        Date dateobj = new Date();
        
@@ -182,7 +183,7 @@ public class addInstalledPart implements Initializable {
             String EXPDATE = (df.format(nextYear));
             int BOOKINGID = (Integer)(IDcomb.getValue());
             
-  
+      try{
       
        Database.getInstance().addInstalledPart( REGNUM, INSTDATE,
               EXPDATE,PARTNAME, BOOKINGID);
@@ -191,15 +192,13 @@ public class addInstalledPart implements Initializable {
       addWithdrawalDate();
       clearRest();
       searchPart();
+      }catch(NullPointerException ex){
+                      JOptionPane.showMessageDialog(null,"Error, try again");
+              }
        
       }
-     // return added;
     }
-   /*public boolean partLimit(String REGNUM){
-      // boolean check=true;
-       return Database.getInstance().maxParts(REGNUM);
-       
-   }*/
+
     public void enterPressed(KeyEvent event) {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();
