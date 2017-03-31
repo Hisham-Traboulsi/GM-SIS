@@ -143,5 +143,10 @@ public class DisplayAllBookingsController implements Initializable {
             return mergeDataEmpty;
         }
         return mergeData;
-    }   
+    }  
+    
+    public void getListOfParts(int booking_ID)
+    {
+        
+    }
 }

@@ -53,6 +53,7 @@ public final class Database
     private ObservableList<String> customerVehicles;
     private ObservableList<Accounts> customerAccounts;
     private ObservableList<String> customerStatus;
+    private ObservableList<String> listOfParts;
     private ObservableList<Part> partsData;
     private ObservableList<Part> partUsedData;
     private ObservableList<Vehicle> vehicleData;
@@ -514,6 +515,22 @@ public final class Database
    {
          PreparedStatement deleteStatusStmt = preparedStatement("DELETE FROM ACCOUNTS WHERE BOOKING_ID="+ booking_ID);
          deleteStatusStmt.executeUpdate();
+   }
+   
+   public ObservableList<String> getListOfParts(int booking_ID) throws SQLException
+   {
+       listOfParts = FXCollections.observableArrayList();
+       PreparedStatement getListOfPartsStmt = preparedStatement("SELECT PART_NAME FROM PARTS_INSTALLATION WHERE BOOKING_ID="+ booking_ID);
+       ResultSet rs = getListOfPartsStmt.executeQuery();
+      
+       while(rs.next())
+       {
+           String partName = rs.getString("PART_NAME");
+           
+           listOfParts.add(partName);
+       }
+       
+       return listOfParts;
    }
     
     /*Author Sergio*/
