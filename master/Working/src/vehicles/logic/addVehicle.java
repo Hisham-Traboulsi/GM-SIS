@@ -36,6 +36,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.converter.IntegerStringConverter;
+import javax.swing.JOptionPane;
 import parts.logic.Part;
 
 /**
@@ -308,14 +309,16 @@ public class addVehicle implements Initializable {
         
     }
     
-    public void enterPressed(KeyEvent event) {
+    public void enterPressed(KeyEvent event) throws SQLException {
                 if (event.getCode() == KeyCode.ENTER) {
                   add();
                 }
             }
 
     @FXML
-    public void add() {
+    public void add() throws SQLException {
+        
+        try{
         
         int vID = (int) IDcomb.getValue();
         String vregnum = (regnum.getText());
@@ -344,7 +347,11 @@ public class addVehicle implements Initializable {
         
 
         Database.getInstance().addVehicle(vID ,vregnum, vmodel, vmake, vengine, vfueltype, vcolour, vmotdate, vlastservice, vmileage, vwarranty, vwarrantycompany, vwarrantyaddress, vwarrantyexpiry);
-
+        }
+        catch(NullPointerException | NumberFormatException ex){
+            JOptionPane.showMessageDialog(null,"Error try again");
+        }
+        
         try {
 
             URL addPartUrl = getClass().getResource("/vehicles/gui/VehicleHomepage.fxml");
