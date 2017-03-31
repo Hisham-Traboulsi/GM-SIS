@@ -357,5 +357,15 @@ public class OutstandingController implements Initializable {
         
 
     }
-    
+        public void helpIcon()
+    {
+        JOptionPane.showMessageDialog(null,
+                "If a part has been returned:\n Select the part \n Enter the bill provided by the SPC"
+                        + "\n Click return\n"
+                        + " the part will now be returned and the SPC bill and part cost will be calculated and sent to the main bill"
+                        + "\n \nIf a vehicle has been returned:\n Select the vehicle \n Enter the bill provided by the SPC"
+                        + "\n Click return"
+                        + "\n the vehicle will now be returned and the bill will be sent"
+                        + "\n \nTo cancel a booking:\n select the part or vehicle\n then click the appropriate cancel button");
+    }
 }
