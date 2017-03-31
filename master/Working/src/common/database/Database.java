@@ -372,7 +372,7 @@ public final class Database
    {
        try
        {
-           PreparedStatement getCustomerAccountsDataStmt = preparedStatement("SELECT IDnum, REG_NUM, BOOKING_DATE, COST FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE CUSTOMERID ="+customerID);
+           PreparedStatement getCustomerAccountsDataStmt = preparedStatement("SELECT IDnum, REG_NUM, TIME, COST FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE CUSTOMERID ="+customerID);
            
            customerAccounts = FXCollections.observableArrayList();
            ResultSet rs = getCustomerAccountsDataStmt.executeQuery();
@@ -381,7 +381,7 @@ public final class Database
            {    System.out.println("A");
                int bookingID = rs.getInt("IDnum");
                String vehicleReg = rs.getString("REG_NUM");
-               String bookingDate = rs.getString("BOOKING_DATE");
+               String bookingDate = rs.getString("TIME");
                double cost = rs.getDouble("COST");
                
                Accounts acc = new Accounts(customerID, bookingID, vehicleReg, bookingDate, cost);
