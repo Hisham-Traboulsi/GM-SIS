@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -112,15 +113,16 @@ public class AddCustomerController implements Initializable {
  
     @Override
     public void initialize(URL url, ResourceBundle rb) 
-    {
-        // TODO
+    {   
         privateRadio.setToggleGroup(group);
         businessRadio.setToggleGroup(group);
         searchByName.setPromptText("Search By Name");
         searchByVehicle.setPromptText("Search By Vehicle");
         
-        try
+        try 
         {
+            // TODO
+           
             ObservableList<Customers> customerData = Database.getInstance().getAllCustomers();
             
             idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -131,7 +133,6 @@ public class AddCustomerController implements Initializable {
             phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
             emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-            
             customerTable.setRowFactory( tv -> {
                 TableRow<Customers> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
@@ -140,13 +141,13 @@ public class AddCustomerController implements Initializable {
                         rowData = row.getItem();
                         Object [] options = {"Add Vehicle", "Book Appointment"};
                         int selection = JOptionPane.showOptionDialog(null,
-                        "Would you like to",
-                        "Customers Options",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.DEFAULT_OPTION,
-                        null,
-                        options,
-                        null); 
+                                "Would you like to",
+                                "Customers Options",
+                                JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.DEFAULT_OPTION,
+                                null,
+                                options,
+                                null);
                         
                         System.out.println(selection);
                         if(selection == 0)
@@ -154,9 +155,9 @@ public class AddCustomerController implements Initializable {
                             try {
                                 URL addVehiclesUrl = getClass().getResource("/vehicles/gui/AddVehicle.fxml");
                                 AnchorPane addVehiclesPane = FXMLLoader.load(addVehiclesUrl);
-
+                                
                                 BorderPane border = Main.getRoot();
-
+                                
                                 border.setCenter(addVehiclesPane);
                             } catch (IOException ex) {
                                 Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,9 +168,9 @@ public class AddCustomerController implements Initializable {
                             try {
                                 URL bookingsUrl = getClass().getResource("/diagrep/gui/addBook.fxml");
                                 AnchorPane bookingPane = FXMLLoader.load(bookingsUrl);
-
+                                
                                 BorderPane border = Main.getRoot();
-
+                                
                                 border.setCenter(bookingPane);
                             } catch (IOException ex) {
                                 Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,31 +180,33 @@ public class AddCustomerController implements Initializable {
                 });
                 return row ;
             });
-            
             FilteredList<Customers> filteredData=new FilteredList<>(customerData,e->true);
             searchByName.textProperty().addListener((observableValue,oldValue,newValue)->{
-		filteredData.setPredicate((Predicate<? super Customers>)customer->{
-			if(newValue==null||newValue.isEmpty()){
-				return true;
-                        }
-			String lowerCaseFilter=newValue.toLowerCase();
-			if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
-				return true;
-			}
-			else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
-				return true;
-			}
-			return false;
-		});
+                filteredData.setPredicate((Predicate<? super Customers>)customer->{
+                    int customerID = Database.getInstance().getCustomerVehicles(searchByName.getText());
+                    if(newValue==null||newValue.isEmpty()){
+                        return true;
+                    }
+                    String lowerCaseFilter=newValue.toLowerCase();
+                    if(customer.getFirstName().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    }
+                    else if(customer.getSurname().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    }
+                    else if(customer.getID() == customerID)
+                    {
+                        return true;
+                    }
+                    return false;
+                });
             });
             SortedList<Customers> sortedData=new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(customerTable.comparatorProperty());
             customerTable.setItems(sortedData);
-        }   
-        catch(SQLException ex)
-        {
-            ex.printStackTrace();
-        } 
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }  
     
     public void addCustomer()

@@ -371,14 +371,13 @@ public final class Database
    {
        try
        {
-           PreparedStatement getCustomerAccountsDataStmt = preparedStatement("SELECT * FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE CUSTOMERID =?");
-           getCustomerAccountsDataStmt.setInt(1, customerID);
+           PreparedStatement getCustomerAccountsDataStmt = preparedStatement("SELECT IDnum, REG_NUM, BOOKING_DATE, COST FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE CUSTOMERID ="+customerID);
            
            customerAccounts = FXCollections.observableArrayList();
            ResultSet rs = getCustomerAccountsDataStmt.executeQuery();
            
            while(rs.next())
-           {
+           {    System.out.println("A");
                int bookingID = rs.getInt("IDnum");
                String vehicleReg = rs.getString("REG_NUM");
                String bookingDate = rs.getString("BOOKING_DATE");
@@ -403,12 +402,13 @@ public final class Database
    {
         try 
         {
+            System.out.println("Add status");
             String newBookingStatus = "UNPAID";
             PreparedStatement addStatusStmt = preparedStatement("INSERT INTO ACCOUNTS VALUES (?,?,?)");
             
             addStatusStmt.setInt(1, customerID);
-            addStatusStmt.setInt(1, bookingID);
-            addStatusStmt.setString(1, newBookingStatus);
+            addStatusStmt.setInt(2, bookingID);
+            addStatusStmt.setString(3, newBookingStatus);
             
             addStatusStmt.execute();
             addStatusStmt.close();
@@ -445,19 +445,21 @@ public final class Database
        return customerStatus;
    }
    
-   private int getMaxBookingID()
-   {
+   private int getMaxBookingID() throws SQLException
+   {    System.out.println("In max booking id");
        int maxID = 0;
         try 
         {   
             PreparedStatement id = preparedStatement("SELECT IDnum FROM DIAGNOSIS_REPAIR_BOOKINGS WHERE IDnum=(SELECT MAX(IDnum) FROM DIAGNOSIS_REPAIR_BOOKINGS)");
             ResultSet rs = id.executeQuery();
+                if(rs.next())
+                {
+                    maxID = rs.getInt("IDnum");
+                }
+                
             
-            while(rs.next());
-            {
-                maxID = rs.getInt("IDnum");
-            }
-            
+             
+            System.out.println(maxID);
             return maxID;
         } 
         catch (SQLException ex) 
@@ -483,6 +485,35 @@ public final class Database
         {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+   }
+   
+   public int getCustomerVehicles(String vehicleReg)
+    {
+        int customerID = 0;
+        try 
+        {
+            PreparedStatement getCustomerVehilceStmt = preparedStatement("SELECT CUSTOMER_ID FROM VEHICLE_RECORD WHERE REG_NUM = ?");
+            
+            getCustomerVehilceStmt.setString(1, vehicleReg);
+            
+            ResultSet rs = getCustomerVehilceStmt.executeQuery();
+            while(rs.next())
+            {
+                customerID = rs.getInt("CUSTOMER_ID");
+            }
+            return customerID;
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return customerID;
+        }
+    }
+   
+   public void deleteStatus(int booking_ID) throws SQLException
+   {
+         PreparedStatement deleteStatusStmt = preparedStatement("DELETE FROM ACCOUNTS WHERE BOOKING_ID="+ booking_ID);
+         deleteStatusStmt.executeUpdate();
    }
     
     /*Author Sergio*/
@@ -2210,6 +2241,7 @@ public final class Database
       // removeInstalledPartStmt.setInt(1, id);
         removeBookingsStmt.executeUpdate();
         JOptionPane.showMessageDialog(null,"Successfully Removed");
+        deleteStatus(ID);
     }
 
 

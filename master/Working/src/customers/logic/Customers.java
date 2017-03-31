@@ -24,6 +24,7 @@ public class Customers
     private StringProperty phone;
     private StringProperty email;
     private StringProperty type;
+    private StringProperty vehicleReg;
     
     public Customers(int id, String firstName, String surname,String address, String postCode, String phone, String email, String type)
     {
@@ -46,6 +47,25 @@ public class Customers
         this.phone = new SimpleStringProperty(phone);
         this.email = new SimpleStringProperty(email);
         this.type = new SimpleStringProperty(type);
+    }
+    
+    public Customers(int id, String firstName, String surname, String address, String postCode, String phone, String email, String type, String vehicleReg)
+    {
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.surname = new SimpleStringProperty(surname);
+        this.address = new SimpleStringProperty(address);
+        this.postCode = new SimpleStringProperty(postCode);
+        this.phone = new SimpleStringProperty(phone);
+        this.email = new SimpleStringProperty(email);
+        this.type = new SimpleStringProperty(type);
+        this.vehicleReg = new SimpleStringProperty(vehicleReg);
+    }
+    
+    public Customers(int id, String vehicleReg)
+    {
+          this.id = new SimpleIntegerProperty(id);
+          this.vehicleReg = new SimpleStringProperty(vehicleReg);
     }
     
     public int getID()
@@ -87,6 +107,11 @@ public class Customers
     {
         return this.type.get();
     }
+    
+    public String getVehicleReg()
+    {
+        return this.vehicleReg.get();
+    }
 
     public void setId(int id) {
         this.id.set(id);
@@ -118,6 +143,11 @@ public class Customers
 
     public void setType(String type) {
         this.type.set(type);
+    }
+    
+    public void setVehicleReg(String vehicleReg)
+    {
+        this.vehicleReg.set(vehicleReg);
     }
 
     public IntegerProperty getId() {
@@ -151,4 +181,9 @@ public class Customers
     public StringProperty TypeProperty() {
         return type;
     } 
+    
+    public StringProperty TypeVehicleReg()
+    {
+        return vehicleReg;
+    }
 }
